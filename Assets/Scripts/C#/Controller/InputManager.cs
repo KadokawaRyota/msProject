@@ -1,0 +1,252 @@
+﻿//------------------------------------------------------------------------------
+//          ファイルインクルード
+//------------------------------------------------------------------------------
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+//------------------------------------------------------------------------------
+//          メイン
+//------------------------------------------------------------------------------
+public class InputManager : MonoBehaviour
+{
+    //--------------------------------------------------------------------------
+    //          変数定義
+    //--------------------------------------------------------------------------
+    private static InputManager instance;
+    private static Vector3 TouchOldPosition;
+
+    //--------------------------------------------------------------------------
+    //          デバッグ表示
+    //--------------------------------------------------------------------------
+    private InputManager()
+    {
+        // 生成表示
+        Debug.Log("Create SoundManager instance");
+    }
+
+    //--------------------------------------------------------------------------
+    //          自己生成関数
+    //--------------------------------------------------------------------------
+    public static InputManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("InputManager");
+                DontDestroyOnLoad(obj);
+                instance = obj.AddComponent<InputManager>();
+            }
+
+            return instance;
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    //          入力判定処理
+    //--------------------------------------------------------------------------
+    //  Android,iphoneの場合はタッチを検出する
+    //  エディタの場合は左クリックとして判定する
+    //--------------------------------------------------------------------------
+    ////    各状態フラグ
+    ///////////////////////////////////////////////////////////////////////////
+    private static bool isTouch;            // タップされているか
+    private static bool isTouchTrigger;     // トリガー状態か
+    private static bool isTouchRelease;     // リリース状態か
+    private static bool isTouchMove;        // タップしたまま移動したか
+
+    private static Touch touch;
+
+    //--------------------------------------------------------------------------
+    //          初期化処理
+    //--------------------------------------------------------------------------
+    void Start()
+    {
+        isTouch = false;
+        isTouchTrigger = false;
+        isTouchRelease = false;
+        isTouchMove = false;
+
+        //touch = Input.GetTouch(0);
+    }
+
+    //--------------------------------------------------------------------------
+    //          更新処理
+    //--------------------------------------------------------------------------
+    void Update()
+    {
+        UpdateTouch();
+    }
+
+    //--------------------------------------------------------------------------
+    //          タップ状態のアップデート
+    //--------------------------------------------------------------------------
+    private void UpdateTouch()
+    {
+        isTouch = false;
+        isTouchTrigger = false;
+        isTouchRelease = false;
+        isTouchMove = false;
+
+        //こちらはエディタの処理
+        if (Application.isEditor)
+        {
+            if(Input.GetMouseButton(0))
+            {
+                isTouch = true;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                isTouchTrigger = true;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                isTouchRelease = true;
+            }
+        }
+
+        //こちらはモバイル系の処理
+        else if (Application.isMobilePlatform)
+        {
+            if (Input.touchCount > 0)
+            {
+                //タッチしている
+                isTouch = true;
+                touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    //タッチ開始
+                    isTouchTrigger = true;
+                }
+
+                else if (touch.phase == TouchPhase.Moved)
+                {
+                    //ドラッグ
+                }
+
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    //タッチ終了
+                    isTouchRelease = true;
+                }
+            }
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    //          クリックは判定処理
+    //--------------------------------------------------------------------------
+    public static bool GetTouchPress()
+    {
+        return isTouch;
+    }
+
+    //--------------------------------------------------------------------------
+    //          トリガー判定処理
+    //--------------------------------------------------------------------------
+    public static bool GetTouchTrigger()
+    {
+        return isTouchTrigger;
+    }
+
+    //--------------------------------------------------------------------------
+    //          リリース判定処理
+    //--------------------------------------------------------------------------
+    public static bool GetTouchRelease()
+    {
+        return isTouchRelease;
+    }
+
+    //--------------------------------------------------------------------------
+    //          タップ位置取得
+    //--------------------------------------------------------------------------
+    public static Vector3 GetTouchPosition()
+    {
+        Vector3 screenPos;
+        Vector3 worldPos;
+ 
+        screenPos = Input.mousePosition;
+        GameObject camera = GameObject.Find("PuniconCamera");
+       // Camera c = camera.GetComponentInParent<Camera>();
+        worldPos = camera.GetComponent<Camera>().ScreenToWorldPoint(screenPos);
+        
+        //if (Application.isEditor)
+        //{
+        //    screenPos = Input.mousePosition;
+        //    worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        //}
+        //else if (Application.isMobilePlatform)
+        //{
+        //    screenPos = touch.position;
+        //    worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        //}
+
+        //Debug.Log(screenPos);
+        //Debug.Log(worldPos);
+        //return worldPos;
+        return screenPos;
+    }
+
+    //--------------------------------------------------------------------------
+    //         移動距離判定(X軸)
+    //--------------------------------------------------------------------------
+    public static float GetTouchMoveHorizonal()
+    {
+        if (Application.isEditor)
+        {
+            return Input.GetAxis("Mouse X");
+        }
+
+        else
+        {
+            touch = Input.GetTouch(0);
+
+            Vector3 vec = touch.position;
+
+            vec.z = 10f;
+
+            vec = Camera.main.ScreenToWorldPoint(vec);
+
+            Vector3 old = vec;
+
+            vec = vec - TouchOldPosition;
+
+            TouchOldPosition = old;
+
+            return vec.x;
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    //         移動距離判定(Y軸)
+    //--------------------------------------------------------------------------
+    public static float GetTouchMoveVertical()
+    {
+        if (Application.isEditor)
+        {
+            return Input.GetAxis("Mouse Y");
+        }
+
+        else
+        {
+            touch = Input.GetTouch(0);
+
+            Vector3 vec = touch.position;
+
+            vec.z = 10f;
+
+            vec = Camera.main.ScreenToWorldPoint(vec);
+
+            Vector3 old = vec;
+
+            vec = vec - TouchOldPosition;
+
+            TouchOldPosition = old;
+
+            return vec.y;
+        }
+    }
+}
