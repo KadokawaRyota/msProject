@@ -66,8 +66,8 @@ MonoBehaviour:
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
-  m_OfflineScene: Menu
-  m_OnlineScene: 
+  m_OfflineScene: Offline
+  m_OnlineScene: Main
   m_SpawnPrefabs: []
   m_CustomConfig: 0
   m_MaxConnections: 4
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d09c4a3f884aa04ebf559b28f9798ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isStartAsHost: 0
-  serverIPAdress: 192.168.2.102
+  isOnlinePlay: 1
+  isStartAsServer: 1
+  serverIPAdress: 192.168.13.3
   punioconCamera: {fileID: 0}

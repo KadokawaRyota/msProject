@@ -27,6 +27,7 @@ public class PostureController : NetworkBehaviour
     float inputHorizontal;
     float inputVertical;
 
+
     void Start()
     {
 
@@ -52,23 +53,35 @@ public class PostureController : NetworkBehaviour
             + transform.position.y * transform.position.y
             + transform.position.z * transform.position.z);
 
-        controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
-     
+
+		controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
+
         prePosition = transform.position;
 
         camera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+
+		NetConnector netConnector = GameObject.Find("NetConnector").GetComponent<NetConnector>();
+
+		//Offline時のときは位置、回転の同期スクリプトを無効にする
+		if(netConnector.GetOnline())
+		{
+			gameObject.GetComponent<PlayerSyncPosition>().enabled = true;
+			gameObject.GetComponent<PlayerSyncRotation>().enabled = true;
+		}
     }
 
     void Update()
     {
-        //inputHorizontal = Input.GetAxisRaw("Horizontal");
-        //inputVertical = Input.GetAxisRaw("Vertical");
+		//inputHorizontal = Input.GetAxisRaw("Horizontal");
+		//inputVertical = Input.GetAxisRaw("Vertical");
 
-        //コントローラの方向ベクトルを代入
-		if(isLocalPlayer)
-        inputVec = new Vector2(controllerManager.ControllerVec.normalized.x, controllerManager.ControllerVec.normalized.y);
-        //inputVec = new Vector2(inputHorizontal, inputVertical);
-    }
+
+		//コントローラの方向ベクトルを代入
+		if (isLocalPlayer)
+			inputVec = new Vector2(controllerManager.ControllerVec.normalized.x, controllerManager.ControllerVec.normalized.y);
+
+		//inputVec = new Vector2(inputHorizontal, inputVertical);
+	}
 
 
     void FixedUpdate()
@@ -79,51 +92,54 @@ public class PostureController : NetworkBehaviour
         surfaceNormal = surfaceNormal.normalized;
 
 
-        /// 移動処理
-        /// 
+		/// 移動処理
+		/// 
 
-        // カメラ進行方向ベクトルを取得
-        Vector3 cameraForward = Vector3.Scale(camera.transform.forward, new Vector3(1, 1, 1)).normalized;
-        Vector3 moveForward;
+		// カメラ進行方向ベクトルを取得
+		if (isLocalPlayer)
+		{
+			Vector3 cameraForward = Vector3.Scale(camera.transform.forward, new Vector3(1, 1, 1)).normalized;
+			Vector3 moveForward;
 
-        // 方向キーの入力値とカメラの向きから、移動方向を決定
-        //moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
-        moveForward = cameraForward * inputVec.y + camera.transform.right * inputVec.x;
+			// 方向キーの入力値とカメラの向きから、移動方向を決定
+			//moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
+			moveForward = cameraForward * inputVec.y + camera.transform.right * inputVec.x;
 
-        // 移動方向にスピードを掛ける
-        moveVec = moveForward * 0.05f;
+			// 移動方向にスピードを掛ける
+			moveVec = moveForward * 0.05f;
 
-        moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
-        moveVec += (Vector3.zero - moveVec) * 0.5f;
-        transform.position += moveVec;
+			moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
+			moveVec += (Vector3.zero - moveVec) * 0.5f;
+			transform.position += moveVec;
 
-        if(moveVec.magnitude > 0)
-        {
-            dirVec = moveVec.normalized;
-        }
+			if (moveVec.magnitude > 0)
+			{
+				dirVec = moveVec.normalized;
+			}
 
-        // プレイヤーの回転
-        transform.rotation = Quaternion.LookRotation(dirVec, surfaceNormal);
+			// プレイヤーの回転
+			transform.rotation = Quaternion.LookRotation(dirVec, surfaceNormal);
 
-        // アニメーション状態取得
-        if (moveVec.magnitude > 0)
-        {
-            animator.SetBool("is_running", true);
-        }
-        else
-        {
-            animator.SetBool("is_running", false);
-        }
+			// アニメーション状態取得
+			if (moveVec.magnitude > 0)
+			{
+				animator.SetBool("is_running", true);
+			}
+			else
+			{
+				animator.SetBool("is_running", false);
+			}
 
-        // 球面中心点からプレイヤーまでの距離更新
-        radPlayer = Mathf.Sqrt(
-            transform.position.x * transform.position.x
-            + transform.position.y * transform.position.y
-            + transform.position.z * transform.position.z);
+			// 球面中心点からプレイヤーまでの距離更新
+			radPlayer = Mathf.Sqrt(
+				transform.position.x * transform.position.x
+				+ transform.position.y * transform.position.y
+				+ transform.position.z * transform.position.z);
 
-        // プレイヤー位置差分の取得
-        difPosition = transform.position - prePosition;
+			// プレイヤー位置差分の取得
+			difPosition = transform.position - prePosition;
 
-        prePosition = transform.position;
+			prePosition = transform.position;
+		}
     }
 }

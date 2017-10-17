@@ -1,56 +1,141 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
+using UnityEngine.SceneManagement;using UnityEngine.Networking;
 
 public class NetConnector : NetworkBehaviour
 {
 
     NetworkManager manager;
 
+	//ローカル切り替えフラグ	ture時はOnline,false時はOffline
+	[SerializeField]
+	bool isOnlinePlay = false;
+
     //サーバー切り替えフラグ
-    public bool isStartAsHost = true;
+    public bool isStartAsServer = true;
 
-    public string serverIPAdress = "(対象のPCのIPAdressをいれる　指定しないとlocalhostっぽい)";
+    [SerializeField]
+	string serverIPAdress = "192.168.13.3";
 
-    public GameObject punioconCamera;
-    // Use this for initialization
-    void Start()
-    {
-        //NetworkManagerの取得
-        manager = GetComponent<NetworkManager>();
+    public GameObject punioconCamera;       //ぷにコンカメラの取得
 
-        //PCアプリケーション起動時処理
-        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-        {
-            if (isStartAsHost)
-            {
-                manager.networkAddress = "localhost";       //ホストの時はlocalhost
-                manager.StartHost();                        //ホスト処理開始
-                Debug.Log("Start as Host");
+	// Use this for initialization
+	/* void Start()
+	 {
+		 //NetworkManagerの取得
+		 manager = GetComponent<NetworkManager>();
+
+		 if (isOnlinePlay)
+		 {
+			 OnlineSetup();	//オンライン時の設定
+		 }
+		 else
+		 {
+			 isStartAsServer = true;	//オフライン時はホストになる
+			 OfflineSetup();	//オフライン時の設定
+		 }
+	 }*/
+
+
+	public void Start()
+	{
+		Debug.Log("Start");
+		Debug.Log(SceneManager.GetActiveScene().name);
+		if(SceneManager.GetActiveScene().name == "Main")
+		{
+			isOnlinePlay = true;
+		}
+		else if (SceneManager.GetActiveScene().name == "Offline")
+		{
+			isOnlinePlay = false;
+		}
+
+		//NetworkManagerの取得
+		manager = GetComponent<NetworkManager>();
+		//punioconCamera = GameObject.Find("PuniconCamera");
+
+		if (isOnlinePlay)
+		{
+			OnlineSetup();  //オンライン時の設定
+		}
+		else
+		{
+			isStartAsServer = true; //オフライン時はホストになる
+			OfflineSetup(); //オフライン時の設定
+		}
+	}
+
+	public bool GetOnline()
+	{
+		return isOnlinePlay;
+	}
+
+	//オンラインセットアップ関数
+	void OnlineSetup()
+	{
+		
+		//PCアプリケーション起動時処理
+		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+		{
+			if (isStartAsServer)
+			{
+				manager.networkAddress = "localhost";       //ホストの時はlocalhost
+				manager.StartHost();                        //ホスト処理開始
+				Debug.Log("Start as Server");
 				punioconCamera.SetActive(false);
 
+			}
 
-            }
-
-            else
-            {
-                manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
-                manager.StartClient();                      //クライアント処理開始
-                Debug.Log("Start as Client");
+			else
+			{
+				//仮想コントローラーの実装
 				punioconCamera.SetActive(true);
-            }
 
-        }
+				manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
+				manager.StartClient();                      //クライアント処理開始
+				Debug.Log("Start as Client");
+			}
 
-        //アンドロイドアプリケーション起動時処理
-        else if (Application.platform == RuntimePlatform.Android)
-        {
-			//アンドロイドのみ仮想コントローラーの実装
+		}
+
+		//アンドロイドアプリケーション起動時処理
+		else if (Application.platform == RuntimePlatform.Android)
+		{
+			//仮想コントローラーの実装
 			punioconCamera.SetActive(true);
 
-            //アンドロイドでは常にクライアント（ホストにはならない）
-            manager.networkAddress = serverIPAdress;
-            manager.StartClient();
-            Debug.Log("Start as Client");
-        }
-    }
+			//アンドロイドでは常にクライアント（ホストにはならない）
+			manager.networkAddress = serverIPAdress;
+			manager.StartClient();
+			Debug.Log("Start as Client");
+		}
+	}
+
+	//オフラインセットアップ関数
+	void OfflineSetup()
+	{
+		//PCアプリケーション起動時処理
+		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+		{
+			//仮想コントローラーの実装
+			punioconCamera.SetActive(true);
+
+			manager.networkAddress = "localhost";       //ホストの時はlocalhost
+			//manager.networkAddress = serverIPAdress;
+			manager.StartHost();                        //ホスト処理開始
+			Debug.Log("Start as Host");
+		}
+
+		//アンドロイドアプリケーション起動時処理
+		else if (Application.platform == RuntimePlatform.Android)
+		{
+			//仮想コントローラーの実装
+			punioconCamera.SetActive(true);
+
+			//オフライン時はホストになる
+			serverIPAdress = "localhost";
+			//manager.networkAddress = serverIPAdress;
+			manager.StartHost();
+			Debug.Log("Start as Host");
+		}
+	}
 }
