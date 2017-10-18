@@ -6,22 +6,21 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour {
 
-	[SerializeField]
-	MenuButton button;
+	ButtonExecution button;		//メニューボタンスクリプト用
 
 	float startPos;     //開始時の位置を記憶
 
 	public float moveSpeed;		//開閉のスピード
 
 	void Start () {
-		button = GetComponent<MenuButton>();
+		button = GetComponent<ButtonExecution>();
 		startPos = gameObject.transform.localPosition.x;
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-		if(button.menuOpen)
+		if(button.GetMenuBar())
 		{
 			if(gameObject.transform.localPosition.x < Screen.width * 0.4f)
 			{

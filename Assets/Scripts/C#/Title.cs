@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour {
 
-    public bool isHost = true;
-
-
 	// Use this for initialization
 	void Start () {
 		
@@ -17,26 +14,5 @@ public class Title : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    public void NextScene()
-    {
-        //PCアプリケーション起動時処理
-        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-        {
-            if (isHost)
-            {
-                SceneManager.LoadScene("Main");     //メインシーンへ
-            }
-            else
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);   //次のシーンへ
-            }
-        }
-
-        //アンドロイドアプリケーション起動時処理
-        else if (Application.platform == RuntimePlatform.Android)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-    }
+	
 }

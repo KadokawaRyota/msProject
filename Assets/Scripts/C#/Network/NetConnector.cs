@@ -21,7 +21,9 @@ public class NetConnector : NetworkBehaviour
     [SerializeField]
 	string serverIPAdress = "192.168.13.3";
 
-    public GameObject punioconCamera;       //ぷにコンカメラの取得
+    GameObject punioconCamera;       //ぷにコンカメラの取得
+
+	GameObject canvas;				//オンラインCanvasの取得
 
 	// Use this for initialization
 	/* void Start()
@@ -54,7 +56,8 @@ public class NetConnector : NetworkBehaviour
 
 		//NetworkManagerの取得
 		manager = GetComponent<NetworkManager>();
-		//punioconCamera = GameObject.Find("PuniconCamera");
+		canvas = GameObject.Find("OnlineCanvas");
+		punioconCamera = GameObject.Find("PuniconCamera");
 
 		
 		if (isOnlinePlay)
@@ -93,8 +96,10 @@ public class NetConnector : NetworkBehaviour
 				manager.networkAddress = "localhost";       //ホストの時はlocalhost
 				manager.StartHost();                        //ホスト処理開始
 				Debug.Log("Start as Server");
-				punioconCamera.SetActive(false);
 
+				punioconCamera.SetActive(false);
+				canvas.SetActive(false);
+		
 			}
 
 			else
