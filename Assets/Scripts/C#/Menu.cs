@@ -1,53 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class Menu : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+	[SerializeField]
+	MenuButton button;
 
-        //回転固定解除
-        //Screen.orientation = ScreenOrientation.AutoRotation;
+	float startPos;     //開始時の位置を記憶
+
+	public float moveSpeed;		//開閉のスピード
+
+	void Start () {
+		button = GetComponent<MenuButton>();
+		startPos = gameObject.transform.localPosition.x;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		if(button.menuOpen)
+		{
+			if(gameObject.transform.localPosition.x < Screen.width * 0.4f)
+			{
+				gameObject.transform.localPosition += new Vector3(moveSpeed, 0.0f,0.0f);
+			}
+		}
+		else
+		{
+			if (gameObject.transform.localPosition.x > startPos)
+			{
+				gameObject.transform.localPosition -= new Vector3(moveSpeed, 0.0f, 0.0f);
+			}
+		}
+
 	}
 
-    public void AndroidSelect()
-    {
-        //回転を固定　縦限定
-        Screen.orientation = ScreenOrientation.Portrait;
-
-        // 縦
-        Screen.autorotateToPortrait = true;
-        // 左
-        Screen.autorotateToLandscapeLeft = false;
-        // 右
-        Screen.autorotateToLandscapeRight = false;
-        // 上下反転
-        Screen.autorotateToPortraitUpsideDown = true;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);   //次のシーンへ
-    }
-
-    public void PcSelect()
-    {
-        //回転を固定　横限定
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
-
-        // 縦
-        Screen.autorotateToPortrait = false;
-        // 左
-        Screen.autorotateToLandscapeLeft = true;
-        // 右
-        Screen.autorotateToLandscapeRight = true;
-        // 上下反転
-        Screen.autorotateToPortraitUpsideDown = false;
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);   //次のシーンへ
-    }
 }

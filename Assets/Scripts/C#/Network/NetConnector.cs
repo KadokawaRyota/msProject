@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class NetConnector : NetworkBehaviour
 {
 
     NetworkManager manager;
+
+	[SerializeField]
+	Image loadingImage;
 
 	//ローカル切り替えフラグ	ture時はOnline,false時はOffline
 	[SerializeField]
@@ -38,8 +43,6 @@ public class NetConnector : NetworkBehaviour
 
 	public void Start()
 	{
-		Debug.Log("Start");
-		Debug.Log(SceneManager.GetActiveScene().name);
 		if(SceneManager.GetActiveScene().name == "Main")
 		{
 			isOnlinePlay = true;
@@ -53,6 +56,7 @@ public class NetConnector : NetworkBehaviour
 		manager = GetComponent<NetworkManager>();
 		//punioconCamera = GameObject.Find("PuniconCamera");
 
+		
 		if (isOnlinePlay)
 		{
 			OnlineSetup();  //オンライン時の設定
@@ -61,6 +65,13 @@ public class NetConnector : NetworkBehaviour
 		{
 			isStartAsServer = true; //オフライン時はホストになる
 			OfflineSetup(); //オフライン時の設定
+		}
+		
+		//クライアント処理
+		if (!isStartAsServer)
+		{
+			//接続時のローディングイメージを有効
+			loadingImage.gameObject.SetActive(true);
 		}
 	}
 
@@ -78,6 +89,7 @@ public class NetConnector : NetworkBehaviour
 		{
 			if (isStartAsServer)
 			{
+				loadingImage.gameObject.SetActive(false);
 				manager.networkAddress = "localhost";       //ホストの時はlocalhost
 				manager.StartHost();                        //ホスト処理開始
 				Debug.Log("Start as Server");
@@ -100,6 +112,8 @@ public class NetConnector : NetworkBehaviour
 		//アンドロイドアプリケーション起動時処理
 		else if (Application.platform == RuntimePlatform.Android)
 		{
+			isStartAsServer = false;
+
 			//仮想コントローラーの実装
 			punioconCamera.SetActive(true);
 

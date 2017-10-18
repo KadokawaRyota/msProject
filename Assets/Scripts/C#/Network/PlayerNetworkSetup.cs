@@ -16,12 +16,16 @@ public class PlayerNetworkSetup : NetworkBehaviour
     // Use this for initialization
     void Start()
 	{
+		
 		netConnector = GameObject.Find("NetConnector").GetComponent<NetConnector>();
 		if (netConnector.GetOnline())
 		{
 			
 			if (!isServer)
 			{
+				//ローディングイメージのアクティブを切る
+				GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
+
 				//自分が操作するオブジェクトに限定する
 				if (isLocalPlayer)
 				{
