@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 92787913476156314}
   - component: {fileID: 124607556958150410}
   - component: {fileID: 81126021480294486}
-  - component: {fileID: 114617745115361770}
+  - component: {fileID: 114882204239893104}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: MainCamera
@@ -1834,7 +1834,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1231594281567410}
-  m_LocalRotation: {x: 0.7071078, y: 0.0002815406, z: -0.7071058, w: 0.00028154138}
+  m_LocalRotation: {x: 0.7071077, y: 0.00028154056, z: -0.70710576, w: 0.00028154135}
   m_LocalPosition: {x: -0.10417484, y: -0.047148883, z: 0.026731417}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1890,7 +1890,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1336845135872604}
-  m_LocalRotation: {x: -0.005911415, y: -0.6794483, z: 0.73369926, w: -0.0006656347}
+  m_LocalRotation: {x: -0.005911414, y: -0.67944837, z: 0.7336993, w: -0.00066563475}
   m_LocalPosition: {x: -0.14276123, y: 0.032653574, z: 0.13977996}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_Children: []
@@ -2871,7 +2871,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1889734340900722}
-  m_LocalRotation: {x: 0.7071078, y: 0.0002815406, z: 0.7071058, w: -0.00028154138}
+  m_LocalRotation: {x: 0.7071077, y: 0.00028154056, z: 0.70710576, w: -0.00028154135}
   m_LocalPosition: {x: -0.10417484, y: -0.047148738, z: -0.02673168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3164,7 +3164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252b2b500640e604dac9a8ddb53616f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114617745115361770
+--- !u!114 &114882204239893104
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3172,12 +3172,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1193483274441236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed5eb42bc5f67ad47bbcf9ebde27666b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fb69f12bcc046c49a67639cb01e7602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetObj: {fileID: 1939103290006014}
-  postureController: {fileID: 114282082976522992, guid: b3023d8e7b4047f458ad085693735bcc,
-    type: 2}
+  postureController: {fileID: 114964041786054002}
 --- !u!114 &114964041786054002
 MonoBehaviour:
   m_ObjectHideFlags: 1
