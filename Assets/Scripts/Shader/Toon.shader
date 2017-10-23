@@ -22,6 +22,9 @@ Shader "Custom/Toon" {
 		sampler2D _MainTex;
 		sampler2D _RampTex;
 
+		uniform float _Outline;
+		uniform float4 _OutlineColor;
+
 		struct Input {
 			float2 uv_MainTex;
 		};
@@ -43,6 +46,7 @@ Shader "Custom/Toon" {
 			c.a = 0;
 			return c;
 		}
+
 
 		void surf (Input IN, inout SurfaceOutput o) {
 

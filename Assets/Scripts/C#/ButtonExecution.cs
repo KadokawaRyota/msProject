@@ -16,24 +16,4 @@ public class ButtonExecution : MonoBehaviour {
 	//ホーム画面へ遷移
 	public void Home() { SceneManager.LoadScene("Home"); }
 
-	/*** ここからメニューバー処理 **/
-	bool menuOpen = false;	//メニューバーの開閉フラグ
-
-	//メニューバーの処理
-	public void Menu()
-	{
-		if(menuOpen)
-		{
-			menuOpen = false;
-		}
-		else
-		{
-			menuOpen = true;
-		}
-	}
-
-	public bool GetMenuBar()
-	{
-		return menuOpen;
-	}
 }
