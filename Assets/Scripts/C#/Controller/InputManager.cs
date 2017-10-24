@@ -68,7 +68,11 @@ public class InputManager : MonoBehaviour
         isTouchRelease = false;
         isTouchMove = false;
 
-        //touch = Input.GetTouch(0);
+        ////        マルチタップ無効
+        ////////////////////////////////////////////////////////////////////////
+
+        Input.multiTouchEnabled = false;
+        touch = Input.GetTouch(0);
     }
 
     //--------------------------------------------------------------------------
@@ -165,28 +169,20 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public static Vector3 GetTouchPosition()
     {
-        Vector3 screenPos;
+        Vector3 screenPos = Vector3.zero;
         Vector3 worldPos;
- 
-        screenPos = Input.mousePosition;
-        GameObject camera = GameObject.Find("PuniconCamera");
-       // Camera c = camera.GetComponentInParent<Camera>();
-        worldPos = camera.GetComponent<Camera>().ScreenToWorldPoint(screenPos);
-        
-        //if (Application.isEditor)
-        //{
-        //    screenPos = Input.mousePosition;
-        //    worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-        //}
-        //else if (Application.isMobilePlatform)
-        //{
-        //    screenPos = touch.position;
-        //    worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-        //}
 
-        //Debug.Log(screenPos);
-        //Debug.Log(worldPos);
-        //return worldPos;
+        if (Application.isEditor)
+        {
+            screenPos = Input.mousePosition;
+            worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        }
+        else if (Application.isMobilePlatform)
+        {
+            screenPos = touch.position;
+            worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        }
+
         return screenPos;
     }
 

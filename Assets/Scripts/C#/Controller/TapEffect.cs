@@ -9,26 +9,23 @@ public class TapEffect : MonoBehaviour
     ParticleSystem tapEffect;              // タップエフェクト
 
     [SerializeField]
-    Camera _camera;                        // カメラの座標
+    Camera TargetCamera;                   // カメラの座標
 
-
+    public bool EffectFlug = false;
+    public Vector3 EffectPos;
 
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
+        // マウスのワールド座標までパーティクルを移動し、パーティクルエフェクトを1つ生成する
+        if (EffectFlug)
         {
-
-            // マウスのワールド座標までパーティクルを移動し、パーティクルエフェクトを1つ生成する
-
-            var pos = _camera.ScreenToWorldPoint(Input.mousePosition + _camera.transform.forward * 10);
-            pos.z = 0.0f;
+            tapEffect.transform.position = EffectPos;
+            Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(EffectPos.x, EffectPos.y, 1.0f));
             tapEffect.transform.position = pos;
-           
-
-            tapEffect.Emit(1);
-
+            tapEffect.Emit(2);
+          
         }
+        EffectFlug = false;
 
     }
 
