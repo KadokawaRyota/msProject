@@ -95,11 +95,8 @@ public class PunipuniController : MonoBehaviour
         public TOUCH_STATE TouchState = TOUCH_STATE.NONE;  // タップの状況
         public  int nStateCheckCounter;
         private bool bStateCountFlug;
+        private Vector3 TapEffectPos;
 
-        ////    コントローラの始点～終点の長さの限界値
-        ////////////////////////////////////////////////////////////////////////
-        //public float VecLengthLimit;  // 始点～終点の長さの限界値
-        
         #endregion
     
     //--------------------------------------------------------------------------
@@ -163,10 +160,7 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             nStateCheckCounter = 0;
             bStateCountFlug = false;
-
-            ////    タップ情報取得
-            ////////////////////////////////////////////////////////////////////
-            //touch = Input.GetTouch(0);
+            TapEffectPos = Vector3.zero;
         }
 
     //--------------------------------------------------------------------------
@@ -177,7 +171,7 @@ public class PunipuniController : MonoBehaviour
             ////    タップ状況の更新
             ////////////////////////////////////////////////////////////////////
             UpdateTapState();
-            
+
             ////        タップ状態判別
             ////////////////////////////////////////////////////////////////////
                 // タップされた瞬間
@@ -231,6 +225,10 @@ public class PunipuniController : MonoBehaviour
             ////    タップ状況判別カウントフラグをtrueに
             ////////////////////////////////////////////////////////////////////
             bStateCountFlug = true;
+
+            ////    タップエフェクトに位置を代入
+            ////////////////////////////////////////////////////////////////////
+            TapEffectPos = ControllerManager.TouchPositionStart;
         }
 
     //--------------------------------------------------------------------------
@@ -242,23 +240,27 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////           
             if (TouchState == TOUCH_STATE.NONE && nStateCheckCounter < TapDiscriminationFrame)
             {
-                ////    タップ状況を「ホールド」に変更
+                ////    タップ状況を「TAP」に変更
                 ////////////////////////////////////////////////////////////////
-                TouchState = TOUCH_STATE.TAP;
-            }
+                TouchState = TOUCH_STATE.TAP;           
 
-            ////   指が離れた時の判定が"ホールド"ではなく"タップ"の時の処理
-            ////////////////////////////////////////////////////////////////////
-            if (TouchState == TOUCH_STATE.TAP)
-            { 
-                // タップエフェクト発生
-                tapeffect.EffectPos = ControllerManager.TouchPositionStart;   // エフェクト位置更新
+                ////    タップエフェクト発生
+                ////////////////////////////////////////////////////////////////
+                tapeffect.EffectPos = TapEffectPos;//ControllerManager.TouchPositionStart;   // エフェクト位置設定
+                tapeffect.SetEffectType(1);                                   // エフェクトタイプセット
                 tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
             }
 
             ////    ベジェ曲線とぷニコンメッシュのリセット
             ////////////////////////////////////////////////////////////////////
             ResetPuniMeshAndBezier();
+
+            ////    エフェクトOFF
+            ////////////////////////////////////////////////////////////////
+            if (tapeffect.nEffecttype_int == 2)
+            {
+                tapeffect.EffectStatusReset();
+            }
         }
 
     //--------------------------------------------------------------------------
@@ -315,6 +317,21 @@ public class PunipuniController : MonoBehaviour
             ////    コントローラ表示フラグをTRUE
             ////////////////////////////////////////////////////////////////////
             VisiblePunipuniController = true;
+
+            ////    エフェクト生成
+            ////////////////////////////////////////////////////////////////////
+            tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
+            tapeffect.SetEffectType(2);                                   // エフェクトタイプセット
+
+            Debug.Log("ホールドエフェクト発生");
+        }
+
+        //----------------------------------------------------------------------
+        //          タップ状態が(HOLD)の時の位置情報送信処理
+        //----------------------------------------------------------------------
+        if (tapeffect.EffectFlug == true && tapeffect.nEffecttype_int == 2)
+        {
+            tapeffect.EffectPos = ControllerManager.TouchPositionNow;   // エフェクト位置更新
         }
 
         //----------------------------------------------------------------------
@@ -550,12 +567,12 @@ public class PunipuniController : MonoBehaviour
         ////    PC or スマホ タッチ判定分岐処理
         ////////////////////////////////////////////////////////////////////
         Vector3 screenPos = Vector3.zero;                                       // タップ座標
-        if (Application.isEditor) screenPos = Input.mousePosition;              // 座標取得(PC)
-        else if (Application.isMobilePlatform) screenPos = touch.position;      // 座標取得(スマホ)
+        if (Application.isEditor)screenPos = Input.mousePosition;               // 座標取得(PC)
+        else if (Application.isMobilePlatform)screenPos = touch.position;       // 座標取得(スマホ)
 
         ////    初期位置(始点)&現在位置(終点)設定
         ////////////////////////////////////////////////////////////////////
-        this.BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 1.0f));
+        this.BeginMousePosition = TapEffectPos = TargetCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 1.0f));
         transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 1.0f));
 
         ////    ベジェ曲線パラメータ設定
@@ -599,6 +616,10 @@ public class PunipuniController : MonoBehaviour
         ////    タップ状況判別カウントフラグをtrueに
         ////////////////////////////////////////////////////////////////////
         bStateCountFlug = false;
+
+        ////    エフェクト位置初期化
+        ////////////////////////////////////////////////////////////////////
+        //TapEffectPos = Vector3.zero;
 
         ////    コントローラ表示フラグfalse
         ////////////////////////////////////////////////////////////////////

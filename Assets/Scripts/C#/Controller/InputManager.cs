@@ -72,7 +72,7 @@ public class InputManager : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////
 
         Input.multiTouchEnabled = false;
-        touch = Input.GetTouch(0);
+        //touch = Input.GetTouch(0);
     }
 
     //--------------------------------------------------------------------------
