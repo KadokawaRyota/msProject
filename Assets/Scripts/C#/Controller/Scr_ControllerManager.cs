@@ -71,6 +71,7 @@ public class Scr_ControllerManager : MonoBehaviour
         ////        タップ位置取得
         ////////////////////////////////////////////////////////////////////////
         TouchPositionStart = InputManager.GetTouchPosition();
+        TouchPositionNow = InputManager.GetTouchPosition();
     }
 
     //--------------------------------------------------------------------------

@@ -55,7 +55,6 @@ public class InputManager : MonoBehaviour
     private static bool isTouchTrigger;     // トリガー状態か
     private static bool isTouchRelease;     // リリース状態か
     private static bool isTouchMove;        // タップしたまま移動したか
-
     private static Touch touch;
 
     //--------------------------------------------------------------------------
@@ -70,9 +69,12 @@ public class InputManager : MonoBehaviour
 
         ////        マルチタップ無効
         ////////////////////////////////////////////////////////////////////////
-
         Input.multiTouchEnabled = false;
-        //touch = Input.GetTouch(0);
+
+        //if (Application.isMobilePlatform)
+        //{
+        //    touch = Input.GetTouch(0);
+        //}
     }
 
     //--------------------------------------------------------------------------
@@ -88,12 +90,15 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     private void UpdateTouch()
     {
+        ////        タップ状況初期化
+        ////////////////////////////////////////////////////////////////////////
         isTouch = false;
         isTouchTrigger = false;
         isTouchRelease = false;
         isTouchMove = false;
 
-        //こちらはエディタの処理
+        ////        エディタでの更新処理
+        ////////////////////////////////////////////////////////////////////////
         if (Application.isEditor)
         {
             if(Input.GetMouseButton(0))
@@ -111,7 +116,8 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        //こちらはモバイル系の処理
+        ////        モバイルでの更新処理
+        ////////////////////////////////////////////////////////////////////////
         else if (Application.isMobilePlatform)
         {
             if (Input.touchCount > 0)
@@ -139,48 +145,65 @@ public class InputManager : MonoBehaviour
             }
         }
     }
+    //--------------------------------------------------------------------------
+    //          各種判定処理
+    //--------------------------------------------------------------------------
+        //--------------------------------------------------------------------------
+        //          クリック判定処理
+        //--------------------------------------------------------------------------
+        public static bool GetTouchPress()
+        {
+            return isTouch;
+        }
 
-    //--------------------------------------------------------------------------
-    //          クリックは判定処理
-    //--------------------------------------------------------------------------
-    public static bool GetTouchPress()
-    {
-        return isTouch;
-    }
+        //--------------------------------------------------------------------------
+        //          トリガー判定処理
+        //--------------------------------------------------------------------------
+        public static bool GetTouchTrigger()
+        {
+            return isTouchTrigger;
+        }
 
-    //--------------------------------------------------------------------------
-    //          トリガー判定処理
-    //--------------------------------------------------------------------------
-    public static bool GetTouchTrigger()
-    {
-        return isTouchTrigger;
-    }
-
-    //--------------------------------------------------------------------------
-    //          リリース判定処理
-    //--------------------------------------------------------------------------
-    public static bool GetTouchRelease()
-    {
-        return isTouchRelease;
-    }
+        //--------------------------------------------------------------------------
+        //          リリース判定処理
+        //--------------------------------------------------------------------------
+        public static bool GetTouchRelease()
+        {
+            return isTouchRelease;
+        }
 
     //--------------------------------------------------------------------------
     //          タップ位置取得
     //--------------------------------------------------------------------------
     public static Vector3 GetTouchPosition()
     {
+        ////        ローカル変数
+        ////////////////////////////////////////////////////////////////////////
         Vector3 screenPos = Vector3.zero;
         Vector3 worldPos;
 
+        ////        エディタでの取得処理
+        ////////////////////////////////////////////////////////////////////////
         if (Application.isEditor)
         {
             screenPos = Input.mousePosition;
             worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+            
         }
+
+        ////        モバイルでの取得処理
+        ////////////////////////////////////////////////////////////////////////
+        /*
         else if (Application.isMobilePlatform)
         {
             screenPos = touch.position;
             worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        }
+        */
+
+        else if (Application.isMobilePlatform)
+        {
+            screenPos = touch.position;
         }
 
         return screenPos;
