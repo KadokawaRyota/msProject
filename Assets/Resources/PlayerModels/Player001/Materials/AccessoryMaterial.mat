@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: OutlineToon
+  m_Name: AccessoryMaterial
   m_Shader: {fileID: 4800000, guid: 9ac384fc37f89da44950e2fe55641d15, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -38,12 +38,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _FalloffSampler:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ee491a8334d22494abded88ca13fec12, type: 3}
+        m_Texture: {fileID: 2800000, guid: 55a577e64b3f50741a2bf0b67752c7e3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -59,10 +55,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RampTex:
-        m_Texture: {fileID: 2800000, guid: 7a93ce6456b51c045911270bbbe7899d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _RimLightSampler:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -77,8 +69,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Outline: 0.00273
-    - _OutlineWidth: 0.01
+    - _Outline: 0.002
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -86,8 +77,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.5514706, g: 0.5514706, b: 0.5514706, a: 1}
+    - _Color: {r: 0.6397059, g: 0.62089103, b: 0.62089103, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 1, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 0.416}
-    - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
+    - _OutlineColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0}
