@@ -78,7 +78,7 @@ public class Scr_ControllerManager : MonoBehaviour
         
         ////        デバック処理
         ////////////////////////////////////////////////////////////////////////
-        Debug.Log("始点：" + TouchPositionStart);                // タップ位置表示
+        //Debug.Log("始点：" + TouchPositionStart);                // タップ位置表示
     }
 
     //--------------------------------------------------------------------------
@@ -134,7 +134,7 @@ public class Scr_ControllerManager : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             
             // タップ位置表示()
-            Debug.Log("ベクトルの長さ : " + ControllerVec);
+            //Debug.Log("ベクトルの長さ : " + ControllerVec);
               
         }
 }
