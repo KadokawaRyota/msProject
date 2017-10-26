@@ -10,7 +10,7 @@ Shader "Custom/Stencil" {
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 	}
 	SubShader {
-		Tags { "RenderType"="Opaque" 
+		Tags { "RenderType"="Transparent" 
 				"Queue" = "Transparent" }
 		LOD 200
 

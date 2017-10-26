@@ -17,15 +17,14 @@ Shader "Custom/StencilShadow" {
 		Pass
 		{
 			Cull Front
-			ColorMask 0
+			ColorMask 0		//カラーを透過
 			ZWrite Off
 
 			//ステンシル設定
 			Stencil{
-				Ref 1			//バッファ値
-				Comp NotEqual		//常にステンシルを成功
+				Ref 4			//バッファ値
+				Comp Always		//常にステンシルを成功
 				Pass Replace	//バッファ値をバッファに書き込み
-
 			}
 
 			CGPROGRAM	//スタート
@@ -70,7 +69,8 @@ Shader "Custom/StencilShadow" {
 		Pass
 		{
 
-			Cull Back	//表側描画
+			Cull Back
+
 			//ステンシル設定
 			Stencil{
 				Ref 0			//バッファ値

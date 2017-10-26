@@ -11,7 +11,7 @@ Shader "Custom/OutlineToon" {
 		_Outline("Outline",Range(0.001,0.005)) = 0.001
 	}
 	SubShader{
-		Tags{ "RenderType" = "Opaque" }
+		Tags{ "RenderType" = "Transparent" }
 		LOD 200
 
 		//アウトラインシェーダ
