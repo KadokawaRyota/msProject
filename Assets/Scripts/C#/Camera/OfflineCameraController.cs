@@ -10,6 +10,7 @@ public class OfflineCameraController : MonoBehaviour
 	public OfflinePostureController postureController;
 	private Vector3 cameraDir;
 	private Vector3 playerToCamera;
+    [SerializeField]
 	static Vector3 localPos;
 
 	void Start()
