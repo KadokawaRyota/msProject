@@ -110,6 +110,35 @@ public class Scr_ControllerManager : MonoBehaviour
     {
         ////        現在のタッチ状態を返す
         ////////////////////////////////////////////////////////////////////////
+        void Move()
+        {
+            ////    タップされていない場合
+            ////////////////////////////////////////////////////////////////////
+            if (InputManager.GetTouchRelease())
+            {
+                OutClick();
+                return;
+            }
+
+            ////    タップされている場合の処理
+            ////////////////////////////////////////////////////////////////////
+
+            // タップ位置取得
+            TouchPositionNow = InputManager.GetTouchPosition();    
+            
+            // 始点と終点の方向ベクトル生成
+            //Vector3 vec3 = (TouchPositionNow - TouchPositionStart).normalized;
+            //ControllerVec = (TouchPositionNow - TouchPositionStart).normalized;
+		ControllerVec = TouchPositionNow - TouchPositionStart;
+		ControllerVecLength = ControllerVec.magnitude;
+
+            ////    デバック処理
+            ////////////////////////////////////////////////////////////////////
+            
+            // タップ位置表示()
+            //Debug.Log("ベクトルの長さ : " + ControllerVec);
+              
+        }
         return TouchMode;
     }
 }

@@ -60,9 +60,6 @@ public class OfflinePostureController : MonoBehaviour {
 		controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
 
 		prePosition = transform.position;
-
-
-
 	}
 
 	void Update()
@@ -84,7 +81,7 @@ public class OfflinePostureController : MonoBehaviour {
 		// プレイヤー位置の地面の法線の更新
 		surfaceNormal = transform.position - Vector3.zero;
 		surfaceNormal = surfaceNormal.normalized;
-
+        
 
 		/// 移動処理
 
@@ -101,9 +98,15 @@ public class OfflinePostureController : MonoBehaviour {
 
 		moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
 		moveVec += (Vector3.zero - moveVec) * 0.5f;
-		transform.position += moveVec;
 
-		if (moveVec.magnitude > 0)
+        // 移動方向にスピードを掛ける
+        moveVec = moveVec * 0.05f;
+
+        moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
+        moveVec += (Vector3.zero - moveVec) * 0.5f;
+        transform.position += moveVec;
+
+        if (moveVec.magnitude > 0)
 		{
 			dirVec = moveVec.normalized;
 		}
@@ -134,4 +137,13 @@ public class OfflinePostureController : MonoBehaviour {
 		prePosition = transform.position;
 		
 	}
+    public Vector3 GetmoveVec()
+    {
+        return moveVec;
+    }
+
+    public Vector3 GetSurfaceNormal()
+    {
+        return surfaceNormal;
+    }
 }
