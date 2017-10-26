@@ -9,8 +9,7 @@ Shader "Custom/StencilShadow" {
 	}
 	SubShader{
 		Tags { "RenderType" = "Transparent" 
-				"Queue" = "Transparent"
-				"IgnoreProjector" = "True"}
+				"Queue" = "Transparent"}
 
 		Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 
@@ -18,12 +17,14 @@ Shader "Custom/StencilShadow" {
 		Pass
 		{
 			Cull Front
+			ColorMask 0		//カラーを透過
+			ZWrite Off
 
 			//ステンシル設定
 			Stencil{
-				Ref 1			//バッファ値
-				Pass Replace	//バッファ値をバッファに書き込み
+				Ref 4			//バッファ値
 				Comp Always		//常にステンシルを成功
+				Pass Replace	//バッファ値をバッファに書き込み
 			}
 
 			CGPROGRAM	//スタート
@@ -68,12 +69,12 @@ Shader "Custom/StencilShadow" {
 		Pass
 		{
 
-			Cull Back	//表側描画
+			Cull Back
 
 			//ステンシル設定
 			Stencil{
-				Ref 1			//バッファ値
-				Comp NotEqual	//バッファ値と違うバッファ値の時
+				Ref 0			//バッファ値
+				Comp Equal	//バッファ値と違うバッファ値の時
 			}
 
 			CGPROGRAM		//スタート

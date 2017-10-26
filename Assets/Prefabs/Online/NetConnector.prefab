@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d09c4a3f884aa04ebf559b28f9798ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingImage: {fileID: 0}
   isOnlinePlay: 1
   isStartAsServer: 1
   serverIPAdress: 192.168.13.3
-  punioconCamera: {fileID: 0}

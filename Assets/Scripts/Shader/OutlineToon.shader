@@ -11,16 +11,17 @@ Shader "Custom/OutlineToon" {
 		_Outline("Outline",Range(0.001,0.005)) = 0.001
 	}
 	SubShader{
-		Tags{ "RenderType" = "Opaque" }
+		Tags{ "RenderType" = "Transparent" }
 		LOD 200
 
 		//アウトラインシェーダ
 		Pass{
 			Cull Front	//裏面描画
+
 			Stencil{
-				Ref 1
-				Comp Always  // 常にステンシルを成功
-				Pass Replace
+				Ref 2			//ステンシル値
+				Comp always		//常にステンシルテストを成功
+				Pass Replace	//常にステンシルに書き込み
 			}
 			CGPROGRAM	//開始
 
@@ -70,7 +71,11 @@ Shader "Custom/OutlineToon" {
 
 
 		//トゥーンシェーダ
-
+		Stencil{
+			Ref 3			//ステンシル値
+			Comp Always		//常にステンシルテストを成功
+			Pass Replace	//常にステンシルに書き込み
+		}
 		CGPROGRAM	//開始
 
 		#pragma surface surf ToonRamp		//ライト情報が必要なため、サーフェースシェーダを使用
@@ -111,5 +116,6 @@ Shader "Custom/OutlineToon" {
 			o.Alpha = c.a;
 		}
 		ENDCG	//終了
+
 	}
 }
