@@ -18,7 +18,7 @@ Shader "Custom/StencilShadow" {
 		Pass
 		{
 			Cull Front
-
+			ColorMask 0
 			//ステンシル設定
 			Stencil{
 				Ref 1			//バッファ値
@@ -69,11 +69,10 @@ Shader "Custom/StencilShadow" {
 		{
 
 			Cull Back	//表側描画
-
 			//ステンシル設定
 			Stencil{
-				Ref 1			//バッファ値
-				Comp NotEqual	//バッファ値と違うバッファ値の時
+				Ref 0			//バッファ値
+				Comp Equal	//バッファ値と違うバッファ値の時
 			}
 
 			CGPROGRAM		//スタート

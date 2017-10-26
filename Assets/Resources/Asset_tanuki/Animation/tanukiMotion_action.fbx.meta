@@ -1,54 +1,60 @@
 fileFormatVersion: 2
-guid: 11886095d36e5884ab0fa1297ec9c3a1
-timeCreated: 1508827585
+guid: de6e5854ffa13e6419c4c0c814dd3ce3
+timeCreated: 1508983328
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: chest
-    100002: head
-    100004: L_elbow
-    100006: L_foot
-    100008: L_hand
-    100010: L_knee
-    100012: L_shoulder
-    100014: L_thigh
-    100016: L_wrist
-    100018: neck
-    100020: R_elbow
-    100022: R_foot
-    100024: R_hand
-    100026: R_knee
-    100028: R_shoulder
-    100030: R_thigh
-    100032: R_wrist
-    100034: root
-    100036: tail1
-    100038: tail2
-    100040: tail3
-    100042: //RootNode
+    100002: grp_bone
+    100004: head
+    100006: ikHandle1
+    100008: ikHandle2
+    100010: L_elbow
+    100012: L_foot
+    100014: L_hand
+    100016: L_knee
+    100018: L_shoulder
+    100020: L_thigh
+    100022: L_wrist
+    100024: neck
+    100026: R_elbow
+    100028: R_foot
+    100030: R_hand
+    100032: R_knee
+    100034: R_shoulder
+    100036: R_thigh
+    100038: R_wrist
+    100040: root
+    100042: tail1
+    100044: tail2
+    100046: tail3
+    100048: //RootNode
     400000: chest
-    400002: head
-    400004: L_elbow
-    400006: L_foot
-    400008: L_hand
-    400010: L_knee
-    400012: L_shoulder
-    400014: L_thigh
-    400016: L_wrist
-    400018: neck
-    400020: R_elbow
-    400022: R_foot
-    400024: R_hand
-    400026: R_knee
-    400028: R_shoulder
-    400030: R_thigh
-    400032: R_wrist
-    400034: root
-    400036: tail1
-    400038: tail2
-    400040: tail3
-    400042: //RootNode
+    400002: grp_bone
+    400004: head
+    400006: ikHandle1
+    400008: ikHandle2
+    400010: L_elbow
+    400012: L_foot
+    400014: L_hand
+    400016: L_knee
+    400018: L_shoulder
+    400020: L_thigh
+    400022: L_wrist
+    400024: neck
+    400026: R_elbow
+    400028: R_foot
+    400030: R_hand
+    400032: R_knee
+    400034: R_shoulder
+    400036: R_thigh
+    400038: R_wrist
+    400040: root
+    400042: tail1
+    400044: tail2
+    400046: tail3
+    400048: //RootNode
     7400000: Take 001
     9500000: //RootNode
   materials:

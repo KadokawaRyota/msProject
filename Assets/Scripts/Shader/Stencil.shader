@@ -49,11 +49,11 @@ Shader "Custom/Stencil" {
 		{
 			Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 
-			Cull off	//カリングOff
-			
+			Cull Back	//カリングOff
+			ZTest off
 			Stencil{
-				Ref 1		//ステンシル値
-				Comp Equal	//ステンシル値が同じとき
+				Ref 0		//ステンシル値
+				Comp NotEqual	//ステンシル値が同じとき
 			}
 
 			CGPROGRAM
@@ -93,6 +93,8 @@ Shader "Custom/Stencil" {
 			}
 			ENDCG
 		}
+
+
 	}
 	//FallBack "Diffuse"
 }

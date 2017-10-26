@@ -31,8 +31,10 @@ public class OfflinePostureController : MonoBehaviour {
 	{
 		GameObject.Find("Scene Camera").SetActive(false);
 
-		camera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+		camera = GetComponentInChildren<Camera>();
 		camera.enabled = true;
+		AudioListener audio = camera.GetComponent<AudioListener>();
+		audio.enabled = true;
 
 		// アニメーション情報の取得
 		animator = GetComponent<Animator>();
@@ -119,6 +121,7 @@ public class OfflinePostureController : MonoBehaviour {
 
 		else
 		{
+			animator.SetBool("is_walk", false);
 			animator.SetBool("is_running", false);
 		}
 
