@@ -9,10 +9,11 @@ using UnityEngine.UI;
 //------------------------------------------------------------------------------
 //          定義
 //------------------------------------------------------------------------------
-enum TOUCH_MODE
+public enum TOUCH_MODE
 {
     NONE,       // タップされていない
-    TOUCH,      // タップされている
+    TRIGGER,    // タップされた瞬間
+    MOVE,       // タップをキープしている
 };
 
 //------------------------------------------------------------------------------
@@ -24,12 +25,10 @@ public class Scr_ControllerManager : MonoBehaviour
     //          変数定義
     //--------------------------------------------------------------------------
     InputManager inputManager;                  // インプットマネージャー
-    Vector3 TouchPositionStart;                 // タップ開始位置
-    Vector3 TouchPositionNow;                   // 現在のタップ位置
-
+    public Vector3 TouchPositionStart;          // タップ開始位置
+    public Vector3 TouchPositionNow;            // 現在のタップ位置
     public Vector3 ControllerVec;               // タップ点の始点から終点へのベクトル
-    public float ControllerVecLength;         // ベクトルの長さ
-
+    public float ControllerVecLength;           // ベクトルの長さ
     public float MaxMoveSpeed;                  // 最高速度
     private Vector3 MoveVec;                    // 移動方向  
     private static TOUCH_MODE TouchMode;        // 現在のタップ状態
@@ -39,6 +38,8 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------
 	void Start () 
     {
+        ////       インプットマネージャ生成
+        ////////////////////////////////////////////////////////////////////////
         inputManager = InputManager.Instance;
         
         ////        初期値設定
@@ -51,90 +52,64 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------
 	void Update () 
     {
-        ////    現在のタップの状態をデバック表示
-        ////////////////////////////////////////////////////////////////////////
-        //Debug.Log("ARMMODE：" + TouchMode);
-        
         ////        タップ状態別の更新処理
         ////////////////////////////////////////////////////////////////////////
-        switch (TouchMode)
-        {
-            case TOUCH_MODE.NONE:       //通常時
-                None();
-                break;
-            case TOUCH_MODE.TOUCH:      //タップ時
-                Move();
-                break;
-        }
+        if (InputManager.GetTouchTrigger()) TouchTrigger();                                  // タップされた瞬間
+        if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) TouchMove();    // タップをキープしている状態
+        if (InputManager.GetTouchRelease()) TouchRelease();                                  // タップを解除した瞬間
     }
 
     //--------------------------------------------------------------------------
-    //          タップ時処理
-    //--------------------------------------------------------------------------
-    public void OnClickTrigger()
+    //          タップされた瞬間(トリガー処理)
+    //--------------------------------------------------------------------------    
+    public void TouchTrigger()
     {
-        TouchMode = TOUCH_MODE.TOUCH;                            // タップ状態にする
-        TouchPositionStart = InputManager.GetTouchPosition();    // タップ位置取得
-        
-        ////        デバック処理
+        ////        タッチ状態の変更
         ////////////////////////////////////////////////////////////////////////
-        Debug.Log("始点：" + TouchPositionStart);                // タップ位置表示
+        TouchMode = TOUCH_MODE.TRIGGER;
+
+        ////        タップ位置取得
+        ////////////////////////////////////////////////////////////////////////
+        TouchPositionStart = InputManager.GetTouchPosition();
+        TouchPositionNow = InputManager.GetTouchPosition();
     }
 
     //--------------------------------------------------------------------------
-    //          タップ解除処理
+    //          タップされている(ムーブ処理)
     //--------------------------------------------------------------------------
-    public void OutClick()
+    void TouchMove()
     {
+        ////        タッチ状態の変更
+        ////////////////////////////////////////////////////////////////////////
+        TouchMode = TOUCH_MODE.MOVE;
+
+        ////        現在のタップ位置取得
+        ////////////////////////////////////////////////////////////////////////
+        TouchPositionNow = InputManager.GetTouchPosition();
+
+        ////        始点と終点の方向ベクトル生成
+        ////////////////////////////////////////////////////////////////////////
+        ControllerVec = (TouchPositionNow - TouchPositionStart).normalized;
+        ControllerVecLength = ControllerVec.magnitude;
+    }
+
+    //--------------------------------------------------------------------------
+    //          タップが解除された(リリース処理)
+    //--------------------------------------------------------------------------
+    void TouchRelease()
+    {
+        ////        タッチ状態の変更
+        ////////////////////////////////////////////////////////////////////////
         TouchMode = TOUCH_MODE.NONE;
-
-		ControllerVec = new Vector3(0.0f, 0.0f, 0.0f);
-		ControllerVecLength = ControllerVec.magnitude;
-	}
+    }
 
     //--------------------------------------------------------------------------
-    //          各状態での更新処理
+    //          タップ状態の取得
     //--------------------------------------------------------------------------
-        ////        タップされていない
+    public TOUCH_MODE GetTouchMode()
+    {
+        ////        現在のタッチ状態を返す
         ////////////////////////////////////////////////////////////////////////
-        private void None()
-        {
-            bool clicked = InputManager.GetTouchTrigger();
-            if (clicked)
-            {
-                OnClickTrigger();
-            }
-        }
-
-        ////        タップされている
-        ////////////////////////////////////////////////////////////////////////
-        void Move()
-        {
-            ////    タップされていない場合
-            ////////////////////////////////////////////////////////////////////
-            if (InputManager.GetTouchRelease())
-            {
-                OutClick();
-                return;
-            }
-
-            ////    タップされている場合の処理
-            ////////////////////////////////////////////////////////////////////
-
-            // タップ位置取得
-            TouchPositionNow = InputManager.GetTouchPosition();    
-            
-            // 始点と終点の方向ベクトル生成
-            //Vector3 vec3 = (TouchPositionNow - TouchPositionStart).normalized;
-            //ControllerVec = (TouchPositionNow - TouchPositionStart).normalized;
-		ControllerVec = TouchPositionNow - TouchPositionStart;
-		ControllerVecLength = ControllerVec.magnitude;
-
-            ////    デバック処理
-            ////////////////////////////////////////////////////////////////////
-            
-            // タップ位置表示()
-            Debug.Log("ベクトルの長さ : " + ControllerVec);
-              
-        }
+        return TouchMode;
+    }
 }
