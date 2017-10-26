@@ -1,0 +1,218 @@
+fileFormatVersion: 2
+guid: 5b204ad103272874a872777d1d558409
+timeCreated: 1508827500
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: accessory
+    100002: acorn
+    100004: body
+    100006: broccoli1
+    100008: broccoli2
+    100010: chest
+    100012: ear
+    100014: flower1
+    100016: flower2
+    100018: grp_born
+    100020: grp_broccoli
+    100022: grp_flower
+    100024: grp_mesh
+    100026: grp_onion
+    100028: grp_tomato
+    100030: hair
+    100032: hat
+    100034: head
+    100036: head 1
+    100038: L_armMesh
+    100040: L_elbow
+    100042: L_foot
+    100044: L_hand
+    100046: L_knee
+    100048: L_shoulder
+    100050: L_thigh
+    100052: L_wrist
+    100054: lowerBody
+    100056: main
+    100058: neck
+    100060: onion
+    100062: R_armMesh
+    100064: R_elbow
+    100066: R_foot
+    100068: R_hand
+    100070: R_knee
+    100072: R_shoulder
+    100074: R_thigh
+    100076: R_wrist
+    100078: root
+    100080: sprout1
+    100082: sprout2
+    100084: sprout3
+    100086: tail
+    100088: tail1
+    100090: tail2
+    100092: tail3
+    100094: //RootNode
+    100096: tomato1
+    100098: tomato2
+    400000: accessory
+    400002: acorn
+    400004: body
+    400006: broccoli1
+    400008: broccoli2
+    400010: chest
+    400012: ear
+    400014: flower1
+    400016: flower2
+    400018: grp_born
+    400020: grp_broccoli
+    400022: grp_flower
+    400024: grp_mesh
+    400026: grp_onion
+    400028: grp_tomato
+    400030: hair
+    400032: hat
+    400034: head
+    400036: head 1
+    400038: L_armMesh
+    400040: L_elbow
+    400042: L_foot
+    400044: L_hand
+    400046: L_knee
+    400048: L_shoulder
+    400050: L_thigh
+    400052: L_wrist
+    400054: lowerBody
+    400056: main
+    400058: neck
+    400060: onion
+    400062: R_armMesh
+    400064: R_elbow
+    400066: R_foot
+    400068: R_hand
+    400070: R_knee
+    400072: R_shoulder
+    400074: R_thigh
+    400076: R_wrist
+    400078: root
+    400080: sprout1
+    400082: sprout2
+    400084: sprout3
+    400086: tail
+    400088: tail1
+    400090: tail2
+    400092: tail3
+    400094: //RootNode
+    400096: tomato1
+    400098: tomato2
+    4300000: hat
+    4300002: acorn
+    4300004: tomato1
+    4300006: tomato2
+    4300008: onion
+    4300010: sprout1
+    4300012: sprout2
+    4300014: sprout3
+    4300016: broccoli1
+    4300018: broccoli2
+    4300020: flower1
+    4300022: flower2
+    4300024: hair
+    4300026: ear
+    4300028: head
+    4300030: R_armMesh
+    4300032: L_armMesh
+    4300034: body
+    4300036: lowerBody
+    4300038: tail
+    9500000: //RootNode
+    13700000: acorn
+    13700002: body
+    13700004: broccoli1
+    13700006: broccoli2
+    13700008: ear
+    13700010: flower1
+    13700012: flower2
+    13700014: hair
+    13700016: hat
+    13700018: head
+    13700020: L_armMesh
+    13700022: lowerBody
+    13700024: onion
+    13700026: R_armMesh
+    13700028: sprout1
+    13700030: sprout2
+    13700032: sprout3
+    13700034: tail
+    13700036: tomato1
+    13700038: tomato2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
