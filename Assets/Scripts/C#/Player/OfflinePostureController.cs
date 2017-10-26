@@ -81,7 +81,7 @@ public class OfflinePostureController : MonoBehaviour {
 		// プレイヤー位置の地面の法線の更新
 		surfaceNormal = transform.position - Vector3.zero;
 		surfaceNormal = surfaceNormal.normalized;
-
+        
 
 		/// 移動処理
 
