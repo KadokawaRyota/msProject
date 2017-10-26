@@ -16,8 +16,12 @@ Shader "Custom/OutlineToon" {
 
 		//アウトラインシェーダ
 		Pass{
-			Cull Front	//優先描画
-
+			Cull Front	//裏面描画
+			Stencil{
+				Ref 1
+				Comp Always  // 常にステンシルを成功
+				Pass Replace
+			}
 			CGPROGRAM	//開始
 
 			#include "UnityCG.cginc"	//インクルード
@@ -66,7 +70,6 @@ Shader "Custom/OutlineToon" {
 
 
 		//トゥーンシェーダ
-		Cull back
 
 		CGPROGRAM	//開始
 
