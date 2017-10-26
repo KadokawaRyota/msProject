@@ -17,8 +17,7 @@ Shader "Custom/OutlineToon" {
 		//アウトラインシェーダ
 		Pass{
 			Cull Front	//裏面描画
-			//ZWrite Off
-			//ZTest off
+
 			Stencil{
 				Ref 2			//ステンシル値
 				Comp always		//常にステンシルテストを成功

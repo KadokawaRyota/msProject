@@ -10,13 +10,14 @@ Shader "Custom/Stencil" {
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 	}
 	SubShader {
-		Tags { "RenderType"="Opaque" }
+		Tags { "RenderType"="Opaque" 
+				"Queue" = "Transparent" }
 		LOD 200
 
 		//デフォルトのサーフェースシェーダ
 		CGPROGRAM
 
-		#pragma surface surf Standard fullforwardshadows	//サーフェースシェーダ宣言
+		#pragma surface surf Standard alpha:blend//fullforwardshadows	//サーフェースシェーダ宣言
 
 		#pragma target 3.0
 
@@ -49,11 +50,9 @@ Shader "Custom/Stencil" {
 		{
 			Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 
-			Cull Back	//カリングOff
-			ZTest off
 			Stencil{
-				Ref 0		//ステンシル値
-				Comp NotEqual	//ステンシル値が同じとき
+				Ref 3		//ステンシル値
+				Comp Equal	//ステンシル値が同じとき
 			}
 
 			CGPROGRAM
