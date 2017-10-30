@@ -101,6 +101,7 @@ public class Scr_ControllerManager : MonoBehaviour
         ////        タッチ状態の変更
         ////////////////////////////////////////////////////////////////////////
         TouchMode = TOUCH_MODE.NONE;
+        ControllerVec = new Vector3(0.0f,0.0f,0.0f);
     }
 
     //--------------------------------------------------------------------------
@@ -108,6 +109,8 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public TOUCH_MODE GetTouchMode()
     {
+        ////        現在のタッチ状態を返す
+        ////////////////////////////////////////////////////////////////////////
         return TouchMode;
     }
 }
