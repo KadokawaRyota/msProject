@@ -17,7 +17,7 @@ Shader "Custom/Stencil" {
 		//デフォルトのサーフェースシェーダ
 		CGPROGRAM
 
-		#pragma surface surf Standard alpha:blend//fullforwardshadows	//サーフェースシェーダ宣言
+		#pragma surface surf Standard fullforwardshadows	//サーフェースシェーダ宣言
 
 		#pragma target 3.0
 
@@ -95,5 +95,5 @@ Shader "Custom/Stencil" {
 
 
 	}
-	//FallBack "Diffuse"
+	FallBack "Diffuse"
 }
