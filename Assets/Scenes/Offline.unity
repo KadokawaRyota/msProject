@@ -656,7 +656,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4375706724082268, guid: 95620b5dd2836f04688615bd0a4fe63e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4375706724082268, guid: 95620b5dd2836f04688615bd0a4fe63e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1175,7 +1175,7 @@ Prefab:
     - target: {fileID: 198198932441225938, guid: baeb32e45f0d0ff47aef48028ff215ce,
         type: 2}
       propertyPath: randomSeed
-      value: 1038951456
+      value: 1022201264
       objectReference: {fileID: 0}
     - target: {fileID: 198198932441225938, guid: baeb32e45f0d0ff47aef48028ff215ce,
         type: 2}
@@ -1214,6 +1214,16 @@ Prefab:
       propertyPath: tapeffect
       value: 
       objectReference: {fileID: 1497457145}
+    - target: {fileID: 198198932441225938, guid: baeb32e45f0d0ff47aef48028ff215ce,
+        type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198198932441225938, guid: baeb32e45f0d0ff47aef48028ff215ce,
+        type: 2}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baeb32e45f0d0ff47aef48028ff215ce, type: 2}
   m_IsPrefabParent: 0
