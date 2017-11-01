@@ -15,13 +15,20 @@ public class Mission : MonoBehaviour {
 	int imgCnt;
 
 	bool imgTexFlg;
-	// Use this for initialization
-	void Start () {
+    bool objectDispFlg;
+
+    //ミッションオブジェクト
+    [SerializeField]
+    GameObject MissionObjects;
+
+    // Use this for initialization
+    void Start () {
 		missionFlg = false;     //フラグの初期化
 
 		imgCnt = 0;
 
 		imgTexFlg = false;
+        objectDispFlg = false;
 
 		missionImage.gameObject.SetActive(false);
 	}
@@ -49,12 +56,21 @@ public class Mission : MonoBehaviour {
 
 						missionImage.color = new Color(1.0f,1.0f,1.0f,0.5f);
 					}
-					
-				}
+                    if( !objectDispFlg )
+                    {
+                        //ミッションに関係あるオブジェクト表示
+                        foreach (Transform child in MissionObjects.transform)
+                        {
+                            child.gameObject.GetComponent<ObjectController>().DispSwitch( true );
+                            objectDispFlg = true;
+                        }
+                    }
+
+
+                }
 			}
 
-			//ミッションプログラム
-
+            //ミッションプログラム
 		}
 	
 	}
