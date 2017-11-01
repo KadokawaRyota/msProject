@@ -10,7 +10,6 @@ public class PlayerNetworkSetup : NetworkBehaviour
     [SerializeField]
     public AudioListener audioListener;
 
-	[SerializeField]
 	NetConnector netConnector;
 	
     // Use this for initialization
@@ -69,6 +68,9 @@ public class PlayerNetworkSetup : NetworkBehaviour
 				PlayerCamera.GetComponent<Camera>().enabled = true;
 				audioListener.GetComponent<AudioListener>().enabled = true;
 
+				//LocalPlayerのAnimatorパラメータを自動的に送る
+				GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
+
 			}
 
 			//同期するスクリプトを無効
@@ -78,5 +80,11 @@ public class PlayerNetworkSetup : NetworkBehaviour
         
 	}
 
-	
+	public override void PreStartClient()
+	{
+		//ClientのAnimatorパラメータを自動的に送る
+		GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
+	}
+
+
 }
