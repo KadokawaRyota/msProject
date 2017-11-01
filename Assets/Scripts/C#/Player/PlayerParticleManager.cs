@@ -42,4 +42,10 @@ public class PlayerParticleManager : MonoBehaviour
             }
         }
 	}
+
+	//フラグ切り替え関数
+	public void SetSmokeFlg(bool flg)
+	{
+		bEmitFlug = flg;
+	}
 }
