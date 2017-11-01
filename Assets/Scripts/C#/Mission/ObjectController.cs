@@ -15,8 +15,13 @@ using UnityEngine;
 
     箱にプレイヤーが引っ張られるのを表現したい・・・AddForceでプレイヤーが引っ張られる事を検証。
 */
+/// <summary>
+/// リアルな紐を演出するのはゲーム上ではバネから作っていく事になる。
+/// 計算上どうしても伸び縮みする。
+/// </summary>
 
-public class ObjectController : MonoBehaviour {
+public class ObjectController : MonoBehaviour
+{
 
     //パブリック
 
@@ -24,66 +29,92 @@ public class ObjectController : MonoBehaviour {
     [SerializeField]
     float fDistance;        //紐が伸び切る距離
     [SerializeField]
-    float playerPullPower;  //プレイヤーが引く力
+    float objectSpringConstant;  //バネ定数
+    [SerializeField]
+    float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
+    [SerializeField]
+    GameObject player;
+    //List<GameObject> players = new List<GameObject>();
+
 
     //プライベート
-    GameObject player = null;
-
-    float fDistancePlayer;  //プレイヤーとの距離
+    float fDistancePlayer;                  //プレイヤーとの距離
     Vector3 vecForPlayer = Vector3.zero;    //プレイヤーへの向き
-
-    Vector3 playerOnSurfaceNormal;
-    Vector3 playerMoveVec;
-    Vector3 moveVec;
-    float moveValue;
+    int playerCnt = 0;
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (player)            //紐で引っ張られるような処理
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        ////プレイヤーからキューブを引く処理
+        fDistancePlayer = Vector3.Distance(player.transform.position, transform.position);
+        //紐が伸び切ってる状態。
+        if (fDistancePlayer >= fDistance)
         {
-            fDistancePlayer = Vector3.Distance(player.transform.position, transform.position);
-            //紐が伸び切ってる状態。
-            if (fDistancePlayer >= fDistance)
-            {
-                //紐にかかる力 + プレイヤーの引く力
-                float pullPower = ( fDistancePlayer - fDistance ) * playerPullPower;
-                //現在のプレイヤーの移動量受け取り
-                //playerMoveVec = player.GetComponent<OfflinePostureController>().GetmoveVec();
-                //プレイヤーのいる位置の地面の法線受け取り
-                //playerOnSurfaceNormal = player.GetComponent<OfflinePostureController>().GetSurfaceNormal();
+            //引く力＝紐にかかる力 + 紐の力
+            float pullPower = (fDistancePlayer - fDistance) * objectSpringConstant;
 
-                /////進行方向を求める
-                //現在のプレイヤーへのベクトル
-                vecForPlayer = player.transform.position - transform.position;
+            /////進行方向を求める
+            //現在のプレイヤーへのベクトル
+            vecForPlayer = player.transform.position - transform.position;
 
-                //プレイヤーへのベクトルを正規化
-                vecForPlayer = vecForPlayer.normalized;
+            //プレイヤーへのベクトルを正規化
+            vecForPlayer = vecForPlayer.normalized;
 
-                //物体の進行方向
-                GetComponent<Rigidbody>().AddForce( new Vector3(vecForPlayer.x * pullPower , vecForPlayer.y * pullPower, vecForPlayer.z * pullPower) , ForceMode.Acceleration );
+            //物体の進行方向へ力を加える
+            GetComponent<Rigidbody>().AddForce(new Vector3(vecForPlayer.x * pullPower, vecForPlayer.y * pullPower, vecForPlayer.z * pullPower), ForceMode.Acceleration);
+        }
+        //紐がたるんでからの減速処理。（適当）
+        else
+        {
+            //加速度を半分に
+            GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
+        }
 
-                Debug.Log(vecForPlayer);
-            }
+        ////キューブからプレイヤーを引く処理
+        fDistancePlayer = Vector3.Distance(transform.position, player.transform.position);
+        //紐が伸び切ってる状態。
+        if (fDistancePlayer >= fDistance)
+        {
+            //引く力＝紐にかかる力 + 紐の力
+            float pullPower = (fDistancePlayer - fDistance) * playerSpringConstant;
 
-            if( fDistancePlayer < fDistance )
-            {
-                GetComponent<Rigidbody>().velocity = new Vector3 ( GetComponent<Rigidbody>().velocity.x / 2 , GetComponent<Rigidbody>().velocity.y / 2 , GetComponent<Rigidbody>().velocity.z / 2);
-            }
+            /////進行方向を求める
+            //現在のキューブへのベクトル
+            vecForPlayer = transform.position - player.transform.position;
 
+            //プレイヤーへのベクトルを正規化
+            vecForPlayer = vecForPlayer.normalized;
+
+            //物体の進行方向へ力を加える
+            player.GetComponent<Rigidbody>().AddForce(new Vector3(vecForPlayer.x * pullPower, vecForPlayer.y * pullPower, vecForPlayer.z * pullPower), ForceMode.Acceleration);
+        }
+        //紐がたるんでからの減速処理。（適当）
+        else
+        {
+            //加速度を半分に
+            player.GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
         }
     }
     void OnCollisionEnter(Collision collision)
     {
-        if(player == null)
-        if (collision.gameObject.name == "OfflinePlayer")
+        if (collision.gameObject.name == "OfflinePlayer_Tanuki")
         {
-            //collision.transform.parent = transform;
+            //自分自身を引っ張る
             player = collision.gameObject;
         }
+    }
+
+    //オブジェクトの表示
+    //ネットワークで同期しているため、見えない間は位置同期のみ。よって表示と判定と物理演算をONにする。
+    public void DispSwitch( bool bDisp )
+    {
+        GetComponent<MeshRenderer>().enabled = bDisp;
+        GetComponent<BoxCollider>().enabled = bDisp;
+        GetComponent<Rigidbody>().isKinematic = !bDisp;
     }
 }
