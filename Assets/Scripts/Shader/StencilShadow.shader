@@ -115,4 +115,5 @@ Shader "Custom/StencilShadow" {
 		}
 
 	}
+	FallBack "Diffuse"
 }
