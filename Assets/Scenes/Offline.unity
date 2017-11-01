@@ -396,7 +396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fDistance: 3
-  springConstant: 3500
+  objectSpringConstant: 40
+  playerSpringConstant: 10
   player: {fileID: 0}
 --- !u!114 &620126343
 MonoBehaviour:

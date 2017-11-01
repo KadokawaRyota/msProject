@@ -29,7 +29,9 @@ public class ObjectController : MonoBehaviour
     [SerializeField]
     float fDistance;        //紐が伸び切る距離
     [SerializeField]
-    float springConstant;  //バネ定数
+    float objectSpringConstant;  //バネ定数
+    [SerializeField]
+    float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
     [SerializeField]
     GameObject player;
     //List<GameObject> players = new List<GameObject>();
@@ -54,7 +56,7 @@ public class ObjectController : MonoBehaviour
         if (fDistancePlayer >= fDistance)
         {
             //引く力＝紐にかかる力 + 紐の力
-            float pullPower = (fDistancePlayer - fDistance) * springConstant;
+            float pullPower = (fDistancePlayer - fDistance) * objectSpringConstant;
 
             /////進行方向を求める
             //現在のプレイヤーへのベクトル
@@ -79,7 +81,7 @@ public class ObjectController : MonoBehaviour
         if (fDistancePlayer >= fDistance)
         {
             //引く力＝紐にかかる力 + 紐の力
-            float pullPower = (fDistancePlayer - fDistance) * springConstant;
+            float pullPower = (fDistancePlayer - fDistance) * playerSpringConstant;
 
             /////進行方向を求める
             //現在のキューブへのベクトル
