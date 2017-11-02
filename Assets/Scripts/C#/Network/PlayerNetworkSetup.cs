@@ -15,12 +15,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
     // Use this for initialization
     void Start()
 	{
-		
-		netConnector = GameObject.Find("NetConnector").GetComponent<NetConnector>();
-		if (netConnector.GetOnline())
-		{
 			
-			if (!isServer)
+			/*if (!isServer)
 			{
 				//ローディングイメージのアクティブを切る
 				GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
@@ -42,21 +38,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
 				{
 					GetComponent<PostureController>().enabled = false;
 				}
-			}
+			}*/
 
-			else
-			{
-				//サーバーの時はプレイヤーを生成しない
-				if (isLocalPlayer)
-				{
-					//camera.SetActive(true);
-
-					Destroy(this.gameObject);
-				}
-			}
-		}
-		else
-		{
 			//自分が操作するオブジェクトに限定する
 			if (isLocalPlayer)
 			{
@@ -72,11 +55,6 @@ public class PlayerNetworkSetup : NetworkBehaviour
 				GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
 
 			}
-
-			//同期するスクリプトを無効
-			GetComponent<PlayerSyncPosition>().enabled = false;
-			GetComponent<PlayerSyncRotation>().enabled = false;
-		}
         
 	}
 

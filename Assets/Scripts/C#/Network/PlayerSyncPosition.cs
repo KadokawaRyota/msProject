@@ -41,7 +41,7 @@ public class PlayerSyncPosition : NetworkBehaviour {
 	{
 		LerpPosition();     //2点間を補完する
 
-		ShowLatency();
+		//ShowLatency();
 	}
 
 	void FixedUpdate()
