@@ -30,13 +30,17 @@ public class PlayerSyncRotation : NetworkBehaviour {
     //しきい値は5。5以上動いたときのみメソッドを実行
     float threshold = 0;
 
+	void Update()
+	{
+		//現在角度と取得した角度を補間する
+		LerpRotations();
+	}
 	// Update is called once per frame
 	void FixedUpdate()
 	{
 		//クライアント側のPlayerの角度を取得
 		TransmitRotations();
-		//現在角度と取得した角度を補間する
-		LerpRotations();
+		
 	}
 
 	//角度を補間するメソッド
@@ -67,17 +71,17 @@ public class PlayerSyncRotation : NetworkBehaviour {
 	{
 		if (isLocalPlayer)
 		{
-            CmdProvideRotationsToServer(playerTransform.rotation, camTransform.rotation);
+            //CmdProvideRotationsToServer(playerTransform.rotation, camTransform.rotation);
 
             /***ネットワークトラフィックの軽減処理***/
-            /*if (Quaternion.Angle(playerTransform.rotation,lastPlayerRot) > threshold
+            if (Quaternion.Angle(playerTransform.rotation,lastPlayerRot) > threshold
             || Quaternion.Angle(camTransform.rotation,lastCamRot) > threshold)
             {
                 CmdProvideRotationsToServer(playerTransform.rotation, camTransform.rotation);
 
                 lastPlayerRot = playerTransform.rotation;
                 lastCamRot = camTransform.rotation;
-            }*/
+            }
 		}
 	}
 }

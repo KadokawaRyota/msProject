@@ -13,11 +13,11 @@ Shader "Custom/Stencil" {
 		Tags { "RenderType"="Transparent" 
 				"Queue" = "Transparent" }
 		LOD 200
-
+			Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 		//デフォルトのサーフェースシェーダ
 		CGPROGRAM
 
-		#pragma surface surf Standard fullforwardshadows	//サーフェースシェーダ宣言
+		#pragma surface surf Standard  alpha	//サーフェースシェーダ宣言
 
 		#pragma target 3.0
 

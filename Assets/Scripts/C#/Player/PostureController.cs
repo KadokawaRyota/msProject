@@ -23,8 +23,11 @@ public class PostureController : NetworkBehaviour
     Scr_ControllerManager controllerManager;    //コントローラのマネージャ
     float length;
 
-    // キーボード入力値
-    float inputHorizontal;
+	PlayerParticleManager particleManager;  //プレイヤーパーティクル
+
+
+	// キーボード入力値
+	float inputHorizontal;
     float inputVertical;
 
 
@@ -53,12 +56,16 @@ public class PostureController : NetworkBehaviour
             + transform.position.y * transform.position.y
             + transform.position.z * transform.position.z);
 
-
+		//コントロールマネージャの取得
 		controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
 
         prePosition = transform.position;
 
-        camera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+		//パーティクルスクリプトの取得
+		particleManager = GameObject.Find("WalkSmoke").GetComponent<PlayerParticleManager>();
+
+
+		camera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
 
 		NetConnector netConnector = GameObject.Find("NetConnector").GetComponent<NetConnector>();
 
@@ -124,10 +131,12 @@ public class PostureController : NetworkBehaviour
 			if (moveVec.magnitude > 0)
 			{
 				animator.SetBool("is_running", true);
+				particleManager.SetSmokeFlg(true);
 			}
 			else
 			{
 				animator.SetBool("is_running", false);
+				particleManager.SetSmokeFlg(false);
 			}
 
 			// 球面中心点からプレイヤーまでの距離更新

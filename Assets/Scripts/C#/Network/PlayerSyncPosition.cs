@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+
+[NetworkSettings(channel = 0, sendInterval = 0.033f)]
 
 public class PlayerSyncPosition : NetworkBehaviour {
 
 	[SyncVar]			//ホストから全クライアントへ送る
-
 	Vector3 syncPos;
 
 	//Playerの現在位置
@@ -22,12 +24,29 @@ public class PlayerSyncPosition : NetworkBehaviour {
 
     //threshold:しきい値、境目となる値のこと
     //0.5unitを越えなければ移動していないこととする
-    float threshold = 0;
+    float threshold = 0.5f;
+
+	private NetworkClient nClient;
+	private int latency; //遅延時間
+	private Text latencyText; //遅延時間表示用テキスト
+
+	void Start()
+	{
+		//NetworkClientとTextをキャッシュする
+		nClient = GameObject.Find("NetConnector").GetComponent<NetworkManager>().client;
+		latencyText = GameObject.Find("OnlineCanvas/Latency Text").GetComponent<Text>();
+	}
+	
+	void Update()
+	{
+		LerpPosition();     //2点間を補完する
+
+		//ShowLatency();
+	}
 
 	void FixedUpdate()
 	{
 		TransmitPosition();
-		LerpPosition();		//2点間を補完する
 	}
 
 	//ポジション補間
@@ -57,18 +76,27 @@ public class PlayerSyncPosition : NetworkBehaviour {
 	{
         /***ネットワークトラフィックの軽減処理***/
         //自プレイヤーであり、現在位置と前フレームのい最終位置との距離がthresholdより大きいとき
-        /*if(isLocalPlayer && Vector3.Distance(myTransform.position,lastPos) > threshold)
+        if(isLocalPlayer && Vector3.Distance(myTransform.position,lastPos) > threshold)
         {
-            //終了
             CmdProvidePositionToServer(myTransform.position);
 
-            //開始
             //現在位置を最終位置として保存
             lastPos = myTransform.position;
-        }*/
-		if(isLocalPlayer)
+        }
+		/*if(isLocalPlayer)
 		{
 			CmdProvidePositionToServer(myTransform.position);
+		}*/
+	}
+
+	void ShowLatency()
+	{
+		if (isLocalPlayer)
+		{
+			//latencyを取得
+			latency = nClient.GetRTT();
+			//latencyを表示
+			latencyText.text = latency.ToString();
 		}
 	}
 }
