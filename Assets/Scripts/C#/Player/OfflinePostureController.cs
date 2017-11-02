@@ -5,28 +5,42 @@ using UnityEngine;
 public class OfflinePostureController : MonoBehaviour {
 
 	Camera camera;
-	public Vector3 GetsurfaceNormal      // プレイヤー位置の地面の法線
+
+    static float screenWidth = 1080.0f;
+    static float screenHeight = 1920.0f;
+    static float puniVecMax = Mathf.Sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
+
+    public float moveWalkSpeed = 0.1f;   // 歩き移動速度係数
+    public float moveRunSpeed = 0.2f;    // 走り移動速度係数
+    public float moveIn = 0.50f;         // 慣性
+    public float moveThre = 0.50f;       // 移動速度変化の閾値
+
+    public OfflineCameraController cameraController;
+
+    public Vector3 GetsurfaceNormal      // プレイヤー位置の地面の法線
 	{
 		get { return this.surfaceNormal; }
 	}
+
 	private Vector3 playerNormal;       // プレイヤーオブジェクトの法線
 	private Vector3 surfaceNormal;      // プレイヤー接地面の法線
 	private Animator animator;          // アニメーション情報
 	private Vector3 dirVec;             // 現在のプレイヤー進行方向
 	private Vector3 moveVec;            // プレイヤー移動量
-	private Vector2 inputVec;           // 現在の入力移動方向
+    private Vector2 inputVec;           // 現在の入力移動方向   
+    private Vector2 inputVecN;          // 現在の入力移動方向( 正規化 )
 	private float radPlayer;            // 球面中心点からプレイヤーまでの距離
 	private Vector3 prePosition;        // プレイヤー前回位置
 	private Vector3 difPosition;        // プレイヤー位置の差分
 
 	Scr_ControllerManager controllerManager;    //コントローラのマネージャ
-	float length;
+    private float VecLength;            // 入力されたベクトルの長さ
 
-	PlayerParticleManager particleManager;	//プレイヤーパーティクル
-	// キーボード入力値
-	float inputHorizontal;
-	float inputVertical;
 
+  	PlayerParticleManager particleManager;	//プレイヤーパーティクル
+    // キーボード入力値
+    //float inputHorizontal;
+	//float inputVertical;
 
 	void Start()
 	{
@@ -70,15 +84,18 @@ public class OfflinePostureController : MonoBehaviour {
 
 	void Update()
 	{
-		//inputHorizontal = Input.GetAxisRaw("Horizontal");
-		//inputVertical = Input.GetAxisRaw("Vertical");
+        //inputHorizontal = Input.GetAxisRaw("Horizontal");
+        //inputVertical = Input.GetAxisRaw("Vertical");
 
 
-		//コントローラの方向ベクトルを代入
-		inputVec = new Vector2(controllerManager.ControllerVec.normalized.x, controllerManager.ControllerVec.normalized.y);
+        //コントローラの方向ベクトルを代入
+        inputVec = new Vector2(controllerManager.ControllerVec.x, controllerManager.ControllerVec.y);
+        inputVecN = new Vector2(controllerManager.ControllerVec.normalized.x, controllerManager.ControllerVec.normalized.y);
+        //inputVecN = new Vector2(inputHorizontal, inputVertical);
 
-		//inputVec = new Vector2(inputHorizontal, inputVertical);
-	}
+        // 入力ベクトルの長さを取得
+        VecLength = controllerManager.ControllerVec.magnitude;
+    }
 
 
 	void FixedUpdate()
@@ -92,18 +109,35 @@ public class OfflinePostureController : MonoBehaviour {
 		/// 移動処理
 
 		// カメラ進行方向ベクトルを取得
-		Vector3 cameraForward = Vector3.Scale(camera.transform.forward, new Vector3(1, 1, 1)).normalized;
-		Vector3 moveForward;
+		//Vector3 cameraForward = Vector3.Scale(camera.transform.forward, new Vector3(1, 1, 1)).normalized;
+        Vector3 cameraForward = Vector3.Scale(cameraController.GetCameraDirection, new Vector3(1, 1, 1)).normalized;
+        Vector3 moveForward;
 
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
 		//moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
-		moveForward = cameraForward * inputVec.y + camera.transform.right * inputVec.x;
+		moveForward = cameraForward * inputVecN.y + camera.transform.right * inputVecN.x;
 
-		// 移動方向にスピードを掛ける
-		moveVec = moveForward * 0.05f;
+        // 入力量によって移動速度を変える
 
-		moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
-		moveVec += (Vector3.zero - moveVec) * 0.5f;
+        if ( VecLength < ( puniVecMax * moveThre) )
+        {
+            moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * moveWalkSpeed;
+        }
+        else if( VecLength >= ( puniVecMax * moveThre ) )
+        {
+            moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * moveRunSpeed;
+        }
+
+
+		//moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal);
+
+        // 慣性
+		moveVec += (Vector3.zero - moveVec) * moveIn;
+
+
+        // 移動速度を位置に足しこむ
+		transform.position += moveVec;
+
 
         // 移動方向にスピードを掛ける
         moveVec = moveVec * 0.05f;

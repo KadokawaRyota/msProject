@@ -17,7 +17,7 @@ public class Acceleration : MonoBehaviour {
         // 重力方向の更新
         Vector3 gravityVec = GetComponent<Transform>().position - Vector3.zero;
         gravityVec = gravityVec.normalized;
-        acceleration = gravityVec * -9.81f * 10;
+        acceleration = gravityVec * -9.81f;
 	}
 
     void FixedUpdate() {

@@ -80,7 +80,7 @@ public class PostureController : NetworkBehaviour
 		if (isLocalPlayer)
 			inputVec = new Vector2(controllerManager.ControllerVec.normalized.x, controllerManager.ControllerVec.normalized.y);
 
-		//inputVec = new Vector2(inputHorizontal, inputVertical);
+		//inputVecN = new Vector2(inputHorizontal, inputVertical);
 	}
 
 

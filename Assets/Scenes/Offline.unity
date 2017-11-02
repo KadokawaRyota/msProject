@@ -183,6 +183,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 37667981}
+
 --- !u!1 &109564389
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissionObjects: {fileID: 1498166777}
   particle: {fileID: 1065899142}
+
 --- !u!1 &197302461
 GameObject:
   m_ObjectHideFlags: 0
@@ -789,7 +791,9 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4729823985421768, guid: 95620b5dd2836f04688615bd0a4fe63e, type: 2}
       propertyPath: m_LocalRotation.x
+
       value: 0
+
       objectReference: {fileID: 0}
     - target: {fileID: 4729823985421768, guid: 95620b5dd2836f04688615bd0a4fe63e, type: 2}
       propertyPath: m_LocalRotation.y
@@ -939,14 +943,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 198799552894511704, guid: 95620b5dd2836f04688615bd0a4fe63e,
         type: 2}
+
       propertyPath: EmissionModule.m_Bursts.Array.data[0].maxCount
       value: 3
+
       objectReference: {fileID: 0}
     - target: {fileID: 198799552894511704, guid: 95620b5dd2836f04688615bd0a4fe63e,
         type: 2}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
       value: 1
       objectReference: {fileID: 0}
+
     - target: {fileID: 198799552894511704, guid: 95620b5dd2836f04688615bd0a4fe63e,
         type: 2}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].repeatInterval
@@ -956,6 +963,7 @@ Prefab:
         type: 2}
       propertyPath: InitialModule.startSize.minMaxState
       value: 3
+
       objectReference: {fileID: 0}
     - target: {fileID: 198799552894511704, guid: 95620b5dd2836f04688615bd0a4fe63e,
         type: 2}
@@ -996,6 +1004,46 @@ Prefab:
         type: 2}
       propertyPath: bEmitFlug
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114964041786054002, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 104420393}
+    - target: {fileID: 114882204239893104, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: rotX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114882204239893104, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: localPos.y
+      value: 2.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 114882204239893104, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: localPos.z
+      value: -4.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114882204239893104, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: rotPitch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114964041786054002, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114964041786054002, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: moveWalkSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114964041786054002, guid: 3ea05b1b2fe66d1489a2760757d28b48,
+        type: 2}
+      propertyPath: moveRunSpeed
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 95620b5dd2836f04688615bd0a4fe63e, type: 2}
