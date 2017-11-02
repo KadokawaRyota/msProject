@@ -5,8 +5,15 @@
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
+	SubShader{
+		Tags{ "RenderType" = "Opaque"}
+
+		/*Stencil{
+			Ref 1 // リファレンス値
+			Comp Always  // 常にステンシルを成功
+			Pass Replace    // リファレンス値をバッファに書き込み
+		}*/
+
 		LOD 200
 
 		CGPROGRAM
@@ -26,8 +33,10 @@
 		half _Metallic;
 		fixed4 _Color;
 
+		float4 pos;
+
 		UNITY_INSTANCING_CBUFFER_START(Props)
-			// put more per-instance properties here
+		// put more per-instance properties here
 		UNITY_INSTANCING_CBUFFER_END
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {

@@ -1,435 +1,588 @@
-﻿using UnityEngine;
+﻿//------------------------------------------------------------------------------
+//          ファイルインクルード
+//------------------------------------------------------------------------------
+using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-/// <summary>
-/// ぷにぷにコントローラー
-/// </summary>
+//------------------------------------------------------------------------------
+//          メイン
+//------------------------------------------------------------------------------
 public class PunipuniController : MonoBehaviour
 {
-  public Scr_ControllerManager ControllerManager;
-
-  #region フィールド
-
-  /// <summary>
-  /// 描画対象のカメラ
-  /// </summary>
-  public Camera TargetCamera;
-
-  /// <summary>
-  /// 描画対象のマテリアル
-  /// </summary>
-  public Material Material;
-
-  #endregion
-
-  #region フィールド(private)
-
-  /// <summary>
-  /// 半径
-  /// </summary>
-  float RadiusPixel = 30.0f;
-  float Radius;
-
-  /// <summary>
-  /// 
-  /// </summary>
-  PunipuniMesh PuniMesh;
-
-  /// <summary>
-  /// 
-  /// </summary>
-  MeshRenderer Renderer;
-
-  /// <summary>
-  /// ベジェ曲線パラメータ(中央、左、右)
-  /// </summary>
-  Bezier BezierC = new Bezier();
-  Bezier BezierL = new Bezier();
-  Bezier BezierR = new Bezier();
-
-
-  public 
-  /// <summary>
-  /// 
-  /// </summary>
-  Vector3 BeginMousePosition;
-
-  #endregion
-
-  #region プロパティ
-
-  /// <summary>
-  /// ぷにぷにコントローラーの表示設定を行います。
-  /// </summary>
-  private bool VisiblePunipuniController
-  {
-    get
+    //------------------------------------------------------------------------------
+    //          変数定義
+    //------------------------------------------------------------------------------
+    public enum TOUCH_STATE
     {
-      if( this.Renderer != null ) {
-        return this.Renderer.enabled;
-      }
-      return false;
-    }
-    set
-    {
-      if( this.Renderer != null ) {
-        this.Renderer.enabled = value;
-      }
-    }
-  }
+        NONE,   // 判別してない
+        TAP,    // タップ
+        HOLD    // ホールド
+    };
 
-  #endregion
+    #region [ パブリック ]
+    public Scr_ControllerManager ControllerManager; // タップ情報
+    public TapEffect tapeffect;                     // タップエフェクト情報
+    public Camera TargetCamera;                     // 描画対象のカメラ
+    public Material Material;                       // 描画対象のマテリアル
+    
+    public int TapDiscriminationFrame;                  // タップorホールド判別用変数タップorホールド判別時間(〇フレーム以内ならタップ、それ以上ならホールド)
+    public int nStateCheckCounter;                      // タップorホールド判別用カウンター
+    public TOUCH_MODE TouchMode = TOUCH_MODE.NONE;      // 現在のタップ状態
+    public TOUCH_MODE TouchModeOld = TOUCH_MODE.NONE;   // １フレ前のタップ状態
+    public TOUCH_STATE TouchState = TOUCH_STATE.NONE;   // タップの状況
+    #endregion
 
-  /// <summary>
-  /// Use this for initialization
-  /// </summary>
-  void Start()
-  {
-    var p1 = TargetCamera.ScreenToWorldPoint(new Vector3(this.RadiusPixel, this.RadiusPixel, transform.position.z));
-    var p2 = TargetCamera.ScreenToWorldPoint(new Vector3(-this.RadiusPixel, -this.RadiusPixel, transform.position.z));
-    this.Radius = System.Math.Abs(p1.x - p2.x);
+    #region [ プライベート ]
 
-    // メッシュを作成しMeshRendererを追加
-    PuniMesh = new PunipuniMesh(64, this.Radius);
-    AddMeshRenderer(gameObject, this.Material);
+    ////    半径
+    ////////////////////////////////////////////////////////////////////////
+    public float RadiusPixel;
+    float Radius;
 
-    // MeshRendererを保持しておく
-    this.Renderer = GetComponent<MeshRenderer>();
+    ////    描画オブジェクト情報
+    ////////////////////////////////////////////////////////////////////////
+    PunipuniMesh PuniMesh;
 
-    // 非表示
-    VisiblePunipuniController = false;
-  }
+    ////    描画設定
+    ////////////////////////////////////////////////////////////////////////
+    MeshRenderer Renderer;
 
-  /// <summary>
-  /// Update is called once per frame
-  /// </summary>
-  void Update()
-  {
-    if( Input.GetMouseButtonDown(0) ) BeginPunipuni();
-    if( Input.GetMouseButtonUp(0) ) EndPunipuni();
-    if( Input.GetMouseButton(0) ) TrackingPunipuni();
-  }
+    ////    ベジェ曲線パラメータ(中央、左、右)
+    ////////////////////////////////////////////////////////////////////////
+    Bezier BezierC = new Bezier();
+    Bezier BezierL = new Bezier();
+    Bezier BezierR = new Bezier();
 
-  /// <summary>
-  /// 指定GameObjectにMeshRendererを追加します。
-  /// </summary>
-  /// <param name="target"></param>
-  /// <param name="material"></param>
-  void AddMeshRenderer( GameObject target, Material material )
-  {
-    // メッシュ設定
-    var meshFilter = target.AddComponent<MeshFilter>();
-    meshFilter.mesh = PuniMesh.Mesh;
-    // meshFilter.sharedMesh = this.Mesh;
+    private static Touch touch;     // タップ情報
+    public Vector3 BeginMousePosition;//　タップ位置
+    private bool bStateCountFlug;
 
-    // gameObject.AddComponent<MeshCollider>();
-    //gameObject.GetComponent<MeshFilter>().sharedMesh.name = name;
-    //gameObject.GetComponent<MeshCollider>().sharedMesh = PuniMesh.Mesh;
+    #endregion
+    
+    //--------------------------------------------------------------------------
+    //          ぷにこん表示設定(表示のON/OFF)
+    //--------------------------------------------------------------------------
+        #region プロパティ
+        private bool VisiblePunipuniController
+        {
+            get
+            {
+                //  コントローラ生成済み
+                if( this.Renderer != null ) 
+                {
+                    // 表示をONに変更
+                    return this.Renderer.enabled;
+                }
+            
+                return false;
+            }
 
-    { // マテリアル設定
-      var renderer = target.AddComponent<MeshRenderer>();
-      renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-      renderer.receiveShadows = false;
-      renderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
-      renderer.material = material;
-    }
-  }
-
-  /// <summary>
-  /// ぷにぷにコントローラーの開始
-  /// </summary>
-  void BeginPunipuni()
-  {
-        // 初期位置
-        this.BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,1.0f));
-		// 位置
-		transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-		// 表示
-		VisiblePunipuniController = true;
-
-    // ベジェ曲線パラメータ
-    var x = 0;
-    var y = 0;
-    BezierC.P1 = new Vector2(x, y);     // 中心
-    BezierC.P2 = new Vector2(x, y);     // 制御点1
-    BezierC.P3 = new Vector2(x, y);     // 制御点2
-    BezierC.P4 = new Vector2(x, y);     // 終点
-    BezierL.P1 = new Vector2(x, y);     // 中心
-    BezierL.P2 = new Vector2(x, y);     // 制御点1
-    BezierL.P3 = new Vector2(x, y);     // 制御点2
-    BezierL.P4 = new Vector2(x, y);     // 終点
-    BezierR.P1 = new Vector2(x, y);     // 中心
-    BezierR.P2 = new Vector2(x, y);     // 制御点1
-    BezierR.P3 = new Vector2(x, y);     // 制御点2
-    BezierR.P4 = new Vector2(x, y);     // 終点
-  }
-
-  /// <summary>
-  /// ぷにぷにコントローラーの終了
-  /// </summary>
-  void EndPunipuni()
-  {
-    // 表示
-    VisiblePunipuniController = false;
-  }
-
-  /// <summary>
-  /// ぷにぷにコントローラーの追跡処理
-  /// </summary>
-  void TrackingPunipuni()
-  {
-
-        // ベジェ曲線パラメータの更新
-        var pos = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-
-        //transform.position.z));
-    var x = this.BeginMousePosition.x - pos.x; 
-    var y = this.BeginMousePosition.y - pos.y;
-/*
-    var xStart = this.BeginMousePosition.x;
-    var x = pos.x;
-
-		// 始点の座標がマイナス
-		if (xStart <= 0)
-		{
-			// 始点x < 現在x
-			if (xStart < x)
-			{
-				// 始点に 現在の値を加算
-				x = x + xStart;
-
-				// 値が大きい場合制限
-				if (x > 500)
-				{
-					x = 500;
-				}
-			}
-
-			// 現在x < 始点x
-			else
-			{
-				// 
-				x = xStart + x;
-
-			}
-		}
-
-		else
-		{
-			if (x < xStart)
-			{
-				x = x + xStart;
-			}
-
-			else
-			{
-				x = xStart + x;
-			}
-		}
-
-		var yOld = this.BeginMousePosition.y;
-    var y = -pos.y;
-*/
-
-    UpdateBezierParameter(-x, -y);
-    // Debug.LogFormat("Mouse X = {0}, y = {1}", Input.mousePosition.x, Input.mousePosition.y);
-
-
-    // メッシュの更新
-    PuniMesh.Vertexes = TransformFromBezier(new Vector3());
-
-    var centerPos = BezierC.GetPosition( 0.8f );
-    PuniMesh.CenterPoint = centerPos;
-  }
-
-  /// <summary>
-  /// ベジェ曲線のパラメータを更新します。
-  /// </summary>
-  /// <param name="x"></param>
-  /// <param name="y"></param>
-  private void UpdateBezierParameter( float x, float y )
-  {
-    AnimateBezierParameter(this.BezierC, this.BezierC, x, y);
-
-    { // 他の2個のベジェの開始位置を更新
-      var dir = this.BezierC.P2 - this.BezierC.P1;
-      var dirL = new Vector2(dir.y, -dir.x);
-      var dirR = new Vector2(-dir.y, dir.x);
-      dirL = dirL.normalized;
-      dirR = dirR.normalized;
-      dirL.x = dirL.x * this.Radius + this.BezierC.P1.x;
-      dirL.y = dirL.y * this.Radius + this.BezierC.P1.y;
-      dirR.x = dirR.x * this.Radius + this.BezierC.P1.x;
-      dirR.y = dirR.y * this.Radius + this.BezierC.P1.y;
-      this.BezierL.P1 = dirL;
-      this.BezierR.P1 = dirR;
-    }
-
-    AnimateBezierParameter(this.BezierL, this.BezierC, x, y);
-    AnimateBezierParameter(this.BezierR, this.BezierC, x, y);
-  }
-
-  float ArrivalTime = 10; // frame count(本来はtimeがいい)
-
-  /// <summary>
-  /// ベジェ曲線パラメータを更新します。
-  /// </summary>
-  /// <param name="bez"></param>
-  /// <param name="baseBez"></param>
-  /// <param name="x"></param>
-  /// <param name="y"></param>
-  private void AnimateBezierParameter( Bezier bez, Bezier baseBez, float x, float y )
-  {
-    // 先端点
-    bez.P4 = new Vector2(x, y);
-
-    { // 先端制御点
-      if( bez.P3 != null ) {
-        var vec = baseBez.P1 - bez.P1;
-        vec = vec.normalized * (this.Radius / 4);
-
-        var pos = bez.P3 - bez.P4;
-        pos += vec;
-        pos /= this.ArrivalTime;
-        bez.P3 -= pos;
-      }
-      else {
-        bez.P3 = new Vector2(x, y);
-      }
-    }
-
-    { // 中心制御点
-      // 最終的な位置
-      var ev = baseBez.P4 - baseBez.P1;
-      var len = ev.magnitude;
-      ev = ev.normalized;
-      ev *= (len / 4);
-      ev += bez.P1;
-
-      if( bez.P2 != null ) {
-        var v = ev - bez.P2;
-        v /= 3; // this.ArrivalTime;
-        bez.P2 += v;
-        //bez.P2 = ev;
-      }
-      else {
-        bez.P2 = new Vector2(bez.P1.x, bez.P1.y);
-      }
-    }
-  }
-
-  /// <summary>
-  /// 操作対象の頂点インデックスを取得します。
-  /// </summary>
-  /// <param name="center"></param>
-  /// <param name="startIndex"></param>
-  /// <param name="endIndex"></param>
-  void GetMoveFixedVertexIndex( Vector3 center, out int startIndex, out int endIndex )
-  {
-    Vector3[] points = PuniMesh.OriginalVertexes;
-
-    int sidx = -1;
-    int eidx = -1;
-    int idx = 0;
-    bool recheckStart = true;
-    bool recheckEnd = true;
-    for( int n = 0; n < points.Length; n++ ) {
-      var point = points[n];
-
-      if( BezierL.IsValid ) {
-        var PT = point - center;
-        var AB = BezierC.P1 - BezierL.P1;
-        var c1 = AB.x * PT.y - AB.y * PT.x;
-        if( c1 < 0 ) {
-          // move
-          if( recheckStart ) {
-            sidx = idx;
-            recheckStart = false;
-            recheckEnd = true;
-          }
+            set
+            {
+                //  コントローラ生成済み
+                if( this.Renderer != null ) 
+                {
+                    // 状態変更
+                    this.Renderer.enabled = value;
+                }
+            }
         }
-        else {
-          // fixed
-          if( recheckEnd ) {
-            eidx = idx - 1;
-            recheckStart = true;
-            recheckEnd = false;
-          }
+        #endregion
+
+    //--------------------------------------------------------------------------
+    //          初期化処理
+    //--------------------------------------------------------------------------
+        void Start()
+        {
+            ////    コントローラの半径定義
+            ////////////////////////////////////////////////////////////////////
+            var p1 = TargetCamera.ScreenToWorldPoint(new Vector3(this.RadiusPixel, this.RadiusPixel, transform.position.z));
+            var p2 = TargetCamera.ScreenToWorldPoint(new Vector3(-this.RadiusPixel, -this.RadiusPixel, transform.position.z));
+        
+            ////    円作成
+            ////////////////////////////////////////////////////////////////////
+            this.Radius = System.Math.Abs(p1.x - p2.x);
+
+            ////    メッシュを作成しMeshRendererを追加
+            ////////////////////////////////////////////////////////////////////
+            PuniMesh = new PunipuniMesh(64, this.Radius);
+            AddMeshRenderer(gameObject, this.Material);
+
+            ////    MeshRendererを保持しておく
+            ////////////////////////////////////////////////////////////////////
+            this.Renderer = GetComponent<MeshRenderer>();
+
+            ////    ぷにこんオブジェクトを非表示にしておく
+            ////////////////////////////////////////////////////////////////////
+            VisiblePunipuniController = false;
+
+            ////    タップ状況判別カウンタを初期化&カウントフラグfalse
+            ////////////////////////////////////////////////////////////////////
+            nStateCheckCounter = 0;
+            bStateCountFlug = false;
         }
-      }
-      ++idx;
-    }
-    startIndex = sidx;
-    endIndex = eidx;
-  }
 
-  /// <summary>
-  /// ベジェ曲線パラメータに応じてメッシュを変形します。
-  /// </summary>
-  /// <param name="center"></param>
-  Vector3[] TransformFromBezier( Vector3 center )
-  {
-    Vector3[] points = PuniMesh.Vertexes;
-    Vector3[] org_points = PuniMesh.OriginalVertexes;
+    //--------------------------------------------------------------------------
+    //          更新処理
+    //--------------------------------------------------------------------------
+        void Update()
+        {
+            ////    タップ状況の更新
+            ////////////////////////////////////////////////////////////////////
+            UpdateTapState();
 
-    // 操作対象の頂点インデックスを取得
-    int si;
-    int ei;
-    GetMoveFixedVertexIndex(center, out si, out ei);
-    if( ei == -1 ) ei = points.Length - 1;
-    if( si == -1 || ei == -1 ) {
-      return org_points;
-    }
+            ////        タップ状態判別
+            ////////////////////////////////////////////////////////////////////
+                // タップされた瞬間
+                if (InputManager.GetTouchTrigger()) 
+                    BeginPunipuni();
 
-    if( si > ei ) ei += points.Length;
-    var useCount = ei - si;
-    if( useCount <= 0 ) {
-      return org_points;
-    }
+                // タップをキープしている状態                          
+                if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) 
+                    TrackingPunipuni();
 
-    int centerIdx = (int)(useCount / 2) + si;
-    int count1 = centerIdx - si;
-    int count2 = ei - centerIdx;
-    // Debug.LogFormat("{0}Num, {1}, {2}Num", count1, centerIdx, count2);
+                // タップを解除した瞬間
+                if (InputManager.GetTouchRelease()) 
+                    EndPunipuni();
 
-    for( int n = 0; n < points.Length; n++ ) {
-      points[n] = org_points[n];
-    }
+            ////        タッチ状態の更新処理
+            //////////////////////////////////////////////////////////////////// 
+            TouchModeOld = TouchMode;
+            TouchMode = ControllerManager.GetTouchMode();
+        }
+    
+    //--------------------------------------------------------------------------
+    //          指定GameObjectにMeshRendererを追加
+    //--------------------------------------------------------------------------
+        void AddMeshRenderer( GameObject target, Material material )
+        {
+            ////    メッシュ設定
+            ////////////////////////////////////////////////////////////////////
+            var meshFilter = target.AddComponent<MeshFilter>();
+            meshFilter.mesh = PuniMesh.Mesh;
 
-    for( int n = 0; n < count1; n++ ) {
-      float t = (float)(n + 1) / (float)(count1 + 1);
-      var point = BezierL.GetPosition(t);
+            ////    マテリアル設定
+            ////////////////////////////////////////////////////////////////////
+            {
+                var renderer = target.AddComponent<MeshRenderer>();
+                renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                renderer.receiveShadows = false;
+                renderer.reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
+                renderer.material = material;
+            }
+        }
 
-      // 半径内にある場合はオリジナルを使用する
-      var dist = new Vector3(point.x, point.y, center.z) - center;
-      var idx = (n + si) % points.Length;
-      if( dist.magnitude > this.Radius ) {
-        points[idx].x = point.x;
-        points[idx].y = point.y;
-      }
-    }
-    for( int n = 0; n < count2; n++ ) {
-      float t = (float)(n + 1) / (float)(count2 + 1);
-      var point = BezierR.GetPosition(t);
+    //--------------------------------------------------------------------------
+    //          ぷにぷにコントローラーの開始
+    //--------------------------------------------------------------------------
+        void BeginPunipuni()
+        {
+            ////    ベジェ曲線とぷニコンメッシュのリセット
+            ////////////////////////////////////////////////////////////////////
+            ResetPuniMeshAndBezier();
 
-      // 半径内にある場合はオリジナルを使用する
-      var dist = new Vector3(point.x, point.y, center.z) - center;
-      var idx = (ei - n) % points.Length;
-      if( dist.magnitude > this.Radius ) {
-        points[idx].x = point.x;
-        points[idx].y = point.y;
-      }
-    }
+            ////    タップ状況判別カウントフラグをtrueに
+            ////////////////////////////////////////////////////////////////////
+            bStateCountFlug = true;
+
+            ////    タップエフェクトに位置を代入
+            ////////////////////////////////////////////////////////////////////
+             //tapeffect.EffectPos = ControllerManager.TouchPositionStart;
+        }
+
+    //--------------------------------------------------------------------------
+    //          ぷにぷにコントローラーの終了
+    //--------------------------------------------------------------------------
+        void EndPunipuni()
+        {
+            ////   タップされていた時間が一定以下だった時の処理
+            ////////////////////////////////////////////////////////////////////           
+            if (TouchState == TOUCH_STATE.NONE && nStateCheckCounter < TapDiscriminationFrame)
+            {
+                ////    タップ状況を「TAP」に変更
+                ////////////////////////////////////////////////////////////////
+                TouchState = TOUCH_STATE.TAP;           
+
+                ////    タップエフェクト発生
+                ////////////////////////////////////////////////////////////////
+                //tapeffect.EffectPos = ControllerManager.TouchPositionStart;   // エフェクト位置設定
+                tapeffect.SetEffectType(EFFECT_TYPE.TAP);                                  // エフェクトタイプセット
+                tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
+            }
+
+            ////    ベジェ曲線とぷニコンメッシュのリセット
+            ////////////////////////////////////////////////////////////////////
+            ResetPuniMeshAndBezier();
+
+            ////    エフェクトOFF
+            ////////////////////////////////////////////////////////////////
+            if (tapeffect.Effecttype == EFFECT_TYPE.HOLD)
+            {
+                tapeffect.EffectStatusReset();
+            }
+        }
+
+    //--------------------------------------------------------------------------
+    //          ぷにぷにコントローラーの追跡処理
+    //--------------------------------------------------------------------------
+        void TrackingPunipuni()
+        {
+            ////    ベジェ曲線パラメータの更新
+            ////////////////////////////////////////////////////////////////////
+            Vector3 pos = Vector3.zero;                             // 更新用変数
+            Vector3 start = ControllerManager.TouchPositionStart;   // タップ位置(開始)
+            Vector3 screenPos = ControllerManager.TouchPositionNow; // タップ位置(現在)
+            tapeffect.EffectPos = ControllerManager.TouchPositionNow;
+            
+            
+            ////    デバッグ表示
+            ////////////////////////////////////////////////////////////////////
+            //Debug.Log("始点：" + start + "終点：" + screenPos);     // タップ位置表示
+
+            ////    ベジェ曲線位置の更新
+            ////////////////////////////////////////////////////////////////////////
+            pos = TargetCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 1.0f));
+            
+            var x = this.BeginMousePosition.x - pos.x;
+            var y = this.BeginMousePosition.y - pos.y;
+
+            ////    ベジェ曲線の情報を更新
+            ////////////////////////////////////////////////////////////////////////
+            UpdateBezierParameter(-x, -y);
+        
+            ////    メッシュ情報の更新
+            ////////////////////////////////////////////////////////////////////////
+            PuniMesh.Vertexes = TransformFromBezier(new Vector3());
+
+            ////    
+            ////////////////////////////////////////////////////////////////////////
+            var centerPos = BezierC.GetPosition( 0.8f );
+            PuniMesh.CenterPoint = centerPos;
+        }
+    
+
+    //--------------------------------------------------------------------------
+    //          タップ状況の更新
+    //--------------------------------------------------------------------------
+    private void UpdateTapState()
     {
-      // 半径内にある場合はオリジナルを使用する
-      var dist = new Vector3(BezierC.P4.x, BezierC.P4.y, center.z) - center;
-      var idx = (centerIdx) % points.Length;
-      if( dist.magnitude > this.Radius ) {
-        // 中心
-        points[idx].x = BezierC.P4.x;
-        points[idx].y = BezierC.P4.y;
-      }
+        //----------------------------------------------------------------------
+        //          カウンタが一定数を超えた場合の処理
+        //----------------------------------------------------------------------
+        if (TouchState == TOUCH_STATE.NONE && nStateCheckCounter >= TapDiscriminationFrame)
+        {
+            ////    タップ状況を「ホールド」に変更
+            ////////////////////////////////////////////////////////////////////
+            TouchState = TOUCH_STATE.HOLD;
+
+            ////    コントローラ表示フラグをTRUE
+            ////////////////////////////////////////////////////////////////////
+            VisiblePunipuniController = true;
+
+            ////    エフェクト生成
+            ////////////////////////////////////////////////////////////////////
+            tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
+            tapeffect.SetEffectType(EFFECT_TYPE.HOLD);                    // エフェクトタイプセット
+
+            Debug.Log("ホールドエフェクト発生");
+        }
+
+        //----------------------------------------------------------------------
+        //          タップ状態が(HOLD)の時の位置情報送信処理
+        //----------------------------------------------------------------------
+        if (tapeffect.EffectFlug == true && tapeffect.Effecttype == EFFECT_TYPE.HOLD)
+        {
+            tapeffect.EffectPos = ControllerManager.TouchPositionNow;   // エフェクト位置更新
+        }
+
+        //----------------------------------------------------------------------
+        //          カウントフラグがTRUEの場合の処理
+        //----------------------------------------------------------------------
+        if (TouchState == TOUCH_STATE.NONE && bStateCountFlug) 
+        {
+            ////    カウンタを加算
+            ////////////////////////////////////////////////////////////////////
+            nStateCheckCounter++; 
+        }
     }
-    return points;
-  }
+
+    //--------------------------------------------------------------------------
+    //          ベジェ曲線のパラメータの更新処理
+    //--------------------------------------------------------------------------
+    private void UpdateBezierParameter( float x, float y )
+    {
+        AnimateBezierParameter(this.BezierC, this.BezierC, x, y);
+
+        { 
+            // 他の2個のベジェの開始位置を更新
+            var dir = this.BezierC.P2 - this.BezierC.P1;
+            var dirL = new Vector2(dir.y, -dir.x);
+            var dirR = new Vector2(-dir.y, dir.x);
+            dirL = dirL.normalized;
+            dirR = dirR.normalized;
+            dirL.x = dirL.x * this.Radius + this.BezierC.P1.x;
+            dirL.y = dirL.y * this.Radius + this.BezierC.P1.y;
+            dirR.x = dirR.x * this.Radius + this.BezierC.P1.x;
+            dirR.y = dirR.y * this.Radius + this.BezierC.P1.y;
+            this.BezierL.P1 = dirL;
+            this.BezierR.P1 = dirR;
+        }
+
+        AnimateBezierParameter(this.BezierL, this.BezierC, x, y);
+        AnimateBezierParameter(this.BezierR, this.BezierC, x, y);
+    }
+    
+    float ArrivalTime = 10; // frame count(本来はtimeがいい)
+
+    //--------------------------------------------------------------------------
+    //          ベジェ曲線のパラメータの更新処理(軌道)
+    //--------------------------------------------------------------------------
+    private void AnimateBezierParameter(Bezier bez, Bezier baseBez, float x, float y)
+    {
+        ////    先端点
+        ////////////////////////////////////////////////////////////////////////
+        bez.P4 = new Vector2(x, y);
+
+        ////    先端点制御点情報
+        ////////////////////////////////////////////////////////////////////////
+        {
+            if (bez.P3 != null)
+            {
+                var vec = baseBez.P1 - bez.P1;
+                vec = vec.normalized * (this.Radius / 4);
+
+                var pos = bez.P3 - bez.P4;
+                pos += vec;
+                pos /= this.ArrivalTime;
+                bez.P3 -= pos;
+            }
+
+            else
+            {
+                bez.P3 = new Vector2(x, y);
+            }
+        }
+
+        ////    中心制御点
+        ////////////////////////////////////////////////////////////////////////
+        {
+            ////    最終的な位置
+            ////////////////////////////////////////////////////////////////////
+            var ev = baseBez.P4 - baseBez.P1;
+            var len = ev.magnitude;
+            ev = ev.normalized;
+            ev *= (len / 4);
+            ev += bez.P1;
+
+            if (bez.P2 != null)
+            {
+                var v = ev - bez.P2;
+                v /= 3;
+                bez.P2 += v;
+            }
+
+            else
+            {
+                bez.P2 = new Vector2(bez.P1.x, bez.P1.y);
+            }
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    //          操作対象の頂点インデックスを取得
+    //--------------------------------------------------------------------------
+    void GetMoveFixedVertexIndex( Vector3 center, out int startIndex, out int endIndex )
+    {
+        ////    ローカル変数
+        ////////////////////////////////////////////////////////////////////////
+        Vector3[] points = PuniMesh.OriginalVertexes;   // 頂点情報
+        int sidx = -1;                                  // ID
+        int eidx = -1;                                  // ID   
+        int idx = 0;                                    // インデックスデータ
+        bool recheckStart = true;
+        bool recheckEnd = true;
+
+        ////    インデックス取得
+        ////////////////////////////////////////////////////////////////////////
+        for( int n = 0; n < points.Length; n++ ) 
+        {
+            var point = points[n];
+            
+            if( BezierL.IsValid ) 
+            {
+                var PT = point - center;
+                var AB = BezierC.P1 - BezierL.P1;
+                var c1 = AB.x * PT.y - AB.y * PT.x;
+
+                if (c1 < 0)
+                {
+                    // move
+                    if (recheckStart)
+                    {
+                        sidx = idx;
+                        recheckStart = false;
+                        recheckEnd = true;
+                    }
+                }
+                else
+                {
+                    // fixed
+                    if (recheckEnd)
+                    {
+                        eidx = idx - 1;
+                        recheckStart = true;
+                        recheckEnd = false;
+                    }
+                }
+            }
+            ++idx;
+        }
+        startIndex = sidx;
+        endIndex = eidx;
+    }
+    
+    //--------------------------------------------------------------------------
+    //          ベジェ曲線パラメータに応じてメッシュを変形
+    //--------------------------------------------------------------------------
+    Vector3[] TransformFromBezier(Vector3 center)
+    {
+        Vector3[] points = PuniMesh.Vertexes;
+        Vector3[] org_points = PuniMesh.OriginalVertexes;
+
+        ////    捜査対象の頂点インデックス取得
+        ////////////////////////////////////////////////////////////////////////
+        int si;
+        int ei;
+        GetMoveFixedVertexIndex(center, out si, out ei);
+        if (ei == -1) ei = points.Length - 1;
+        if (si == -1 || ei == -1)
+        {
+            return org_points;
+        }
+
+        if (si > ei) ei += points.Length;
+        var useCount = ei - si;
+        if (useCount <= 0)
+        {
+            return org_points;
+        }
+
+        int centerIdx = (int)(useCount / 2) + si;
+        int count1 = centerIdx - si;
+        int count2 = ei - centerIdx;
+
+        for (int n = 0; n < points.Length; n++)
+        {
+            points[n] = org_points[n];
+        }
+
+        for (int n = 0; n < count1; n++)
+        {
+            float t = (float)(n + 1) / (float)(count1 + 1);
+            var point = BezierL.GetPosition(t);
+
+            // 半径内にある場合はオリジナルを使用する
+            var dist = new Vector3(point.x, point.y, center.z) - center;
+            var idx = (n + si) % points.Length;
+            if (dist.magnitude > this.Radius)
+            {
+                points[idx].x = point.x;
+                points[idx].y = point.y;
+            }
+        }
+
+        for (int n = 0; n < count2; n++)
+        {
+            float t = (float)(n + 1) / (float)(count2 + 1);
+            var point = BezierR.GetPosition(t);
+
+            //  半径内にある場合はオリジナルを使用する
+            var dist = new Vector3(point.x, point.y, center.z) - center;
+            var idx = (ei - n) % points.Length;
+            if (dist.magnitude > this.Radius)
+            {
+                points[idx].x = point.x;
+                points[idx].y = point.y;
+            }
+        }
+
+        {
+            //  半径内にある場合はオリジナルを使用する
+            var dist = new Vector3(BezierC.P4.x, BezierC.P4.y, center.z) - center;
+            var idx = (centerIdx) % points.Length;
+            if (dist.magnitude > this.Radius)
+            {
+                //  中心
+                points[idx].x = BezierC.P4.x;
+                points[idx].y = BezierC.P4.y;
+            }
+        }
+        return points;
+    }
+
+    //--------------------------------------------------------------------------
+    //          ベジェ曲線とぷニコンメッシュのリセット
+    //--------------------------------------------------------------------------
+    void ResetPuniMeshAndBezier()
+    {
+        ////    PC or スマホ タッチ判定分岐処理
+        ////////////////////////////////////////////////////////////////////
+        Vector3 screenPos = Vector3.zero;                                       // タップ座標
+        if (Application.isEditor)screenPos = Input.mousePosition;               // 座標取得(PC)
+        else if (Application.isMobilePlatform)screenPos = touch.position;       // 座標取得(スマホ)
+
+        ////    初期位置(始点)&現在位置(終点)設定
+        ////////////////////////////////////////////////////////////////////
+        this.BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 1.0f));
+        transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 1.0f));
+
+        ////    ベジェ曲線パラメータ設定
+        ////////////////////////////////////////////////////////////////////
+        var x = 0;
+        var y = 0;
+        BezierC.P1 = new Vector2(x, y);     // 中心
+        BezierC.P2 = new Vector2(x, y);     // 制御点1
+        BezierC.P3 = new Vector2(x, y);     // 制御点2
+        BezierC.P4 = new Vector2(x, y);     // 終点
+        BezierL.P1 = new Vector2(x, y);     // 中心
+        BezierL.P2 = new Vector2(x, y);     // 制御点1
+        BezierL.P3 = new Vector2(x, y);     // 制御点2
+        BezierL.P4 = new Vector2(x, y);     // 終点
+        BezierR.P1 = new Vector2(x, y);     // 中心
+        BezierR.P2 = new Vector2(x, y);     // 制御点1
+        BezierR.P3 = new Vector2(x, y);     // 制御点2
+        BezierR.P4 = new Vector2(x, y);     // 終点
+
+        ////    ベジェ曲線の情報を更新
+        ////////////////////////////////////////////////////////////////////////
+        UpdateBezierParameter(-x, -y);
+
+        ////    メッシュ情報の更新
+        ////////////////////////////////////////////////////////////////////////
+        PuniMesh.Vertexes = TransformFromBezier(new Vector3());
+
+        ////   メッシュ情報確定
+        ////////////////////////////////////////////////////////////////////////
+        var centerPos = BezierC.GetPosition(0.8f);
+        PuniMesh.CenterPoint = centerPos;
+
+        ////    タップ状況を"NONE"にする。
+        ////////////////////////////////////////////////////////////////////////
+        TouchState = TOUCH_STATE.NONE;
+
+        ////    カウンタリセット
+        ////////////////////////////////////////////////////////////////
+        nStateCheckCounter = 0;
+
+        ////    タップ状況判別カウントフラグをfalseに
+        ////////////////////////////////////////////////////////////////////
+        bStateCountFlug = false;
+
+        ////    コントローラ表示フラグfalse
+        ////////////////////////////////////////////////////////////////////
+        VisiblePunipuniController = false;
+    }
 }
+
+

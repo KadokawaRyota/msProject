@@ -18,7 +18,7 @@ public class CameraController : MonoBehaviour {
         cameraDir = Vector3.Scale(transform.forward, new Vector3(1, 1, 1)).normalized;
 
         // 球面座標系中心点からプレイヤーまでの距離
-        localPos = new Vector3(0.0f, 1.5f, -2.5f);
+        localPos = new Vector3(0.0f, 20.5f, -4.5f);
     }
 
     void Update()

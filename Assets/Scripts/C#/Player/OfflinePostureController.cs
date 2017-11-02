@@ -37,17 +37,19 @@ public class OfflinePostureController : MonoBehaviour {
     private float VecLength;            // 入力されたベクトルの長さ
 
 
+  	PlayerParticleManager particleManager;	//プレイヤーパーティクル
     // キーボード入力値
     //float inputHorizontal;
 	//float inputVertical;
-
 
 	void Start()
 	{
 		GameObject.Find("Scene Camera").SetActive(false);
 
-		camera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+		camera = GetComponentInChildren<Camera>();
 		camera.enabled = true;
+		AudioListener audio = camera.GetComponent<AudioListener>();
+		audio.enabled = true;
 
 		// アニメーション情報の取得
 		animator = GetComponent<Animator>();
@@ -71,13 +73,13 @@ public class OfflinePostureController : MonoBehaviour {
 			+ transform.position.y * transform.position.y
 			+ transform.position.z * transform.position.z);
 
-
+		//コントロールマネージャの取得
 		controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
 
 		prePosition = transform.position;
 
-
-
+		//パーティクルスクリプトの取得
+		particleManager = GameObject.Find("WalkSmoke").GetComponent<PlayerParticleManager>();
 	}
 
 	void Update()
@@ -102,7 +104,7 @@ public class OfflinePostureController : MonoBehaviour {
 		// プレイヤー位置の地面の法線の更新
 		surfaceNormal = transform.position - Vector3.zero;
 		surfaceNormal = surfaceNormal.normalized;
-
+        
 
 		/// 移動処理
 
@@ -132,10 +134,19 @@ public class OfflinePostureController : MonoBehaviour {
         // 慣性
 		moveVec += (Vector3.zero - moveVec) * moveIn;
 
+
         // 移動速度を位置に足しこむ
 		transform.position += moveVec;
 
-		if (moveVec.magnitude > 0)
+
+        // 移動方向にスピードを掛ける
+        moveVec = moveVec * 0.05f;
+
+        moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
+        moveVec += (Vector3.zero - moveVec) * 0.5f;
+        transform.position += moveVec;
+
+        if (moveVec.magnitude > 0)
 		{
 			dirVec = moveVec.normalized;
 		}
@@ -147,11 +158,14 @@ public class OfflinePostureController : MonoBehaviour {
 		if (moveVec.magnitude > 0)
 		{
 			animator.SetBool("is_running", true);
+			particleManager.SetSmokeFlg(true);
 		}
 
 		else
 		{
+			//animator.SetBool("is_walk", false);
 			animator.SetBool("is_running", false);
+			particleManager.SetSmokeFlg(false);
 		}
 
 		// 球面中心点からプレイヤーまでの距離更新
@@ -166,4 +180,13 @@ public class OfflinePostureController : MonoBehaviour {
 		prePosition = transform.position;
 		
 	}
+    public Vector3 GetmoveVec()
+    {
+        return moveVec;
+    }
+
+    public Vector3 GetSurfaceNormal()
+    {
+        return surfaceNormal;
+    }
 }

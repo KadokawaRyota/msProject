@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OfflineCameraController : MonoBehaviour
 {
+
 	public GameObject targetObj;                        // プレイヤー情報
     public OfflinePostureController postureController;  // プレイヤー姿勢の
     public Vector3 localPos;                            // カメラローカル位置
@@ -19,6 +20,9 @@ public class OfflineCameraController : MonoBehaviour
     {
         get { return this.cameraDir; }
     }
+  //  [SerializeField]
+	//static Vector3 localPos;
+
 
 	void Start()
 	{
