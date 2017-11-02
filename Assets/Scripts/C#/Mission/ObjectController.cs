@@ -24,6 +24,7 @@ public class ObjectController : MonoBehaviour
 {
 
     //パブリック
+    public GameObject player;
 
     //シリアライズ
     [SerializeField]
@@ -32,24 +33,32 @@ public class ObjectController : MonoBehaviour
     float objectSpringConstant;  //バネ定数
     [SerializeField]
     float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
-    [SerializeField]
-    GameObject player;
+
     //List<GameObject> players = new List<GameObject>();
+
+
+    //位置記憶用
+    Vector3 pos;
+    Quaternion rot;
 
 
     //プライベート
     float fDistancePlayer;                  //プレイヤーとの距離
     Vector3 vecForPlayer = Vector3.zero;    //プレイヤーへの向き
-    int playerCnt = 0;
 
     // Use this for initialization
     void Start()
     {
+        //位置記憶
+        pos = transform.position;
+        rot = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null) return;
+
         ////プレイヤーからキューブを引く処理
         fDistancePlayer = Vector3.Distance(player.transform.position, transform.position);
         //紐が伸び切ってる状態。
@@ -107,6 +116,13 @@ public class ObjectController : MonoBehaviour
             //自分自身を引っ張る
             player = collision.gameObject;
         }
+    }
+
+    public void Refresh()
+    {
+        transform.position = pos;
+        transform.rotation = rot;
+        player = null;
     }
 
     //オブジェクトの表示
