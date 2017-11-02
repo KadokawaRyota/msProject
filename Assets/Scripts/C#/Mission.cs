@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Mission : MonoBehaviour {
 
-	
 	bool missionFlg;    //フラグ
 
 
@@ -17,12 +16,11 @@ public class Mission : MonoBehaviour {
 	bool imgTexFlg;
     bool objectDispFlg;
 
-    //ミッションオブジェクト
     [SerializeField]
-    GameObject MissionObjects;
+    GameObject Transportation;
 
-    // Use this for initialization
-    void Start () {
+// Use this for initialization
+void Start () {
 		missionFlg = false;     //フラグの初期化
 
 		imgCnt = 0;
@@ -41,36 +39,25 @@ public class Mission : MonoBehaviour {
 		{
 			if (!imgTexFlg)
 			{
-				//ロゴ表示
-				if (imgCnt < 120)
-				{
-					imgCnt++;
-				}
-				else
-				{
-					if (missionImage.gameObject.transform.localPosition.y < Screen.height * 0.5f - missionImage.gameObject.GetComponent<RectTransform>().sizeDelta.y * 0.5f)
-					{
-						missionImage.gameObject.transform.localPosition += new Vector3((Screen.width * 0.5f / missionImage.gameObject.GetComponent<RectTransform>().sizeDelta.x * 0.5f) * 16.0f,
-																					   (Screen.height * 0.5f / missionImage.gameObject.GetComponent<RectTransform>().sizeDelta.y * 0.5f) * 10.0f,
-																						0.0f);
-
-						missionImage.color = new Color(1.0f,1.0f,1.0f,0.5f);
-					}
-                    if( !objectDispFlg )
+                //ロゴ表示
+                if (imgCnt < 120)
+                {
+                    imgCnt++;
+                }
+                else
+                {
+                    if (missionImage.gameObject.transform.localPosition.y < Screen.height * 0.5f - missionImage.gameObject.GetComponent<RectTransform>().sizeDelta.y * 0.5f)
                     {
-                        //ミッションに関係あるオブジェクト表示
-                        foreach (Transform child in MissionObjects.transform)
-                        {
-                            child.gameObject.GetComponent<ObjectController>().DispSwitch( true );
-                            objectDispFlg = true;
-                        }
+                        missionImage.gameObject.transform.localPosition += new Vector3((Screen.width * 0.5f / missionImage.gameObject.GetComponent<RectTransform>().sizeDelta.x * 0.5f) * 16.0f,
+                                                                                       (Screen.height * 0.5f / missionImage.gameObject.GetComponent<RectTransform>().sizeDelta.y * 0.5f) * 10.0f,
+                                                                                        0.0f);
+
+                        missionImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                     }
-
-
+                    //実行されるミッションによって変える・・・今は運搬のみ
+                    Transportation.GetComponent<TransportationScript>().StartMission();
                 }
 			}
-
-            //ミッションプログラム
 		}
 	
 	}

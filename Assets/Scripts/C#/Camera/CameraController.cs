@@ -34,8 +34,6 @@ public class CameraController : MonoBehaviour {
         cameraDir = Vector3.ProjectOnPlane(cameraDir, postureController.GetsurfaceNormal);
         transform.rotation = Quaternion.LookRotation(cameraDir, postureController.GetsurfaceNormal);
 
-
-
         transform.position = targetObj.transform.position + transform.rotation * localPos;
 
         // マウスの右クリックを押している間
