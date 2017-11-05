@@ -120,6 +120,7 @@ public class ObjectController : MonoBehaviour
 
     public void Refresh()
     {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = pos;
         transform.rotation = rot;
         player = null;

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class arrivalAreaScript : MonoBehaviour {
-    [SerializeField]
-    GameObject Mission;
 	// Use this for initialization
 	void Start () {
 		
