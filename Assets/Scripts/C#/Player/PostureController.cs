@@ -23,6 +23,7 @@ public class PostureController : NetworkBehaviour
     Scr_ControllerManager controllerManager;    //コントローラのマネージャ
     float length;
 
+	[SerializeField]
 	PlayerParticleManager particleManager;  //プレイヤーパーティクル
 
 
@@ -33,7 +34,7 @@ public class PostureController : NetworkBehaviour
 
     void Start()
     {
-
+		GameObject.Find("OnlineCanvas/LodingImage").SetActive(false);
         // アニメーション情報の取得
         animator = GetComponent<Animator>();
 
@@ -61,22 +62,19 @@ public class PostureController : NetworkBehaviour
 
         prePosition = transform.position;
 
-		//パーティクルスクリプトの取得
-		particleManager = GameObject.Find("WalkSmoke").GetComponent<PlayerParticleManager>();
-
-
 		camera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
 
 		NetConnector netConnector = GameObject.Find("NetConnector").GetComponent<NetConnector>();
 
 		//Offline時のときは位置、回転の同期スクリプトを無効にする
-		if(netConnector.GetOnline())
+		if(!isLocalPlayer)
 		{
 			gameObject.GetComponent<PlayerSyncPosition>().enabled = true;
 			gameObject.GetComponent<PlayerSyncRotation>().enabled = true;
 		}
     }
 
+	[Client]
     void Update()
     {
 		//inputHorizontal = Input.GetAxisRaw("Horizontal");
@@ -90,7 +88,7 @@ public class PostureController : NetworkBehaviour
 		//inputVecN = new Vector2(inputHorizontal, inputVertical);
 	}
 
-
+	[Client]
     void FixedUpdate()
     {
 

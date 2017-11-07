@@ -2,6 +2,8 @@
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
+		_Power("Power",Range(-0.05,0.05)) = 0.02
+		_Frame("Time",Range(0,100)) = 100
 	}
 	SubShader{
 		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent"}
@@ -23,6 +25,9 @@
 		#pragma target 3.0
 
 		sampler2D _MainTex;
+		fixed4 _Color;
+		float _Power;
+		int _Frame;
 
 		struct Input {
 			float2 uv_MainTex;
@@ -30,15 +35,14 @@
 
 		void vert(inout appdata_full v, out Input o)
 		{
-			float3 y = v.vertex.y;
-			float power = 0.01f * sin(_Time * 100 + v.vertex.x * 100);
 			UNITY_INITIALIZE_OUTPUT(Input, o);
-			v.vertex.xyz = float3(v.vertex.x + power * (v.vertex.y * 0.5f + 0.5f), v.vertex.y, v.vertex.z);
+			float power = _Power * sin(_Time * _Frame + v.vertex.z * 100);
+			v.vertex.xyz = float3(v.vertex.x + power * (v.texcoord.y), v.vertex.y, v.vertex.z);
 
 		}
 
 		void surf(Input IN, inout SurfaceOutput o) {
-			fixed4 c = tex2D(_MainTex, IN.uv_MainTex);
+			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb;
 			o.Alpha = c.a;;
 		}

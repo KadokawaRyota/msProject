@@ -1089,7 +1089,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850121449319694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.4, z: 0}
   m_LocalScale: {x: 0.59999996, y: 0.52, z: 0.59999996}
   m_Children: []
   m_Father: {fileID: 4512020126387700}
@@ -1815,6 +1815,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66dcbb1dff31f4145a1eb8df7fd7d7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveWalkSpeed: 0.1
+  moveRunSpeed: 0.2
+  moveIn: 0.5
+  moveThre: 0.5
+  cameraController: {fileID: 0}
 --- !u!114 &114683431709273810
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1828,6 +1833,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObj: {fileID: 1777114718840426}
   postureController: {fileID: 114651737819074024}
+  localPos: {x: 0, y: 0, z: 0}
+  rotPitch: 0
 --- !u!114 &114958388212123480
 MonoBehaviour:
   m_ObjectHideFlags: 1
