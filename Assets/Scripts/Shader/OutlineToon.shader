@@ -34,32 +34,32 @@ Shader "Custom/OutlineToon" {
 			fixed4 _OutlineColor;		//アウトラインカラー
 
 			//取得情報
-			struct IN {
+			struct appdata {
 				float4 position : POSITION;		//頂点座標
 				float3 normal : NORMAL;			//法線
 			};
 
 			//出力情報
-			struct OUT {
+			struct v2f {
 				float4 position : SV_POSITION;	//頂点座標
 				float3 normal : NORMAL;			//法線
 				fixed4 color : COLOR0;			//カラー
 			};
 
 			//頂点シェーダ
-			OUT vert(IN i)
+			v2f vert(appdata i)
 			{
 				float distance = -UnityObjectToViewPos(i.position).z;	//カメラクリップ空間へ変換（モデルと被った部分は見えなくさせるための変換）
 				i.position.xyz += i.normal * distance * _Outline;		//モデルを法線の方向へ拡大する
 
-				OUT o;
+				v2f o;
 				o.position = UnityObjectToClipPos(i.position);	//座標変換
 
 				return o;
 			}
 
 			//フラグメントシェーダ
-			fixed4 frag(OUT o) : SV_Target
+			fixed4 frag(v2f o) : SV_Target
 			{
 				o.color = _OutlineColor;	//カラー代入
 
