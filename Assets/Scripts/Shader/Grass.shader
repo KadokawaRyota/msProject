@@ -11,8 +11,9 @@
 
 		Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 
-		Cull Off
-		//ZWrite Off
+		Cull Off	//両面描画
+		
+		//ステンシル
 		Stencil{
 			Ref 1
 			Comp Always
@@ -33,14 +34,21 @@
 			float2 uv_MainTex;
 		};
 
+		//頂点シェーダ
 		void vert(inout appdata_full v, out Input o)
 		{
+			//サーフェースシェーダへ送る情報を設定
 			UNITY_INITIALIZE_OUTPUT(Input, o);
+
+			//揺らす力と間隔を設定
 			float power = _Power * sin(_Time * _Frame + v.vertex.z * 100);
+
+			//頂点の設定
 			v.vertex.xyz = float3(v.vertex.x + power * (v.texcoord.y), v.vertex.y, v.vertex.z);
 
 		}
 
+		//サーフェースシェーダ
 		void surf(Input IN, inout SurfaceOutput o) {
 			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb;
