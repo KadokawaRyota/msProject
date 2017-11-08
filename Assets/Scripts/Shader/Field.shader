@@ -2,17 +2,18 @@
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
-		_Glossiness ("Smoothness", Range(0,1)) = 0.5
-		_Metallic ("Metallic", Range(0,1)) = 0.0
+		_Glossiness("Smoothness", Range(0,1)) = 0.5
+		_Metallic("Metallic", Range(0,1)) = 0.0
 	}
 	SubShader{
-		Tags{ "RenderType" = "Opaque"}
+		Tags{ "RenderType" = "Opaque"
+				"Queue" = "Geometry"}
 
-		/*Stencil{
+		Stencil{
 			Ref 1 // リファレンス値
 			Comp Always  // 常にステンシルを成功
-			Pass Replace    // リファレンス値をバッファに書き込み
-		}*/
+			Pass Replace
+		}
 
 		LOD 200
 
