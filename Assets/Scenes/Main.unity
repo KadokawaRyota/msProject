@@ -318,6 +318,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 29.1, y: 0, z: 0}
+--- !u!1001 &813374122
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860390971061838, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 07bd2e7b8bf9fb14eacb9440e200bef7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &847441506
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +477,7 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: serverIPAdress
-      value: 192.168.13.4
+      value: localhost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}
@@ -457,7 +499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1289348885
 MeshRenderer:
   m_ObjectHideFlags: 0

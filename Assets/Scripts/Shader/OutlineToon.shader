@@ -42,7 +42,6 @@ Shader "Custom/OutlineToon" {
 			//出力情報
 			struct v2f {
 				float4 position : SV_POSITION;	//頂点座標
-				float3 normal : NORMAL;			//法線
 				fixed4 color : COLOR0;			//カラー
 			};
 
@@ -54,6 +53,7 @@ Shader "Custom/OutlineToon" {
 
 				v2f o;
 				o.position = UnityObjectToClipPos(i.position);	//座標変換
+				o.color = (0, 0, 0, 0);
 
 				return o;
 			}

@@ -13,7 +13,15 @@
 	SubShader{
 		Tags{ "RenderType" = "Opaque" }
 		LOD 200
+
+		//ステンシル
+		Stencil{
+			Ref 1
+			Comp Equal	//ステンシル値が同じところに描画
+		}
 		CGPROGRAM
+
+		
 
 		#pragma surface surf Standard
 		#pragma target 3.0
