@@ -34,6 +34,7 @@ public class PostureController : NetworkBehaviour
 
     void Start()
     {
+		gameObject.transform.localPosition = new Vector3(0.0f, 25.0f, 0.0f);
 		GameObject.Find("OnlineCanvas/LodingImage").SetActive(false);
         // アニメーション情報の取得
         animator = GetComponent<Animator>();
