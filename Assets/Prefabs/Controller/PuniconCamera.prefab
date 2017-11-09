@@ -105,9 +105,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 3, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4642784603665974}
   - {fileID: 4829490426686452}
   - {fileID: 4818824377730710}
-  - {fileID: 4642784603665974}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,7 +122,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4284895845946868}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4818824377730710
 Transform:
@@ -136,7 +136,7 @@ Transform:
   m_Children:
   - {fileID: 4897060562540750}
   m_Father: {fileID: 4284895845946868}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4829490426686452
 Transform:
@@ -149,7 +149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4284895845946868}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4897060562540750
 Transform:
@@ -159,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 1150271981191266}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4818824377730710}
   m_RootOrder: 0
@@ -245,13 +245,13 @@ MonoBehaviour:
   tapeffect: {fileID: 114878797581501468}
   TargetCamera: {fileID: 20968100623631218}
   Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  TapDiscriminationFrame: 5
-  RadiusPixel: 40
-  BeginMousePosition: {x: 0, y: 0, z: 0}
+  TapDiscriminationFrame: 7
+  nStateCheckCounter: 0
   TouchMode: 0
   TouchModeOld: 0
   TouchState: 0
-  nStateCheckCounter: 0
+  RadiusPixel: 40
+  BeginMousePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114878797581501468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,6 +267,7 @@ MonoBehaviour:
   TargetCamera: {fileID: 20968100623631218}
   EffectFlug: 0
   EffectPos: {x: 0, y: 0, z: 0}
+  Effecttype: 0
 --- !u!124 &124243590144230778
 Behaviour:
   m_ObjectHideFlags: 1
@@ -331,14 +332,14 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1272856012
+  randomSeed: 1022201264
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -727,7 +728,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 1000
     size3D: 0
     rotation3D: 0
     gravityModifier:
