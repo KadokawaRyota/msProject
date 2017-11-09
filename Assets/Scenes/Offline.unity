@@ -4271,19 +4271,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.2542895
+      value: -0.094775006
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0.0026259567
+      value: -0.5663296
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0.008379142
+      value: -0.41478
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.9670883
+      value: -0.70586556
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4291,15 +4291,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 29.465002
+      value: 199.634
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0.054
+      value: 608.801
       objectReference: {fileID: 0}
     - target: {fileID: 4450169783895374, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.97900003
+      value: 227.365
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acd52eac3594c43488a0688e607c56ca, type: 2}
@@ -4320,6 +4320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920c5b3bb21c5ae478e611080f898e7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standX: 1
+  standY: 0
+  standZ: 1
 --- !u!1 &1452114536
 GameObject:
   m_ObjectHideFlags: 0
@@ -9546,7 +9549,7 @@ Transform:
   m_LocalScale: {x: 3, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 81.54301, y: 0.021000002, z: -0.41400003}
 --- !u!64 &1934225455
 MeshCollider:
