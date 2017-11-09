@@ -73,7 +73,7 @@ Shader "Custom/StencilShadow" {
 
 			//ステンシル設定
 			Stencil{
-				Ref 0			//バッファ値
+				Ref 1			//バッファ値
 				Comp Equal	//バッファ値と違うバッファ値の時
 			}
 

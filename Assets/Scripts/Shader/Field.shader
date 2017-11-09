@@ -6,8 +6,7 @@
 		_Metallic("Metallic", Range(0,1)) = 0.0
 	}
 	SubShader{
-		Tags{ "RenderType" = "Opaque"
-				"Queue" = "Geometry"}
+		Tags{ "RenderType" = "Opaque"}
 
 		Stencil{
 			Ref 1 // リファレンス値
