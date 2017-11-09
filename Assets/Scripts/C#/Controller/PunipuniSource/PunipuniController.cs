@@ -54,8 +54,8 @@ public class PunipuniController : MonoBehaviour
     Bezier BezierL = new Bezier();
     Bezier BezierR = new Bezier();
 
-    private static Touch touch;     // タップ情報
-    public Vector3 BeginMousePosition;//　タップ位置
+    private static Touch touch;         // タップ情報
+    public Vector3 BeginMousePosition;  // タップ位置
     private bool bStateCountFlug;
 
     #endregion
@@ -186,9 +186,10 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             bStateCountFlug = true;
 
-            ////    タップエフェクトに位置を代入
+            ////    タップ位置を取得
             ////////////////////////////////////////////////////////////////////
-             //tapeffect.EffectPos = ControllerManager.TouchPositionStart;
+            BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+            transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
         }
 
     //--------------------------------------------------------------------------
@@ -206,7 +207,6 @@ public class PunipuniController : MonoBehaviour
 
                 ////    タップエフェクト発生
                 ////////////////////////////////////////////////////////////////
-                //tapeffect.EffectPos = ControllerManager.TouchPositionStart;   // エフェクト位置設定
                 tapeffect.SetEffectType(EFFECT_TYPE.TAP);                                  // エフェクトタイプセット
                 tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
             }
@@ -230,11 +230,8 @@ public class PunipuniController : MonoBehaviour
         {
             ////    ベジェ曲線パラメータの更新
             ////////////////////////////////////////////////////////////////////
-            Vector3 pos = Vector3.zero;                             // 更新用変数
-            Vector3 start = ControllerManager.TouchPositionStart;   // タップ位置(開始)
-            Vector3 screenPos = ControllerManager.TouchPositionNow; // タップ位置(現在)
+            Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
             tapeffect.EffectPos = ControllerManager.TouchPositionNow;
-            
             
             ////    デバッグ表示
             ////////////////////////////////////////////////////////////////////
@@ -242,11 +239,9 @@ public class PunipuniController : MonoBehaviour
 
             ////    ベジェ曲線位置の更新
             ////////////////////////////////////////////////////////////////////////
-            pos = TargetCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, 1.0f));
-            
             var x = this.BeginMousePosition.x - pos.x;
             var y = this.BeginMousePosition.y - pos.y;
-
+            
             ////    ベジェ曲線の情報を更新
             ////////////////////////////////////////////////////////////////////////
             UpdateBezierParameter(-x, -y);
@@ -260,8 +255,6 @@ public class PunipuniController : MonoBehaviour
             var centerPos = BezierC.GetPosition( 0.8f );
             PuniMesh.CenterPoint = centerPos;
         }
-    
-
     //--------------------------------------------------------------------------
     //          タップ状況の更新
     //--------------------------------------------------------------------------
@@ -293,7 +286,7 @@ public class PunipuniController : MonoBehaviour
         //----------------------------------------------------------------------
         if (tapeffect.EffectFlug == true && tapeffect.Effecttype == EFFECT_TYPE.HOLD)
         {
-            tapeffect.EffectPos = ControllerManager.TouchPositionNow;   // エフェクト位置更新
+            tapeffect.EffectPos = TargetCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 1.0f)); //ControllerManager.TouchPositionNow;   // エフェクト位置更新
         }
 
         //----------------------------------------------------------------------
@@ -530,7 +523,7 @@ public class PunipuniController : MonoBehaviour
         ////////////////////////////////////////////////////////////////////
         Vector3 screenPos = Vector3.zero;                                       // タップ座標
         if (Application.isEditor)screenPos = Input.mousePosition;               // 座標取得(PC)
-        else if (Application.isMobilePlatform)screenPos = touch.position;       // 座標取得(スマホ)
+        //else if (Application.isMobilePlatform)screenPos = touch.position;       // 座標取得(スマホ)
 
         ////    初期位置(始点)&現在位置(終点)設定
         ////////////////////////////////////////////////////////////////////

@@ -35,7 +35,7 @@ public class InputManager : MonoBehaviour
             if (instance == null)
             {
                 GameObject obj = new GameObject("InputManager");
-                DontDestroyOnLoad(obj);
+                //DontDestroyOnLoad(obj);
                 instance = obj.AddComponent<InputManager>();
             }
 
@@ -70,11 +70,6 @@ public class InputManager : MonoBehaviour
         ////        マルチタップ無効
         ////////////////////////////////////////////////////////////////////////
         Input.multiTouchEnabled = false;
-
-        //if (Application.isMobilePlatform)
-        //{
-        //    touch = Input.GetTouch(0);
-        //}
     }
 
     //--------------------------------------------------------------------------
@@ -177,34 +172,9 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public static Vector3 GetTouchPosition()
     {
-        ////        ローカル変数
+        ////        タップ位置を代入
         ////////////////////////////////////////////////////////////////////////
-        Vector3 screenPos = Vector3.zero;
-        Vector3 worldPos;
-
-        ////        エディタでの取得処理
-        ////////////////////////////////////////////////////////////////////////
-        if (Application.isEditor)
-        {
-            screenPos = Input.mousePosition;
-            worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-            
-        }
-
-        ////        モバイルでの取得処理
-        ////////////////////////////////////////////////////////////////////////
-        /*
-        else if (Application.isMobilePlatform)
-        {
-            screenPos = touch.position;
-            worldPos = Camera.main.ScreenToWorldPoint(screenPos);
-        }
-        */
-
-        else if (Application.isMobilePlatform)
-        {
-            screenPos = touch.position;
-        }
+        Vector3 screenPos = Input.mousePosition;
 
         return screenPos;
     }
