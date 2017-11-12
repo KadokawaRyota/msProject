@@ -111,9 +111,9 @@ public class ObjectController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "OfflinePlayer_Tanuki")
+        //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
+        if( collision.gameObject.GetComponent<PostureController>().enabled == true )
         {
-            //自分自身を引っ張る
             player = collision.gameObject;
         }
     }

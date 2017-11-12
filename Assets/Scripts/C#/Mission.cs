@@ -19,11 +19,18 @@ public class Mission : MonoBehaviour {
     [SerializeField]
     GameObject Transportation;
 
+
+    /// <summary>
+    /// ////////////////////適当
+    /// </summary>
+
+
 // Use this for initialization
 void Start () {
 		missionFlg = false;     //フラグの初期化
+        missionFlg = true;
 
-		imgCnt = 0;
+        imgCnt = 0;
 
 		imgTexFlg = false;
         objectDispFlg = false;
