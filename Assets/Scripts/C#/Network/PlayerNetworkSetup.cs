@@ -13,14 +13,17 @@ public class PlayerNetworkSetup : NetworkBehaviour
     // Use this for initialization
     void Start()
 	{
-		//ローディングイメージのアクティブを切る
-		GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
+		//ローディングイメージのアクティブを切るサーバーと自分で2回入ってきたんだが
+		//GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
 
 		//自分が操作するオブジェクトに限定する
 		if (isLocalPlayer)
 		{
-			//PlayerCameraを使うため、Scene Cameraを非アクティブ化
-			GameObject.Find("Scene Camera").SetActive(false);
+            //ローディングイメージのアクティブを切る
+            GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
+
+            //PlayerCameraを使うため、Scene Cameraを非アクティブ化
+            GameObject.Find("Scene Camera").SetActive(false);
 
 			//Camera,AudioListenerの各コンポーネントをアクティブ化
 			PlayerCamera.GetComponent<Camera>().enabled = true;
@@ -28,7 +31,11 @@ public class PlayerNetworkSetup : NetworkBehaviour
 
 			//LocalPlayerのAnimatorパラメータを自動的に送る
 			GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
-		}
+
+            //カメラの取得等があるため、ここでPostureControllerのスクリプトをOnにしてStartメソッド呼び出し。
+            GetComponent<PostureController>().enabled = true;
+
+        }
 		else
 		{
 			//自分以外の移動スクリプトを切る
