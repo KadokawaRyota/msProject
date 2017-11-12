@@ -25,7 +25,7 @@ public class ObjectController : MonoBehaviour
 
     //パブリック
     public GameObject player;
-
+	
     //シリアライズ
     [SerializeField]
     float fDistance;        //紐が伸び切る距離
