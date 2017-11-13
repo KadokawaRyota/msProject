@@ -25,7 +25,7 @@ public class ObjectController : MonoBehaviour
 
     //パブリック
     public GameObject player;
-
+	
     //シリアライズ
     [SerializeField]
     float fDistance;        //紐が伸び切る距離
@@ -111,9 +111,9 @@ public class ObjectController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "OfflinePlayer_Tanuki")
+        //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
+        if( collision.gameObject.GetComponent<PostureController>().enabled == true )
         {
-            //自分自身を引っ張る
             player = collision.gameObject;
         }
     }

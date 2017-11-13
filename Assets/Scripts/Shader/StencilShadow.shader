@@ -9,7 +9,7 @@ Shader "Custom/StencilShadow" {
 	}
 	SubShader{
 		Tags { "RenderType" = "Transparent" 
-				"Queue" = "Transparent"}
+				"Queue" = "Transparent-1"}	//PlayerのOutlileToonシェーダより先に描画するため-1する
 
 		Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 
@@ -26,6 +26,7 @@ Shader "Custom/StencilShadow" {
 				Comp Always		//常にステンシルを成功
 				Pass Replace	//バッファ値をバッファに書き込み
 			}
+
 
 			CGPROGRAM	//スタート
 
@@ -65,7 +66,7 @@ Shader "Custom/StencilShadow" {
 			ENDCG
 		}
 
-		//表側描画
+		//表側描画（丸影部分）
 		Pass
 		{
 

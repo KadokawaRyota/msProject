@@ -278,7 +278,6 @@ public class PunipuniController : MonoBehaviour
             tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
             tapeffect.SetEffectType(EFFECT_TYPE.HOLD);                    // エフェクトタイプセット
 
-            Debug.Log("ホールドエフェクト発生");
         }
 
         //----------------------------------------------------------------------

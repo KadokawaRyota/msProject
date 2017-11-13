@@ -15,8 +15,8 @@ public class arrivalAreaScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        //オブジェクトに自分が紐付いていたら
-        if( collider.GetComponent<ObjectController>().player.name == "OfflinePlayer_Tanuki")
+        //オブジェクトに自分が紐付いていたら((プレイヤーを判別する要素が欲しい））
+        if( collider.GetComponent<ObjectController>().player != null )
         {
             collider.GetComponent<ObjectController>().Refresh();
             //加点する
