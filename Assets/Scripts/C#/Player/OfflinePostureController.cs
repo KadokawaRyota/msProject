@@ -141,7 +141,6 @@ public class OfflinePostureController : MonoBehaviour {
 
         // 移動方向にスピードを掛ける
         moveVec = moveVec * 0.05f;
-
         moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
         moveVec += (Vector3.zero - moveVec) * 0.5f;
         transform.position += moveVec;
@@ -168,7 +167,7 @@ public class OfflinePostureController : MonoBehaviour {
 			particleManager.SetSmokeFlg(false);
 		}
 
-		// 球面中心点からプレイヤーまでの距離更新
+		// 球面中心点からプレイヤーまでの距離更新]
 		radPlayer = Mathf.Sqrt(
 			transform.position.x * transform.position.x
 			+ transform.position.y * transform.position.y
