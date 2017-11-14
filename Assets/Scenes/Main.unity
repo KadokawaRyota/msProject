@@ -521,6 +521,10 @@ Prefab:
       propertyPath: serverIPAdress
       value: localhost
       objectReference: {fileID: 0}
+    - target: {fileID: 1402513040094194, guid: c341415438230494da36b51dc59070f4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}
   m_IsPrefabParent: 0

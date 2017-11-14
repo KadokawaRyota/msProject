@@ -7,7 +7,7 @@ public class ObjectPostureController : MonoBehaviour
 
     private Vector3 surfaceNormal;
     public bool standX;
-    public bool standY;
+    public bool standY = true;
     public bool standZ;
 
     void Start()

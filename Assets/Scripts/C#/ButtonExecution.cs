@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 //ボタン各種のスクリプト
 public class ButtonExecution : NetworkBehaviour {
-
+	
 	//オンライン接続ボタン用
 	public void Online() { SceneManager.LoadScene("Main"); }
 
