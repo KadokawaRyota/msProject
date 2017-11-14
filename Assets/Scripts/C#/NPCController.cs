@@ -21,13 +21,9 @@ public class NPCController : MonoBehaviour {
     private Vector2 NPCinputVec;
     private float waitTime = 0.0f;
     private bool move = false;
-    private Animator animator;          // アニメーション情報
 
     void Start () {
         NPCinputVec = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
-
-        // アニメーション情報の取得
-        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -139,17 +135,5 @@ public class NPCController : MonoBehaviour {
             }
         }
 
-        // アニメーション状態取得
-        // アニメーション状態取得
-        if (move)
-        {
-            animator.SetBool("is_running", true);
-        }
-
-        else
-        {
-            animator.SetBool("is_running", false);
-        }
     }
-
 }
