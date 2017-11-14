@@ -77,6 +77,7 @@ Shader "Custom/OutlineToon" {
 			Comp Always		//常にステンシルテストを成功
 			Pass Replace	//常にステンシルに書き込み
 		}
+
 		CGPROGRAM	//開始
 
 		#pragma surface surf ToonRamp		//ライト情報が必要なため、サーフェースシェーダを使用

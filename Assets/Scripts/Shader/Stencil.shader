@@ -6,41 +6,59 @@ Shader "Custom/Stencil" {
 		_Color("Color", Color) = (1,1,1,1)
 		_StencilColor("StencilColor",Color) = (0,0,0,1)
 		_MainTex ("Texture", 2D) = "white" {}
+		_RampTex ("Ramp", 2D) = "white"{}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
 	}
 	SubShader {
 		Tags { "RenderType"="Transparent" 
-				"Queue" = "Transparent" }
+				"Queue" = "Transparent+1" }
 		LOD 200
-			Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
+
+		Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 		//デフォルトのサーフェースシェーダ
 		CGPROGRAM
+		// Physically based Standard lighting model, and enable shadows on all light types
+		//#pragma surface surf Standard fullforwardshadows
 
-		#pragma surface surf Standard  alpha	//サーフェースシェーダ宣言
+		#pragma surface surf ToonRamp
 
+		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
 
+		sampler2D _MainTex;
+		sampler2D _RampTex;
 
-		//取得情報
+		uniform float _Outline;
+		uniform float4 _OutlineColor;
+
 		struct Input {
 			float2 uv_MainTex;
 		};
 
-		//プロパティ宣言
-		sampler2D _MainTex;
-		half _Glossiness;
-		half _Metallic;
 		fixed4 _Color;
 
-		//サーフェースシェーダ
-		void surf(Input IN, inout SurfaceOutputStandard o) {
-			// Albedo comes from a texture tinted by color
-			fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
+		//ライティング用メソッド
+		fixed4 LightingToonRamp(SurfaceOutput s, fixed3 lightDir, fixed atten)
+		{
+			//法線とライトの方向ベクトルの内積値(0.0f～1.0f)
+			half d = dot(s.Normal, lightDir) * 0.5f + 0.5f;
+
+			//値に応じた明度のUV座標に設定
+			fixed3 ramp = tex2D(_RampTex, fixed2(d,0.5f)).rgb;
+
+			//色の計算
+			fixed4 c;
+			c.rgb = s.Albedo * _LightColor0.rgb * ramp;
+			c.a = 0;
+			return c;
+		}
+
+
+		void surf (Input IN, inout SurfaceOutput o) {
+
+			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb;
-			// Metallic and smoothness come from slider variables
-			o.Metallic = _Metallic;
-			o.Smoothness = _Glossiness;
 			o.Alpha = c.a;
 		}
 		ENDCG

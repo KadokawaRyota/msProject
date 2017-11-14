@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Water001
-  m_Shader: {fileID: 4800000, guid: 3d1d792de6f724444ae0d68cd93ac852, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9990d1af027e7ce4a8dea461369e8347, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -39,8 +39,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 318f083ea3cb6cf4087bf80b26999c82, type: 3}
-        m_Scale: {x: 0, y: 5}
+        m_Texture: {fileID: 2800000, guid: 96d6bce2404ae824fa532678f6441ebd, type: 3}
+        m_Scale: {x: 15, y: 15}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -66,7 +66,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MainSpeedX: 2
+    - _MainSpeedX: 0.31
     - _MainSpeedY: -2
     - _Metallic: 0
     - _Mode: 0
@@ -75,12 +75,12 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SubSpeedX: -2
-    - _SubSpeedY: -2
+    - _SubSpeedX: 2
+    - _SubSpeedY: -0.07
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0.022312192, g: 0.209, b: 0.64705884, a: 1}
-    - _SubColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0, g: 0.48785293, b: 0.71323526, a: 1}
+    - _SubColor: {r: 0.3455882, g: 0.3455882, b: 0.3455882, a: 1}
