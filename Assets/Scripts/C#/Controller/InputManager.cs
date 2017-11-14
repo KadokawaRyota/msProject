@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
     private InputManager()
     {
         // 生成表示
-        Debug.Log("Create SoundManager instance");
+        //Debug.Log("Create SoundManager instance");
     }
 
     //--------------------------------------------------------------------------
@@ -140,6 +140,7 @@ public class InputManager : MonoBehaviour
             }
         }
     }
+
     //--------------------------------------------------------------------------
     //          各種判定処理
     //--------------------------------------------------------------------------
