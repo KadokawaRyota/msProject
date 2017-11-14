@@ -908,10 +908,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1663053398685384, guid: 686b2578af3dfa443af463b3eed2f6d3, type: 2}
-      propertyPath: m_Name
-      value: MissionManager
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 686b2578af3dfa443af463b3eed2f6d3, type: 2}
   m_IsPrefabParent: 0
