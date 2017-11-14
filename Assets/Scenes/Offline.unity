@@ -895,7 +895,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1323094340
 Prefab:
@@ -934,7 +934,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4963940113409692, guid: 686b2578af3dfa443af463b3eed2f6d3, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4963940113409692, guid: 686b2578af3dfa443af463b3eed2f6d3, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1498,7 +1498,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4737261482431736, guid: 5ae5b69c7b5d96647a24b8e80d84195d, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1820274369251964, guid: 5ae5b69c7b5d96647a24b8e80d84195d, type: 2}
       propertyPath: m_IsActive
@@ -1926,33 +1926,6 @@ Prefab:
     - target: {fileID: 4029902420717478, guid: baeb32e45f0d0ff47aef48028ff215ce, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1542711535197562, guid: baeb32e45f0d0ff47aef48028ff215ce, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 212400548861951872, guid: baeb32e45f0d0ff47aef48028ff215ce,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376760273514788, guid: baeb32e45f0d0ff47aef48028ff215ce, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1719578129386650, guid: baeb32e45f0d0ff47aef48028ff215ce, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114464389559191096, guid: baeb32e45f0d0ff47aef48028ff215ce,
-        type: 2}
-      propertyPath: HoldEffect
-      value: 
-      objectReference: {fileID: 1086322437}
-    - target: {fileID: 114464389559191096, guid: baeb32e45f0d0ff47aef48028ff215ce,
-        type: 2}
-      propertyPath: HoldEffectSpawnFrame
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baeb32e45f0d0ff47aef48028ff215ce, type: 2}
