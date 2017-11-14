@@ -23,9 +23,10 @@ public class PunipuniController : MonoBehaviour
     #region [ パブリック ]
     public Scr_ControllerManager ControllerManager; // タップ情報
     public TapEffect tapeffect;                     // タップエフェクト情報
+    public SpriteRenderer SpriteRenderHE2D;                 // ホールドエフェクトの情報
     public Camera TargetCamera;                     // 描画対象のカメラ
     public Material Material;                       // 描画対象のマテリアル
-    
+
     public int TapDiscriminationFrame;                  // タップorホールド判別用変数タップorホールド判別時間(〇フレーム以内ならタップ、それ以上ならホールド)
     public int nStateCheckCounter;                      // タップorホールド判別用カウンター
     public TOUCH_MODE TouchMode = TOUCH_MODE.NONE;      // 現在のタップ状態
@@ -121,6 +122,10 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             nStateCheckCounter = 0;
             bStateCountFlug = false;
+
+            //先端のエフェクト取得
+            SpriteRenderHE2D = GameObject.Find("PuniconCamera/TapEffect/HoldEffect2D").GetComponent<SpriteRenderer>();
+            
         }
 
     //--------------------------------------------------------------------------
@@ -221,6 +226,10 @@ public class PunipuniController : MonoBehaviour
             {
                 tapeffect.EffectStatusReset();
             }
+
+            ////    ホールドエフェクトOFF
+            ////////////////////////////////////////////////////////////////
+            SpriteRenderHE2D.enabled = false;
         }
 
     //--------------------------------------------------------------------------
@@ -278,6 +287,9 @@ public class PunipuniController : MonoBehaviour
             tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
             tapeffect.SetEffectType(EFFECT_TYPE.HOLD);                    // エフェクトタイプセット
 
+            SpriteRenderHE2D.enabled = true;
+
+            //Debug.Log("ホールドエフェクト発生");
         }
 
         //----------------------------------------------------------------------
@@ -520,9 +532,8 @@ public class PunipuniController : MonoBehaviour
     {
         ////    PC or スマホ タッチ判定分岐処理
         ////////////////////////////////////////////////////////////////////
-        Vector3 screenPos = Vector3.zero;                                       // タップ座標
-        if (Application.isEditor)screenPos = Input.mousePosition;               // 座標取得(PC)
-        //else if (Application.isMobilePlatform)screenPos = touch.position;       // 座標取得(スマホ)
+        Vector3 screenPos = Vector3.zero;                        // タップ座標
+        screenPos = Input.mousePosition;                         // 座標取得
 
         ////    初期位置(始点)&現在位置(終点)設定
         ////////////////////////////////////////////////////////////////////
