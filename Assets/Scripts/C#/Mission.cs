@@ -28,7 +28,6 @@ public class Mission : MonoBehaviour {
 // Use this for initialization
 void Start () {
 		missionFlg = false;     //フラグの初期化
-        missionFlg = true;
 
         imgCnt = 0;
 

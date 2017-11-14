@@ -24,14 +24,22 @@ public class TapEffect : MonoBehaviour
     ParticleSystem tapEffect;   // タップエフェクト
 
     [SerializeField]
+    ParticleSystem HoldEffect;  // ホールドエフェクト
+
+    [SerializeField]
+    GameObject HoldEffect2D;    // ホールドエフェクト(2Dオブジェクト部分)
+
+    [SerializeField]
     Camera TargetCamera;        // カメラの座標
 
     //--------------------------------------------------------------------------
     //          変数定義
     //--------------------------------------------------------------------------
-    public bool EffectFlug;         // エフェクト発生フラグ 
-    public Vector3 EffectPos;       // エフェクト発生位置
-    public EFFECT_TYPE Effecttype;  // エフェクトタイプ
+    public bool EffectFlug;             // エフェクト発生フラグ 
+    public Vector3 EffectPos;           // エフェクト発生位置
+    public EFFECT_TYPE Effecttype;      // エフェクトタイプ
+    public int HoldEffectSpawnFrame;    // ホールドエフェクト発生間隔
+    int HoldEffectSpawnCounter;         // ホールドエフェクト発生カウンター    
 
     //--------------------------------------------------------------------------
     //          初期化処理
@@ -57,9 +65,9 @@ public class TapEffect : MonoBehaviour
 
                 ////    タップエフェクト
                 /////////////////////////////////////////////////////////////////////////////////////
-                case EFFECT_TYPE.TAP:       // マウスのワールド座標までパーティクルを移動し、パーティクルエフェクトを1つ生成する
+                case EFFECT_TYPE.TAP:
+                    
                     // ポジション設定
-                    tapEffect.transform.position = EffectPos;
                     pos = TargetCamera.ScreenToWorldPoint(new Vector3(EffectPos.x, EffectPos.y, 1.0f));
                     tapEffect.transform.position = pos;
                     
@@ -67,29 +75,58 @@ public class TapEffect : MonoBehaviour
                     tapEffect.transform.localScale = new Vector3(8, 8, 8);
                     
                     // 発生
-                    tapEffect.Emit(2);
+                    tapEffect.Emit(1);
                     
                     // 情報リセット
-                    //EffectStatusReset();
                     EffectFlug = false;
                     
                     // デバック表示
-                    Debug.Log("タップエフェクト発生");
+                    //Debug.Log("タップエフェクト発生");
+                    
                     break;
 
                 ////    ホールドエフェクト
                 /////////////////////////////////////////////////////////////////////////////////////
                 case EFFECT_TYPE.HOLD:
-                    // ポジション設定
-                    tapEffect.transform.position = EffectPos;
+
+                    ////        ホールドエフェクト(2D部分)の位置設定
+                    /////////////////////////////////////////////////////////////////////////////////
                     pos = TargetCamera.ScreenToWorldPoint(new Vector3(EffectPos.x, EffectPos.y, 1.0f));
-                    tapEffect.transform.position = pos;
-                    
-                    // スケール値設定
-                    tapEffect.transform.localScale = new Vector3(4, 4, 4);
-                    
-                    // 発生
-                    tapEffect.Emit(1);
+                    HoldEffect2D.transform.position = pos;
+
+                    ////        ホールドエフェクト(パーティクル部分)の位置設定
+                    /////////////////////////////////////////////////////////////////////////////////
+                    pos = TargetCamera.ScreenToWorldPoint(new Vector3(EffectPos.x, EffectPos.y, 1.0f));
+                    HoldEffect.transform.position = pos;
+
+                    ////        発生処理
+                    /////////////////////////////////////////////////////////////////////////////////
+                    if (HoldEffectSpawnFrame <= HoldEffectSpawnCounter)
+                    {
+                        #region [ 後で戻すかもしれないホールドエフェクトパーティクル設定 ]
+                        //pos = TargetCamera.ScreenToWorldPoint(new Vector3(EffectPos.x, EffectPos.y, 1.0f));
+                        //tapEffect.transform.position = pos;
+                        // ポジション設定
+                        //pos = TargetCamera.ScreenToWorldPoint(new Vector3(EffectPos.x, EffectPos.y, 1.0f));
+                        //HoldEffect.transform.position = pos;
+                        // スケール値変更
+                        //tapEffect.transform.localScale = new Vector3(6, 6, 6);
+
+                        // 発生
+                        //tapEffect.Emit(1);
+                        #endregion
+                        
+                        // カウンタ初期化
+                        HoldEffectSpawnCounter = 0;
+
+                        // スケール値変更
+                        HoldEffect.transform.localScale = new Vector3(10, 10, 10);
+                        
+                        // 発生
+                        HoldEffect.Emit(1);
+                    }
+
+                    HoldEffectSpawnCounter++;
                     break;
 
                 default:
@@ -116,6 +153,9 @@ public class TapEffect : MonoBehaviour
         EffectPos = Vector3.zero;           // 発生位置
         if (Effecttype == EFFECT_TYPE.HOLD) // エフェクト消去
         tapEffect.Clear();
+        HoldEffect.Clear();
         Effecttype = EFFECT_TYPE.NONE;      // エフェクトタイプ
+        HoldEffectSpawnCounter = 0;         // ホールドエフェクト発生カウンター
+        HoldEffect2D.transform.position = new Vector3(100.0f, 0.0f, 0.0f);  // 2Dエフェクトの位置リセット
     }
 }
