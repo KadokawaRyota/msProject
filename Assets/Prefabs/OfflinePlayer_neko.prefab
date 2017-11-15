@@ -1020,7 +1020,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4411410817012026}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 20.5, y: 0, z: 0}
 --- !u!4 &4302871823149064
 Transform:
@@ -1068,12 +1068,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1725546183959988}
-  m_LocalRotation: {x: 0.1779435, y: 0, z: 0, w: 0.98404074}
+  m_LocalRotation: {x: 0.1779435, y: -0, z: -0, w: 0.98404074}
   m_LocalPosition: {x: 0, y: 25, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4411410817012026}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 20.5, y: 0, z: 0}
 --- !u!4 &4379915288269826
 Transform:
@@ -1098,15 +1098,15 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731215057056540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 26.39, z: -1.5}
+  m_LocalPosition: {x: 0.33, y: 25.74, z: -1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4459224281100368}
   - {fileID: 4215170698446386}
   - {fileID: 4020276373330882}
   - {fileID: 4915310769096572}
-  - {fileID: 4367653763502022}
   - {fileID: 4300241843315024}
+  - {fileID: 4367653763502022}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1728,7 +1728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offlinePostureController: {fileID: 114702129444117218}
   targetObj: {fileID: 1731215057056540}
-  localPos: {x: 0, y: 1.7, z: -4.8}
+  localPos: {x: 0, y: 7, z: -7}
 --- !u!114 &114449276767817784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StandCameraObj: {fileID: 1858930886217780}
-  rotPitch: 0
+  rotPitch: 30
 --- !u!114 &114702129444117218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1758,6 +1758,9 @@ MonoBehaviour:
   moveIn: 0.5
   moveThre: 0.5
   cameraStand: {fileID: 114173045923848112}
+  footStampPrefab: {fileID: 1390423647849450, guid: 71feb10ad2285134e99904b3079576cc,
+    type: 2}
+  footStampSetTime: 0.25
 --- !u!114 &114908310340611370
 MonoBehaviour:
   m_ObjectHideFlags: 1
