@@ -10,15 +10,16 @@ public class TransportationScript : MonoBehaviour {
     ParticleSystem particle;
     // Use this for initialization
     void Start () {
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
     }
 
-    public void DispMissionObject()
+    public void StartMission()
     {
-        //ミッションに関係あるオブジェクトを全て表示
+        //ミッションに関係あるオブジェクト表示
         foreach (Transform child in MissionObjects.transform)
         {
             child.gameObject.GetComponent<ObjectController>().DispSwitch(true);
