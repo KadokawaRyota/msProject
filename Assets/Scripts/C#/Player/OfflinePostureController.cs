@@ -15,7 +15,7 @@ public class OfflinePostureController : MonoBehaviour {
     public float moveIn = 0.50f;         // 慣性
     public float moveThre = 0.50f;       // 移動速度変化の閾値
 
-    public OfflineCameraController cameraController;
+    public OfflineCameraStand cameraStand;
 
     public Vector3 GetsurfaceNormal      // プレイヤー位置の地面の法線
 	{
@@ -110,7 +110,7 @@ public class OfflinePostureController : MonoBehaviour {
 
 		// カメラ進行方向ベクトルを取得
 		//Vector3 cameraForward = Vector3.Scale(camera.transform.forward, new Vector3(1, 1, 1)).normalized;
-        Vector3 cameraForward = Vector3.Scale(cameraController.GetCameraDirection, new Vector3(1, 1, 1)).normalized;
+        Vector3 cameraForward = Vector3.Scale(cameraStand.GetCameraDirection, new Vector3(1, 1, 1)).normalized;
         Vector3 moveForward;
 
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
@@ -179,13 +179,4 @@ public class OfflinePostureController : MonoBehaviour {
 		prePosition = transform.position;
 		
 	}
-    public Vector3 GetmoveVec()
-    {
-        return moveVec;
-    }
-
-    public Vector3 GetSurfaceNormal()
-    {
-        return surfaceNormal;
-    }
 }
