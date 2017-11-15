@@ -66,8 +66,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MainSpeedX: 1
-    - _MainSpeedY: -1
+    - _MainSpeedX: -1
+    - _MainSpeedY: -0.5
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -76,12 +76,12 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _SubSpeedX: 2
-    - _SubSpeedY: -2
+    - _SubSpeedX: -2
+    - _SubSpeedY: -1.5
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0, g: 0.48785293, b: 0.71323526, a: 1}
-    - _SubColor: {r: 0.3455882, g: 0.3455882, b: 0.3455882, a: 1}
+    - _MainColor: {r: 0, g: 0.45162314, b: 0.89705884, a: 1}
+    - _SubColor: {r: 0, g: 0.4230225, b: 0.63235295, a: 1}

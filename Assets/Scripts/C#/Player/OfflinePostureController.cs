@@ -42,6 +42,11 @@ public class OfflinePostureController : MonoBehaviour {
     //float inputHorizontal;
 	//float inputVertical;
 
+	public GameObject footStampPrefab;		//足跡
+	[SerializeField]
+	float footStampSetTime;
+	float footStampTime;					//足跡の生成時間
+
 	void Start()
 	{
 		GameObject.Find("Scene Camera").SetActive(false);
@@ -80,6 +85,8 @@ public class OfflinePostureController : MonoBehaviour {
 
 		//パーティクルスクリプトの取得
 		particleManager = GameObject.Find("WalkSmoke").GetComponent<PlayerParticleManager>();
+
+		footStampTime = 0;
 	}
 
 	void Update()
@@ -158,6 +165,13 @@ public class OfflinePostureController : MonoBehaviour {
 		{
 			animator.SetBool("is_running", true);
 			particleManager.SetSmokeFlg(true);
+
+			footStampTime += Time.deltaTime;
+
+			if (footStampTime > footStampSetTime) {
+				footStampTime = 0;
+				Instantiate (footStampPrefab, transform.position, transform.rotation);
+			}
 		}
 
 		else

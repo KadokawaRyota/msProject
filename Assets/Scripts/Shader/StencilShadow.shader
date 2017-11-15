@@ -9,7 +9,7 @@ Shader "Custom/StencilShadow" {
 	}
 	SubShader{
 		Tags { "RenderType" = "Transparent" 
-				"Queue" = "Transparent-1"}	//PlayerのOutlileToonシェーダより先に描画するため-1する
+				"Queue" = "Transparent+1"}	//PlayerのOutlileToonシェーダより先に描画するため-1する
 
 		Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 
