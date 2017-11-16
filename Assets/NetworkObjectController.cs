@@ -50,6 +50,8 @@ public class NetworkObjectController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        GameObject parent = GameObject.Find("NetworkMissionManager/NetworkTransportation/MissionObject");
+        this.transform.parent = parent.transform;
         //位置記憶
         pos = transform.position;
         rot = transform.rotation;
