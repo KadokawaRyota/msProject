@@ -39,7 +39,7 @@ public class OfflinePostureController : MonoBehaviour {
     AnimationNum animationNum;
 
     Scr_ControllerManager controllerManager;    //コントローラのマネージャ
-    public float VecLength;            // 入力されたベクトルの長さ
+    private float VecLength;            // 入力されたベクトルの長さ
 
 
   	PlayerParticleManager particleManager;	//プレイヤーパーティクル

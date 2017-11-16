@@ -700,56 +700,37 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.33
       objectReference: {fileID: 0}
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_LocalPosition.y
       value: 25.74
       objectReference: {fileID: 0}
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_LocalPosition.z
       value: -1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4411410817012026, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
+    - target: {fileID: 4383779163103940, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
       propertyPath: m_RootOrder
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1731215057056540, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
-      propertyPath: m_Name
-      value: OfflinePlayer_Neko
-      objectReference: {fileID: 0}
-    - target: {fileID: 114702129444117218, guid: d8b8b94f0de1ba846b887ec79bc40a1e,
-        type: 2}
-      propertyPath: moveRunSpeed
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114702129444117218, guid: d8b8b94f0de1ba846b887ec79bc40a1e,
-        type: 2}
-      propertyPath: moveWalkSpeed
-      value: 0.025
-      objectReference: {fileID: 0}
-    - target: {fileID: 114702129444117218, guid: d8b8b94f0de1ba846b887ec79bc40a1e,
-        type: 2}
-      propertyPath: moveThre
-      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
