@@ -21,7 +21,11 @@ public class NetConnector : NetworkManager
 
 	GameObject canvas;				//オンラインCanvasの取得
 
-	public void Start()
+    [SerializeField]
+    GameObject TransportationObject;
+
+
+    public void Start()
 	{
 
 		//NetworkManagerの取得
@@ -51,13 +55,14 @@ public class NetConnector : NetworkManager
 			{
 				loadingImage.gameObject.SetActive(false);
 				manager.networkAddress = "localhost";       //ホストの時はlocalhost
-				manager.StartHost();                        //ホスト処理開始
+				manager.StartServer();                        //ホスト処理開始
 				Debug.Log("Start as Server");
 
 				punioconCamera.SetActive(false);
 				canvas.SetActive(false);
-		
-			}
+
+                TransportationObject.GetComponent<NetworkTransportationScript>().CreateObject();
+            }
 
 			else
 			{
