@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 114083536865265326}
   - component: {fileID: 114029802428240828}
   m_Layer: 0
-  m_Name: OfflinePlayer_Neko
+  m_Name: OfflinePlayer_neko
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
