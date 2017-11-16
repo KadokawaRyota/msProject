@@ -14,7 +14,9 @@ public class OfflinePostureController : MonoBehaviour {
     public float moveRunSpeed = 0.2f;    // 走り移動速度係数
     public float moveIn = 0.50f;         // 慣性
     public float moveThre = 0.50f;       // 移動速度変化の閾値
-    public bool move = false;            // プレイヤー移動可否           
+    public float moveDead = 70.0f;       // ぷにコンデッドゾーン
+    public bool move = false;            // プレイヤー移動可否
+    public bool deadTrans = false;           // デッドゾーン時の回転可否
 
     public OfflineCameraStand cameraStand;
 
@@ -137,6 +139,17 @@ public class OfflinePostureController : MonoBehaviour {
 
         // 入力量によって移動速度を変える
 
+        if (VecLength < moveDead)
+        {
+            move = false;
+            animationNum = AnimationNum.Idle;
+        }
+        else
+        {
+            move = true;
+        }
+
+
         if (move)
         {
             if (VecLength < (puniVecMax * moveThre))
@@ -152,34 +165,30 @@ public class OfflinePostureController : MonoBehaviour {
         }
         else
         {
+            moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * moveWalkSpeed;
             animationNum = AnimationNum.Idle;
         }
 
 
-		//moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal);
-
         // 慣性
 		moveVec += (Vector3.zero - moveVec) * moveIn;
 
-
         // 移動速度を位置に足しこむ
-		transform.position += moveVec;
-
-
-        // 移動方向にスピードを掛ける
-        moveVec = moveVec * 0.05f;
-        moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * 0.05f;
-        moveVec += (Vector3.zero - moveVec) * 0.5f;
-        transform.position += moveVec;
+        if (move)
+        {
+            transform.position += moveVec;
+        }
 
         if (moveVec.magnitude > 0)
 		{
 			dirVec = moveVec.normalized;
 		}
 
-		// プレイヤーの回転
-		transform.rotation = Quaternion.LookRotation(dirVec, surfaceNormal);
-
+        // プレイヤーの回転
+        if (move || deadTrans)
+        {
+            transform.rotation = Quaternion.LookRotation(dirVec, surfaceNormal);
+        }
 		// アニメーション状態取得
 		if (moveVec.magnitude > 0)
 		{
