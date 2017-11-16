@@ -60,8 +60,6 @@ void Start () {
 
                         missionImage.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
                     }
-                    //実行されるミッションによって変える・・・今は運搬のみ
-                    Transportation.GetComponent<TransportationScript>().StartMission();
                 }
 			}
 		}

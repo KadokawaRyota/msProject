@@ -17,7 +17,7 @@ public class TransportationScript : MonoBehaviour {
 	void Update () {
     }
 
-    public void StartMission()
+    public void dispMission()
     {
         //ミッションに関係あるオブジェクト表示
         foreach (Transform child in MissionObjects.transform)
