@@ -89,7 +89,7 @@ public class Scr_ControllerManager : MonoBehaviour
 
         ////        始点と終点の方向ベクトル生成
         ////////////////////////////////////////////////////////////////////////
-        ControllerVec = (TouchPositionNow - TouchPositionStart).normalized;
+        ControllerVec = (TouchPositionNow - TouchPositionStart);//.normalized;
         ControllerVecLength = ControllerVec.magnitude;
     }
 
