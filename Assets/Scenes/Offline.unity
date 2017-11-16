@@ -4326,12 +4326,8 @@ Prefab:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1731215057056540, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1731215057056540, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
-      propertyPath: m_TagString
-      value: Player
+      propertyPath: m_Name
+      value: OfflinePlayer_Neko
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8b8b94f0de1ba846b887ec79bc40a1e, type: 2}
@@ -4367,7 +4363,7 @@ Transform:
   - {fileID: 460123624}
   - {fileID: 1257953204}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1168105692
 MonoBehaviour:
@@ -5226,6 +5222,12 @@ Prefab:
       propertyPath: StandCameraObj
       value: 
       objectReference: {fileID: 1683003000}
+    - target: {fileID: 114651737819074024, guid: 47eb23fe1c8e49e4cbefc571fbab429b,
+        type: 2}
+      propertyPath: footStampPrefab
+      value: 
+      objectReference: {fileID: 1390423647849450, guid: 71feb10ad2285134e99904b3079576cc,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47eb23fe1c8e49e4cbefc571fbab429b, type: 2}
   m_IsPrefabParent: 0
