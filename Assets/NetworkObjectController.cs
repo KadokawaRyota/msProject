@@ -112,6 +112,7 @@ public class NetworkObjectController : MonoBehaviour
             player.GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
         }
     }
+
     void OnCollisionEnter(Collision collision)
     {
         //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
