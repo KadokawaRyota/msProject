@@ -69,7 +69,7 @@ public class InputManager : MonoBehaviour
 
         ////        マルチタップ無効
         ////////////////////////////////////////////////////////////////////////
-        Input.multiTouchEnabled = false;
+        //Input.multiTouchEnabled = false;
     }
 
     //--------------------------------------------------------------------------
@@ -173,9 +173,35 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public static Vector3 GetTouchPosition()
     {
-        ////        タップ位置を代入
-        ////////////////////////////////////////////////////////////////////////
-        Vector3 screenPos = Input.mousePosition;
+        Vector3 screenPos = Vector3.zero;
+        //screenPos = Input.mousePosition;
+        if (Application.isEditor)
+        {
+            ////        タップ位置を代入
+            ////////////////////////////////////////////////////////////////////////
+            screenPos = Input.mousePosition;
+            
+            if (Input.touchCount >= 1)
+            {
+                ////        タップ位置を代入
+                ////////////////////////////////////////////////////////////////////////
+                screenPos = Input.GetTouch(0).position; 
+                //screenPos = Input.mousePosition;
+            }
+        }
+
+        else if (Application.isMobilePlatform)
+        {
+            screenPos = Input.GetTouch(Input.touchCount).position;
+
+            if (Input.touchCount >= 1)
+            {
+                ////        タップ位置を代入
+                ////////////////////////////////////////////////////////////////////////
+                screenPos = Input.GetTouch(0).position; 
+                //screenPos = Input.mousePosition;            
+            }
+        }
 
         return screenPos;
     }

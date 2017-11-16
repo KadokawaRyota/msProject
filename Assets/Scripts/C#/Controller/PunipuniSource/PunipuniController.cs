@@ -17,7 +17,7 @@ public class PunipuniController : MonoBehaviour
     {
         NONE,   // 判別してない
         TAP,    // タップ
-        HOLD    // ホールド
+        HOLD,   // ホールド
     };
 
     #region [ パブリック ]
@@ -32,6 +32,9 @@ public class PunipuniController : MonoBehaviour
     public TOUCH_MODE TouchMode = TOUCH_MODE.NONE;      // 現在のタップ状態
     public TOUCH_MODE TouchModeOld = TOUCH_MODE.NONE;   // １フレ前のタップ状態
     public TOUCH_STATE TouchState = TOUCH_STATE.NONE;   // タップの状況
+
+    public Vector3 TapPosCamera = Vector3.zero;          // 二本目の指のタップ位置(カメラ用) 
+    public Vector3 TapPosCameraOld= Vector3.zero;       // 1フレーム前の二本目の指のタップ位置(カメラ用)
     #endregion
 
     #region [ プライベート ]
@@ -58,7 +61,6 @@ public class PunipuniController : MonoBehaviour
     private static Touch touch;         // タップ情報
     public Vector3 BeginMousePosition;  // タップ位置
     private bool bStateCountFlug;
-
     #endregion
     
     //--------------------------------------------------------------------------
@@ -151,6 +153,10 @@ public class PunipuniController : MonoBehaviour
                 if (InputManager.GetTouchRelease()) 
                     EndPunipuni();
 
+            ////    カメラ情報の更新
+            ////////////////////////////////////////////////////////////////////
+            UpdateCamera();
+            
             ////        タッチ状態の更新処理
             //////////////////////////////////////////////////////////////////// 
             TouchModeOld = TouchMode;
@@ -190,7 +196,7 @@ public class PunipuniController : MonoBehaviour
             ////    タップ状況判別カウントフラグをtrueに
             ////////////////////////////////////////////////////////////////////
             bStateCountFlug = true;
-
+            
             ////    タップ位置を取得
             ////////////////////////////////////////////////////////////////////
             BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
@@ -220,16 +226,18 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             ResetPuniMeshAndBezier();
 
+            ////    カメラ回転用タップ位置のリセット
+            ////////////////////////////////////////////////////////////////////
+            TapPosCamera = Vector3.zero;
+            TapPosCameraOld = Vector3.zero;
+
             ////    エフェクトOFF
             ////////////////////////////////////////////////////////////////
             if (tapeffect.Effecttype == EFFECT_TYPE.HOLD)
             {
-                tapeffect.EffectStatusReset();
+                SpriteRenderHE2D.enabled = false;   // ホールドエフェクトOFF
+                tapeffect.EffectStatusReset();      // ステータスリセット
             }
-
-            ////    ホールドエフェクトOFF
-            ////////////////////////////////////////////////////////////////
-            SpriteRenderHE2D.enabled = false;
         }
 
     //--------------------------------------------------------------------------
@@ -239,7 +247,9 @@ public class PunipuniController : MonoBehaviour
         {
             ////    ベジェ曲線パラメータの更新
             ////////////////////////////////////////////////////////////////////
-            Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+            //Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+            Vector3 Inputpos = InputManager.GetTouchPosition();
+            Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Inputpos.x, Inputpos.y, 1.0f)); 
             tapeffect.EffectPos = ControllerManager.TouchPositionNow;
             
             ////    デバッグ表示
@@ -264,6 +274,7 @@ public class PunipuniController : MonoBehaviour
             var centerPos = BezierC.GetPosition( 0.8f );
             PuniMesh.CenterPoint = centerPos;
         }
+
     //--------------------------------------------------------------------------
     //          タップ状況の更新
     //--------------------------------------------------------------------------
@@ -289,6 +300,7 @@ public class PunipuniController : MonoBehaviour
 
             SpriteRenderHE2D.enabled = true;
 
+            //Debug.Log(Input.touchCount);
             //Debug.Log("ホールドエフェクト発生");
         }
 
@@ -308,6 +320,19 @@ public class PunipuniController : MonoBehaviour
             ////    カウンタを加算
             ////////////////////////////////////////////////////////////////////
             nStateCheckCounter++; 
+        }
+    }
+
+    //--------------------------------------------------------------------------
+    //          カメラパラメータの更新
+    //--------------------------------------------------------------------------
+    void UpdateCamera()
+    {
+        if (Input.GetTouch(1).position.x != 0.0f &&
+            Input.GetTouch(1).position.y != 0.0f)
+        {
+            TapPosCamera = Input.GetTouch(1).position;
+            TapPosCameraOld = TapPosCamera;
         }
     }
 

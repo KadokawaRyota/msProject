@@ -253,7 +253,49 @@ Prefab:
     - {fileID: 114432776460164700, guid: 381dd791654b2054a91311cb4a94733f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 381dd791654b2054a91311cb4a94733f, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &418096845
+--- !u!1001 &86000022
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 26.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346219516912238, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f7dd14f1ba80e9e48ab61050ebfd45ee, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &112500509
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
