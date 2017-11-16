@@ -328,11 +328,10 @@ public class PunipuniController : MonoBehaviour
     //--------------------------------------------------------------------------
     void UpdateCamera()
     {
-        if (Input.GetTouch(1).position.x != 0.0f &&
-            Input.GetTouch(1).position.y != 0.0f)
+        if( Input.touchCount >=  1)
         {
-            TapPosCamera = Input.GetTouch(1).position;
-            TapPosCameraOld = TapPosCamera;
+           TapPosCamera = Input.GetTouch(1).position;
+           TapPosCameraOld = TapPosCamera;
         }
     }
 
