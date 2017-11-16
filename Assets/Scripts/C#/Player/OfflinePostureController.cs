@@ -14,8 +14,9 @@ public class OfflinePostureController : MonoBehaviour {
     public float moveRunSpeed = 0.2f;    // 走り移動速度係数
     public float moveIn = 0.50f;         // 慣性
     public float moveThre = 0.50f;       // 移動速度変化の閾値
+    public bool move = false;            // プレイヤー移動可否           
 
-    public OfflineCameraController cameraController;
+    public OfflineCameraStand cameraStand;
 
     public Vector3 GetsurfaceNormal      // プレイヤー位置の地面の法線
 	{
@@ -33,14 +34,23 @@ public class OfflinePostureController : MonoBehaviour {
 	private Vector3 prePosition;        // プレイヤー前回位置
 	private Vector3 difPosition;        // プレイヤー位置の差分
 
-	Scr_ControllerManager controllerManager;    //コントローラのマネージャ
-    private float VecLength;            // 入力されたベクトルの長さ
+
+    enum AnimationNum { Idle, Walk, Running };
+    AnimationNum animationNum;
+
+    Scr_ControllerManager controllerManager;    //コントローラのマネージャ
+    public float VecLength;            // 入力されたベクトルの長さ
 
 
   	PlayerParticleManager particleManager;	//プレイヤーパーティクル
     // キーボード入力値
     //float inputHorizontal;
 	//float inputVertical;
+
+	public GameObject footStampPrefab;		//足跡
+	[SerializeField]
+	float footStampSetTime;
+	float footStampTime;					//足跡の生成時間
 
 	void Start()
 	{
@@ -62,10 +72,12 @@ public class OfflinePostureController : MonoBehaviour {
 		surfaceNormal = surfaceNormal.normalized;
 
 		// プレイヤー進行方向の初期化
-		dirVec = new Vector3(0.0f, 0.0f, 1.0f);
+		dirVec = Vector3.Scale(transform.forward, new Vector3(1, 1, 1)).normalized;
+        dirVec = Vector3.ProjectOnPlane(dirVec, surfaceNormal);
+        transform.rotation = Quaternion.LookRotation(dirVec, surfaceNormal);
 
-		// プレイヤー移動量ベクトルの初期化
-		moveVec = Vector3.zero;
+        // プレイヤー移動量ベクトルの初期化
+        moveVec = Vector3.zero;
 
 		// 球面中心点からプレイヤーまでの距離
 		radPlayer = Mathf.Sqrt(
@@ -80,7 +92,13 @@ public class OfflinePostureController : MonoBehaviour {
 
 		//パーティクルスクリプトの取得
 		particleManager = GameObject.Find("WalkSmoke").GetComponent<PlayerParticleManager>();
-	}
+
+		footStampTime = 0;
+
+        // アニメーション状態の初期化
+        animationNum = AnimationNum.Idle;
+
+    }
 
 	void Update()
 	{
@@ -110,7 +128,7 @@ public class OfflinePostureController : MonoBehaviour {
 
 		// カメラ進行方向ベクトルを取得
 		//Vector3 cameraForward = Vector3.Scale(camera.transform.forward, new Vector3(1, 1, 1)).normalized;
-        Vector3 cameraForward = Vector3.Scale(cameraController.GetCameraDirection, new Vector3(1, 1, 1)).normalized;
+        Vector3 cameraForward = Vector3.Scale(cameraStand.GetCameraDirection, new Vector3(1, 1, 1)).normalized;
         Vector3 moveForward;
 
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
@@ -119,13 +137,22 @@ public class OfflinePostureController : MonoBehaviour {
 
         // 入力量によって移動速度を変える
 
-        if ( VecLength < ( puniVecMax * moveThre) )
+        if (move)
         {
-            moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * moveWalkSpeed;
+            if (VecLength < (puniVecMax * moveThre))
+            {
+                moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * moveWalkSpeed;
+                animationNum = AnimationNum.Walk;
+            }
+            else if (VecLength >= (puniVecMax * moveThre))
+            {
+                moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * moveRunSpeed;
+                animationNum = AnimationNum.Running;
+            }
         }
-        else if( VecLength >= ( puniVecMax * moveThre ) )
+        else
         {
-            moveVec = Vector3.ProjectOnPlane(moveForward, surfaceNormal) * moveRunSpeed;
+            animationNum = AnimationNum.Idle;
         }
 
 
@@ -156,16 +183,54 @@ public class OfflinePostureController : MonoBehaviour {
 		// アニメーション状態取得
 		if (moveVec.magnitude > 0)
 		{
-			animator.SetBool("is_running", true);
-			particleManager.SetSmokeFlg(true);
+            move = true;
 		}
-
 		else
 		{
-			//animator.SetBool("is_walk", false);
-			animator.SetBool("is_running", false);
-			particleManager.SetSmokeFlg(false);
+            move = false;
 		}
+
+        /// アニメーション状態によって動作を変える
+        /// 
+        switch( animationNum )
+        {
+            case AnimationNum.Idle:
+                {
+                    animator.SetBool("is_running", false);
+                    particleManager.SetSmokeFlg(false);
+                    break;
+                }
+            case AnimationNum.Walk:
+                {
+                    animator.SetBool("is_running", true);
+                    particleManager.SetSmokeFlg(true);
+
+                    footStampTime += Time.deltaTime;
+
+                    if (footStampTime > footStampSetTime)
+                    {
+                        footStampTime = 0;
+                        Instantiate(footStampPrefab, transform.position, transform.rotation);
+                    }
+                    break;
+                }
+            case AnimationNum.Running:
+                {
+                    animator.SetBool("is_running", true);
+                    particleManager.SetSmokeFlg(true);
+
+                    footStampTime += Time.deltaTime;
+
+                    if (footStampTime > footStampSetTime)
+                    {
+                        footStampTime = 0;
+                        Instantiate(footStampPrefab, transform.position, transform.rotation);
+                    }
+                    break;
+                }
+        }
+
+
 
 		// 球面中心点からプレイヤーまでの距離更新]
 		radPlayer = Mathf.Sqrt(

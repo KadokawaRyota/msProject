@@ -112,7 +112,7 @@ public class ObjectController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
-        if( collision.gameObject.name == "OfflinePlayer_Tanuki" )
+        if( collision.gameObject.tag == "Player" )
         {
             player = collision.gameObject;
         }
