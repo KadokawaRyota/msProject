@@ -37,7 +37,7 @@ public class NetworkTransportationScript : NetworkBehaviour
         //ミッションに関係あるオブジェクト表示
         foreach (Transform child in MissionObjects.transform)
         {
-            child.gameObject.GetComponent<ObjectController>().DispSwitch(true);
+            child.gameObject.GetComponent<NetworkObjectController>().DispSwitch(true);
             particle.Play();
         }
     }
