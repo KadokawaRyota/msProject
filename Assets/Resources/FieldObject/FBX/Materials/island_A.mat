@@ -73,13 +73,13 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 0.381
-    - _Parallax: 0.05
+    - _Parallax: 0.08
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 0
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.6838235, g: 0.5329801, b: 0.30671498, a: 1}
+    - _Color: {r: 0.709, g: 0.547, b: 0.30671498, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
