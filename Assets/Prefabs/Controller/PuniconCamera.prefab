@@ -288,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ControllerManager: {fileID: 114908783692624940}
   tapeffect: {fileID: 114464389559191096}
-  SpriteRenderHE2D: {fileID: 0}
+  SpriteRenderHE2D: {fileID: 212400548861951872}
   TargetCamera: {fileID: 20617550026863486}
   Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   TapDiscriminationFrame: 7
@@ -296,6 +296,8 @@ MonoBehaviour:
   TouchMode: 0
   TouchModeOld: 0
   TouchState: 0
+  TapPosCamera: {x: 0, y: 0, z: 0}
+  TapPosCameraOld: {x: 0, y: 0, z: 0}
   RadiusPixel: 40
   BeginMousePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114464389559191096
