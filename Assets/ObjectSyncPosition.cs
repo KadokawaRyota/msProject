@@ -24,7 +24,7 @@ public class ObjectSyncPosition : NetworkBehaviour
 
     //threshold:しきい値、境目となる値のこと
     //0.5unitを越えなければ移動していないこととする
-    float threshold = 0.5f;
+    float threshold = 0;
 
     private NetworkClient nClient;
 
@@ -36,7 +36,7 @@ public class ObjectSyncPosition : NetworkBehaviour
 
     void Update()
     {
-        LerpPosition();     //2点間を補完する
+        //LerpPosition();     //2点間を補完する
     }
 
     void FixedUpdate()
@@ -48,7 +48,7 @@ public class ObjectSyncPosition : NetworkBehaviour
     void LerpPosition()
     {
         //補間対象は相手プレイヤーのみ
-        if (!isLocalPlayer)
+		if (GetComponent<NetworkObjectController>().player!=null)
         {
             //Lerp(from,to,割合) from～toのベクトル間を補完する
             myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
@@ -64,6 +64,12 @@ public class ObjectSyncPosition : NetworkBehaviour
         syncPos = pos;
     }
 
+    [Server]
+    void GeTransform()
+    {
+        gameObject.transform.localPosition = syncPos;
+    }
+
     //クライアントのみ実行される
     [ClientCallback]
     //位置情報を送るメソッド
@@ -73,8 +79,9 @@ public class ObjectSyncPosition : NetworkBehaviour
         //自プレイヤーであり、現在位置と前フレームのい最終位置との距離がthresholdより大きいとき
 		if (GetComponent<NetworkObjectController>().player!=null && Vector3.Distance(myTransform.position, lastPos) > threshold)
         {
-            CmdProvidePositionToServer(myTransform.position);
-
+            //CmdProvidePositionToServer(myTransform.position);
+            //サーバーが受け取る値
+            syncPos = myTransform.position;
             //現在位置を最終位置として保存
             lastPos = myTransform.position;
         }

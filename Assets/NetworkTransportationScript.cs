@@ -49,6 +49,7 @@ public class NetworkTransportationScript : NetworkBehaviour
         for( int cnt = 0; cnt < objectCnt; cnt++ )
         {
             missionObject = Instantiate( missionObjectPrefab , missionObjectPosition , Quaternion.identity , MissionObjects.transform );
+			missionObject.GetComponent<MeshRenderer>().enabled = true;
             NetworkServer.Spawn(missionObject);
         }
     }
