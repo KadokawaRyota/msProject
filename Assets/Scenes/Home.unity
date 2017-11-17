@@ -285,6 +285,16 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 852189980}
+    - target: {fileID: 223947579055483888, guid: 27a34620a91d33b48b5289d83824ebf3,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223947579055483888, guid: 27a34620a91d33b48b5289d83824ebf3,
+        type: 2}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27a34620a91d33b48b5289d83824ebf3, type: 2}
   m_IsPrefabParent: 0
@@ -669,7 +679,7 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
 --- !u!4 &1377961451
 Transform:
   m_ObjectHideFlags: 0

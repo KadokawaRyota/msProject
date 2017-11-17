@@ -151,6 +151,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74f5f7a7039b29444959857cd4e7aace, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &132455939 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114440747310769524, guid: 9c32f2f61aae1424abef098f018ecacd,
+    type: 2}
+  m_PrefabInternal: {fileID: 464475161}
+  m_Script: {fileID: 11500000, guid: 330d2bd4ce48e084f9791e78c4d73f55, type: 3}
 --- !u!1 &204135363
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +397,16 @@ Prefab:
       propertyPath: moveRunSpeed
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 114282388399517364, guid: 9c32f2f61aae1424abef098f018ecacd,
+        type: 2}
+      propertyPath: deadTrans
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114282388399517364, guid: 9c32f2f61aae1424abef098f018ecacd,
+        type: 2}
+      propertyPath: particleManager
+      value: 
+      objectReference: {fileID: 132455939}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c32f2f61aae1424abef098f018ecacd, type: 2}
   m_IsPrefabParent: 0
