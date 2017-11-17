@@ -43,7 +43,7 @@ public class OfflinePostureController : MonoBehaviour {
     Scr_ControllerManager controllerManager;    //コントローラのマネージャ
     private float VecLength;            // 入力されたベクトルの長さ
 
-
+	[SerializeField]
   	PlayerParticleManager particleManager;	//プレイヤーパーティクル
     // キーボード入力値
     //float inputHorizontal;
@@ -93,7 +93,7 @@ public class OfflinePostureController : MonoBehaviour {
 		prePosition = transform.position;
 
 		//パーティクルスクリプトの取得
-		particleManager = GameObject.Find("WalkSmoke").GetComponent<PlayerParticleManager>();
+		//particleManager = GameObject.Find("WalkSmoke").GetComponent<PlayerParticleManager>();
 
 		footStampTime = 0;
 
@@ -205,14 +205,16 @@ public class OfflinePostureController : MonoBehaviour {
         {
             case AnimationNum.Idle:
                 {
+					animator.SetBool("is_walk", false);
                     animator.SetBool("is_running", false);
                     particleManager.SetSmokeFlg(false);
                     break;
                 }
             case AnimationNum.Walk:
                 {
-                    animator.SetBool("is_running", true);
-                    particleManager.SetSmokeFlg(true);
+                    animator.SetBool("is_walk", true);
+					animator.SetBool("is_running", false);
+                    //particleManager.SetSmokeFlg(true);
 
                     footStampTime += Time.deltaTime;
 
@@ -226,6 +228,7 @@ public class OfflinePostureController : MonoBehaviour {
             case AnimationNum.Running:
                 {
                     animator.SetBool("is_running", true);
+					//animator.SetBool("is_walk", false);
                     particleManager.SetSmokeFlg(true);
 
                     footStampTime += Time.deltaTime;

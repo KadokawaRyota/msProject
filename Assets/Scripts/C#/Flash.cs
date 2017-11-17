@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class Flash : MonoBehaviour {
 
+	[SerializeField]
+	string sceneName;
+
     private Image image;
 
     float m_Time;
 
 
     [SerializeField]
-    float onTime;   //ついてる時間
+	float onTime;   //ついてる時間
     [SerializeField]
     float offTime;  //消えてる時間
 
@@ -36,5 +39,11 @@ public class Flash : MonoBehaviour {
             m_Time = 0.0f;
         }
     }
+
+	public void LoadFade()
+	{
+		Transitioner.Instance.TransitionToScene (sceneName);
+
+	}
 }
 
