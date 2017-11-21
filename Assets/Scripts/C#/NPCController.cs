@@ -21,9 +21,18 @@ public class NPCController : MonoBehaviour {
     private Vector2 NPCinputVec;
     private float waitTime = 0.0f;
     private bool move = false;
+    private Animator animator;          // アニメーション情報
+    enum AnimationNum { Idle, Walk, Running };
+    AnimationNum animationNum;
 
     void Start () {
         NPCinputVec = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+
+        // アニメーション情報の取得
+        animator = GetComponent<Animator>();
+
+        // アニメーション状態の初期化
+        animationNum = AnimationNum.Idle;
     }
 
     void Update()
@@ -39,6 +48,7 @@ public class NPCController : MonoBehaviour {
                 if (move)
                 {
                     move = false;
+                    animationNum = AnimationNum.Idle;
                 }
                 else
                 {
@@ -46,6 +56,8 @@ public class NPCController : MonoBehaviour {
                     NPCinputVec = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
                     NPCinputVec = NPCinputVec.normalized;
                     moveForward = transform.forward * NPCinputVec.y + transform.right * NPCinputVec.x;
+
+                    animationNum = AnimationNum.Walk;
                 }
                 waitTime = 0.0f;
             }
@@ -133,6 +145,50 @@ public class NPCController : MonoBehaviour {
 
                 }
             }
+        }
+
+
+        /// アニメーション状態によって動作を変える
+        /// 
+        switch (animationNum)
+        {
+            case AnimationNum.Idle:
+                {
+                    animator.SetBool("is_walk", false);
+                    animator.SetBool("is_running", false);
+                    //particleManager.SetSmokeFlg(false);
+                    break;
+                }
+            case AnimationNum.Walk:
+                {
+                    animator.SetBool("is_walk", true);
+                    animator.SetBool("is_running", false);
+                    //particleManager.SetSmokeFlg(true);
+
+                    //footStampTime += Time.deltaTime;
+
+                    //if (footStampTime > footStampSetTime)
+                    //{
+                    //    footStampTime = 0;
+                    //    Instantiate(footStampPrefab, transform.position, transform.rotation);
+                    //}
+                    break;
+                }
+            case AnimationNum.Running:
+                {
+                    animator.SetBool("is_running", true);
+                    //animator.SetBool("is_walk", false);
+                    //particleManager.SetSmokeFlg(true);
+
+                    //footStampTime += Time.deltaTime;
+
+                    //if (footStampTime > footStampSetTime)
+                    //{
+                    //    footStampTime = 0;
+                    //    Instantiate(footStampPrefab, transform.position, transform.rotation);
+                    //}
+                    break;
+                }
         }
 
     }
