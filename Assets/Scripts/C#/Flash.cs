@@ -42,7 +42,7 @@ public class Flash : MonoBehaviour {
 
 	public void LoadFade()
 	{
-		Transitioner.Instance.TransitionToScene (sceneName);
+		//Transitioner.Instance.TransitionToScene (sceneName);
 
 	}
 }
