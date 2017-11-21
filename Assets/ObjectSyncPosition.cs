@@ -26,12 +26,8 @@ public class ObjectSyncPosition : NetworkBehaviour
     //0.5unitを越えなければ移動していないこととする
     float threshold = 0;
 
-    private NetworkClient nClient;
-
     void Start()
     {
-        //NetworkClientとTextをキャッシュする
-        nClient = GameObject.Find("NetConnector").GetComponent<NetworkManager>().client;
     }
 
     void Update()
@@ -85,9 +81,5 @@ public class ObjectSyncPosition : NetworkBehaviour
             //現在位置を最終位置として保存
             lastPos = myTransform.position;
         }
-        /*if(isLocalPlayer)
-		{
-			CmdProvidePositionToServer(myTransform.position);
-		}*/
     }
 }

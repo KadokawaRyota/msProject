@@ -21,7 +21,7 @@ using UnityEngine.Networking;
 /// 計算上どうしても伸び縮みする。
 /// </summary>
 
-public class NetworkObjectController : MonoBehaviour
+public class NetworkObjectController : NetworkBehaviour
 {
 
     //パブリック
@@ -116,10 +116,23 @@ public class NetworkObjectController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
-        if (collision.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer == true)
+        if (collision.gameObject.name == "OnlinePlayer_Tanuki(Clone)")
         {
             player = collision.gameObject;
+            AssignAuthorityObject();
         }
+    }
+
+    [Server]
+    void AssignAuthorityObject()
+    {
+        CmdAssignAuthority(GetComponent<NetworkIdentity>(), player.GetComponent<NetworkIdentity>());
+    }
+
+    [Command]
+    void CmdAssignAuthority( NetworkIdentity targetId , NetworkIdentity playerId )
+    {
+        targetId.AssignClientAuthority(playerId.connectionToClient);
     }
 
     public void Refresh()
