@@ -50,6 +50,7 @@ public class NetworkTransportationScript : NetworkBehaviour
         {
             missionObject = Instantiate( missionObjectPrefab , missionObjectPosition , Quaternion.identity , MissionObjects.transform );
 			missionObject.GetComponent<MeshRenderer>().enabled = true;
+            missionObject.GetComponent<BoxCollider>().enabled = true;
             NetworkServer.Spawn(missionObject);
         }
     }
