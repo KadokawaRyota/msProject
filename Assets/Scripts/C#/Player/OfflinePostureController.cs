@@ -10,15 +10,17 @@ public class OfflinePostureController : MonoBehaviour {
     static float screenHeight = 1920.0f;
     static float puniVecMax = Mathf.Sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
 
+    public Vector3 spawnPoint = new Vector3(0.1f, 25.0f, 0.1f);
     public float moveWalkSpeed = 0.1f;   // 歩き移動速度係数
     public float moveRunSpeed = 0.2f;    // 走り移動速度係数
     public float moveIn = 0.50f;         // 慣性
     public float moveThre = 0.50f;       // 移動速度変化の閾値
     public float moveDead = 70.0f;       // ぷにコンデッドゾーン
     public bool move = false;            // プレイヤー移動可否
-    public bool deadTrans = false;           // デッドゾーン時の回転可否
+    public bool deadTrans = false;       // デッドゾーン時の回転可否
 
     public OfflineCameraStand cameraStand;
+
 
     public Vector3 GetsurfaceNormal      // プレイヤー位置の地面の法線
 	{
@@ -56,9 +58,14 @@ public class OfflinePostureController : MonoBehaviour {
 
 	void Start()
 	{
-		GameObject.Find("Scene Camera").SetActive(false);
+        if (Application.loadedLevelName == "Offline")
+        {
+            GameObject.Find("Scene Camera").SetActive(false);
+        }
 
-		camera = GetComponentInChildren<Camera>();
+        transform.position = spawnPoint;
+
+        camera = GetComponentInChildren<Camera>();
 		camera.enabled = true;
 		AudioListener audio = camera.GetComponent<AudioListener>();
 		audio.enabled = true;

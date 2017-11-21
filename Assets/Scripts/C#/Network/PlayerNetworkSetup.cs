@@ -33,13 +33,13 @@ public class PlayerNetworkSetup : NetworkBehaviour
 			GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
 
             //カメラの取得等があるため、ここでPostureControllerのスクリプトをOnにしてStartメソッド呼び出し。
-            GetComponent<PostureController>().enabled = true;
+            GetComponent<OfflinePostureController>().enabled = true;
 
         }
 		else
 		{
 			//自分以外の移動スクリプトを切る
-			GetComponent<PostureController>().enabled = false;
+			GetComponent<OfflinePostureController>().enabled = false;
 		}
         
 	}
