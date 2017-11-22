@@ -129,6 +129,9 @@ public class NetworkObjectController : NetworkBehaviour
                 player = collision.gameObject;
             }
         }
+		collision.gameObject.GetComponent<NetworkBehaviour> ().OnStartAuthority ();
+
+
     }
 
     [Server]
