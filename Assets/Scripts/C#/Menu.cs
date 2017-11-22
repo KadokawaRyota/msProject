@@ -8,14 +8,16 @@ public class Menu : MonoBehaviour {
 
 	ButtonExecution button;		//メニューボタンスクリプト用
 
-	float startPos;     //開始時の位置を記憶
+	Vector2 startPos;
+	RectTransform rect;     //開始時の位置を記憶
 
 	public float moveSpeed;     //開閉のスピード
 
 	bool menuOpen = false;  //メニューバーの開閉フラグ
 
 	void Start () {
-		startPos = gameObject.transform.localPosition.x;		//メニューを閉じるときの終点を保存
+		rect = GetComponent<RectTransform>();		//メニューを閉じるときの終点を保存
+		startPos = GetComponent<RectTransform>().anchoredPosition;
     }
 	
 	// Update is called once per frame
@@ -24,17 +26,17 @@ public class Menu : MonoBehaviour {
 		//メニューを開く処理
 		if(menuOpen)
 		{
-			if(gameObject.transform.localPosition.x < Screen.width * 0.4f)
+			if( rect.anchoredPosition.x < 500.0f)
 			{
-				gameObject.transform.localPosition += new Vector3(moveSpeed, 0.0f,0.0f);
+				rect.anchoredPosition += new Vector2(moveSpeed, 0.0f);
 			}
 		}
 		//メニューを閉じる処理
 		else
 		{
-			if (gameObject.transform.localPosition.x > startPos)
+			if (rect.anchoredPosition.x > startPos.x)
 			{
-				gameObject.transform.localPosition -= new Vector3(moveSpeed, 0.0f, 0.0f);
+				rect.anchoredPosition -= new Vector2(moveSpeed, 0.0f);
 			}
 		}
 
