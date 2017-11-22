@@ -94,7 +94,7 @@ public class InputManager : MonoBehaviour
 
         ////        エディタでの更新処理
         ////////////////////////////////////////////////////////////////////////
-        if (Application.isEditor)
+		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
         {
             if(Input.GetMouseButton(0))
             {
@@ -175,8 +175,8 @@ public class InputManager : MonoBehaviour
     {
         Vector3 screenPos = Vector3.zero;
 
-        if (Application.isEditor)
-        {
+		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+		{
             ////        タップ位置を代入
             ////////////////////////////////////////////////////////////////////////
             screenPos = Input.mousePosition;
@@ -195,8 +195,8 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public static float GetTouchMoveHorizonal()
     {
-        if (Application.isEditor)
-        {
+		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+		{
             return Input.GetAxis("Mouse X");
         }
 
@@ -225,8 +225,8 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public static float GetTouchMoveVertical()
     {
-        if (Application.isEditor)
-        {
+		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+		{
             return Input.GetAxis("Mouse Y");
         }
 
