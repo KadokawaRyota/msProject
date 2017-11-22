@@ -10,11 +10,12 @@ public class LoadSceneManager : MonoBehaviour {
 	public GameObject loadingUI;
 	public Slider slider;
 
-	bool flg = false;
-	public int waitTime = 60;
-	int cnt = 0;
+	//[SerializeField]
+	//Vector2 Scroll;
+	//RawImage img;
 	public void LoadNextScene(string name)
 	{
+		//img = loadingUI.GetComponent<RawImage> ();
 		loadingUI.SetActive (true);	//ロード画面UIをアクティブ
 		StartCoroutine (LoadScene(name));	//コルーチンを開始
 	}
@@ -23,13 +24,12 @@ public class LoadSceneManager : MonoBehaviour {
 	{
 		//シーン読み込み
 		async = SceneManager.LoadSceneAsync (sceneName);
-
+		//img.uvRect = new Rect(img.uvRect.x + Scroll.x,img.uvRect.y + Scroll.y,1,1);
 		//読み込みが終わるまで進捗状況をスライダーの値に反映させる
 		while (!async.isDone) {
-
+			
 			slider.value = async.progress;
 			yield return null;
 		}
-
 	}
 }
