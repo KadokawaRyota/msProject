@@ -8,22 +8,25 @@
 		_SubTex("SubTexture", 2D) = "white" {}
 		_SubSpeedX("SubSpeed X",Range(-2.0,2.0)) = 0.5
 		_SubSpeedY("SubSpeed Y",Range(-2.0,2.0)) = 0.5
+		_Power("Power",Range(0.0,0.01)) = 0.001
 
 	}
 	SubShader{
-		Tags{ "RenderType" = "Opaque" }
+		Tags{ "RenderType" = "Transparent" 
+			"Queue" = "Transparent" }
 		LOD 200
+
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		//ステンシル
 		Stencil{
 			Ref 1
-			Comp Equal	//ステンシル値が同じところに描画
+			Comp Always	//ステンシル値が同じところに描画
+			Pass Replace
 		}
 		CGPROGRAM
 
-		
-
-		#pragma surface surf Standard
+		#pragma surface surf Lambert vertex:vert
 		#pragma target 3.0
 
 		//プロパティ宣言
@@ -37,13 +40,24 @@
 		float _SubSpeedX;
 		float _SubSpeedY;
 
+		float _Power;
+
 
 		struct Input {
 			float2 uv_MainTex;
 		};
 
+		 void vert(inout appdata_full v, out Input o )
+        {
+            UNITY_INITIALIZE_OUTPUT(Input, o);
+            float amp1 = _Power*sin(_Time*100 + v.vertex.x * 100);
+            float amp2 = _Power*cos(_Time*100 + v.vertex.x * 100);
+            v.vertex.xyz = float3(v.vertex.x, v.vertex.y + amp1, v.vertex.z + amp2);            
+            //v.normal = normalize(float3(v.normal.x+offset_, v.normal.y, v.normal.z));
+        }
+
 		//サーフェースシェーダ	
-		void surf(Input IN, inout SurfaceOutputStandard o) {
+		void surf(Input IN, inout SurfaceOutput  o) {
 
 			fixed2 uv = IN.uv_MainTex;	//テクスチャ座標取得
 
@@ -58,6 +72,7 @@
 			fixed4 c2 = tex2D(_SubTex,uv) * _SubColor;		//サブカラーと合成
 
 			o.Albedo = c1 + c2;		//2枚のテクスチャを合成（*なら乗算合成、+なら加算合成）
+			o.Alpha = 0.5;
 		}
 		ENDCG
 	}
