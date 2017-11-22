@@ -35,6 +35,8 @@ public class NetworkObjectController : NetworkBehaviour
     [SerializeField]
     float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
 
+    NetworkIdentity niPlayerId;
+
     //List<GameObject> players = new List<GameObject>();
 
 
@@ -113,20 +115,26 @@ public class NetworkObjectController : NetworkBehaviour
         }
     }
 
+    //プレイヤー側では引っ張るオブジェクトを触った人に同期の権限を与え、ローカルではオブジェクトとプレイヤーをつなげる状態にする。
     void OnCollisionEnter(Collision collision)
     {
-        //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
-        if (collision.gameObject.name == "OnlinePlayer_Tanuki(Clone)")
+        if (collision.gameObject.tag == "Player")
         {
-            player = collision.gameObject;
+            niPlayerId = collision.gameObject.GetComponent<NetworkIdentity>();
             AssignAuthorityObject();
+
+            //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
+            if (collision.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer == true)
+            {
+                player = collision.gameObject;
+            }
         }
     }
 
     [Server]
     void AssignAuthorityObject()
     {
-        CmdAssignAuthority(GetComponent<NetworkIdentity>(), player.GetComponent<NetworkIdentity>());
+        CmdAssignAuthority(GetComponent<NetworkIdentity>(), niPlayerId);
     }
 
     [Command]
