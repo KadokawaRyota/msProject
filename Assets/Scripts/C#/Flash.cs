@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class Flash : MonoBehaviour {
 
-	[SerializeField]
-	string sceneName;
-
     private Image image;
 
     float m_Time;
@@ -39,11 +36,5 @@ public class Flash : MonoBehaviour {
             m_Time = 0.0f;
         }
     }
-
-	public void LoadFade()
-	{
-		//Transitioner.Instance.TransitionToScene (sceneName);
-
-	}
 }
 
