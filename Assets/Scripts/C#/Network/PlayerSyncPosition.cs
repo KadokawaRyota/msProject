@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
+
+//channel(SyncVar変数をUpdateする時の設定Qos参照)
+//sendInterval(どれくらいの頻度でUpdateするか)
 [NetworkSettings(channel = 0, sendInterval = 0.033f)]
 
 public class PlayerSyncPosition : NetworkBehaviour {

@@ -421,12 +421,12 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: serverIPAdress
-      value: 192.168.13.3
+      value: 192.168.2.100
       objectReference: {fileID: 0}
     - target: {fileID: 1402513040094194, guid: c341415438230494da36b51dc59070f4, type: 2}
       propertyPath: m_IsActive
