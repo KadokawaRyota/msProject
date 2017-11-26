@@ -59,7 +59,7 @@ public class NetworkObjectController : NetworkBehaviour
         rot = transform.rotation;
     }
 
-    // Update is called once per frame
+    /*// Update is called once per frame
 	[ClientCallback]
     void Update()
     {
@@ -120,7 +120,7 @@ public class NetworkObjectController : NetworkBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
-        {
+        {*/
             /*niPlayerId = collision.gameObject.GetComponent<NetworkIdentity>();
 			//AssignAuthorityObject();
 			CmdAssignAuthority(gameObject.GetComponent<NetworkIdentity>(), collision.gameObject.GetComponent<NetworkIdentity>());
@@ -131,7 +131,7 @@ public class NetworkObjectController : NetworkBehaviour
                 player = collision.gameObject;
 				collision.gameObject.GetComponent<PlayerObjectAuthority>().AssingAuthority(gameObject);
             }*/
-
+            /*
 			if(collision.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer)
 			{
 				collision.gameObject.GetComponent<PlayerObjectAuthority>().AssingAuthority(gameObject);
@@ -154,7 +154,9 @@ public class NetworkObjectController : NetworkBehaviour
     {
         targetId.AssignClientAuthority(playerId.connectionToClient);
     }
+    */
 
+    //運び終わったら発動させる
     public void Refresh()
     {
         GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -171,4 +173,5 @@ public class NetworkObjectController : NetworkBehaviour
         GetComponent<BoxCollider>().enabled = bDisp;
         GetComponent<Rigidbody>().isKinematic = !bDisp;
     }
+
 }
