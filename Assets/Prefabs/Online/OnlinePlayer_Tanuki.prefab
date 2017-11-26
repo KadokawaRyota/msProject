@@ -419,6 +419,8 @@ GameObject:
   - component: {fileID: 114766097396970256}
   - component: {fileID: 114661076077364430}
   - component: {fileID: 114849293880700326}
+  - component: {fileID: 114405297135741734}
+  - component: {fileID: 114271723457527508}
   m_Layer: 0
   m_Name: OnlinePlayer_Tanuki
   m_TagString: Player
@@ -1854,6 +1856,30 @@ MonoBehaviour:
   PlayerParticleObject: {fileID: 198173172759895980}
   bEmitFlug: 0
   nEmitCountNum: 10
+--- !u!114 &114271723457527508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400560442846014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eeecc5aa47d82e4fb53fd19003d12ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114405297135741734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400560442846014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77e23042705191340a5923436cddd3d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasAuthority: {fileID: 0}
+  myObject: {fileID: 1400560442846014}
 --- !u!114 &114461326257129122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1975,13 +2001,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400560442846014}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 3
-  m_SendInterval: 0.1
+  m_SendInterval: 0
   m_SyncRotationAxis: 2
   m_RotationSyncCompression: 0
   m_SyncSpin: 0

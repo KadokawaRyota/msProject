@@ -60,6 +60,7 @@ public class NetworkObjectController : NetworkBehaviour
     }
 
     // Update is called once per frame
+	[ClientCallback]
     void Update()
     {
         if (player == null) return;
@@ -120,16 +121,24 @@ public class NetworkObjectController : NetworkBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            niPlayerId = collision.gameObject.GetComponent<NetworkIdentity>();
-            AssignAuthorityObject();
+            /*niPlayerId = collision.gameObject.GetComponent<NetworkIdentity>();
+			//AssignAuthorityObject();
+			CmdAssignAuthority(gameObject.GetComponent<NetworkIdentity>(), collision.gameObject.GetComponent<NetworkIdentity>());
 
-            //オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
-            if (collision.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer == true)
+			//オブジェクトに触ったのが操作プレイヤーなら判別方法が適当なのはわからなかったから☆
+			if (collision.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer == true)
             {
                 player = collision.gameObject;
-            }
+				collision.gameObject.GetComponent<PlayerObjectAuthority>().AssingAuthority(gameObject);
+            }*/
+
+			if(collision.gameObject.GetComponent<NetworkIdentity>().isLocalPlayer)
+			{
+				collision.gameObject.GetComponent<PlayerObjectAuthority>().AssingAuthority(gameObject);
+				player = collision.gameObject;
+			}
         }
-		collision.gameObject.GetComponent<NetworkBehaviour> ().OnStartAuthority ();
+		//collision.gameObject.GetComponent<NetworkBehaviour> ().OnStartAuthority ();
 
 
     }
@@ -140,7 +149,7 @@ public class NetworkObjectController : NetworkBehaviour
         CmdAssignAuthority(GetComponent<NetworkIdentity>(), niPlayerId);
     }
 
-    [Command]
+    [Server]
     void CmdAssignAuthority( NetworkIdentity targetId , NetworkIdentity playerId )
     {
         targetId.AssignClientAuthority(playerId.connectionToClient);

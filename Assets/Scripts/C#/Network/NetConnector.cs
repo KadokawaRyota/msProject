@@ -55,7 +55,7 @@ public class NetConnector : NetworkManager
 			{
 				loadingImage.gameObject.SetActive(false);
 				manager.networkAddress = "localhost";       //ホストの時はlocalhost
-				manager.StartHost();                        //ホスト処理開始
+				manager.StartServer();                        //ホスト処理開始
 				Debug.Log("Start as Server");
 
 				punioconCamera.SetActive(false);

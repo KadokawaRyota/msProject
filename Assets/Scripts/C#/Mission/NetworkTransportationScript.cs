@@ -42,7 +42,7 @@ public class NetworkTransportationScript : NetworkBehaviour
         }
     }
 
-    [Server]
+    [ServerCallback]
     public void CreateObject()
     {
         GameObject missionObject;
@@ -51,7 +51,11 @@ public class NetworkTransportationScript : NetworkBehaviour
             missionObject = Instantiate( missionObjectPrefab , missionObjectPosition , Quaternion.identity , MissionObjects.transform );
 			missionObject.GetComponent<MeshRenderer>().enabled = true;
             missionObject.GetComponent<BoxCollider>().enabled = true;
-            NetworkServer.Spawn(missionObject);
+
+			NetworkServer.Spawn(missionObject);
+			//NetworkServer.SpawnWithClientAuthority(missionObject, gameObject);
+			//GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToServer);
+
         }
     }
 }
