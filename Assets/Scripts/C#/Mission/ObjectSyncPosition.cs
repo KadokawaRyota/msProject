@@ -31,6 +31,8 @@ public class ObjectSyncPosition : NetworkBehaviour
 
 	void Start()
     {
+        if(isServer == true)
+        syncPos = this.transform.localPosition;
     }
 
     void Update()
@@ -48,17 +50,18 @@ public class ObjectSyncPosition : NetworkBehaviour
     {
 		NetworkObjectController netObjCon = GetComponent<NetworkObjectController>();
 
-		/*if(isServer == true)
+		if(isServer == true)
 		{
+            //サーバーで補間。
 			myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
-		}*/
-		//補間対象は相手プレイヤーのみ
-		//if (GetComponent<NetworkIdentity>().hasAuthority == false)
-		if (netObjCon.player.GetComponent<PlayerObjectAuthority>().hasAuthority != gameObject)
-		{
-			//Lerp(from,to,割合) from～toのベクトル間を補完する
-			myTransform.position = Vector3.Lerp(myTransform.position, syncPos, Time.deltaTime * lerpRate);
-		}
+            //送りたい情報を格納
+            syncPos = myTransform.position;
+        }
+        else
+        {
+            //サーバーから送られてきた値を格納
+            myTransform.position = syncPos;
+        }
     }
 
 
@@ -67,7 +70,7 @@ public class ObjectSyncPosition : NetworkBehaviour
     void CmdProvidePositionToServer(Vector3 pos)
     {
         //サーバーが受け取る値
-        syncPos = pos;
+        syncPos += Vector3.zero;
     }
 
     //クライアントのみ実行される
@@ -75,20 +78,10 @@ public class ObjectSyncPosition : NetworkBehaviour
     //位置情報を送るメソッド
     void TransmitPosition()
     {
-		NetworkObjectController netObjCon = GetComponent<NetworkObjectController>();
 
-		if (netObjCon.player != null)
-		{
-			/***ネットワークトラフィックの軽減処理***/
-			//自プレイヤーであり、現在位置と前フレームのい最終位置との距離がthresholdより大きいとき
-			//if (GetComponent<NetworkIdentity>().hasAuthority == true && Vector3.Distance(myTransform.position, lastPos) > threshold)
-			if (netObjCon.player.GetComponent<PlayerObjectAuthority>().hasAuthority == gameObject && Vector3.Distance(myTransform.position, lastPos) > threshold)
-			{
 				CmdProvidePositionToServer(myTransform.position);
 
 				//現在位置を最終位置として保存
 				lastPos = myTransform.position;
-			}
-		}
     }
 }

@@ -56,33 +56,7 @@ public class playerTransportationScript : MonoBehaviour
         //引っ張るオブジェクト無かったら入らない。
         if (transportObject == null) return;
 
-        ////プレイヤーからキューブを引く処理
         fDistancePlayer = Vector3.Distance(transform.position, transportObject.transform.position);
-        //紐が伸び切ってる状態。
-        if (fDistancePlayer >= fDistance)
-        {
-            //引く力＝紐にかかる力 + 紐の力
-            float pullPower = (fDistancePlayer - fDistance) * objectSpringConstant;
-
-            /////進行方向を求める
-            //現在のプレイヤーへのベクトル
-            vecForPlayer = transform.position - transportObject.transform.position;
-
-            //プレイヤーへのベクトルを正規化
-            vecForPlayer = vecForPlayer.normalized;
-
-            //物体の進行方向へ力を加える
-            transportObject.GetComponent<Rigidbody>().AddForce(new Vector3(vecForPlayer.x * pullPower, vecForPlayer.y * pullPower, vecForPlayer.z * pullPower), ForceMode.Acceleration);
-        }
-        //紐がたるんでからの減速処理。（適当）
-        else
-        {
-            //加速度を半分に
-            transportObject.GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
-        }
-
-        ////キューブを引く時にかかるプレイヤーへの逆ベクトルの処理（通常は同じ力がかかるが、今回はプレイヤーの踏ん張りが無いのでキューブとは別に力を加える事が可能）
-        fDistancePlayer = Vector3.Distance(transportObject.transform.position, transform.position);
         //紐が伸び切ってる状態。
         if (fDistancePlayer >= fDistance)
         {
