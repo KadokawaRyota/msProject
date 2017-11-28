@@ -33,7 +33,7 @@ public class serverObjectController : NetworkBehaviour {
 
     //シリアライズ
     [SerializeField]
-    float fDistance;        //紐が伸び切る距離
+    float fDistance;            //紐が伸び切る距離
     [SerializeField]
     float objectSpringConstant;  //バネ定数
     [SerializeField]
@@ -41,7 +41,6 @@ public class serverObjectController : NetworkBehaviour {
 
     [SerializeField]
     List<GameObject> players = new List<GameObject>();
-
 
     //位置記憶用
     Vector3 pos;
@@ -83,10 +82,10 @@ public class serverObjectController : NetworkBehaviour {
 
         foreach (GameObject player in players)
         {
-            ////プレイヤーからキューブを引く処理
+            ////紐の長さ
             fDistancePlayer = Vector3.Distance(player.transform.position, transform.position);
             //紐が伸び切ってる状態。
-            if (fDistancePlayer >= fDistance)
+            if (fDistancePlayer >= fDistance && !(player.GetComponent<Rigidbody>().velocity.Equals(Vector3.zero)))
             {
                 //引く力＝紐にかかる力 + 紐の力
                 pullPower = (fDistancePlayer - fDistance) * objectSpringConstant;
@@ -131,19 +130,15 @@ public class serverObjectController : NetworkBehaviour {
     }
 
     [Server]
-    void OnCollisionEnter(Collision collision)
+    public void PlayerWithObject(GameObject player )
     {
-        if (collision.gameObject.tag == "Player")
+        //同じプレイヤーがいないか検索。
+        foreach (GameObject listPlayer in players)
         {
-            //同じプレイヤーがいないか検索。
-            foreach (GameObject player in players)
-            {
-                if( player == collision.gameObject ) return;
-            }
-
-            //リストにプレイヤーを追加
-            players.Add(collision.gameObject);
+            if(listPlayer == player ) return;
         }
+        //リストにプレイヤーを追加
+        players.Add(player);
     }
 
     //運び終わったら発動させる
@@ -166,5 +161,15 @@ public class serverObjectController : NetworkBehaviour {
         GetComponent<MeshRenderer>().enabled = bDisp;
         GetComponent<BoxCollider>().enabled = bDisp;
         GetComponent<Rigidbody>().isKinematic = !bDisp;
+    }
+
+    public float GetfDistance()
+    {
+        return fDistance;            //紐が伸び切る距離
+    }
+
+    public float GetPlayerSpringConstant()
+    {
+        return playerSpringConstant;            //紐が伸び切る距離
     }
 }
