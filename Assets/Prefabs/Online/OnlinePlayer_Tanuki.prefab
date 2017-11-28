@@ -416,7 +416,6 @@ GameObject:
   - component: {fileID: 114637869834066126}
   - component: {fileID: 114724848917851780}
   - component: {fileID: 114575737655799790}
-  - component: {fileID: 114766097396970256}
   - component: {fileID: 114661076077364430}
   - component: {fileID: 114849293880700326}
   - component: {fileID: 114405297135741734}
@@ -1995,27 +1994,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myTransform: {fileID: 4733592325165038}
   lerpRate: 15
---- !u!114 &114766097396970256
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1400560442846014}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
-  m_SendInterval: 0
-  m_SyncRotationAxis: 2
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114849293880700326
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2046,13 +2024,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400560442846014}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6a5d3803e3419b45b297c3cbe6806e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fDistance: 2
-  objectSpringConstant: 40
   playerSpringConstant: 10
   transportObject: {fileID: 0}
 --- !u!124 &124159481220711282
