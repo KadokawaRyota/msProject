@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114753263577437794}
   - component: {fileID: 114587958071507460}
   - component: {fileID: 114996229285631452}
+  - component: {fileID: 114255393403931180}
   m_Layer: 0
   m_Name: NetworkObject
   m_TagString: transportObject
@@ -120,7 +121,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1296815650949776}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 968298e0db30a8d4cb0876c63ae79fdb, type: 3}
   m_Name: 
@@ -129,6 +130,21 @@ MonoBehaviour:
   fDistance: 2
   objectSpringConstant: 40
   playerSpringConstant: 10
+--- !u!114 &114255393403931180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1296815650949776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f579eebc4f93942b0c11d76b7b9c42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fDistance: 2
+  objectSpringConstant: 40
+  playerSpringConstant: 10
+  players: []
 --- !u!114 &114278466141525804
 MonoBehaviour:
   m_ObjectHideFlags: 1
