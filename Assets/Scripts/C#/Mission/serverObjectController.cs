@@ -132,8 +132,14 @@ public class serverObjectController : NetworkBehaviour {
     [Server]
     public void PlayerWithObject(GameObject player )
     {
+        Vector3 pos;
+        pos = gameObject.transform.position;
+
+        //プレイヤーがミッション中なら
+        if (player.GetComponent<playerTransportationScript>().GetRuntime() )
+
         //同じプレイヤーがいないか検索。
-        foreach (GameObject listPlayer in players)
+            foreach (GameObject listPlayer in players)
         {
             if(listPlayer == player ) return;
         }

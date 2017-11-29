@@ -42,10 +42,14 @@ public class playerTransportationScript : NetworkBehaviour
 
     bool oldPullListAdd = false;
 
+    [SyncVar , SerializeField]
+    bool SyncbRunTimeTransport = false; //トランスポートミッション中ならtrue
+
     // Use this for initialization
     void Start()
     {
         SyncbPullListAdd = false;
+        SyncbRunTimeTransport = false;
     }
 
     // Update is called once per frame
@@ -119,6 +123,19 @@ public class playerTransportationScript : NetworkBehaviour
     {
         transportObject = transportObj;
         SyncbPullListAdd = true;
+    }
+
+    //プレイヤーがトランスポートのミッション中かどうか伝えるため
+    [Command]
+    public void CmdProvidebRunTimeToServer(bool bRuntime)
+    {
+        SyncbRunTimeTransport = bRuntime;
+    }
+
+    [Server]
+    public bool GetRuntime()
+    {
+        return SyncbRunTimeTransport;
     }
 
     //オブジェクトにプレイヤーを紐付けるために、オブジェクトの関数を呼ぶ処理
