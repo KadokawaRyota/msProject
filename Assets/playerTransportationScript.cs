@@ -22,67 +22,57 @@ using UnityEngine.Networking;
 /// 計算上どうしても伸び縮みする。
 /// </summary>
 
-
-public class playerTransportationScript : MonoBehaviour
+public class playerTransportationScript : NetworkBehaviour
 {
     //シリアライズ
     [SerializeField]
-    float fDistance;        //紐が伸び切る距離
+    private float fDistance;        //紐が伸び切る距離
     [SerializeField]
-    float objectSpringConstant;  //バネ定数
-    [SerializeField]
-    float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
+    private float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
 
-    [SerializeField]
+    private float fDistancePlayer;          //プレイヤーとの距離
+    Vector3 vecForPlayer = Vector3.zero;    //プレイヤーへの向き
+
+
+    [SyncVar]
+    bool SyncbPullListAdd = false;
+
+    [SerializeField , SyncVar]
     GameObject transportObject = null; //プレイヤーが運ぶオブジェクト
 
-    //位置記憶用
-    Vector3 pos;
-    Quaternion rot;
-
-
-    //プライベート
-    float fDistancePlayer;                  //プレイヤーとの距離
-    Vector3 vecForPlayer = Vector3.zero;    //プレイヤーへの向き
+    bool oldPullListAdd = false;
 
     // Use this for initialization
     void Start()
     {
+        SyncbPullListAdd = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //引っ張るオブジェクト無かったら入らない。
-        if (transportObject == null) return;
+        //プレイヤーをサーバー側のオブジェクトに紐付けて良い時
+        if (SyncbPullListAdd && !oldPullListAdd)
+        {
+            //サーバー側でリストにプレイヤーを追加;
+            playerWithObject();
+        }
 
-        ////プレイヤーからキューブを引く処理
+        //ローカルプレイヤー側の処理
+        pullPlayer();
+
+        //前回の状態として保存
+        if( oldPullListAdd != SyncbPullListAdd)
+        oldPullListAdd = SyncbPullListAdd;
+    }
+
+    [Client]
+    void pullPlayer()
+    {
+        //引っ張るオブジェクト無かったら入らない。操作出来るプレイヤーじゃなきゃ入らない
+        if (transportObject == null && isLocalPlayer ) return;
+
         fDistancePlayer = Vector3.Distance(transform.position, transportObject.transform.position);
-        //紐が伸び切ってる状態。
-        if (fDistancePlayer >= fDistance)
-        {
-            //引く力＝紐にかかる力 + 紐の力
-            float pullPower = (fDistancePlayer - fDistance) * objectSpringConstant;
-
-            /////進行方向を求める
-            //現在のプレイヤーへのベクトル
-            vecForPlayer = transform.position - transportObject.transform.position;
-
-            //プレイヤーへのベクトルを正規化
-            vecForPlayer = vecForPlayer.normalized;
-
-            //物体の進行方向へ力を加える
-            transportObject.GetComponent<Rigidbody>().AddForce(new Vector3(vecForPlayer.x * pullPower, vecForPlayer.y * pullPower, vecForPlayer.z * pullPower), ForceMode.Acceleration);
-        }
-        //紐がたるんでからの減速処理。（適当）
-        else
-        {
-            //加速度を半分に
-            transportObject.GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
-        }
-
-        ////キューブを引く時にかかるプレイヤーへの逆ベクトルの処理（通常は同じ力がかかるが、今回はプレイヤーの踏ん張りが無いのでキューブとは別に力を加える事が可能）
-        fDistancePlayer = Vector3.Distance(transportObject.transform.position, transform.position);
         //紐が伸び切ってる状態。
         if (fDistancePlayer >= fDistance)
         {
@@ -107,12 +97,34 @@ public class playerTransportationScript : MonoBehaviour
         }
     }
 
-    //プレイヤーが引っ張るオブジェクトを決める。
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "transportObject" && transportObject == null)
+        //オブジェクトに触った。オブジェクトを引っ張ってなかった。自分が操作可能プレイヤーである。
+        if (collision.gameObject.tag == "transportObject" && transportObject == null && isLocalPlayer == true)
         {
-            transportObject = collision.gameObject;
+            //サーバー側のオブジェクトにプレイヤーを追加して欲しいメッセージとプレイヤーにオブジェクトを紐付け
+            CmdProvidebPullToServer(true , collision.gameObject);
+
+            serverObjectController serverObjectControllerScript = collision.gameObject.GetComponent<serverObjectController>();
+
+            ////オブジェクトを引っ張るステータス設定。
+            fDistance = serverObjectControllerScript.GetfDistance();
+            playerSpringConstant = serverObjectControllerScript.GetPlayerSpringConstant();
         }
+    }
+
+    //サーバー側のオブジェクトにリストを追加してほしいメッセージ
+    [Command]
+    void CmdProvidebPullToServer(bool bPull , GameObject transportObj)
+    {
+        transportObject = transportObj;
+        SyncbPullListAdd = true;
+    }
+
+    //オブジェクトにプレイヤーを紐付けるために、オブジェクトの関数を呼ぶ処理
+    [Server]
+    void playerWithObject()
+    {
+        transportObject.GetComponent<serverObjectController>().PlayerWithObject(this.gameObject);
     }
 }
