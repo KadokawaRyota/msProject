@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour {
 
-	ButtonExecution button;		//メニューボタンスクリプト用
-
 	Vector2 startPos;
 	RectTransform rect;     //開始時の位置を記憶
 
