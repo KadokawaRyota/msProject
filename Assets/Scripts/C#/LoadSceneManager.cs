@@ -4,32 +4,90 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//ローディング遷移
 public class LoadSceneManager : MonoBehaviour {
 
-	AsyncOperation async;
+    AsyncOperation async;
 	public GameObject loadingUI;
 	public Slider slider;
 
-	//[SerializeField]
-	//Vector2 Scroll;
-	//RawImage img;
-	public void LoadNextScene(string name)
+    //シーン遷移
+    public void LoadNextScene(string name)
 	{
-		//img = loadingUI.GetComponent<RawImage> ();
 		loadingUI.SetActive (true);	//ロード画面UIをアクティブ
-		StartCoroutine (LoadScene(name));	//コルーチンを開始
-	}
+		StartCoroutine (LoadScene(name));   //コルーチンを開始
 
+        //シーン遷移時にBGMを止める
+        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+
+        if (audioManager != null)
+        {
+            audioManager.Stop_BGM();
+
+            int random = 0;
+
+            //取得したシーンの次のシーンのBGMを再生
+            switch (name)
+            {
+                case "Title":
+                    audioManager.Play_BGM(AudioManager.BGM.Title);
+                    break;
+
+                case "Home":
+                    audioManager.Play_BGM(AudioManager.BGM.Home);
+                    break;
+
+                case "Offline":
+                    random = Random.Range(0, 3);
+                    switch (random)
+                    {
+                        case 0:
+                            audioManager.Play_BGM(AudioManager.BGM.Game001);
+                            break;
+
+                        case 1:
+                            audioManager.Play_BGM(AudioManager.BGM.Game002);
+                            break;
+
+                        case 2:
+                            audioManager.Play_BGM(AudioManager.BGM.Game003);
+                            break;
+                    }
+                    break;
+                case "Main":
+                    random = Random.Range(0, 3);
+                    switch (random)
+                    {
+                        case 0:
+                            audioManager.Play_BGM(AudioManager.BGM.Game001);
+                            break;
+
+                        case 1:
+                            audioManager.Play_BGM(AudioManager.BGM.Game002);
+                            break;
+
+                        case 2:
+                            audioManager.Play_BGM(AudioManager.BGM.Game003);
+                            break;
+                    }
+                    break;
+            }
+        }
+    }
+
+    //ローディングコルーチン
 	IEnumerator LoadScene(string sceneName)
 	{
 		//シーン読み込み
 		async = SceneManager.LoadSceneAsync (sceneName);
-		//img.uvRect = new Rect(img.uvRect.x + Scroll.x,img.uvRect.y + Scroll.y,1,1);
+
 		//読み込みが終わるまで進捗状況をスライダーの値に反映させる
 		while (!async.isDone) {
 			
 			slider.value = async.progress;
 			yield return null;
 		}
+
+        Debug.Log("コルーチン終了");
 	}
 }

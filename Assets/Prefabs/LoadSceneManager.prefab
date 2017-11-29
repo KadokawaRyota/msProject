@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 223896366035066922}
   - component: {fileID: 114455862265881742}
   - component: {fileID: 114829415139479514}
+  - component: {fileID: 114082493359198330}
   m_Layer: 5
   m_Name: LoadSceneManager
   m_TagString: Untagged
@@ -128,6 +129,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &114082493359198330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1551204169897872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f580b4fc381624f828c527c8777b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingUI: {fileID: 1845513676735734}
+  slider: {fileID: 114169920662283100}
 --- !u!114 &114109060303568166
 MonoBehaviour:
   m_ObjectHideFlags: 1
