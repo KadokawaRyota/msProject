@@ -13,12 +13,12 @@ public class PlayerNetworkSetup : NetworkBehaviour
     // Use this for initialization
     void Start()
 	{
-		//ローディングイメージのアクティブを切るサーバーと自分で2回入ってきたんだが
-		//GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
-
 		//自分が操作するオブジェクトに限定する
 		if (isLocalPlayer)
 		{
+            //自分のプレイヤーの名前変更
+            name = "Player";
+
             //ローディングイメージのアクティブを切る
             GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
 
@@ -34,6 +34,9 @@ public class PlayerNetworkSetup : NetworkBehaviour
 
             //カメラの取得等があるため、ここでPostureControllerのスクリプトをOnにしてStartメソッド呼び出し。
             GetComponent<OfflinePostureController>().enabled = true;
+
+            //ミッションマネージャに自分がスポーンした事を知らせる。
+            GameObject.Find("NetworkMissionManager").GetComponent<NetworkMissionManager>().SetPlayer(this.gameObject);
 
         }
 		else

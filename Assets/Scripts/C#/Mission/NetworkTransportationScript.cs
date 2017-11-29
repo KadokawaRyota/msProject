@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class NetworkTransportationScript : NetworkBehaviour
 {
-
     [SerializeField]
     GameObject MissionObjects;
 
