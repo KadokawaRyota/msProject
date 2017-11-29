@@ -18,8 +18,7 @@ Shader "Custom/Stencil" {
 		Blend SrcAlpha OneMinusSrcAlpha		//アルファブレンディング有効
 		//デフォルトのサーフェースシェーダ
 		CGPROGRAM
-		// Physically based Standard lighting model, and enable shadows on all light types
-		//#pragma surface surf Standard fullforwardshadows
+
 
 		#pragma surface surf ToonRamp
 
