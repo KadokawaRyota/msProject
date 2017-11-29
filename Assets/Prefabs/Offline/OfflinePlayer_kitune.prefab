@@ -626,13 +626,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4416320059306826}
   - component: {fileID: 95611329704359960}
-  - component: {fileID: 136887423459825028}
   - component: {fileID: 54992222756152594}
+  - component: {fileID: 136887423459825028}
   - component: {fileID: 114528590223337176}
   - component: {fileID: 114448320594075678}
   m_Layer: 0
   m_Name: OfflinePlayer_kitune
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
