@@ -85,7 +85,7 @@ public class playerTransportationScript : NetworkBehaviour
     void pullPlayer()
     {
         //引っ張るオブジェクト無かったら入らない。操作出来るプレイヤーじゃなきゃ入らない
-        if (transportObject == null || isLocalPlayer ) return;
+        if (transportObject == null || !isLocalPlayer ) return;
 
         fDistancePlayer = Vector3.Distance(transform.position, transportObject.transform.position);
         //紐が伸び切ってる状態。
