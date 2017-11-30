@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: a5da168509281c04db26e6926a730eea
+timeCreated: 1511933282
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: body
+    100002: //RootNode
+    100004: grp_cactusL_mesh
+    100006: L_arm
+    100008: R_arm
+    100010: thorn1
+    100012: thorn10
+    100014: thorn11
+    100016: thorn12
+    100018: thorn13
+    100020: thorn14
+    100022: thorn15
+    100024: thorn16
+    100026: thorn17
+    100028: thorn18
+    100030: thorn2
+    100032: thorn3
+    100034: thorn4
+    100036: thorn5
+    100038: thorn6
+    100040: thorn7
+    100042: thorn8
+    100044: thorn9
+    400000: body
+    400002: //RootNode
+    400004: grp_cactusL_mesh
+    400006: L_arm
+    400008: R_arm
+    400010: thorn1
+    400012: thorn10
+    400014: thorn11
+    400016: thorn12
+    400018: thorn13
+    400020: thorn14
+    400022: thorn15
+    400024: thorn16
+    400026: thorn17
+    400028: thorn18
+    400030: thorn2
+    400032: thorn3
+    400034: thorn4
+    400036: thorn5
+    400038: thorn6
+    400040: thorn7
+    400042: thorn8
+    400044: thorn9
+    2300000: body
+    2300002: L_arm
+    2300004: R_arm
+    2300006: thorn1
+    2300008: thorn10
+    2300010: thorn11
+    2300012: thorn12
+    2300014: thorn13
+    2300016: thorn14
+    2300018: thorn15
+    2300020: thorn16
+    2300022: thorn17
+    2300024: thorn18
+    2300026: thorn2
+    2300028: thorn3
+    2300030: thorn4
+    2300032: thorn5
+    2300034: thorn6
+    2300036: thorn7
+    2300038: thorn8
+    2300040: thorn9
+    3300000: body
+    3300002: L_arm
+    3300004: R_arm
+    3300006: thorn1
+    3300008: thorn10
+    3300010: thorn11
+    3300012: thorn12
+    3300014: thorn13
+    3300016: thorn14
+    3300018: thorn15
+    3300020: thorn16
+    3300022: thorn17
+    3300024: thorn18
+    3300026: thorn2
+    3300028: thorn3
+    3300030: thorn4
+    3300032: thorn5
+    3300034: thorn6
+    3300036: thorn7
+    3300038: thorn8
+    3300040: thorn9
+    4300000: body
+    4300002: L_arm
+    4300004: R_arm
+    4300006: thorn1
+    4300008: thorn2
+    4300010: thorn3
+    4300012: thorn4
+    4300014: thorn5
+    4300016: thorn6
+    4300018: thorn7
+    4300020: thorn8
+    4300022: thorn9
+    4300024: thorn10
+    4300026: thorn11
+    4300028: thorn12
+    4300030: thorn13
+    4300032: thorn14
+    4300034: thorn15
+    4300036: thorn16
+    4300038: thorn17
+    4300040: thorn18
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
