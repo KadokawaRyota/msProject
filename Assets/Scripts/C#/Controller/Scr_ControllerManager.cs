@@ -87,10 +87,13 @@ public class Scr_ControllerManager : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////
         TouchPositionNow = InputManager.GetTouchPosition();
 
-        ////        始点と終点の方向ベクトル生成
-        ////////////////////////////////////////////////////////////////////////
-        ControllerVec = (TouchPositionNow - TouchPositionStart);//.normalized;
-        ControllerVecLength = ControllerVec.magnitude;
+        if (PunipuniController.GetVisibleFlug() == true)
+        {
+            ////        始点と終点の方向ベクトル生成
+            ////////////////////////////////////////////////////////////////////////
+            ControllerVec = (TouchPositionNow - TouchPositionStart);//.normalized;
+            ControllerVecLength = ControllerVec.magnitude;
+        }
     }
 
     //--------------------------------------------------------------------------
