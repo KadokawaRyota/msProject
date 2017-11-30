@@ -43,7 +43,9 @@ public class PlayerNetworkSetup : NetworkBehaviour
 		{
 			//自分以外の移動スクリプトを切る
 			GetComponent<OfflinePostureController>().enabled = false;
-		}
+            PlayerCamera.GetComponent<Camera>().enabled = false;
+            audioListener.GetComponent<AudioListener>().enabled = false;
+        }
         
 	}
 
