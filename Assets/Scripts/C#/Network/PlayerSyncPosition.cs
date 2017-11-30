@@ -29,25 +29,13 @@ public class PlayerSyncPosition : NetworkBehaviour {
     //0.5unitを越えなければ移動していないこととする
     float threshold = 0.5f;
 
-	private NetworkClient nClient;
-	private int latency; //遅延時間
-	private Text latencyText; //遅延時間表示用テキスト
+    void Update()
+    {
+        LerpPosition();     //2点間を補完する
 
-	void Start()
-	{
-		//NetworkClientとTextをキャッシュする
-		nClient = GameObject.Find("NetConnector").GetComponent<NetworkManager>().client;
-		latencyText = GameObject.Find("OnlineCanvas/Latency Text").GetComponent<Text>();
-	}
-	
-	void Update()
-	{
-		LerpPosition();     //2点間を補完する
+    }
 
-		//ShowLatency();
-	}
-
-	void FixedUpdate()
+    void FixedUpdate()
 	{
 		TransmitPosition();
 	}
@@ -92,14 +80,4 @@ public class PlayerSyncPosition : NetworkBehaviour {
 		}*/
 	}
 
-	void ShowLatency()
-	{
-		if (isLocalPlayer)
-		{
-			//latencyを取得
-			latency = nClient.GetRTT();
-			//latencyを表示
-			latencyText.text = latency.ToString();
-		}
-	}
 }

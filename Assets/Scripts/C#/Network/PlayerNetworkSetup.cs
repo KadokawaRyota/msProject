@@ -20,7 +20,10 @@ public class PlayerNetworkSetup : NetworkBehaviour
             name = "Player";
 
             //ローディングイメージのアクティブを切る
-            GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
+            if (GameObject.Find("OnlineCanvas/LoadingImage") != null)
+            {
+                GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
+            }
 
             //PlayerCameraを使うため、Scene Cameraを非アクティブ化
             GameObject.Find("Scene Camera").SetActive(false);
