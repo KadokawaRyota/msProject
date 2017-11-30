@@ -35,6 +35,8 @@ public class PunipuniController : MonoBehaviour
 
     public Vector3 TapPosCamera = Vector3.zero;          // 二本目の指のタップ位置(カメラ用) 
     public Vector3 TapPosCameraOld= Vector3.zero;       // 1フレーム前の二本目の指のタップ位置(カメラ用)
+
+    public static bool TestVisibleFlug;
     #endregion
 
     #region [ プライベート ]
@@ -193,10 +195,11 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             ResetPuniMeshAndBezier();
 
-            ////    タップ状況判別カウントフラグをtrueに
+			////    タップ位置にUIがない場合タップ状況判別カウントフラグをtrueに
             ////////////////////////////////////////////////////////////////////
-            bStateCountFlug = true;
-            
+			//if (!CheckUIObjectRay ()) {
+				bStateCountFlug = true;
+			//}
             ////    タップ位置を取得
             ////////////////////////////////////////////////////////////////////
             BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
@@ -245,34 +248,34 @@ public class PunipuniController : MonoBehaviour
     //--------------------------------------------------------------------------
         void TrackingPunipuni()
         {
-            ////    ベジェ曲線パラメータの更新
-            ////////////////////////////////////////////////////////////////////
-            //Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-            Vector3 Inputpos = InputManager.GetTouchPosition();
-            Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Inputpos.x, Inputpos.y, 1.0f)); 
-            tapeffect.EffectPos = ControllerManager.TouchPositionNow;
-            
-            ////    デバッグ表示
-            ////////////////////////////////////////////////////////////////////
-            //Debug.Log("始点：" + start + "終点：" + screenPos);     // タップ位置表示
+                ////    ベジェ曲線パラメータの更新
+                ////////////////////////////////////////////////////////////////////
+                //Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+                Vector3 Inputpos = InputManager.GetTouchPosition();
+                Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Inputpos.x, Inputpos.y, 1.0f));
+                tapeffect.EffectPos = ControllerManager.TouchPositionNow;
 
-            ////    ベジェ曲線位置の更新
-            ////////////////////////////////////////////////////////////////////////
-            var x = this.BeginMousePosition.x - pos.x;
-            var y = this.BeginMousePosition.y - pos.y;
-            
-            ////    ベジェ曲線の情報を更新
-            ////////////////////////////////////////////////////////////////////////
-            UpdateBezierParameter(-x, -y);
-        
-            ////    メッシュ情報の更新
-            ////////////////////////////////////////////////////////////////////////
-            PuniMesh.Vertexes = TransformFromBezier(new Vector3());
+                ////    デバッグ表示
+                ////////////////////////////////////////////////////////////////////
+                //Debug.Log("始点：" + start + "終点：" + screenPos);     // タップ位置表示
 
-            ////    
-            ////////////////////////////////////////////////////////////////////////
-            var centerPos = BezierC.GetPosition( 0.8f );
-            PuniMesh.CenterPoint = centerPos;
+                ////    ベジェ曲線位置の更新
+                ////////////////////////////////////////////////////////////////////////
+                var x = this.BeginMousePosition.x - pos.x;
+                var y = this.BeginMousePosition.y - pos.y;
+
+                ////    ベジェ曲線の情報を更新
+                ////////////////////////////////////////////////////////////////////////
+                UpdateBezierParameter(-x, -y);
+
+                ////    メッシュ情報の更新
+                ////////////////////////////////////////////////////////////////////////
+                PuniMesh.Vertexes = TransformFromBezier(new Vector3());
+
+                ////    
+                ////////////////////////////////////////////////////////////////////////
+                var centerPos = BezierC.GetPosition(0.8f);
+                PuniMesh.CenterPoint = centerPos;
         }
 
     //--------------------------------------------------------------------------
@@ -307,7 +310,7 @@ public class PunipuniController : MonoBehaviour
         //----------------------------------------------------------------------
         //          タップ状態が(HOLD)の時の位置情報送信処理
         //----------------------------------------------------------------------
-        if (tapeffect.EffectFlug == true && tapeffect.Effecttype == EFFECT_TYPE.HOLD)
+        if (tapeffect.EffectFlug == true && tapeffect.Effecttype == EFFECT_TYPE.HOLD && VisiblePunipuniController == true)
         {
             tapeffect.EffectPos = TargetCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 1.0f)); //ControllerManager.TouchPositionNow;   // エフェクト位置更新
         }
@@ -321,6 +324,106 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             nStateCheckCounter++; 
         }
+
+        TestVisibleFlug = VisiblePunipuniController;
+    }
+
+	//--------------------------------------------------------------------------
+	//          トリガー時のタップオブジェクトチェック(UIがタップされていればコントローラ出さず)
+	//--------------------------------------------------------------------------
+	private bool CheckUIObject()        // タップ位置での判定
+	{
+        ////    レイヤーの設定
+        ////////////////////////////////////////////////////////////////////////
+        int enablelayer = 1 << LayerMask.NameToLayer("UI");
+
+        ////    タップ位置を取得
+        ////////////////////////////////////////////////////////////////////////
+        Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(Input.mousePosition); 
+        Debug.Log(point); 
+        
+        ////    当たり判定
+        ////////////////////////////////////////////////////////////////////////
+        Collider2D collition2d = Physics2D.OverlapPoint(point, enablelayer);
+        
+        ////    当たっていた場合の処理
+        ////////////////////////////////////////////////////////////////////////
+        if (collition2d)
+        {
+            Debug.Log(collition2d.gameObject.name.ToString());
+            return true;
+        }
+
+        ////    当たっていなかった場合の処理
+        ////////////////////////////////////////////////////////////////////////
+        Debug.Log("UIなし"); 
+		return false;
+	}
+
+    private bool CheckUIObjectRay()     // レイでの判定(3D)
+    {
+        ////    レイヤーマスク作成
+        ////////////////////////////////////////////////////////////////////////
+        //int enablelayer = 1 << LayerMask.NameToLayer("UI");
+        
+        ////    レイの設定
+        ////////////////////////////////////////////////////////////////////////
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.Log(Input.mousePosition); 
+        Debug.Log(ray);      
+
+        ////    レイの作成
+        ////////////////////////////////////////////////////////////////////////
+        RaycastHit hit = new RaycastHit();
+        
+        ////    レイが当たっていた場合の処理
+        ////////////////////////////////////////////////////////////////////////
+        if (Physics.Raycast(ray, out hit))  //,enablelayer
+        {
+            Debug.Log(hit.collider.gameObject.name);
+            return true;
+        }
+
+        ////    レイが当たっていない場合の処理
+        ////////////////////////////////////////////////////////////////////////
+        Debug.Log(" UI無し ");
+        return false;
+    }
+
+    private bool CheckUIObjectRay2D()   // レイでの判定(2D)
+    {
+        ////    メインカメラ上のマウスカーソルのある位置からRayを飛ばす
+        ////////////////////////////////////////////////////////////////////////
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        ////    レイヤーマスク作成
+        ////////////////////////////////////////////////////////////////////////
+        int enablelayer = 1 << LayerMask.NameToLayer("UI");
+
+        ////    Rayの長さ
+        ////////////////////////////////////////////////////////////////////////
+        float maxDistance = 100;
+
+        /////   Rayの設定
+        ////////////////////////////////////////////////////////////////////////
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, maxDistance, enablelayer);
+        Debug.Log(Input.mousePosition); 
+        Debug.Log(ray);
+
+        ////    衝突した場合の処理
+        ////////////////////////////////////////////////////////////////////////
+        if (hit.collider)
+        {
+            // オブジェクトの名前をログに
+            Debug.Log(hit.collider.gameObject.name);
+            return true;
+        }
+
+        ////    衝突していない場合の処理
+        ////////////////////////////////////////////////////////////////////////
+        Debug.Log(" UI無し "); 
+        return false;
     }
 
     //--------------------------------------------------------------------------
@@ -609,6 +712,11 @@ public class PunipuniController : MonoBehaviour
         ////    コントローラ表示フラグfalse
         ////////////////////////////////////////////////////////////////////
         VisiblePunipuniController = false;
+    }
+
+    public static bool GetVisibleFlug()
+    {
+        return TestVisibleFlug;
     }
 }
 
