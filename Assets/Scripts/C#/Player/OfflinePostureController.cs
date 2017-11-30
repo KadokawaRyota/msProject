@@ -94,8 +94,11 @@ public class OfflinePostureController : MonoBehaviour {
 			+ transform.position.y * transform.position.y
 			+ transform.position.z * transform.position.z);
 
-		//コントロールマネージャの取得
-		controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
+        //コントロールマネージャの取得
+        if (GameObject.Find("PuniconCamera/ControllerManager") != null)
+        {
+            controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
+        }
 
 		prePosition = transform.position;
 

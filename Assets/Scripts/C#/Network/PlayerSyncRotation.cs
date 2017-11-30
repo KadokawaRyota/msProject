@@ -21,7 +21,7 @@ public class PlayerSyncRotation : NetworkBehaviour {
 	Transform camTransform;
 
 	[SerializeField]
-	float lerpRate = 15;
+	float lerpRate = 0;
 
     //前フレームの最終角度
     Quaternion lastPlayerRot;
