@@ -42,15 +42,27 @@ public class playerTransportationScript : NetworkBehaviour
 
     bool oldPullListAdd = false;
 
+    [SyncVar , SerializeField]
+    bool SyncbRunTimeTransport = false; //トランスポートミッション中ならtrue
+
+    bool runTimeTransportOld = false; //トランスポートミッション中ならtrue
+
     // Use this for initialization
     void Start()
     {
         SyncbPullListAdd = false;
+        SyncbRunTimeTransport = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //サーバー側でプレイヤーをトランスポート状態でミッションオブジェクトにぶつかるようにするため。
+        if( !runTimeTransportOld && SyncbRunTimeTransport )
+        {
+            this.gameObject.layer = 10;
+        }
+
         //プレイヤーをサーバー側のオブジェクトに紐付けて良い時
         if (SyncbPullListAdd && !oldPullListAdd)
         {
@@ -64,6 +76,9 @@ public class playerTransportationScript : NetworkBehaviour
         //前回の状態として保存
         if( oldPullListAdd != SyncbPullListAdd)
         oldPullListAdd = SyncbPullListAdd;
+
+        //ミッション中だったかどうかの判別のため。
+        runTimeTransportOld = SyncbRunTimeTransport;
     }
 
     [Client]
@@ -119,6 +134,19 @@ public class playerTransportationScript : NetworkBehaviour
     {
         transportObject = transportObj;
         SyncbPullListAdd = true;
+    }
+
+    //プレイヤーがトランスポートのミッション中かどうか伝えるため
+    [Command]
+    public void CmdProvidebRunTimeToServer(bool bRuntime)
+    {
+        SyncbRunTimeTransport = bRuntime;
+    }
+
+    [Server]
+    public bool GetRuntime()
+    {
+        return SyncbRunTimeTransport;
     }
 
     //オブジェクトにプレイヤーを紐付けるために、オブジェクトの関数を呼ぶ処理

@@ -569,7 +569,7 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
@@ -589,7 +589,7 @@ Prefab:
         type: 2}
       propertyPath: m_SpawnPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 1296815650949776, guid: ef6867482c6da8047b0881f97bdc5ecf,
+      objectReference: {fileID: 1734194474056488, guid: ef6867482c6da8047b0881f97bdc5ecf,
         type: 2}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
@@ -969,25 +969,6 @@ Prefab:
     - target: {fileID: 4548863021993480, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959046198250280, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4322270278018672, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
-        type: 2}
-      propertyPath: missionObjectPrefab
-      value: 
-      objectReference: {fileID: 1296815650949776, guid: ef6867482c6da8047b0881f97bdc5ecf,
-        type: 2}
-    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
-        type: 2}
-      propertyPath: missionObjectPosition.y
-      value: 27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e1811d44fb47384db63400a54843b72, type: 2}

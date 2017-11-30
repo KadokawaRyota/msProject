@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NetworkMissionManager : MonoBehaviour
 {
+    GameObject Player = null;
 
     bool missionFlg = false;     //フラグの初期化
 
@@ -31,7 +32,14 @@ public class NetworkMissionManager : MonoBehaviour
         missionFlg = true;
         //ミッションキャンバスを表示して移動
         MissionCanvas.GetComponent<MissionCanvasScript>().ImgFlgSwitch(true);
-        //オブジェクトの表示
+        //オブジェクトの表示（トランスポートミッション）
         MissionType.GetComponent<NetworkTransportationScript>().dispMission();
+        //プレイヤーがトランスポートミッション中だとする。
+        Player.GetComponent<playerTransportationScript>().CmdProvidebRunTimeToServer(true);
+    }
+
+    public void SetPlayer( GameObject player )
+    {
+        Player = player;
     }
 }

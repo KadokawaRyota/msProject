@@ -210,9 +210,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MissionObjects: {fileID: 1573300499008654}
-  missionObjectPrefab: {fileID: 1395812161805294, guid: ef6867482c6da8047b0881f97bdc5ecf,
+  missionObjectPrefab: {fileID: 1734194474056488, guid: ef6867482c6da8047b0881f97bdc5ecf,
     type: 2}
-  missionObjectPosition: {x: 1, y: 25.5, z: -3}
+  missionObjectPosition: {x: 1, y: 27, z: -3}
   particle: {fileID: 198217774047458702}
 --- !u!114 &114096047998135808
 MonoBehaviour:

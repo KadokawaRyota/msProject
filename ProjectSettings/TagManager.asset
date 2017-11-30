@@ -15,9 +15,9 @@ TagManager:
   - 
   - 
   - Controller
-  - 
-  - 
-  - 
+  - Player
+  - TransPortPlayer
+  - Object
   - 
   - 
   - 
