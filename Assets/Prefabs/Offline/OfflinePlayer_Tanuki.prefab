@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 114147293189216908}
   - component: {fileID: 114443776595784518}
   m_Layer: 0
-  m_Name: OfflinePlayer_tanuki
+  m_Name: OfflinePlayer_Tanuki
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

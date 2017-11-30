@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 114204815627475744}
   - component: {fileID: 114627234029163092}
   m_Layer: 0
-  m_Name: OnlinePlayer_tanuki
+  m_Name: OnlinePlayer_Tanuki
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,7 +860,6 @@ GameObject:
   - component: {fileID: 4088012098921314}
   m_Layer: 0
   m_Name: chest
-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1716,7 +1715,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1280925073589964}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -1907,8 +1906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ccd4b45d25d0346a5bdef682a31013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  camTransform: {fileID: 0}
+  playerTransform: {fileID: 4866110007083910}
+  camTransform: {fileID: 4955724128062226}
   lerpRate: 15
 --- !u!114 &114230009806531864
 MonoBehaviour:
@@ -2010,7 +2009,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306b306b8544e7e4ab1bb83860b86007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myTransform: {fileID: 0}
+  myTransform: {fileID: 4866110007083910}
   lerpRate: 15
 --- !u!114 &114619336012664206
 MonoBehaviour:
@@ -2039,6 +2038,7 @@ MonoBehaviour:
   fDistance: 2
   playerSpringConstant: 10000
   transportObject: {fileID: 0}
+  SyncbRunTimeTransport: 0
 --- !u!114 &114767781198903474
 MonoBehaviour:
   m_ObjectHideFlags: 1
