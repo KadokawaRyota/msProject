@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d090cc58bc9f96b4782b90b2055d15a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offlinePostureController: {fileID: 0}
+  offlinePostureController: {fileID: 114370895630857240}
   targetObj: {fileID: 1780679494021252}
   localPos: {x: 0, y: 7, z: -7}
 --- !u!114 &114619336012664206

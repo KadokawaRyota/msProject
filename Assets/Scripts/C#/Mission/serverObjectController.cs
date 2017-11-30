@@ -38,6 +38,8 @@ public class serverObjectController : NetworkBehaviour {
     float objectSpringConstant;  //バネ定数
     [SerializeField]
     float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
+    [SerializeField]
+    int transportNum;           //最大の力で引っ張れる人数。
 
     [SerializeField]
     List<GameObject> players = new List<GameObject>();
@@ -62,6 +64,11 @@ public class serverObjectController : NetworkBehaviour {
         GameObject parent = GameObject.Find("NetworkMissionManager/NetworkTransportation/MissionObject");
         transform.parent = parent.transform;
 
+        if( transportNum < 1)
+        {
+            transportNum = 1;
+        }
+
         ServerStart();
     }
     [Server]
@@ -82,13 +89,17 @@ public class serverObjectController : NetworkBehaviour {
 
         foreach (GameObject player in players)
         {
+            //現在の紐付いているプレイヤーからプレイヤーが引く力を調節
+            int playerNum = players.Count / transportNum;
+            if(playerNum > 1) playerNum = 1;
+
             ////紐の長さ
             fDistancePlayer = Vector3.Distance(player.transform.position, transform.position);
             //紐が伸び切ってる状態。
             if (fDistancePlayer >= fDistance && !(player.GetComponent<Rigidbody>().velocity.Equals(Vector3.zero)))
             {
-                //引く力＝紐にかかる力 + 紐の力
-                pullPower = (fDistancePlayer - fDistance) * objectSpringConstant;
+                //引く力＝紐にかかる力 + 紐の力 * 運ぶプレイヤーの人数が少なかったら、足りない分、減らす。
+                pullPower = (fDistancePlayer - fDistance) * objectSpringConstant * playerNum;
 
                 /////進行方向を求める
                 //現在のプレイヤーへのベクトル
@@ -99,33 +110,13 @@ public class serverObjectController : NetworkBehaviour {
 
                 //物体の進行方向へ力を加える
                 GetComponent<Rigidbody>().AddForce(new Vector3(vecForPlayer.x * pullPower, vecForPlayer.y * pullPower, vecForPlayer.z * pullPower), ForceMode.Acceleration);
-
-
-                ////////////////////キューブからプレイヤーを引く処理
-                fDistancePlayer = Vector3.Distance(transform.position, player.transform.position);
-
-                //引く力＝紐にかかる力 + 紐の力
-                pullPower = (fDistancePlayer - fDistance) * playerSpringConstant;
-
-                /////進行方向を求める
-                //現在のキューブへのベクトル
-                vecForPlayer = transform.position - player.transform.position;
-
-                //プレイヤーへのベクトルを正規化
-                vecForPlayer = vecForPlayer.normalized;
-
-                //物体の進行方向へ力を加える
-                player.GetComponent<Rigidbody>().AddForce(new Vector3(vecForPlayer.x * pullPower, vecForPlayer.y * pullPower, vecForPlayer.z * pullPower), ForceMode.Acceleration);
             }
             //紐がたるんでからの減速処理。（適当）
             else
             {
                 //加速度を半分に
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
-
-                //加速度を半分に（プレイヤー）
-                player.GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
-            }
+           }
         }
     }
 
