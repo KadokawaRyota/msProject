@@ -34,7 +34,8 @@ public class PunipuniController : MonoBehaviour
     public TOUCH_STATE TouchState = TOUCH_STATE.NONE;   // タップの状況
 
     public Vector3 TapPosCamera = Vector3.zero;          // 二本目の指のタップ位置(カメラ用) 
-    public Vector3 TapPosCameraOld= Vector3.zero;       // 1フレーム前の二本目の指のタップ位置(カメラ用)
+    public Vector3 TapPosCameraNow = Vector3.zero;       // 1フレーム前の二本目の指のタップ位置(カメラ用)
+    public float TapPosCameraLength = 0.0f;
 
     public static bool TestVisibleFlug;
     #endregion
@@ -154,10 +155,6 @@ public class PunipuniController : MonoBehaviour
                 // タップを解除した瞬間
                 if (InputManager.GetTouchRelease()) 
                     EndPunipuni();
-
-            ////    カメラ情報の更新
-            ////////////////////////////////////////////////////////////////////
-            UpdateCamera();
             
             ////        タッチ状態の更新処理
             //////////////////////////////////////////////////////////////////// 
@@ -201,9 +198,12 @@ public class PunipuniController : MonoBehaviour
 				bStateCountFlug = true;
 			//}
             ////    タップ位置を取得
-            ////////////////////////////////////////////////////////////////////
-            BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-            transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+            ////////////////////////////////////////////////////////////////////   
+            //BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+            //transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
+            Vector3 pos = InputManager.GetTouchPosition(0);
+            BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 1.0f));
+            transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 1.0f));
         }
 
     //--------------------------------------------------------------------------
@@ -232,7 +232,7 @@ public class PunipuniController : MonoBehaviour
             ////    カメラ回転用タップ位置のリセット
             ////////////////////////////////////////////////////////////////////
             TapPosCamera = Vector3.zero;
-            TapPosCameraOld = Vector3.zero;
+            TapPosCameraNow = Vector3.zero;
 
             ////    エフェクトOFF
             ////////////////////////////////////////////////////////////////
@@ -250,8 +250,7 @@ public class PunipuniController : MonoBehaviour
         {
                 ////    ベジェ曲線パラメータの更新
                 ////////////////////////////////////////////////////////////////////
-                //Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-                Vector3 Inputpos = InputManager.GetTouchPosition();
+                Vector3 Inputpos = InputManager.GetTouchPosition(0);
                 Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Inputpos.x, Inputpos.y, 1.0f));
                 tapeffect.EffectPos = ControllerManager.TouchPositionNow;
 
@@ -303,7 +302,6 @@ public class PunipuniController : MonoBehaviour
 
             SpriteRenderHE2D.enabled = true;
 
-            //Debug.Log(Input.touchCount);
             //Debug.Log("ホールドエフェクト発生");
         }
 
@@ -424,18 +422,6 @@ public class PunipuniController : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////
         Debug.Log(" UI無し "); 
         return false;
-    }
-
-    //--------------------------------------------------------------------------
-    //          カメラパラメータの更新
-    //--------------------------------------------------------------------------
-    void UpdateCamera()
-    {
-        if( Input.touchCount >=  1)
-        {
-           TapPosCamera = Input.GetTouch(1).position;
-           TapPosCameraOld = TapPosCamera;
-        }
     }
 
     //--------------------------------------------------------------------------
@@ -712,11 +698,6 @@ public class PunipuniController : MonoBehaviour
         ////    コントローラ表示フラグfalse
         ////////////////////////////////////////////////////////////////////
         VisiblePunipuniController = false;
-    }
-
-    public static bool GetVisibleFlug()
-    {
-        return TestVisibleFlug;
     }
 }
 
