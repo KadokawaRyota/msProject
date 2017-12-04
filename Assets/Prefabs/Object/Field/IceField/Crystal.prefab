@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4978553856387062}
   - component: {fileID: 33051444574965432}
   - component: {fileID: 23257470795098758}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StencilShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4253248660313682}
   - component: {fileID: 33755112663188968}
   - component: {fileID: 23289744836241352}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: crystal_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4522976142675294}
   - component: {fileID: 65620025236204316}
   - component: {fileID: 114397365709461482}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

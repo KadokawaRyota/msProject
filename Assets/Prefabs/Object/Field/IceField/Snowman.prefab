@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4457044503241584}
   - component: {fileID: 33582774173673270}
   - component: {fileID: 23351829303580596}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Rarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4284881169525738}
   - component: {fileID: 33829951265063584}
   - component: {fileID: 23640809173111710}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lfinger 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4067622105406882}
   - component: {fileID: 33314082348881444}
   - component: {fileID: 23694750803534828}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StencilShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4820971420887424}
   - component: {fileID: 33582099519147918}
   - component: {fileID: 23789527801245646}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lfinger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4860471857901646}
   - component: {fileID: 33477051447253534}
   - component: {fileID: 23320005106840104}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Larm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4020803187954938}
   - component: {fileID: 33419961028314204}
   - component: {fileID: 23250753186509456}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4848733209089588}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: grp_snowman_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4363040363488172}
   - component: {fileID: 65721942623358548}
   - component: {fileID: 114992222366925956}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Snowman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4254689671348984}
   - component: {fileID: 33925799830129812}
   - component: {fileID: 23286928579648302}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Reye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4593372980014812}
   - component: {fileID: 33869042242354752}
   - component: {fileID: 23049426806456076}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 4676470819616964}
   - component: {fileID: 33383853838134118}
   - component: {fileID: 23163741395021160}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Leye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 4327393496563014}
   - component: {fileID: 33663954365771970}
   - component: {fileID: 23068577438631478}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}

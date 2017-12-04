@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4013722285358702}
   - component: {fileID: 33857565399931718}
   - component: {fileID: 23181119617355506}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4624499209428522}
   - component: {fileID: 33409387626966448}
   - component: {fileID: 23850704002253052}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: iceHouseA_living
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4258548690526962}
   - component: {fileID: 33729898070492562}
   - component: {fileID: 23755683412772032}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4213976064952856}
   - component: {fileID: 33886636663299776}
   - component: {fileID: 23243456388770956}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StencilShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4534201290015856}
   - component: {fileID: 33372737556564054}
   - component: {fileID: 23703558892526258}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4765638200401182}
   - component: {fileID: 114427884511295908}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: IceHouseA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 4113113644530112}
   - component: {fileID: 65612754868959338}
   - component: {fileID: 65669794573495314}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: grp_iceHouseA_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 4555108658539298}
   - component: {fileID: 33721859445477446}
   - component: {fileID: 23864403144271162}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StencilShadow_Sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 4172526954540060}
   - component: {fileID: 33899489910297970}
   - component: {fileID: 23838099204358570}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4715658386494452}
   - component: {fileID: 33133278580582590}
   - component: {fileID: 23590160902903800}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: iceHouseA_entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 4111039199958768}
   - component: {fileID: 33810102422948732}
   - component: {fileID: 23592787958944196}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
