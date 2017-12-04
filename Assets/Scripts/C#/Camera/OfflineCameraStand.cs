@@ -8,6 +8,11 @@ public class OfflineCameraStand : MonoBehaviour {
 
     public GameObject targetObj;                        // プレイヤー情報
     public Vector3 localPos;                            // カメラローカル位置
+    public float mouseInputX;
+    public float mouseInputY;
+    private Vector2 inputStart;
+    private Vector2 inputEnd;
+    private float inputLength;
 
     private Vector3 targetPos;                          // プレイヤー位置情報
     private Quaternion targetRot;                       // プレイヤー角度情報
@@ -20,12 +25,28 @@ public class OfflineCameraStand : MonoBehaviour {
         get { return this.cameraDir; }
     }
 
+    Scr_ControllerManager controllerManager;    //コントローラのマネージャ
+
 
     void Start () {
         cameraDir = Vector3.Scale(transform.forward, new Vector3(1, 1, 1)).normalized;
+
+        //コントロールマネージャの取得
+        if (GameObject.Find("PuniconCamera/ControllerManager") != null)
+        {
+            controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
+        }
     }
 	
 	void Update () {
+
+        // 2点タッチ入力の取得
+        inputStart = new Vector2(controllerManager.CameraMoveLength_Start.x, controllerManager.CameraMoveLength_Start.y);
+        inputEnd = new Vector2(controllerManager.CameraMoveLength_End.x, controllerManager.CameraMoveLength_End.y);
+        inputLength = controllerManager.fCameraMoveLength;
+
+        inputLength /= 1080.0f;
+        //inputLength = 0.10f;
 
         // プレイヤー位置の取得
         targetPos = targetObj.transform.position;
@@ -54,8 +75,8 @@ public class OfflineCameraStand : MonoBehaviour {
         if (Input.GetMouseButton(1))
         {
             // マウスの移動量
-            float mouseInputX = Input.GetAxis("Mouse X");
-            float mouseInputY = Input.GetAxis("Mouse Y");
+            mouseInputX = Input.GetAxis("Mouse X");
+            mouseInputY = Input.GetAxis("Mouse Y");
 
             // targetの位置のY軸を中心に、回転（公転）する
             // playerToCamera = transform.position - targetPos;
@@ -69,6 +90,12 @@ public class OfflineCameraStand : MonoBehaviour {
             cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
 
 
+        }
+
+        if(inputLength > 0.0f)
+        {
+            transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, inputLength * Time.deltaTime * 200f);
+            cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
         }
 
     }
