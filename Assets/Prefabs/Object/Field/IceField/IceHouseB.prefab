@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4706744329613816}
   - component: {fileID: 33782535342274950}
   - component: {fileID: 23173041669197996}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4208208218667264}
   - component: {fileID: 33072944758219928}
   - component: {fileID: 23500863631080218}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: iceHouseB_entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4467417369915454}
   - component: {fileID: 33089443777076012}
   - component: {fileID: 23738940331513396}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StencilShadow_Sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4427570061227134}
   - component: {fileID: 33753978067267772}
   - component: {fileID: 23982456876844720}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: iceHouseB_living
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4878306905988772}
   - component: {fileID: 33088050820731904}
   - component: {fileID: 23509913227591290}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4075616183450392}
   - component: {fileID: 33934116407287034}
   - component: {fileID: 23278633916533888}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 65333035583381918}
   - component: {fileID: 65088952727615760}
   - component: {fileID: 114432176244674244}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: IceHouseB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 4778765535496244}
   - component: {fileID: 33976949182025234}
   - component: {fileID: 23762135459599384}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: snow2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4466392267596766}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: grp_iceHouseB_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 4329351712293402}
   - component: {fileID: 33012771379698840}
   - component: {fileID: 23792306649559158}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StencilShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

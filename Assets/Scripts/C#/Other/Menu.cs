@@ -13,7 +13,20 @@ public class Menu : MonoBehaviour {
 
 	bool menuOpen = false;  //メニューバーの開閉フラグ
 
+    [SerializeField]
+    float stopPosX = 500.0f;
+
+    [SerializeField]
+    Sprite openImage;
+
+    [SerializeField]
+    Sprite closeImage;
+
+    Image img;
+
 	void Start () {
+
+        img = GetComponent<Image>();
 		rect = GetComponent<RectTransform>();		//メニューを閉じるときの終点を保存
 		startPos = GetComponent<RectTransform>().anchoredPosition;
     }
@@ -24,7 +37,7 @@ public class Menu : MonoBehaviour {
 		//メニューを開く処理
 		if(menuOpen)
 		{
-			if( rect.anchoredPosition.x < 500.0f)
+			if( rect.anchoredPosition.x < stopPosX)
 			{
 				rect.anchoredPosition += new Vector2(moveSpeed, 0.0f);
 			}
@@ -40,19 +53,24 @@ public class Menu : MonoBehaviour {
 
 	}
 
+
 	//メニューバーの処理
 	public void ChangeMenuBar()
 	{
-		if (menuOpen)
+        if (menuOpen)
 		{
 			//クローズ
 			menuOpen = false;
+
+            img.sprite = openImage;
 		}
 		else
 		{
 			//オープン
 			menuOpen = true;
-		}
+
+            img.sprite = closeImage;
+        }
 	}
 
 }
