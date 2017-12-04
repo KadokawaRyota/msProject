@@ -171,7 +171,7 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     //          タップ位置取得
     //--------------------------------------------------------------------------
-    public static Vector3 GetTouchPosition()
+    public static Vector3 GetTouchPosition(int i)
     {
         Vector3 screenPos = Vector3.zero;
 
@@ -184,7 +184,9 @@ public class InputManager : MonoBehaviour
 
         else if (Application.isMobilePlatform)
         {
-            screenPos = Input.mousePosition;    //screenPos = Input.GetTouch(Input.touchCount).position;
+            touch = Input.GetTouch(i);
+            screenPos = touch.position;
+            //screenPos = Input.mousePosition;    //screenPos = Input.GetTouch(Input.touchCount).position;
         }
 
         return screenPos;
