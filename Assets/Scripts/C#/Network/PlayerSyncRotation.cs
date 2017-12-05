@@ -10,22 +10,14 @@ public class PlayerSyncRotation : NetworkBehaviour {
 	[SyncVar]
 	Quaternion syncPlayerRotation;
 
-	//FirstPersonCharacterのカメラの角度
-	[SyncVar]
-	Quaternion syncCamRotation;
-
 	[SerializeField]
 	Transform playerTransform;
 
 	[SerializeField]
-	Transform camTransform;
-
-	[SerializeField]
-	float lerpRate = 0;
+	float lerpRate = 15;
 
     //前フレームの最終角度
     Quaternion lastPlayerRot;
-    Quaternion lastCamRot;
 
     //しきい値は5。5以上動いたときのみメソッドを実行
     float threshold = 0;
@@ -52,17 +44,14 @@ public class PlayerSyncRotation : NetworkBehaviour {
 			//プレイヤーの角度とカメラの角度を補間
 			playerTransform.rotation = Quaternion.Lerp(playerTransform.rotation,
 				syncPlayerRotation, Time.deltaTime * lerpRate);
-			camTransform.rotation = Quaternion.Lerp(camTransform.rotation,
-				syncCamRotation, Time.deltaTime * lerpRate);
 		}
 	}
 
 	//クライアントからホストへ送られる
 	[Command]
-	void CmdProvideRotationsToServer(Quaternion playerRot, Quaternion camRot)
+	void CmdProvideRotationsToServer(Quaternion playerRot)
 	{
 		syncPlayerRotation = playerRot;
-		syncCamRotation = camRot;
 	}
 
 	//クライアント側だけが実行できるメソッド
@@ -74,13 +63,11 @@ public class PlayerSyncRotation : NetworkBehaviour {
             //CmdProvideRotationsToServer(playerTransform.rotation, camTransform.rotation);
 
             /***ネットワークトラフィックの軽減処理***/
-            if (Quaternion.Angle(playerTransform.rotation,lastPlayerRot) > threshold
-            || Quaternion.Angle(camTransform.rotation,lastCamRot) > threshold)
+            if (Quaternion.Angle(playerTransform.rotation,lastPlayerRot) > threshold)
             {
-                CmdProvideRotationsToServer(playerTransform.rotation, camTransform.rotation);
+                CmdProvideRotationsToServer(playerTransform.rotation);
 
                 lastPlayerRot = playerTransform.rotation;
-                lastCamRot = camTransform.rotation;
             }
 		}
 	}

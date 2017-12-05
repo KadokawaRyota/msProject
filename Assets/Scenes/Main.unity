@@ -466,11 +466,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
-        type: 2}
-      propertyPath: m_SpawnPrefabs.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4896526003254234, guid: c341415438230494da36b51dc59070f4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -510,39 +505,13 @@ Prefab:
       objectReference: {fileID: 1787959106}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
-      propertyPath: isStartAsServer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
-        type: 2}
-      propertyPath: serverIPAdress
-      value: 192.168.13.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1402513040094194, guid: c341415438230494da36b51dc59070f4, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
-        type: 2}
       propertyPath: TransportationObject
       value: 
       objectReference: {fileID: 1850384725}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
-      propertyPath: m_SpawnPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 1734194474056488, guid: ef6867482c6da8047b0881f97bdc5ecf,
-        type: 2}
-    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
-        type: 2}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 1780679494021252, guid: a78f0be6355d32f4f92f6d991942e96f,
-        type: 2}
-    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
-        type: 2}
-      propertyPath: m_AutoCreatePlayer
-      value: 1
+      propertyPath: isStartAsServer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}

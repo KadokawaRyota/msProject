@@ -1752,7 +1752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerParticleObject: {fileID: 198173450728921586}
   bEmitFlug: 0
-  nEmitCountNum: 10
+  nEmitCountNum: 30
 --- !u!114 &114830960939428834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1767,6 +1767,8 @@ MonoBehaviour:
   offlinePostureController: {fileID: 114972407989570796}
   targetObj: {fileID: 1820274369251964}
   localPos: {x: 0, y: 7, z: -7}
+  mouseInputX: 0
+  mouseInputY: 0
 --- !u!114 &114972407989570796
 MonoBehaviour:
   m_ObjectHideFlags: 1
