@@ -22,7 +22,7 @@ public class CharactorInfo : MonoBehaviour {
     static CHARA charSelectData;   //種類格納
 
     [SerializeField]
-    static string playerName;      //プレイヤーの名前
+    static string playerName = "Player";      //プレイヤーの名前
 
     [SerializeField]
     GameObject playerPrefab_0;
