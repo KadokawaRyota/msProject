@@ -36,7 +36,8 @@
             v2f vert (appdata v) {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.texcoord.xy;
+                o.uv.x = v.texcoord.x;
+				o.uv.y = v.texcoord.y;
                 return o;
             }
 

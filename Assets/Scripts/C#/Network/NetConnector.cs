@@ -24,14 +24,46 @@ public class NetConnector : NetworkManager
     [SerializeField]
     GameObject TransportationObject;
 
+    GameObject charaInfo;
+
+    [SerializeField]
+    GameObject PlayerPrefab_0;
+
+    [SerializeField]
+    GameObject PlayerPrefab_1;
+
+    [SerializeField]
+    GameObject PlayerPrefab_2;
+
+    [SerializeField]
+    GameObject PlayerPrefab_3;
 
     public void Start()
 	{
 
 		//NetworkManagerの取得
 		manager = GetComponent<NetworkManager>();
+
+        //OnlineCanvasの取得
 		canvas = GameObject.Find("OnlineCanvas");
-		punioconCamera = GameObject.Find("PuniconCamera");
+        if (charaInfo == null)
+        {
+            Debug.Log("Missing : OnlineCanvas");
+        }
+
+        //PuniconCameraの取得
+        punioconCamera = GameObject.Find("PuniconCamera");
+        if (charaInfo == null)
+        {
+            Debug.Log("Missing : PunioconCamera");
+        }
+
+        //CharactorInfoの取得
+        charaInfo = GameObject.Find("CharactorInfo");
+        if(charaInfo == null)
+        {
+            Debug.Log("Missing : CharactorInfo");
+        }
 
 		//クライアント処理
 		if (!isStartAsServer)
@@ -51,31 +83,34 @@ public class NetConnector : NetworkManager
 		//PCアプリケーション起動時処理
 		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
 		{
-			if (isStartAsServer)
-			{
-				loadingImage.gameObject.SetActive(false);
-				manager.networkAddress = "localhost";       //ホストの時はlocalhost
-				manager.StartServer();                        //ホスト処理開始
-				Debug.Log("Start as Server");
+            if (isStartAsServer)
+            {
+                loadingImage.gameObject.SetActive(false);
+                manager.networkAddress = "localhost";       //ホストの時はlocalhost
+                manager.StartServer();                        //ホスト処理開始
+                Debug.Log("Start as Server");
 
-				punioconCamera.SetActive(false);
-				canvas.SetActive(false);
+                punioconCamera.SetActive(false);
+                canvas.SetActive(false);
 
                 TransportationObject.GetComponent<NetworkTransportationScript>().CreateObject();
             }
 
-			else
-			{
-				//仮想コントローラーの実装
-				punioconCamera.SetActive(true);
+            else
+            {
+                //仮想コントローラーの実装
+                punioconCamera.SetActive(true);
 
-				manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
-				manager.StartClient();                      //クライアント処理開始
-				Debug.Log("Start as Client");
+                manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
+                manager.StartClient();                      //クライアント処理開始
+                Debug.Log("Start as Client");
 
-				//接続時のローディングイメージを無効
-				//loadingImage.gameObject.SetActive(false);
-			}
+                //接続時のローディングイメージを無効
+                //loadingImage.gameObject.SetActive(false);
+
+                //プレイヤーの生成
+               // PlayerSpawn(charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData());     
+            }
 
 		}
 
@@ -92,8 +127,62 @@ public class NetConnector : NetworkManager
 			manager.StartClient();
 			Debug.Log("Start as Client");
 
-			//接続時のローディングイメージを無効
-			//loadingImage.gameObject.SetActive(false);
-		}
+            //接続時のローディングイメージを無効
+            //loadingImage.gameObject.SetActive(false);
+
+            //プレイヤーの生成
+            //PlayerSpawn(charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData());
+        }
 	}
+
+    /*void PlayerSpawn(CharactorInfo.CHARA chara)
+    {
+        GameObject obj = null;
+        switch (chara)
+        {
+            case CharactorInfo.CHARA.TANUKI:
+                obj = (GameObject)Instantiate(PlayerPrefab_0, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+
+            case CharactorInfo.CHARA.CAT:
+                obj = (GameObject)Instantiate(PlayerPrefab_1, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+
+            case CharactorInfo.CHARA.FOX:
+                obj = (GameObject)Instantiate(PlayerPrefab_2, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+
+            case CharactorInfo.CHARA.DOG:
+                obj = (GameObject)Instantiate(PlayerPrefab_3, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+        }
+        //GetComponent<NetworkManager>().OnServerAddPlayer(obj);
+        //GetComponent<NetworkManager>().playerSpawnMethod
+        //NetworkServer.AddPlayerForConnection(.
+    }*/
+
+    //指定したプレイヤーを生成するためにオーバーライド
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    {
+        GameObject obj = null;
+        switch (charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData())
+        {
+            case CharactorInfo.CHARA.TANUKI:
+                obj = (GameObject)Instantiate(PlayerPrefab_0, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+
+            case CharactorInfo.CHARA.CAT:
+                obj = (GameObject)Instantiate(PlayerPrefab_1, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+
+            case CharactorInfo.CHARA.FOX:
+                obj = (GameObject)Instantiate(PlayerPrefab_2, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+
+            case CharactorInfo.CHARA.DOG:
+                obj = (GameObject)Instantiate(PlayerPrefab_3, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
+                break;
+        }
+        NetworkServer.AddPlayerForConnection(conn, obj, playerControllerId);
+    }
 }

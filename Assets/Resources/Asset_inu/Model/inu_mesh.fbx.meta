@@ -1,0 +1,192 @@
+fileFormatVersion: 2
+guid: 86146faaed377634b861e5b354ec4b00
+timeCreated: 1512464753
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: body
+    100002: bonbon
+    100004: chest
+    100006: face
+    100008: grp_body_mesh
+    100010: grp_cloth_mesh
+    100012: grp_inu_bone
+    100014: grp_inu_mesh
+    100016: head
+    100018: head 1
+    100020: headMofu
+    100022: //RootNode
+    100024: L_ear
+    100026: L_ear1
+    100028: L_ear2
+    100030: L_elbow
+    100032: L_foot
+    100034: L_hand
+    100036: L_hand 1
+    100038: L_knee
+    100040: L_leg
+    100042: L_shoulder
+    100044: L_thigh
+    100046: neck
+    100048: neckMofu
+    100050: nose
+    100052: R_ear
+    100054: R_ear1
+    100056: R_ear2
+    100058: R_elbow
+    100060: R_foot
+    100062: R_hand
+    100064: R_hand 1
+    100066: R_knee
+    100068: R_leg
+    100070: R_shoulder
+    100072: R_thigh
+    100074: root
+    100076: tail
+    100078: tail1
+    100080: tail2
+    100082: tail3
+    100084: tail4
+    400000: body
+    400002: bonbon
+    400004: chest
+    400006: face
+    400008: grp_body_mesh
+    400010: grp_cloth_mesh
+    400012: grp_inu_bone
+    400014: grp_inu_mesh
+    400016: head
+    400018: head 1
+    400020: headMofu
+    400022: //RootNode
+    400024: L_ear
+    400026: L_ear1
+    400028: L_ear2
+    400030: L_elbow
+    400032: L_foot
+    400034: L_hand
+    400036: L_hand 1
+    400038: L_knee
+    400040: L_leg
+    400042: L_shoulder
+    400044: L_thigh
+    400046: neck
+    400048: neckMofu
+    400050: nose
+    400052: R_ear
+    400054: R_ear1
+    400056: R_ear2
+    400058: R_elbow
+    400060: R_foot
+    400062: R_hand
+    400064: R_hand 1
+    400066: R_knee
+    400068: R_leg
+    400070: R_shoulder
+    400072: R_thigh
+    400074: root
+    400076: tail
+    400078: tail1
+    400080: tail2
+    400082: tail3
+    400084: tail4
+    4300000: body
+    4300002: neckMofu
+    4300004: head
+    4300006: headMofu
+    4300008: bonbon
+    4300010: face
+    4300012: nose
+    4300014: L_hand
+    4300016: R_hand
+    4300018: L_leg
+    4300020: R_leg
+    4300022: tail
+    4300024: L_ear
+    4300026: R_ear
+    9500000: //RootNode
+    13700000: body
+    13700002: bonbon
+    13700004: face
+    13700006: head
+    13700008: headMofu
+    13700010: L_ear
+    13700012: L_hand
+    13700014: L_leg
+    13700016: neckMofu
+    13700018: nose
+    13700020: R_ear
+    13700022: R_hand
+    13700024: R_leg
+    13700026: tail
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
