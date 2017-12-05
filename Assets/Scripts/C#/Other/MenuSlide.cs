@@ -15,11 +15,14 @@ public class MenuSlide : MonoBehaviour {
     public CharactorInfo.CHARA charNum = CharactorInfo.CHARA.TANUKI;    // キャラクタ識別番号
 
     void Start() {
-        destCameraPos = transform.position;
-        startPosition = transform.position;
+        
+        charNum = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().GetCharaSelectData();
         GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().SetCharaSelectData(charNum);
+        transform.position += new Vector3(10.0f, 0.0f, 0.0f) * ((int)charNum);
+        destCameraPos = transform.position;
+        startPosition += transform.position;
     }
-
+     
     void Update() {
 
         var diff = Time.timeSinceLevelLoad - startTime;
