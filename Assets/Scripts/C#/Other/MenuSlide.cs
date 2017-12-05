@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class MenuSlide : MonoBehaviour {
 
-    public float timeRate = 2.0f;
 
-    private Vector3 destCameraPos;
-    private bool move = false;
-    private float startTime;
-    private Vector3 startPosition;
+    public float timeRate = 2.0f;           // スライド速度
+
+    private Vector3 destCameraPos;          // カメラの次の参照位置
+    private bool move = false;              // スライド中かどうかの判定
+    private float startTime;                // Δタイム取得の為のスライド開始時間
+    private Vector3 startPosition;          // スライド開始位置
+
+    public CharactorInfo.CHARA charNum = CharactorInfo.CHARA.TANUKI;    // キャラクタ識別番号
 
     void Start() {
         destCameraPos = transform.position;
         startPosition = transform.position;
+        GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().SetCharaSelectData(charNum);
     }
 
     void Update() {
@@ -45,6 +49,13 @@ public class MenuSlide : MonoBehaviour {
                 startTime = Time.timeSinceLevelLoad;
                 startPosition = transform.position;
                 move = true;
+
+                charNum += 1;
+                if(charNum == CharactorInfo.CHARA.MAX)
+                {
+                    charNum = CharactorInfo.CHARA.TANUKI;
+                }
+                GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().SetCharaSelectData(charNum);
             }
             else if( dir == "left" )
             {
@@ -53,6 +64,13 @@ public class MenuSlide : MonoBehaviour {
                 startTime = Time.timeSinceLevelLoad;
                 startPosition = transform.position;
                 move = true;
+
+                if (charNum == CharactorInfo.CHARA.TANUKI)
+                {
+                    charNum = CharactorInfo.CHARA.MAX;
+                }
+                charNum -= 1;
+                GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().SetCharaSelectData(charNum);
             }
         }
     }

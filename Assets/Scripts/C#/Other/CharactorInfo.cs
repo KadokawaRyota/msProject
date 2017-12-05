@@ -15,7 +15,8 @@ public class CharactorInfo : MonoBehaviour {
         TANUKI = 0,
         CAT,
         FOX,
-        DOG
+        DOG,
+        MAX
     };
 
     [SerializeField]

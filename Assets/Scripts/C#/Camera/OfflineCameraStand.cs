@@ -45,7 +45,7 @@ public class OfflineCameraStand : MonoBehaviour {
         inputEnd = new Vector2(controllerManager.CameraMoveLength_End.x, controllerManager.CameraMoveLength_End.y);
         inputLength = controllerManager.fCameraMoveLength;
 
-        inputLength /= 1080.0f;
+        //inputLength /= 1080.0f;
         //inputLength = 0.10f;
 
         // プレイヤー位置の取得
