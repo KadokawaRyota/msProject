@@ -973,6 +973,40 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4959046198250280, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959046198250280, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 24.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959046198250280, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 3.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959046198250280, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.49795374
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959046198250280, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.8672036
+      objectReference: {fileID: 0}
+    - target: {fileID: 4959046198250280, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -59.729004
+      objectReference: {fileID: 0}
+    - target: {fileID: 198217774047458702, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: InitialModule.startRotationX.scalar
+      value: 0.17278759
+      objectReference: {fileID: 0}
+    - target: {fileID: 198217774047458702, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: randomSeed
+      value: 720632738
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
   m_IsPrefabParent: 0
