@@ -193,6 +193,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee9bb91c26f16434aa78d90709299efb, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &397732079 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1834333953302386, guid: 4e1811d44fb47384db63400a54843b72,
+    type: 2}
+  m_PrefabInternal: {fileID: 2061199081}
 --- !u!1 &775960769
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +465,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4896526003254234, guid: c341415438230494da36b51dc59070f4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -501,11 +511,11 @@ Prefab:
         type: 2}
       propertyPath: TransportationObject
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 397732079}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
@@ -517,6 +527,12 @@ Prefab:
       propertyPath: m_PlayerSpawnMethod
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 1327068514790068, guid: 0c8c6a0f7c9c6354e9be4c489755e79d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}
   m_IsPrefabParent: 0
@@ -746,7 +762,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1065876657}
     - target: {fileID: 114321587472719158, guid: 32859000b690cb04ba34bab833e0ea68,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -767,9 +783,20 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 2081068155}
+    - target: {fileID: 114521419207830450, guid: 32859000b690cb04ba34bab833e0ea68,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StartMission
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32859000b690cb04ba34bab833e0ea68, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1065876657 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114096047998135808, guid: 4e1811d44fb47384db63400a54843b72,
+    type: 2}
+  m_PrefabInternal: {fileID: 2061199081}
+  m_Script: {fileID: 11500000, guid: 4c5e04c006a9eae48b469d321765e6fb, type: 3}
 --- !u!1 &1416182922
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +1021,50 @@ Prefab:
         type: 2}
       propertyPath: randomSeed
       value: 720632738
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 24.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalRotation.w
+      value: 0.8660254
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: arrivalAreaPrefab
+      value: 
+      objectReference: {fileID: 1327068514790068, guid: 0c8c6a0f7c9c6354e9be4c489755e79d,
+        type: 2}
+    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: arrivalAreaPosition.y
+      value: 24.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: arrivalAreaPosition.z
+      value: 3.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e1811d44fb47384db63400a54843b72, type: 2}

@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 65355584321833082}
   - component: {fileID: 114854250856674450}
   - component: {fileID: 114101280076411188}
+  - component: {fileID: 114033574884769400}
   m_Layer: 0
   m_Name: NetworkarrivalArea
   m_TagString: Untagged
@@ -38,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327068514790068}
   m_LocalRotation: {x: -0.49795374, y: -0, z: -0, w: 0.8672036}
-  m_LocalPosition: {x: 0, y: 24.34, z: 3.34}
+  m_LocalPosition: {x: 0, y: 24.5, z: 3.35}
   m_LocalScale: {x: 3, y: 0.01, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,6 +57,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0078738, y: 307.03424, z: 1.1461694}
   m_Center: {x: -0.017854095, y: 3.5172095, z: 0.5496261}
+--- !u!114 &114033574884769400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327068514790068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 12
+    i1: 140
+    i2: 106
+    i3: 15
+    i4: 124
+    i5: 156
+    i6: 99
+    i7: 84
+    i8: 233
+    i9: 190
+    i10: 76
+    i11: 72
+    i12: 151
+    i13: 85
+    i14: 231
+    i15: 157
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114101280076411188
 MonoBehaviour:
   m_ObjectHideFlags: 1

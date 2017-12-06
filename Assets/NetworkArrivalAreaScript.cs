@@ -21,6 +21,7 @@ public class NetworkArrivalAreaScript : NetworkBehaviour
 
     }
 
+    [Server]
     void OnTriggerEnter(Collider collider)
     {
         /*オブジェクトを綺麗に確実に他プレイヤーとの紐付けを切る手順

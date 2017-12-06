@@ -12,30 +12,21 @@ public class NetworkTransportationScript : NetworkBehaviour
    [SerializeField]
     GameObject missionObjectPrefab;
 
-
     //ここを配列で増やす。
     [SerializeField]
     Vector3 missionObjectPosition;
+
     //配列を増やしたら数も変える事
     int objectCnt = 1;
 
     [SerializeField]
-    ParticleSystem particle;
+    GameObject arrivalAreaPrefab;
+    [SerializeField]
+    Vector3 arrivalAreaPosition;
+
     // Use this for initialization
     void Start()
     {
-        if( SceneManager.GetActiveScene().name == "Offline" )
-        {
-            particle = GameObject.Find("arrivalArea").GetComponent<ParticleSystem>();
-        }
-        else if (SceneManager.GetActiveScene().name == "Main")
-        {
-            particle = GameObject.Find("NetworkarrivalArea").GetComponent<ParticleSystem>();
-        }
-        else
-        {
-            Debug.Log("シーンが見つからない。");
-        }
     }
 
     // Update is called once per frame
@@ -49,14 +40,16 @@ public class NetworkTransportationScript : NetworkBehaviour
         foreach (Transform child in MissionObjects.transform)
         {
             child.gameObject.GetComponent<NetworkObjectController>().DispSwitch(true);
-            particle.Play();
+            //particle.Play();
         }
     }
 
     [ServerCallback]
     public void CreateObject()
     {
+        //ミッションオブジェクトの生成
         GameObject missionObject;
+        GameObject arrivalArea;
         for( int cnt = 0; cnt < objectCnt; cnt++ )
         {
             missionObject = Instantiate( missionObjectPrefab , missionObjectPosition , Quaternion.identity , MissionObjects.transform );
@@ -68,5 +61,9 @@ public class NetworkTransportationScript : NetworkBehaviour
 			//GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToServer);
 
         }
+
+        //arraivalAreaの生成
+        arrivalArea = Instantiate(arrivalAreaPrefab, arrivalAreaPosition, arrivalAreaPrefab.transform.localRotation, MissionObjects.transform.parent);
+        NetworkServer.Spawn(arrivalArea);
     }
 }
