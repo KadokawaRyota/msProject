@@ -57,5 +57,5 @@ MonoBehaviour:
     type: 2}
   playerPrefab_2: {fileID: 1747647281318872, guid: e6ae74e87b26e7048a277061aeacc28f,
     type: 2}
-  playerPrefab_3: {fileID: 1159637917801612, guid: d5fb2a7c8a9a2b24b907db6cfce3c0fa,
+  playerPrefab_3: {fileID: 1097431059847472, guid: 55291cacd9d75f5408f4995441098bc3,
     type: 2}
