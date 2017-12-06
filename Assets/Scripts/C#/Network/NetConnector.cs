@@ -38,6 +38,8 @@ public class NetConnector : NetworkManager
     [SerializeField]
     GameObject PlayerPrefab_3;
 
+    CharactorInfo.CHARA chara;
+
     public void Start()
 	{
 
@@ -46,14 +48,14 @@ public class NetConnector : NetworkManager
 
         //OnlineCanvasの取得
 		canvas = GameObject.Find("OnlineCanvas");
-        if (charaInfo == null)
+        if (canvas == null)
         {
             Debug.Log("Missing : OnlineCanvas");
         }
 
         //PuniconCameraの取得
         punioconCamera = GameObject.Find("PuniconCamera");
-        if (charaInfo == null)
+        if (punioconCamera == null)
         {
             Debug.Log("Missing : PunioconCamera");
         }
@@ -64,9 +66,10 @@ public class NetConnector : NetworkManager
         {
             Debug.Log("Missing : CharactorInfo");
         }
+        chara = charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData();
 
-		//クライアント処理
-		if (!isStartAsServer)
+        //クライアント処理
+        if (!isStartAsServer)
 		{
 			//接続時のローディングイメージを有効
 			loadingImage.gameObject.SetActive(true);
@@ -103,13 +106,7 @@ public class NetConnector : NetworkManager
 
                 manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
                 manager.StartClient();                      //クライアント処理開始
-                Debug.Log("Start as Client");
-
-                //接続時のローディングイメージを無効
-                //loadingImage.gameObject.SetActive(false);
-
-                //プレイヤーの生成
-               // PlayerSpawn(charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData());     
+                Debug.Log("Start as Client");   
             }
 
 		}
@@ -126,16 +123,11 @@ public class NetConnector : NetworkManager
 			manager.networkAddress = serverIPAdress;
 			manager.StartClient();
 			Debug.Log("Start as Client");
-
-            //接続時のローディングイメージを無効
-            //loadingImage.gameObject.SetActive(false);
-
-            //プレイヤーの生成
-            //PlayerSpawn(charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData());
         }
 	}
 
-    /*void PlayerSpawn(CharactorInfo.CHARA chara)
+    //指定したプレイヤーを生成するためにオーバーライド
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject obj = null;
         switch (chara)
@@ -156,33 +148,13 @@ public class NetConnector : NetworkManager
                 obj = (GameObject)Instantiate(PlayerPrefab_3, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
                 break;
         }
-        //GetComponent<NetworkManager>().OnServerAddPlayer(obj);
-        //GetComponent<NetworkManager>().playerSpawnMethod
-        //NetworkServer.AddPlayerForConnection(.
-    }*/
-
-    //指定したプレイヤーを生成するためにオーバーライド
-    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
-    {
-        GameObject obj = null;
-        switch (charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData())
-        {
-            case CharactorInfo.CHARA.TANUKI:
-                obj = (GameObject)Instantiate(PlayerPrefab_0, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
-                break;
-
-            case CharactorInfo.CHARA.CAT:
-                obj = (GameObject)Instantiate(PlayerPrefab_1, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
-                break;
-
-            case CharactorInfo.CHARA.FOX:
-                obj = (GameObject)Instantiate(PlayerPrefab_2, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
-                break;
-
-            case CharactorInfo.CHARA.DOG:
-                obj = (GameObject)Instantiate(PlayerPrefab_3, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
-                break;
-        }
         NetworkServer.AddPlayerForConnection(conn, obj, playerControllerId);
+    }
+
+    public void Disconnect()
+    {
+        manager.StopClient();
+        manager.OnClientDisconnect(GetComponent<NetworkIdentity>().connectionToClient);
+        
     }
 }
