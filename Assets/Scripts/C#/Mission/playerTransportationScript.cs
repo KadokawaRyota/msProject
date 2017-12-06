@@ -69,14 +69,21 @@ public class playerTransportationScript : NetworkBehaviour
             //サーバー側でリストにプレイヤーを追加;
             playerWithObject();
         }
-
         //ローカルプレイヤー側の処理
         pullPlayer();
 
-        //前回の状態として保存
-        if( oldPullListAdd != SyncbPullListAdd)
-        oldPullListAdd = SyncbPullListAdd;
+        //プレイヤーから見たオブジェクトへの紐付けを解除する。
+        if( transportObject != null )
+        {
+            if( transportObject.GetComponent<serverObjectController>().GetbGoal() )
+            {
+                transportObject = null;
+            }
+        }
 
+        //前回の状態として保存
+        if ( oldPullListAdd != SyncbPullListAdd)
+        oldPullListAdd = SyncbPullListAdd;
         //ミッション中だったかどうかの判別のため。
         runTimeTransportOld = SyncbRunTimeTransport;
     }
@@ -84,7 +91,7 @@ public class playerTransportationScript : NetworkBehaviour
     [Client]
     void pullPlayer()
     {
-        //引っ張るオブジェクト無かったら入らない。操作出来るプレイヤーじゃなきゃ入らない
+        //引っ張るオブジェクト無かったら入らない。操作出来るプレイヤーじゃなきゃ入らない(プレイヤーが動く処理)
         if (transportObject == null || !isLocalPlayer ) return;
 
         fDistancePlayer = Vector3.Distance(transform.position, transportObject.transform.position);
@@ -129,8 +136,10 @@ public class playerTransportationScript : NetworkBehaviour
     }
 
     //サーバー側のオブジェクトにリストを追加してほしいメッセージ
+    //bool:オブジェクトのプレイヤーリストに追加要求
+    //GameObjec:プレイヤーのtransportObjectに追加要求
     [Command]
-    void CmdProvidebPullToServer(bool bPull , GameObject transportObj)
+    public void CmdProvidebPullToServer(bool bPull , GameObject transportObj)
     {
         transportObject = transportObj;
         SyncbPullListAdd = true;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class NetworkTransportationScript : NetworkBehaviour
 {
@@ -23,7 +24,18 @@ public class NetworkTransportationScript : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-
+        if( SceneManager.GetActiveScene().name == "Offline" )
+        {
+            particle = GameObject.Find("arrivalArea").GetComponent<ParticleSystem>();
+        }
+        else if (SceneManager.GetActiveScene().name == "Main")
+        {
+            particle = GameObject.Find("NetworkarrivalArea").GetComponent<ParticleSystem>();
+        }
+        else
+        {
+            Debug.Log("シーンが見つからない。");
+        }
     }
 
     // Update is called once per frame

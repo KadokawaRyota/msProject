@@ -18,6 +18,7 @@ public class PlayerNetworkSetup : NetworkBehaviour
 		{
             //自分のプレイヤーの名前変更
             name = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().GetPlayerName();
+            name = "Player";
 
             //ローディングイメージのアクティブを切る
             if (GameObject.Find("OnlineCanvas/LoadingImage") != null)
