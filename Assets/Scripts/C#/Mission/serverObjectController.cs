@@ -54,9 +54,14 @@ public class serverObjectController : NetworkBehaviour {
     Vector3 vecForPlayer = Vector3.zero;    //プレイヤーへの向き
     Vector3 vecForObject = Vector3.zero;    //オブジェクトへの向き
 
+    [SyncVar]
+    bool SyncbGoal = false;
+
     // Use this for initialization
     void Start()
     {
+        SyncbGoal = false;
+
         //__________デバッグ用にキネマティック解除
         GetComponent<Rigidbody>().isKinematic = false;
 
@@ -167,6 +172,18 @@ public class serverObjectController : NetworkBehaviour {
 
     public float GetPlayerSpringConstant()
     {
-        return playerSpringConstant;            //紐が伸び切る距離
+        return playerSpringConstant;
+    }
+
+    //オブジェクトがゴールした事を通知する。
+    [ClientRpc]
+    public void RpcInGoalArea( bool bGoal )
+    {
+        SyncbGoal = bGoal;
+    }
+
+    public bool GetbGoal()
+    {
+        return SyncbGoal;
     }
 }
