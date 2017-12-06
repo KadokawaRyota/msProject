@@ -176,7 +176,7 @@ public class serverObjectController : NetworkBehaviour {
     }
 
     //オブジェクトがゴールした事を通知する。
-    [Server , ClientRpc]
+    [ClientRpc]
     public void RpcInGoalArea( bool bGoal )
     {
         SyncbGoal = bGoal;
