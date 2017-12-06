@@ -67,9 +67,9 @@ MonoBehaviour:
   m_OnlineScene: Main
   m_SpawnPrefabs:
   - {fileID: 1734194474056488, guid: ef6867482c6da8047b0881f97bdc5ecf, type: 2}
-  - {fileID: 1780679494021252, guid: a78f0be6355d32f4f92f6d991942e96f, type: 2}
-  - {fileID: 1084415041520660, guid: 8978ab4c572d29f46b8d3c2e519d65fa, type: 2}
-  - {fileID: 1416383574398348, guid: 32e5528cbd6a2fd4bb61d35d2b18b290, type: 2}
+  - {fileID: 1076935737701120, guid: 8c980fddeff8724419dd9c04c56be336, type: 2}
+  - {fileID: 1726364102298456, guid: 6ef52f039deff8d4e81a0d0e3c5a34ff, type: 2}
+  - {fileID: 1961596324318994, guid: 744c6c89a194f4c4eba4950fbe3d6e9e, type: 2}
   - {fileID: 1193348380848396, guid: 8fd6df88080ef9349879bfe456cf7e57, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
@@ -127,14 +127,14 @@ MonoBehaviour:
   isNetworkActive: 0
   matchMaker: {fileID: 0}
   loadingImage: {fileID: 0}
-  isStartAsServer: 0
+  isStartAsServer: 1
   serverIPAdress: localhost
   TransportationObject: {fileID: 0}
-  PlayerPrefab_0: {fileID: 1780679494021252, guid: a78f0be6355d32f4f92f6d991942e96f,
+  PlayerPrefab_0: {fileID: 1076935737701120, guid: 8c980fddeff8724419dd9c04c56be336,
     type: 2}
-  PlayerPrefab_1: {fileID: 1084415041520660, guid: 8978ab4c572d29f46b8d3c2e519d65fa,
+  PlayerPrefab_1: {fileID: 1726364102298456, guid: 6ef52f039deff8d4e81a0d0e3c5a34ff,
     type: 2}
-  PlayerPrefab_2: {fileID: 1416383574398348, guid: 32e5528cbd6a2fd4bb61d35d2b18b290,
+  PlayerPrefab_2: {fileID: 1961596324318994, guid: 744c6c89a194f4c4eba4950fbe3d6e9e,
     type: 2}
   PlayerPrefab_3: {fileID: 1193348380848396, guid: 8fd6df88080ef9349879bfe456cf7e57,
     type: 2}

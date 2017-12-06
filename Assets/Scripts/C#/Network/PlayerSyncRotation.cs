@@ -20,7 +20,8 @@ public class PlayerSyncRotation : NetworkBehaviour {
     Quaternion lastPlayerRot;
 
     //しきい値は5。5以上動いたときのみメソッドを実行
-    float threshold = 0;
+    [SerializeField]
+    float threshold = 0.5f;
 
 	void Update()
 	{

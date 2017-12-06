@@ -54,7 +54,7 @@ Shader "Custom/OutlineToon" {
 
 				v2f o;
 				o.position = UnityObjectToClipPos(i.position);	//座標変換
-				o.color = (0, 0, 0, 0);
+				o.color = 0;
 
 				return o;
 			}

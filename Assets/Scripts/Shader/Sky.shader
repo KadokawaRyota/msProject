@@ -35,16 +35,17 @@
             //頂点シェーダ
             v2f vert (appdata v) {
                 v2f o;
+				UNITY_INITIALIZE_OUTPUT(v2f, o);
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv.x = v.texcoord.x;
-				o.uv.y = v.texcoord.y;
+                //o.uv.x = v.texcoord.x;
+				//o.uv.y = v.texcoord.y;
                 return o;
             }
 
             //フラグメントシェーダ
             fixed4 frag(v2f v) : SV_Target {
 
-                v.color = tex2D(_MainTex, v.uv) * _Color;
+				v.color = _Color;//tex2D(_MainTex, v.uv) * _Color;
                 return v.color;
             }
             ENDCG

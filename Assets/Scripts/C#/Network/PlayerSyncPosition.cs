@@ -27,6 +27,7 @@ public class PlayerSyncPosition : NetworkBehaviour {
 
     //threshold:しきい値、境目となる値のこと
     //0.5unitを越えなければ移動していないこととする
+    [SerializeField]
     float threshold = 0.5f;
 
     void Update()

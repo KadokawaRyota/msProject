@@ -20,7 +20,7 @@ public class CharactorInfo : MonoBehaviour {
     };
 
     [SerializeField]
-    static CHARA charSelectData;   //種類格納
+    static CHARA charSelectData = CHARA.TANUKI;   //種類格納
 
     [SerializeField]
     static string playerName = "Player";      //プレイヤーの名前

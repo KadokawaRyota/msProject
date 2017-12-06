@@ -10,11 +10,11 @@ public class OfflinePostureController : MonoBehaviour {
     static float screenHeight = 1920.0f;
     static float puniVecMax = Mathf.Sqrt(screenWidth * screenWidth + screenHeight * screenHeight);
 
-    public Vector3 spawnPoint = new Vector3(0.1f, 25.0f, 0.1f);
-    public float moveWalkSpeed = 0.1f;   // 歩き移動速度係数
-    public float moveRunSpeed = 0.2f;    // 走り移動速度係数
-    public float moveIn = 0.50f;         // 慣性
-    public float moveThre = 0.50f;       // 移動速度変化の閾値
+    public Vector3 spawnPoint = new Vector3(0.1f, 25.5f, 0.1f);
+    public float moveWalkSpeed = 0.05f;   // 歩き移動速度係数
+    public float moveRunSpeed = 0.08f;    // 走り移動速度係数
+    public float moveIn = 0.1f;         // 慣性
+    public float moveThre = 0.1f;       // 移動速度変化の閾値
     public float moveDead = 70.0f;       // ぷにコンデッドゾーン
     public bool move = false;            // プレイヤー移動可否
     public bool deadTrans = false;       // デッドゾーン時の回転可否
@@ -54,7 +54,7 @@ public class OfflinePostureController : MonoBehaviour {
 	public GameObject footStampPrefab;		//足跡
 	[SerializeField]
 	float footStampSetTime;
-	float footStampTime;					//足跡の生成時間
+	float footStampTime = 0.25f;					//足跡の生成時間
 
 	void Start()
 	{
