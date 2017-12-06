@@ -88,7 +88,7 @@ public class CharactorInfo : MonoBehaviour {
     void Start()
     {
         /////キャラセレクトができるようになったら消す/////
-        // = CHARA.TANUKI;
+        //charSelectData = CHARA.DOG;
         playerName = "Player";
         /////////////////////////////////////
     }
