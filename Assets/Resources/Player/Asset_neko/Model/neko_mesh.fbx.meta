@@ -1,0 +1,206 @@
+fileFormatVersion: 2
+guid: 948cb64ae1b19fc4386c92e6903d9368
+timeCreated: 1512541068
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: beltStar
+    100002: body
+    100004: body 1
+    100006: chest
+    100008: ear
+    100010: grp_neko_bone
+    100012: grp_neko_mesh
+    100014: hair
+    100016: hairAndJacket
+    100018: head
+    100020: head 1
+    100022: ikHandle1
+    100024: ikHandle2
+    100026: jacket
+    100028: L_ankle
+    100030: L_elbow
+    100032: L_foot
+    100034: L_hand
+    100036: L_hand 1
+    100038: L_knee
+    100040: L_shoulder
+    100042: L_star
+    100044: L_thigh
+    100046: L_wrist
+    100048: neck
+    100050: //RootNode
+    100052: polySurface11
+    100054: polySurface12
+    100056: polySurface13
+    100058: R_ankle
+    100060: R_elbow
+    100062: R_foot
+    100064: R_hand
+    100066: R_hand 1
+    100068: R_knee
+    100070: R_shoulder
+    100072: R_star
+    100074: R_thigh
+    100076: R_wrist
+    100078: root
+    100080: spine
+    100082: sunglasses
+    100084: tail
+    100086: tail1
+    100088: tail2
+    100090: tail3
+    100092: tail4
+    100094: tail5
+    100096: tailStar
+    400000: beltStar
+    400002: body
+    400004: body 1
+    400006: chest
+    400008: ear
+    400010: grp_neko_bone
+    400012: grp_neko_mesh
+    400014: hair
+    400016: hairAndJacket
+    400018: head
+    400020: head 1
+    400022: ikHandle1
+    400024: ikHandle2
+    400026: jacket
+    400028: L_ankle
+    400030: L_elbow
+    400032: L_foot
+    400034: L_hand
+    400036: L_hand 1
+    400038: L_knee
+    400040: L_shoulder
+    400042: L_star
+    400044: L_thigh
+    400046: L_wrist
+    400048: neck
+    400050: //RootNode
+    400052: polySurface11
+    400054: polySurface12
+    400056: polySurface13
+    400058: R_ankle
+    400060: R_elbow
+    400062: R_foot
+    400064: R_hand
+    400066: R_hand 1
+    400068: R_knee
+    400070: R_shoulder
+    400072: R_star
+    400074: R_thigh
+    400076: R_wrist
+    400078: root
+    400080: spine
+    400082: sunglasses
+    400084: tail
+    400086: tail1
+    400088: tail2
+    400090: tail3
+    400092: tail4
+    400094: tail5
+    400096: tailStar
+    4300000: hair
+    4300002: jacket
+    4300004: polySurface11
+    4300006: polySurface12
+    4300008: polySurface13
+    4300010: tail
+    4300012: beltStar
+    4300014: body
+    4300016: L_hand
+    4300018: R_hand
+    4300020: head
+    4300022: ear
+    4300024: sunglasses
+    4300026: L_star
+    4300028: R_star
+    9500000: //RootNode
+    13700000: beltStar
+    13700002: body 1
+    13700004: ear
+    13700006: hair
+    13700008: head
+    13700010: jacket
+    13700012: L_hand
+    13700014: L_star
+    13700016: polySurface11
+    13700018: polySurface12
+    13700020: polySurface13
+    13700022: R_hand
+    13700024: R_star
+    13700026: sunglasses
+    13700028: tail
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
