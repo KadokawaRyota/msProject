@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9e0d567407ef5b44fbfabbbced1c37e4
-timeCreated: 1512545792
+guid: e75855ba523691245babf288e36dc08f
+timeCreated: 1512638904
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,11 +8,9 @@ ModelImporter:
     100000: board
     100002: building
     100004: //RootNode
-    100006: grp_buildingA_mesh
     400000: board
     400002: building
     400004: //RootNode
-    400006: grp_buildingA_mesh
     2300000: board
     2300002: building
     3300000: board

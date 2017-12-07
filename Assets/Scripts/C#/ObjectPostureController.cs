@@ -9,6 +9,7 @@ public class ObjectPostureController : MonoBehaviour
     public bool standX;
     public bool standY = true;
     public bool standZ;
+    public bool reverse = false;
 
     void Start()
     {
@@ -43,9 +44,18 @@ public class ObjectPostureController : MonoBehaviour
         // Z軸上向き
         if (standX || standZ)
         {
-            dirVecY = transform.up;
-            dirVecY = Vector3.ProjectOnPlane(dirVecY, surfaceNormal);
-            transform.rotation = Quaternion.LookRotation(surfaceNormal, dirVecY);
+            /*if (reverse)
+            {
+                dirVecY = transform.up;
+                dirVecY = Vector3.ProjectOnPlane(dirVecY, surfaceNormal);
+                transform.rotation = Quaternion.LookRotation(surfaceNormal, dirVecY);
+            }
+            else
+            {*/
+                dirVecY = transform.up;
+                dirVecY = Vector3.ProjectOnPlane(dirVecY, surfaceNormal);
+                transform.rotation = Quaternion.LookRotation(surfaceNormal, dirVecY);
+            //}
         }
 
         // X軸上向き
@@ -53,6 +63,8 @@ public class ObjectPostureController : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, 1, 0), -90);
         }
+
+        
     }
 
 }
