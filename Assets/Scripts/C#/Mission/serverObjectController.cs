@@ -56,6 +56,8 @@ public class serverObjectController : NetworkBehaviour {
 
     [SyncVar]
     bool SyncbGoal = false;
+    
+    bool bGoal = false;
 
     // Use this for initialization
     void Start()
@@ -90,7 +92,7 @@ public class serverObjectController : NetworkBehaviour {
         float pullPower = 0.0f;
 
         //オブジェクトがゴールしていたら、プレイヤー側の接続が切れているか確認する
-        if( SyncbGoal )
+        if( bGoal )
         {
             foreach (GameObject player in players)
             {
@@ -101,6 +103,7 @@ public class serverObjectController : NetworkBehaviour {
             }
             //forのチェックを抜けたら、全てのプレイヤーが接続を切ったと言う事になるので、オブジェクト側のリストを全て解放し、加点して初期位置へ。
             //memo....急ぎで作ったため。要チェック
+            GetComponent<serverObjectController>().SetGoal(false);
             Refresh();
         }
 
@@ -191,11 +194,19 @@ public class serverObjectController : NetworkBehaviour {
         return playerSpringConstant;
     }
 
-    //オブジェクトがゴールした事を通知する。
-    [ClientRpc]
-    public void RpcInGoalArea( bool bGoal )
+    //値の書き換え
+    public void SetGoal( bool bgoal )
     {
-        SyncbGoal = bGoal;
+        bGoal = bgoal;
+        //クライアントへ送信
+        RpcInGoalArea(bGoal);
+    }
+
+    //値をクライアントに送信
+    [ClientRpc]
+    public void RpcInGoalArea(bool bgoal)
+    {
+        SyncbGoal = bgoal;
     }
 
     public bool GetbGoal()
