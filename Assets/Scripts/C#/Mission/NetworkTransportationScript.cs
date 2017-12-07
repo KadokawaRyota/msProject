@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
+//運ぶオブジェクトと到達地点の作成
+
 public class NetworkTransportationScript : NetworkBehaviour
 {
     [SerializeField]
     GameObject MissionObjects;
+    [SerializeField]
+    GameObject ArrivalAreas;
 
    [SerializeField]
     GameObject missionObjectPrefab;
@@ -40,7 +44,11 @@ public class NetworkTransportationScript : NetworkBehaviour
         foreach (Transform child in MissionObjects.transform)
         {
             child.gameObject.GetComponent<NetworkObjectController>().DispSwitch(true);
-            //particle.Play();
+        }
+        //アライバルエリアを全て表示
+        foreach (Transform child in ArrivalAreas.transform)
+        {
+            child.gameObject.GetComponent<ParticleSystem>().Play();
         }
     }
 

@@ -57,7 +57,7 @@ public class playerTransportationScript : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //サーバー側でプレイヤーをトランスポート状態でミッションオブジェクトにぶつかるようにするため。
+        //サーバー側でプレイヤーをトランスポート状態でミッションオブジェクトにぶつかるようにするため。レイヤー変更
         if( !runTimeTransportOld && SyncbRunTimeTransport )
         {
             this.gameObject.layer = 10;
@@ -81,11 +81,23 @@ public class playerTransportationScript : NetworkBehaviour
             }
         }
 
+
+        if( transportObject != null )
+        {
+            //引っ張ってるオブジェクトがエリアに入った事を検知させる
+            if ( transportObject.GetComponent<serverObjectController>().GetbGoal() )
+            {
+                transportObject = null;
+            }
+        }
+
         //前回の状態として保存
         if ( oldPullListAdd != SyncbPullListAdd)
         oldPullListAdd = SyncbPullListAdd;
         //ミッション中だったかどうかの判別のため。
         runTimeTransportOld = SyncbRunTimeTransport;
+
+
     }
 
     [Client]
@@ -163,5 +175,10 @@ public class playerTransportationScript : NetworkBehaviour
     void playerWithObject()
     {
         transportObject.GetComponent<serverObjectController>().PlayerWithObject(this.gameObject);
+    }
+
+    public GameObject GetTransportObject()
+    {
+        return transportObject;
     }
 }

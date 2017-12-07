@@ -89,8 +89,24 @@ public class serverObjectController : NetworkBehaviour {
     {
         float pullPower = 0.0f;
 
+        //オブジェクトがゴールしていたら、プレイヤー側の接続が切れているか確認する
+        if( SyncbGoal )
+        {
+            foreach (GameObject player in players)
+            {
+                if( player.GetComponent<playerTransportationScript>().GetTransportObject() != null )
+                {
+                    return;
+                }
+            }
+            //forのチェックを抜けたら、全てのプレイヤーが接続を切ったと言う事になるので、オブジェクト側のリストを全て解放し、加点して初期位置へ。
+            //memo....急ぎで作ったため。要チェック
+            Refresh();
+        }
+
+
         //リストに何も入ってない！
-        if (players.Count <= 0) return;
+        if (players.Count <= 0 ) return;
 
         foreach (GameObject player in players)
         {

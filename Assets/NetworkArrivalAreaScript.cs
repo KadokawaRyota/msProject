@@ -7,12 +7,17 @@ using UnityEngine.Networking;
 public class NetworkArrivalAreaScript : NetworkBehaviour 
 {
     // Use this for initialization
+    GameObject parent;
+
 
     GameObject player;
 
     void Start()
     {
+        parent = GameObject.Find("NetworkMissionManager/NetworkTransportation/ArrivalAreas");
         player = GameObject.Find("Player");
+
+        transform.parent = parent.transform;
     }
 
     // Update is called once per frame

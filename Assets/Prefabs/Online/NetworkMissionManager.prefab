@@ -11,6 +11,21 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1832854120272758}
   m_IsPrefabParent: 1
+--- !u!1 &1057394512996600
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4246544573174180}
+  m_Layer: 0
+  m_Name: ArrivalAreas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1264421626884972
 GameObject:
   m_ObjectHideFlags: 1
@@ -111,6 +126,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4246544573174180
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1057394512996600}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4860642458190604}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4322270278018672
 Transform:
   m_ObjectHideFlags: 1
@@ -150,6 +178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4322270278018672}
+  - {fileID: 4246544573174180}
   m_Father: {fileID: 4548863021993480}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -167,8 +196,10 @@ MonoBehaviour:
   MissionObjects: {fileID: 1573300499008654}
   missionObjectPrefab: {fileID: 1734194474056488, guid: ef6867482c6da8047b0881f97bdc5ecf,
     type: 2}
-  arrivalAreaPrefab: {fileID: 0}
   missionObjectPosition: {x: 1, y: 27, z: -3}
+  arrivalAreaPrefab: {fileID: 1327068514790068, guid: 0c8c6a0f7c9c6354e9be4c489755e79d,
+    type: 2}
+  arrivalAreaPosition: {x: 0, y: 24.5, z: 3.35}
 --- !u!114 &114096047998135808
 MonoBehaviour:
   m_ObjectHideFlags: 1
