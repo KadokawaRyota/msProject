@@ -77,7 +77,7 @@ public class playerTransportationScript : NetworkBehaviour
         {
             if( transportObject.GetComponent<serverObjectController>().GetbGoal() )
             {
-                transportObject = null;
+                CmdProvidebPullToServer(false, null);
             }
         }
 
@@ -154,7 +154,7 @@ public class playerTransportationScript : NetworkBehaviour
     public void CmdProvidebPullToServer(bool bPull , GameObject transportObj)
     {
         transportObject = transportObj;
-        SyncbPullListAdd = true;
+        SyncbPullListAdd = bPull;
     }
 
     //プレイヤーがトランスポートのミッション中かどうか伝えるため

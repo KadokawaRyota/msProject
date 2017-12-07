@@ -36,15 +36,10 @@ public class NetworkArrivalAreaScript : NetworkBehaviour
         3：サーバー側でリストに入ってる全てのプレイヤーが紐付けを切った事を確認し、サーバー側のリストを解放する。
         4：サーバー側でエリアに対応した街に加点する。*/
 
-        if (collider.gameObject.tag == "transportObject")
+        if (collider.gameObject.tag == "transportObject" && isServer )
         {
-            //サーバー側でゴールした事を繋がってるプレイヤーに通知する。
-            collider.GetComponent<serverObjectController>().RpcInGoalArea(true);
-
-            //オブジェクトを元の場所に戻す。オブジェクト側のプレイヤーを削除
-            //collider.GetComponent<serverObjectController>().Refresh();
-
-            //加点する
+            //サーバー側のオブジェクトがゴールしたことを知らせる。
+            collider.GetComponent<serverObjectController>().SetGoal(true);
         }
     }
 }
