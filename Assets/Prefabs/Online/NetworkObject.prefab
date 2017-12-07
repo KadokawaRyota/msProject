@@ -151,8 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fDistance: 2
   objectSpringConstant: 40
-  playerSpringConstant: 10
-  transportNum: 4
+  playerSpringConstant: 20
+  transportNum: 1
   players: []
 --- !u!114 &114875992232553222
 MonoBehaviour:

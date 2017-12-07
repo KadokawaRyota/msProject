@@ -70,7 +70,7 @@ public class playerTransportationScript : NetworkBehaviour
             playerWithObject();
         }
         //ローカルプレイヤー側の処理
-        pullPlayer();
+        if( isLocalPlayer ) pullPlayer();
 
         //プレイヤーから見たオブジェクトへの紐付けを解除する。
         if( transportObject != null )
