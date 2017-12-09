@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 65835401920095290}
   - component: {fileID: 114888097593251112}
   m_Layer: 0
-  m_Name: iceHouseB
+  m_Name: IceHouseB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
