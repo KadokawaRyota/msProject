@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 65969603589912892}
   - component: {fileID: 114184330070645092}
   m_Layer: 0
-  m_Name: Hedge
+  m_Name: hedge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -240,7 +240,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 734d9464553f4a8488e8c99f357ce936, type: 2}
+  - {fileID: 2100000, guid: 366396b331be33c47aa5191cf80a5d68, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

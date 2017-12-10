@@ -15,6 +15,7 @@
 		Tags{ "RenderType" = "Opaque" }
 		LOD 200
 
+
 		//ステンシル
 		Stencil{
 			Ref 1
@@ -24,7 +25,6 @@
 		CGPROGRAM
 
 		
-
 		#pragma surface surf Lambert vertex:vert
 		#pragma target 3.0
 
