@@ -12,10 +12,12 @@ public class RopeConnect : MonoBehaviour {
     float distX;                        // オブジェクトの伸縮値
 
 	void Start () {
-		
+        pullPlayer = transform.parent.gameObject;
 	}
 	
 	void Update () {
+
+        if (pullObject == null) return;
 
         // オブジェクトの中間点を求めて配置
         midPos = (pullObject.transform.position - pullPlayer.transform.position) / 2.0f;
@@ -36,5 +38,10 @@ public class RopeConnect : MonoBehaviour {
 
         // 地面に埋まらないように調整
         transform.localPosition += transform.up * 0.50f;
+    }
+
+    public void SetObject( GameObject transportObject )
+    {
+        pullObject = transportObject;
     }
 }

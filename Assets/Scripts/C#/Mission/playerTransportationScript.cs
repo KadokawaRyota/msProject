@@ -47,11 +47,24 @@ public class playerTransportationScript : NetworkBehaviour
 
     bool runTimeTransportOld = false; //トランスポートミッション中ならtrue
 
+    //ひも
+    [SerializeField]
+    GameObject Rope;
+
     // Use this for initialization
     void Start()
     {
         SyncbPullListAdd = false;
         SyncbRunTimeTransport = false;
+
+        foreach (Transform child in transform)
+        {
+            //child is your child transform
+            if( child.name == "Rope" )
+            {
+                Rope = child.gameObject;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -69,6 +82,7 @@ public class playerTransportationScript : NetworkBehaviour
             //サーバー側でリストにプレイヤーを追加;
             playerWithObject();
         }
+
         //ローカルプレイヤー側の処理
         if( isLocalPlayer ) pullPlayer();
 
@@ -77,6 +91,8 @@ public class playerTransportationScript : NetworkBehaviour
         {
             if( transportObject.GetComponent<serverObjectController>().GetbGoal() )
             {
+                //ロープにオブジェクトを渡す。
+                Rope.GetComponent<RopeConnect>().SetObject(null);
                 CmdProvidebPullToServer(false, null);
             }
         }
@@ -96,8 +112,6 @@ public class playerTransportationScript : NetworkBehaviour
         oldPullListAdd = SyncbPullListAdd;
         //ミッション中だったかどうかの判別のため。
         runTimeTransportOld = SyncbRunTimeTransport;
-
-
     }
 
     [Client]
@@ -138,6 +152,8 @@ public class playerTransportationScript : NetworkBehaviour
         {
             //サーバー側のオブジェクトにプレイヤーを追加して欲しいメッセージとプレイヤーにオブジェクトを紐付け
             CmdProvidebPullToServer(true , collision.gameObject);
+            //ロープにオブジェクトを渡す。
+            Rope.GetComponent<RopeConnect>().SetObject(collision.gameObject);
 
             serverObjectController serverObjectControllerScript = collision.gameObject.GetComponent<serverObjectController>();
 
