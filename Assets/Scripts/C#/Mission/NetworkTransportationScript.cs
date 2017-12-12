@@ -62,7 +62,7 @@ public class NetworkTransportationScript : NetworkBehaviour
         {
             missionObject = Instantiate( missionObjectPrefab , missionObjectPosition , Quaternion.identity , MissionObjects.transform );
 			missionObject.GetComponent<MeshRenderer>().enabled = true;
-            missionObject.GetComponent<BoxCollider>().enabled = true;
+            missionObject.GetComponent<SphereCollider>().enabled = true;
 
 			NetworkServer.Spawn(missionObject);
 			//NetworkServer.SpawnWithClientAuthority(missionObject, gameObject);

@@ -533,6 +533,12 @@ Prefab:
       value: 
       objectReference: {fileID: 1327068514790068, guid: 0c8c6a0f7c9c6354e9be4c489755e79d,
         type: 2}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1988203635526700, guid: c03d61584204d9c4c8decaa6477a7d36,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}
   m_IsPrefabParent: 0
@@ -1014,6 +1020,12 @@ Prefab:
       propertyPath: ArrivalAreas
       value: 
       objectReference: {fileID: 1990218405}
+    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: missionObjectPrefab
+      value: 
+      objectReference: {fileID: 1988203635526700, guid: c03d61584204d9c4c8decaa6477a7d36,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
   m_IsPrefabParent: 0
