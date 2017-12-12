@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Home.unity
     guid: 5b39b6739e446274c973fc917ac201d0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Offline.unity
     guid: 68ca8cde34f5365448041ee0ad8cfd9a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: db36ca67f64297c4a82333ef6433b6f9
   - enabled: 0
