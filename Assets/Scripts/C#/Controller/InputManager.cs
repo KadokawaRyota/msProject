@@ -51,6 +51,12 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     ////    各状態フラグ
     ///////////////////////////////////////////////////////////////////////////
+    //private static bool[] isTouch = new bool[2];            // タップされているか
+    //private static bool[] isTouchTrigger = new bool[2];     // トリガー状態か
+    //private static bool[] isTouchRelease = new bool[2];     // リリース状態か
+    //private static bool[] isTouchMove = new bool[2];        // タップしたまま移動したか
+    //private static Touch[] touch = new Touch[2];
+    
     private static bool isTouch;            // タップされているか
     private static bool isTouchTrigger;     // トリガー状態か
     private static bool isTouchRelease;     // リリース状態か
@@ -62,14 +68,26 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     void Start()
     {
+        //////        タップ情報の初期化
+        //////////////////////////////////////////////////////////////////////////
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    isTouch[i]          = false;
+        //    isTouchTrigger[i]   = false;
+        //    isTouchRelease[i]   = false;
+        //    isTouchMove[i]      = false;        
+        //}
+        
         isTouch = false;
         isTouchTrigger = false;
         isTouchRelease = false;
         isTouchMove = false;
 
+        
+
         ////        マルチタップ無効
         ////////////////////////////////////////////////////////////////////////
-        Input.multiTouchEnabled = false;
+        //Input.multiTouchEnabled = false;
     }
 
     //--------------------------------------------------------------------------
@@ -77,16 +95,28 @@ public class InputManager : MonoBehaviour
     //--------------------------------------------------------------------------
     void Update()
     {
-        UpdateTouch();
+        //for (int i = 0; i < 2; i++)
+        //{
+        //    UpdateTouch(i);
+        //}
+
+        UpdateTouch(0);
+
+        
     }
 
     //--------------------------------------------------------------------------
     //          タップ状態のアップデート
     //--------------------------------------------------------------------------
-    private void UpdateTouch()
+    private void UpdateTouch(int Num)
     {
+       
         ////        タップ状況初期化
         ////////////////////////////////////////////////////////////////////////
+        //isTouch[Num]        = false;
+        //isTouchTrigger[Num] = false;
+        //isTouchRelease[Num] = false;
+        //isTouchMove[Num]    = false;
         isTouch = false;
         isTouchTrigger = false;
         isTouchRelease = false;
@@ -98,15 +128,18 @@ public class InputManager : MonoBehaviour
         {
             if(Input.GetMouseButton(0))
             {
+                //isTouch[0] = true;
                 isTouch = true;
             }
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(Num))
             {
+                //isTouchTrigger[0] = true;
                 isTouchTrigger = true;
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(Num))
             {
+                //isTouchRelease[0] = true;
                 isTouchRelease = true;
             }
         }
@@ -115,29 +148,24 @@ public class InputManager : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////
         else if (Application.isMobilePlatform)
         {
-            if (Input.touchCount > 0)
-            {
-                //タッチしている
-                isTouch = true;
-                touch = Input.GetTouch(0);
+            //タッチしている
+            //isTouch[Num] = true;
+            //isTouch = true;
+            ////
+            /////////////////////////////////////////////////////////////////
+            //touch[Num] = Input.GetTouch(Num);
+            touch = Input.GetTouch(0);
+            //タッチ開始
+            //if (touch[Num].phase == TouchPhase.Began)isTouchTrigger[Num] = true;
+            if (touch.phase == TouchPhase.Began) isTouchTrigger = true;
 
-                if (touch.phase == TouchPhase.Began)
-                {
-                    //タッチ開始
-                    isTouchTrigger = true;
-                }
+            //ドラッグ
+            //else if (touch[Num].phase == TouchPhase.Moved)isTouchMove[Num] = true;
+            else if (touch.phase == TouchPhase.Moved) isTouchMove = true;
 
-                else if (touch.phase == TouchPhase.Moved)
-                {
-                    //ドラッグ
-                }
-
-                else if (touch.phase == TouchPhase.Ended)
-                {
-                    //タッチ終了
-                    isTouchRelease = true;
-                }
-            }
+            //タッチ終了
+            //else if (touch[Num].phase == TouchPhase.Ended)isTouchRelease[Num] = true;
+            else if (touch.phase == TouchPhase.Ended) isTouchRelease = true;
         }
     }
 
@@ -147,27 +175,21 @@ public class InputManager : MonoBehaviour
         //--------------------------------------------------------------------------
         //          クリック判定処理
         //--------------------------------------------------------------------------
-        public static bool GetTouchPress()
-        {
-            return isTouch;
-        }
-
+        //public static bool GetTouchPress(int Num){return isTouch[Num];}
+        public static bool GetTouchPress() { return isTouch; }
+        
         //--------------------------------------------------------------------------
         //          トリガー判定処理
         //--------------------------------------------------------------------------
-        public static bool GetTouchTrigger()
-        {
-            return isTouchTrigger;
-        }
+        //public static bool GetTouchTrigger(int Num){return isTouchTrigger[Num];}
+        public static bool GetTouchTrigger() { return isTouchTrigger; }
 
         //--------------------------------------------------------------------------
         //          リリース判定処理
         //--------------------------------------------------------------------------
-        public static bool GetTouchRelease()
-        {
-            return isTouchRelease;
-        }
-
+        //public static bool GetTouchRelease(int Num){return isTouchRelease[Num];}
+        public static bool GetTouchRelease() { return isTouchRelease; }
+    
     //--------------------------------------------------------------------------
     //          タップ位置取得
     //--------------------------------------------------------------------------
@@ -184,71 +206,16 @@ public class InputManager : MonoBehaviour
 
         else if (Application.isMobilePlatform)
         {
-            touch = Input.GetTouch(i);
-            screenPos = touch.position;
+            screenPos = Input.GetTouch(i).position;
             //screenPos = Input.mousePosition;    //screenPos = Input.GetTouch(Input.touchCount).position;
         }
 
         return screenPos;
     }
 
-    //--------------------------------------------------------------------------
-    //         移動距離判定(X軸)
-    //--------------------------------------------------------------------------
-    public static float GetTouchMoveHorizonal()
+    public static int GetTapFingerCount()
     {
-		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-		{
-            return Input.GetAxis("Mouse X");
-        }
-
-        else
-        {
-            touch = Input.GetTouch(0);
-
-            Vector3 vec = touch.position;
-
-            vec.z = 10f;
-
-            vec = Camera.main.ScreenToWorldPoint(vec);
-
-            Vector3 old = vec;
-
-            vec = vec - TouchOldPosition;
-
-            TouchOldPosition = old;
-
-            return vec.x;
-        }
-    }
-
-    //--------------------------------------------------------------------------
-    //         移動距離判定(Y軸)
-    //--------------------------------------------------------------------------
-    public static float GetTouchMoveVertical()
-    {
-		if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-		{
-            return Input.GetAxis("Mouse Y");
-        }
-
-        else
-        {
-            touch = Input.GetTouch(0);
-
-            Vector3 vec = touch.position;
-
-            vec.z = 10f;
-
-            vec = Camera.main.ScreenToWorldPoint(vec);
-
-            Vector3 old = vec;
-
-            vec = vec - TouchOldPosition;
-
-            TouchOldPosition = old;
-
-            return vec.y;
-        }
+        //touch.tapCount;
+        return 0;
     }
 }
