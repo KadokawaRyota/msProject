@@ -23,21 +23,17 @@ public class PunipuniController : MonoBehaviour
     #region [ パブリック ]
     public Scr_ControllerManager ControllerManager; // タップ情報
     public TapEffect tapeffect;                     // タップエフェクト情報
-    public SpriteRenderer SpriteRenderHE2D;                 // ホールドエフェクトの情報
+    public SpriteRenderer SpriteRenderHE2D;         // ホールドエフェクトの情報
     public Camera TargetCamera;                     // 描画対象のカメラ
     public Material Material;                       // 描画対象のマテリアル
 
     public int TapDiscriminationFrame;                  // タップorホールド判別用変数タップorホールド判別時間(〇フレーム以内ならタップ、それ以上ならホールド)
     public int nStateCheckCounter;                      // タップorホールド判別用カウンター
-    public TOUCH_MODE TouchMode = TOUCH_MODE.NONE;      // 現在のタップ状態
-    public TOUCH_MODE TouchModeOld = TOUCH_MODE.NONE;   // １フレ前のタップ状態
     public TOUCH_STATE TouchState = TOUCH_STATE.NONE;   // タップの状況
-
-    public Vector3 TapPosCamera = Vector3.zero;          // 二本目の指のタップ位置(カメラ用) 
-    public Vector3 TapPosCameraNow = Vector3.zero;       // 1フレーム前の二本目の指のタップ位置(カメラ用)
-    public float TapPosCameraLength = 0.0f;
-
-    public static bool TestVisibleFlug;
+    //public static Touch tTouchInfo;                     // タップ情報
+    public Vector3 BeginMousePosition;                  // タップ位置
+    private bool bStateCountFlug;
+    
     #endregion
 
     #region [ プライベート ]
@@ -60,10 +56,6 @@ public class PunipuniController : MonoBehaviour
     Bezier BezierC = new Bezier();
     Bezier BezierL = new Bezier();
     Bezier BezierR = new Bezier();
-
-    private static Touch touch;         // タップ情報
-    public Vector3 BeginMousePosition;  // タップ位置
-    private bool bStateCountFlug;
     #endregion
     
     //--------------------------------------------------------------------------
@@ -136,30 +128,34 @@ public class PunipuniController : MonoBehaviour
     //--------------------------------------------------------------------------
     //          更新処理
     //--------------------------------------------------------------------------
-        void Update()
+        public void PuniPuniUpdate()
         {
             ////    タップ状況の更新
             ////////////////////////////////////////////////////////////////////
             UpdateTapState();
 
-            ////        タップ状態判別
-            ////////////////////////////////////////////////////////////////////
-                // タップされた瞬間
-                if (InputManager.GetTouchTrigger()) 
-                    BeginPunipuni();
+            ////        エディタでの更新処理
+            ////////////////////////////////////////////////////////////////////////
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                if (InputManager.GetTouchTrigger()) BeginPunipuni();                                  // タップされた瞬間
+                else if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) TrackingPunipuni();   // タップをキープしている状態
+                else if (InputManager.GetTouchRelease()) EndPunipuni();                                   // タップを解除した瞬間
 
-                // タップをキープしている状態                          
-                if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) 
-                    TrackingPunipuni();
-
-                // タップを解除した瞬間
-                if (InputManager.GetTouchRelease()) 
-                    EndPunipuni();
-            
-            ////        タッチ状態の更新処理
-            //////////////////////////////////////////////////////////////////// 
-            TouchModeOld = TouchMode;
-            TouchMode = ControllerManager.GetTouchMode();
+                //if (Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Began) BeginPunipuni();      // タップされた瞬間
+                //else if (Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Moved ||
+                //         Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Stationary)TrackingPunipuni();   // タップをキープしている状態 
+                //else if (Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Ended) EndPunipuni();        // タップを解除した瞬間
+            }
+            ////        モバイルでの更新処理
+            ////////////////////////////////////////////////////////////////////////
+            else if (Application.isMobilePlatform)
+            {
+                if (Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Began) BeginPunipuni();      // タップされた瞬間
+                if (Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Moved ||
+                    Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Stationary) TrackingPunipuni();   // タップをキープしている状態 
+                if (Scr_ControllerManager.tTouchInfo.phase == TouchPhase.Ended) EndPunipuni();        // タップを解除した瞬間
+            }
         }
     
     //--------------------------------------------------------------------------
@@ -188,20 +184,31 @@ public class PunipuniController : MonoBehaviour
     //--------------------------------------------------------------------------
         void BeginPunipuni()
         {
+
             ////    ベジェ曲線とぷニコンメッシュのリセット
             ////////////////////////////////////////////////////////////////////
             ResetPuniMeshAndBezier();
 
-			////    タップ位置にUIがない場合タップ状況判別カウントフラグをtrueに
+			////    カウントフラグをtrueに
             ////////////////////////////////////////////////////////////////////
-			//if (!CheckUIObjectRay ()) {
-				bStateCountFlug = true;
-			//}
+			bStateCountFlug = true;
+			
             ////    タップ位置を取得
             ////////////////////////////////////////////////////////////////////   
-            //BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-            //transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1.0f));
-            Vector3 pos = InputManager.GetTouchPosition(0);
+            Vector3 pos = Vector3.zero; 
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                pos = InputManager.GetTouchPosition(0);
+                //pos = Scr_ControllerManager.tTouchInfo.position;
+            }
+
+            else if(Application.isMobilePlatform)
+            {
+                pos = Scr_ControllerManager.tTouchInfo.position;
+            }
+
+            ////    コントローラに位置情報を設定
+            ////////////////////////////////////////////////////////////////////   
             BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 1.0f));
             transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 1.0f));
         }
@@ -209,11 +216,11 @@ public class PunipuniController : MonoBehaviour
     //--------------------------------------------------------------------------
     //          ぷにぷにコントローラーの終了
     //--------------------------------------------------------------------------
-        void EndPunipuni()
+        public void EndPunipuni()
         {
             ////   タップされていた時間が一定以下だった時の処理
             ////////////////////////////////////////////////////////////////////           
-            if (TouchState == TOUCH_STATE.NONE && nStateCheckCounter < TapDiscriminationFrame)
+            if (TouchState == TOUCH_STATE.NONE && nStateCheckCounter < TapDiscriminationFrame && Input.touchCount > 0)
             {
                 ////    タップ状況を「TAP」に変更
                 ////////////////////////////////////////////////////////////////
@@ -221,42 +228,55 @@ public class PunipuniController : MonoBehaviour
 
                 ////    タップエフェクト発生
                 ////////////////////////////////////////////////////////////////
-                tapeffect.SetEffectType(EFFECT_TYPE.TAP);                                  // エフェクトタイプセット
+                tapeffect.SetEffectType(EFFECT_TYPE.TAP);                     // エフェクトタイプセット
                 tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
             }
 
-            ////    ベジェ曲線とぷニコンメッシュのリセット
-            ////////////////////////////////////////////////////////////////////
-            ResetPuniMeshAndBezier();
-
-            ////    カメラ回転用タップ位置のリセット
-            ////////////////////////////////////////////////////////////////////
-            TapPosCamera = Vector3.zero;
-            TapPosCameraNow = Vector3.zero;
-
-            ////    エフェクトOFF
-            ////////////////////////////////////////////////////////////////
-            if (tapeffect.Effecttype == EFFECT_TYPE.HOLD)
+            ////   タップされていた時間が一定以上だった時の処理
+            ////////////////////////////////////////////////////////////////////     
+            if (Input.touchCount == 0)
             {
-                SpriteRenderHE2D.enabled = false;   // ホールドエフェクトOFF
-                tapeffect.EffectStatusReset();      // ステータスリセット
+                ////    ベジェ曲線とぷニコンメッシュのリセット
+                ////////////////////////////////////////////////////////////////////
+                ResetPuniMeshAndBezier();
+
+                ////    エフェクトOFF
+                ////////////////////////////////////////////////////////////////
+                if (tapeffect.Effecttype == EFFECT_TYPE.HOLD)
+                {
+                    SpriteRenderHE2D.enabled = false;   // ホールドエフェクトOFF
+                    tapeffect.EffectStatusReset();      // ステータスリセット
+                }       
             }
         }
 
     //--------------------------------------------------------------------------
     //          ぷにぷにコントローラーの追跡処理
     //--------------------------------------------------------------------------
-        void TrackingPunipuni()
-        {
+            void TrackingPunipuni()
+            {
+                Vector3 Inputpos = Vector3.zero;
                 ////    ベジェ曲線パラメータの更新
                 ////////////////////////////////////////////////////////////////////
-                Vector3 Inputpos = InputManager.GetTouchPosition(0);
-                Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Inputpos.x, Inputpos.y, 1.0f));
-                tapeffect.EffectPos = ControllerManager.TouchPositionNow;
+                if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+                {
+                    Inputpos = InputManager.GetTouchPosition(0);
+                    tapeffect.EffectPos = InputManager.GetTouchPosition(0);
+                    //Inputpos = Scr_ControllerManager.tTouchInfo.position;
+                    //tapeffect.EffectPos = Scr_ControllerManager.tTouchInfo.position;
+                }
 
-                ////    デバッグ表示
-                ////////////////////////////////////////////////////////////////////
-                //Debug.Log("始点：" + start + "終点：" + screenPos);     // タップ位置表示
+                else if (Application.isMobilePlatform)
+                {
+                    Inputpos = Scr_ControllerManager.tTouchInfo.position;
+                    tapeffect.EffectPos = Scr_ControllerManager.tTouchInfo.position;
+                }
+
+                Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Inputpos.x, Inputpos.y, 1.0f));
+
+                //Vector3 Inputpos = Scr_ControllerManager.tTouchInfo.position; //InputManager.GetTouchPosition(0);
+                //Vector3 pos = TargetCamera.ScreenToWorldPoint(new Vector3(Inputpos.x, Inputpos.y, 1.0f));
+                //tapeffect.EffectPos = Scr_ControllerManager.tTouchInfo.position;
 
                 ////    ベジェ曲線位置の更新
                 ////////////////////////////////////////////////////////////////////////
@@ -291,18 +311,12 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             TouchState = TOUCH_STATE.HOLD;
 
-            ////    コントローラ表示フラグをTRUE
+            ////    コントローラ表示フラグをTRUE、エフェクト生成
             ////////////////////////////////////////////////////////////////////
             VisiblePunipuniController = true;
-
-            ////    エフェクト生成
-            ////////////////////////////////////////////////////////////////////
             tapeffect.EffectFlug = true;                                  // エフェクト更新フラグON
             tapeffect.SetEffectType(EFFECT_TYPE.HOLD);                    // エフェクトタイプセット
-
             SpriteRenderHE2D.enabled = true;
-
-            //Debug.Log("ホールドエフェクト発生");
         }
 
         //----------------------------------------------------------------------
@@ -310,7 +324,9 @@ public class PunipuniController : MonoBehaviour
         //----------------------------------------------------------------------
         if (tapeffect.EffectFlug == true && tapeffect.Effecttype == EFFECT_TYPE.HOLD && VisiblePunipuniController == true)
         {
-            tapeffect.EffectPos = TargetCamera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 1.0f)); //ControllerManager.TouchPositionNow;   // エフェクト位置更新
+            tapeffect.EffectPos = TargetCamera.ScreenToWorldPoint(new Vector3(Scr_ControllerManager.tTouchInfo.position.x,
+                                                                              Scr_ControllerManager.tTouchInfo.position.y,
+                                                                              1.0f));
         }
 
         //----------------------------------------------------------------------
@@ -322,8 +338,6 @@ public class PunipuniController : MonoBehaviour
             ////////////////////////////////////////////////////////////////////
             nStateCheckCounter++; 
         }
-
-        TestVisibleFlug = VisiblePunipuniController;
     }
 
 	//--------------------------------------------------------------------------
@@ -338,8 +352,6 @@ public class PunipuniController : MonoBehaviour
         ////    タップ位置を取得
         ////////////////////////////////////////////////////////////////////////
         Vector3 point = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(Input.mousePosition); 
-        Debug.Log(point); 
         
         ////    当たり判定
         ////////////////////////////////////////////////////////////////////////

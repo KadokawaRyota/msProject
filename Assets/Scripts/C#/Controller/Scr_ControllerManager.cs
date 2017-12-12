@@ -7,16 +7,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //------------------------------------------------------------------------------
-//          定義
-//------------------------------------------------------------------------------
-public enum TOUCH_MODE
-{
-    NONE,       // タップされていない
-    TRIGGER,    // タップされた瞬間
-    MOVE,       // タップをキープしている
-};
-
-//------------------------------------------------------------------------------
 //          メイン
 //------------------------------------------------------------------------------
 public class Scr_ControllerManager : MonoBehaviour 
@@ -24,20 +14,18 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------
     //          変数定義
     //--------------------------------------------------------------------------
-    InputManager inputManager;                  // インプットマネージャー
-    public Vector3 TouchPositionStart;          // タップ開始位置
-    public Vector3 TouchPositionNow;            // 現在のタップ位置
-    public Vector3 ControllerVec;               // タップ点の始点から終点へのベクトル
-    public float ControllerVecLength;           // ベクトルの長さ
-    public float MaxMoveSpeed;                  // 最高速度
-    private Vector3 MoveVec;                    // 移動方向  
+        ////
+        ////////////////////////////////////////////////////////////////////////
+        InputManager inputManager;                  // インプットマネージャー
 
-    public Vector3 CameraMoveLength_Start;      // 始点タップ位置(カメラ移動用)
-    public Vector3 CameraMoveLength_End;        // 終点タップ位置(カメラ移動用)
-    public float fCameraMoveLength;             // カメラ移動距離(速度？)
-    private bool bCameraMoveFlug;               // 回転移動状態フラグ    
-
-    private static TOUCH_MODE TouchMode;        // 現在のタップ状態
+        ////        コントローラ
+        ////////////////////////////////////////////////////////////////////////
+        public Vector3 TouchPositionStart;          // タップ開始位置
+        public Vector3 TouchPositionNow;            // 現在のタップ位置
+        public Vector3 ControllerVec;               // タップ点の始点から終点へのベクトル
+        public float   fControllerVecLength;        // ベクトルの長さ
+        public static Touch tTouchInfo;             // タップ情報
+        private PunipuniController PuniPuniController;
 
     //--------------------------------------------------------------------------
     //          初期化処理
@@ -48,25 +36,40 @@ public class Scr_ControllerManager : MonoBehaviour
         ////////////////////////////////////////////////////////////////////////
         inputManager = InputManager.Instance;
 
-        ////       カメラ回転フラグfalse
-        ////////////////////////////////////////////////////////////////////////
-        bCameraMoveFlug = false;
-        
-        ////        初期値設定
-        ////////////////////////////////////////////////////////////////////////
-        TouchMode = TOUCH_MODE.NONE;    // 現在のタップ状態
+        PuniPuniController = GameObject.Find("PuniconCamera/Punicon").GetComponent<PunipuniController>();
     }
 
     //--------------------------------------------------------------------------
     //          更新処理
     //--------------------------------------------------------------------------
-	void Update () 
+    public void ControllerUpdate()
     {
-        ////        タップ状態別の更新処理
-        ////////////////////////////////////////////////////////////////////////
-        if (InputManager.GetTouchTrigger()) TouchTrigger();                                  // タップされた瞬間
-        if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) TouchMove();    // タップをキープしている状態
-        if (InputManager.GetTouchRelease()) TouchRelease();                                  // タップを解除した瞬間
+        //if (Input.touchCount >= 1)
+        //{
+            ////        エディタでの更新処理
+            ////////////////////////////////////////////////////////////////////////
+            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                if (InputManager.GetTouchTrigger()) TouchTrigger();                                     // タップされた瞬間
+                else if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) TouchMove();  // タップをキープしている状態
+                else if (InputManager.GetTouchRelease()) TouchRelease();                                // タップを解除した瞬間
+
+                //if (tTouchInfo.phase == TouchPhase.Began) TouchTrigger();
+                //else if (tTouchInfo.phase == TouchPhase.Moved || tTouchInfo.phase == TouchPhase.Stationary) TouchMove();
+                //else if (tTouchInfo.phase == TouchPhase.Ended) TouchRelease();
+            }
+
+            ////        モバイルでの更新処理
+            ////////////////////////////////////////////////////////////////////////
+            else if (Application.isMobilePlatform)
+            {
+                if (tTouchInfo.phase == TouchPhase.Began) TouchTrigger();
+                else if (tTouchInfo.phase == TouchPhase.Moved || tTouchInfo.phase == TouchPhase.Stationary) TouchMove();
+                else if (tTouchInfo.phase == TouchPhase.Ended) TouchRelease();
+            }
+
+            PuniPuniController.PuniPuniUpdate();
+        //}
     }
 
     //--------------------------------------------------------------------------
@@ -74,19 +77,26 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------    
     public void TouchTrigger()
     {
-        ////        タッチ状態の変更
+        ////        エディタでの更新処理
         ////////////////////////////////////////////////////////////////////////
-        TouchMode = TOUCH_MODE.TRIGGER;
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            TouchPositionStart  = InputManager.GetTouchPosition(0);
+            TouchPositionNow    = InputManager.GetTouchPosition(0);
 
-        ////        タップ位置取得
-        ////////////////////////////////////////////////////////////////////////
-        TouchPositionStart  = InputManager.GetTouchPosition(0);
-        TouchPositionNow    = InputManager.GetTouchPosition(0);
+            //TouchPositionStart = tTouchInfo.position;
+            //TouchPositionNow = tTouchInfo.position;
+        }
 
-        ////        カメラ回転用変数初期化
+        ////        モバイルでの更新処理
         ////////////////////////////////////////////////////////////////////////
-        CameraMoveLength_Start = Vector3.zero;
-        CameraMoveLength_End   = Vector3.zero; 
+        else if (Application.isMobilePlatform)
+        {
+            ////        始点を設定
+            ////////////////////////////////////////////////////////////////////
+            TouchPositionStart = tTouchInfo.position;
+            TouchPositionNow = tTouchInfo.position;
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -94,95 +104,50 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------
     void TouchMove()
     {
-        ////        タッチ状態の変更
+        ////        エディタでの更新処理
         ////////////////////////////////////////////////////////////////////////
-        TouchMode = TOUCH_MODE.MOVE;
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            TouchPositionNow = InputManager.GetTouchPosition(0);
+            //TouchPositionNow = tTouchInfo.position;
+        }
 
-        ////        現在のタップ位置取得
+        ////        モバイルでの更新処理
         ////////////////////////////////////////////////////////////////////////
-        TouchPositionNow = InputManager.GetTouchPosition(0);
+        else if (Application.isMobilePlatform)
+        {
+            ////        終点を設定
+            ////////////////////////////////////////////////////////////////////////
+            TouchPositionNow = tTouchInfo.position;
+        }
 
         ////        始点と終点の方向ベクトル生成
         ////////////////////////////////////////////////////////////////////////
-        ControllerVec = (TouchPositionNow - TouchPositionStart);//.normalized;
-        ControllerVecLength = ControllerVec.magnitude;
+        ControllerVec = (TouchPositionNow - TouchPositionStart);
+        fControllerVecLength = ControllerVec.magnitude;
 
-        ////        カメラの回転移動距離算出
-        ////////////////////////////////////////////////////////////////////////
-        if (Input.touchCount == 2)  // タップされている指の本数が「2本」の場合のみ
-        {
-            CameraRotateUpdate();
-        }
+        //Debug.Log("始点" + TouchPositionStart + "終点" + TouchPositionNow + "ベクトル" + fControllerVecLength);
     }
 
     //--------------------------------------------------------------------------
     //          タップが解除された(リリース処理)
     //--------------------------------------------------------------------------
-    void TouchRelease()
+    public void TouchRelease()
     {
-        ////        タッチ状態の変更
-        ////////////////////////////////////////////////////////////////////////
-        TouchMode = TOUCH_MODE.NONE;
-        ControllerVec = Vector3.zero;   // new Vector3(0.0f, 0.0f, 0.0f);
-        
-        ////        カメラ回転用変数初期化
-        ////////////////////////////////////////////////////////////////////////
-        CameraMoveLength_Start = Vector3.zero;
-        CameraMoveLength_End = Vector3.zero; 
-        bCameraMoveFlug = false;
+        //TouchPositionStart = Vector3.zero;
+        TouchPositionNow = Vector3.zero;
+        ControllerVec = Vector3.zero;
+        fControllerVecLength = 0.0f; ;
     }
 
     //--------------------------------------------------------------------------
-    //          タップ状態の取得
+    //          コントローラのタップ位置取得
     //--------------------------------------------------------------------------
-    public TOUCH_MODE GetTouchMode()
+    public Vector3 GetControllerTouchPos()
     {
-        ////        現在のタッチ状態を返す
-        ////////////////////////////////////////////////////////////////////////
-        return TouchMode;
-    }
-
-    //--------------------------------------------------------------------------
-    //          カメラ回転情報の更新処理
-    //--------------------------------------------------------------------------
-    void CameraRotateUpdate()
-    {
-        ////    タップ位置の設定
-        ////////////////////////////////////////////////////////////////////////
-        if (CameraMoveLength_Start.x == 0.0f &&
-            CameraMoveLength_Start.y == 0.0f &&
-            CameraMoveLength_Start.z == 0.0f)
-        {
-            CameraMoveLength_Start = Input.GetTouch(1).position;  // 始点位置(初回のみ)
-        }
-
-        CameraMoveLength_End = Input.GetTouch(1).position;   // 終点位置
-
-        ////    タップ位置からカメラ移動用の距離を算出
-        ////////////////////////////////////////////////////////////////////////
-        fCameraMoveLength = CameraMoveLength_End.x - CameraMoveLength_Start.x;
-        
-        ////    回転移動フラグをTrueに
-        ////////////////////////////////////////////////////////////////////////
-        bCameraMoveFlug = true;
-
-        ////    デバッグ表示
-        ////////////////////////////////////////////////////////////////////////
-        Debug.Log("始点：" + CameraMoveLength_Start + "終点：" + CameraMoveLength_End + "長さ：" + fCameraMoveLength);     // カメラ回転情報表示
-
-    }
-
-    //--------------------------------------------------------------------------
-    //          カメラ回転情報のゲッター
-    //--------------------------------------------------------------------------
-    public float GetCameraRotateLength()
-    {
-        if (bCameraMoveFlug)
-            return fCameraMoveLength;
-
-        else
-            return 0.0f;
+        return tTouchInfo.position;
     }
 }
+
 
 

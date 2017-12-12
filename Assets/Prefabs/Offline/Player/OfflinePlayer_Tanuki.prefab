@@ -1868,6 +1868,7 @@ MonoBehaviour:
   localPos: {x: 0, y: 7, z: -7}
   mouseInputX: 0
   mouseInputY: 0
+  rotSpeed: 0.05
 --- !u!114 &114968332964952372
 MonoBehaviour:
   m_ObjectHideFlags: 1

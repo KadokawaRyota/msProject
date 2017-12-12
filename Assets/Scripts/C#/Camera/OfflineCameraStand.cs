@@ -10,22 +10,25 @@ public class OfflineCameraStand : MonoBehaviour {
     public Vector3 localPos;                            // カメラローカル位置
     public float mouseInputX;
     public float mouseInputY;
-    private Vector2 inputStart;
-    private Vector2 inputEnd;
-    private float inputLength;
+    public float rotSpeed = 1.0f;
+
+    private Vector3 inputController;                    // コントローラー入力位置
+    private Vector3 inputCameraController;              // カメラコントローラー入力位置
 
     private Vector3 targetPos;                          // プレイヤー位置情報
     private Quaternion targetRot;                       // プレイヤー角度情報
     private Vector3 cameraDir;                          // カメラの進行方向射影ベクトル
     private Vector3 playerToCamera;                     // プレイヤーからカメラへのベクトル
     private Quaternion rotCamera;                       // カメラの傾き情報
+    private float touchDiff;                            // マルチタップ,タッチ位置の差分
 
     public Vector3 GetCameraDirection
     {
         get { return this.cameraDir; }
     }
 
-    Scr_ControllerManager controllerManager;    //コントローラのマネージャ
+    Scr_ControllerManager controllerManager;            // コントローラのマネージャ
+    Scr_CameraController cameraController;              // カメラコントローラのマネージャ
 
 
     void Start () {
@@ -35,17 +38,23 @@ public class OfflineCameraStand : MonoBehaviour {
         if (GameObject.Find("PuniconCamera/ControllerManager") != null)
         {
             controllerManager = GameObject.Find("PuniconCamera/ControllerManager").GetComponent<Scr_ControllerManager>();
+            cameraController = GameObject.Find("PuniconCamera/CameraController").GetComponent<Scr_CameraController>();
         }
     }
 	
 	void Update () {
 
-        // 2点タッチ入力の取得
-        inputStart = new Vector2(controllerManager.CameraMoveLength_Start.x, controllerManager.CameraMoveLength_Start.y);
-        inputEnd = new Vector2(controllerManager.CameraMoveLength_End.x, controllerManager.CameraMoveLength_End.y);
-        inputLength = controllerManager.fCameraMoveLength;
+        // コントローラー入力位置の取得
+        inputController = controllerManager.GetControllerTouchPos();
 
-        //inputLength /= 1080.0f;
+        // カメラコントローラー入力値取得
+        inputCameraController = cameraController.GetCameraTouchPos();
+
+        // タッチ位置の差分の算出
+        touchDiff = inputCameraController.x - inputController.x;
+
+
+        //touchDiff /= 1080.0f;
         //inputLength = 0.10f;
 
         // プレイヤー位置の取得
@@ -92,9 +101,9 @@ public class OfflineCameraStand : MonoBehaviour {
 
         }
 
-        if(inputLength > 0.0f)
+        if( Input.touchCount == 2 )
         {
-            transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, inputLength * Time.deltaTime * 200f);
+            transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, touchDiff * Time.deltaTime * rotSpeed);
             cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
         }
 
