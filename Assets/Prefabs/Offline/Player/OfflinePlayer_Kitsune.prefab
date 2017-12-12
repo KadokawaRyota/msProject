@@ -1626,7 +1626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66dcbb1dff31f4145a1eb8df7fd7d7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {x: 0.1, y: 25.5, z: 0.1}
+  spawnPoint: {x: 0.1, y: 26.5, z: 0.1}
   moveWalkSpeed: 0.05
   moveRunSpeed: 0.08
   moveIn: 0.1

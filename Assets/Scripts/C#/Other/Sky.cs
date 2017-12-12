@@ -7,6 +7,9 @@ public class Sky : MonoBehaviour {
 	[SerializeField]
 	float scrollSpeedX = 0.1f;
 
+    [SerializeField]
+    OfflineCameraStand standCam;
+
 	void Start()
 	{
 		GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_MainTex", Vector2.zero);
@@ -16,13 +19,13 @@ public class Sky : MonoBehaviour {
 
 		float x = Time.deltaTime * scrollSpeedX;
 
-		Vector2 offset = new Vector2(x, 0f);
+		Vector2 offset = new Vector2(0f, 0f);
 
 		//カメラの回転角度を取得
-		Vector2 camRot = new Vector2(Camera.main.transform.localRotation.y,0.0f);
-		offset = offset + camRot;
+		Vector2 camRot = new Vector2(1 / standCam.gameObject.transform.rotation.y * Mathf.Rad2Deg,0.0f);
+		offset = camRot;
 
 		//ShaderからOffsetの位置をずらす
-		GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
+		//GetComponent<Renderer>().sharedMaterial.SetTextureOffset("_MainTex", offset);
 	}
 }
