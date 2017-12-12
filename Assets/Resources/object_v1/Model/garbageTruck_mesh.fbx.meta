@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: 587a2744a17d28a478efc1e71150c442
+timeCreated: 1513064178
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: bumper
+    100002: chassis
+    100004: crusher
+    100006: frontBody
+    100008: //RootNode
+    100010: grp_body
+    100012: grp_truckBed
+    100014: L_frontWheel
+    100016: L_frontWheel1
+    100018: L_mirror
+    100020: L_tank
+    100022: madFlap
+    100024: truckBed
+    100026: truckBed_cover
+    400000: bumper
+    400002: chassis
+    400004: crusher
+    400006: frontBody
+    400008: //RootNode
+    400010: grp_body
+    400012: grp_truckBed
+    400014: L_frontWheel
+    400016: L_frontWheel1
+    400018: L_mirror
+    400020: L_tank
+    400022: madFlap
+    400024: truckBed
+    400026: truckBed_cover
+    2300000: bumper
+    2300002: chassis
+    2300004: crusher
+    2300006: frontBody
+    2300008: L_frontWheel
+    2300010: L_frontWheel1
+    2300012: L_mirror
+    2300014: L_tank
+    2300016: madFlap
+    2300018: truckBed
+    2300020: truckBed_cover
+    3300000: bumper
+    3300002: chassis
+    3300004: crusher
+    3300006: frontBody
+    3300008: L_frontWheel
+    3300010: L_frontWheel1
+    3300012: L_mirror
+    3300014: L_tank
+    3300016: madFlap
+    3300018: truckBed
+    3300020: truckBed_cover
+    4300000: truckBed
+    4300002: crusher
+    4300004: truckBed_cover
+    4300006: bumper
+    4300008: L_mirror
+    4300010: frontBody
+    4300012: L_frontWheel
+    4300014: madFlap
+    4300016: L_tank
+    4300018: chassis
+    4300020: L_frontWheel1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

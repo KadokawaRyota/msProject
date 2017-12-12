@@ -34,6 +34,9 @@ public class ObjectController : MonoBehaviour
     [SerializeField]
     float playerSpringConstant;  //バネ定数・・・通常かかるバネ係数は同一だが、ゲーム的にプレイヤーの動きを良くするため。
 
+    [SerializeField]
+    GameObject stencil;
+
     //List<GameObject> players = new List<GameObject>();
 
 
@@ -131,7 +134,8 @@ public class ObjectController : MonoBehaviour
     public void DispSwitch( bool bDisp )
     {
         GetComponent<MeshRenderer>().enabled = bDisp;
-        GetComponent<BoxCollider>().enabled = bDisp;
+        GetComponent<SphereCollider>().enabled = bDisp;
         GetComponent<Rigidbody>().isKinematic = !bDisp;
+        stencil.SetActive(true);
     }
 }
