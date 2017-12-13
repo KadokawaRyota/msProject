@@ -10,10 +10,8 @@ public class OfflineCameraStand : MonoBehaviour {
     public Vector3 localPos;                            // カメラローカル位置
     public float mouseInputX;
     public float mouseInputY;
-    public float rotSpeed = 1.0f;
-
-    private Vector3 inputController;                    // コントローラー入力位置
-    private Vector3 inputCameraController;              // カメラコントローラー入力位置
+    public float rotSpeed = 0.50f;                      // 回転速度調整用係数
+    public float rotCameraThre = 50.0f;                 // カメラ回転開始閾値
 
     private Vector3 targetPos;                          // プレイヤー位置情報
     private Quaternion targetRot;                       // プレイヤー角度情報
@@ -44,19 +42,6 @@ public class OfflineCameraStand : MonoBehaviour {
 	
 	void Update () {
 
-        // コントローラー入力位置の取得
-        inputController = controllerManager.GetControllerTouchPos();
-
-        // カメラコントローラー入力値取得
-        inputCameraController = cameraController.GetCameraTouchPos();
-
-        // タッチ位置の差分の算出
-        touchDiff = inputCameraController.x - inputController.x;
-
-
-        //touchDiff /= 1080.0f;
-        //inputLength = 0.10f;
-
         // プレイヤー位置の取得
         targetPos = targetObj.transform.position;
 
@@ -80,31 +65,37 @@ public class OfflineCameraStand : MonoBehaviour {
         transform.position = targetObj.transform.position + rotCameraEvac * localPos;
         //transform.position = targetObj.transform.position + rotCamera * localPos;
 
-        // マウスの右クリックを押している間
-        if (Input.GetMouseButton(1))
+        // エディタ上での操作
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
         {
-            // マウスの移動量
-            mouseInputX = Input.GetAxis("Mouse X");
-            mouseInputY = Input.GetAxis("Mouse Y");
+            // マウスの右クリックを押している間
+            if (Input.GetMouseButton(1))
+            {
+                // マウスの移動量
+                mouseInputX = Input.GetAxis("Mouse X");
+                mouseInputY = Input.GetAxis("Mouse Y");
 
-            // targetの位置のY軸を中心に、回転（公転）する
-            // playerToCamera = transform.position - targetPos;
-            // Vector3 proj;                                      // playerToCameraの法線に対する射影ベクトル
-
-            // proj = Vector3.Project(playerToCamera, postureController.GetsurfaceNormal);
-            // proj += targetPos;
-
-            //transform.RotateAround(targetPos, postureController.GetsurfaceNormal, mouseInputX * Time.deltaTime * 200f);
-            transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, mouseInputX * Time.deltaTime * 200f);
-            cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
+                // targetの位置のY軸を中心に、回転（公転）する
+                transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, mouseInputX * Time.deltaTime * 200f);
+                cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
 
 
+            }
         }
-
-        if( Input.touchCount == 2 )
+        // スマホ上での操作
+        else if (Application.isMobilePlatform)
         {
-            transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, touchDiff * Time.deltaTime * rotSpeed);
-            cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
+            // タッチ位置の差分の算出
+            touchDiff = cameraController.GetCameraRotateLength();
+
+            if (Input.touchCount == 2)
+            {
+                if (Mathf.Abs(touchDiff) > rotCameraThre)
+                {
+                    transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, touchDiff * Time.deltaTime * rotSpeed);
+                    cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
+                }
+            }
         }
 
     }
