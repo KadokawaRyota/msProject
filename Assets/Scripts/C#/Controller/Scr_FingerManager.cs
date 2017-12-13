@@ -56,8 +56,9 @@ public class Scr_FingerManager : MonoBehaviour
     //--------------------------------------------------------------------------
     //          更新処理
     //--------------------------------------------------------------------------
-	void Update () 
+	public void Update () 
     {
+        //Debug.Log("__青木＿＿");
         ////        タップ本数情報保存
         ////////////////////////////////////////////////////////////////////////
         nTouchCount = Input.touchCount;
@@ -159,9 +160,10 @@ public class Scr_FingerManager : MonoBehaviour
             // ぷにぷにコントローラに1本目のタップ情報を割り当て
             if (TouchCount == 1)
             {
-                nContollerID = Input.GetTouch(0).fingerId;  
+                if(Input.GetTouch(0).fingerId == 1)
+                    nContollerID = Input.GetTouch(0).fingerId;  
             }
-
+            
             CameraController.ResetValue();
         }
     }

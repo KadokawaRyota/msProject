@@ -45,7 +45,7 @@ public class Scr_ControllerManager : MonoBehaviour
     public void ControllerUpdate()
     {
         //if (Input.touchCount >= 1)
-        //{
+        {
             ////        エディタでの更新処理
             ////////////////////////////////////////////////////////////////////////
             if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
@@ -69,7 +69,7 @@ public class Scr_ControllerManager : MonoBehaviour
             }
 
             PuniPuniController.PuniPuniUpdate();
-        //}
+        }
     }
 
     //--------------------------------------------------------------------------
@@ -137,7 +137,8 @@ public class Scr_ControllerManager : MonoBehaviour
         //TouchPositionStart = Vector3.zero;
         TouchPositionNow = Vector3.zero;
         ControllerVec = Vector3.zero;
-        fControllerVecLength = 0.0f; ;
+        fControllerVecLength = 0.0f;
+
     }
 
     //--------------------------------------------------------------------------
@@ -145,6 +146,7 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public Vector3 GetControllerTouchPos()
     {
+
         return tTouchInfo.position;
     }
 }
