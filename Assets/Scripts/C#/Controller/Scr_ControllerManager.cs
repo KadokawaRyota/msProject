@@ -44,32 +44,32 @@ public class Scr_ControllerManager : MonoBehaviour
     //--------------------------------------------------------------------------
     public void ControllerUpdate()
     {
-        //if (Input.touchCount >= 1)
-        //{
-            ////        エディタでの更新処理
-            ////////////////////////////////////////////////////////////////////////
-            if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-            {
-                if (InputManager.GetTouchTrigger()) TouchTrigger();                                     // タップされた瞬間
-                else if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) TouchMove();  // タップをキープしている状態
-                else if (InputManager.GetTouchRelease()) TouchRelease();                                // タップを解除した瞬間
+        ////        エディタでの更新処理
+        ////////////////////////////////////////////////////////////////////////
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            if (InputManager.GetTouchTrigger()) TouchTrigger();                                     // タップされた瞬間
+            else if (InputManager.GetTouchPress() && !InputManager.GetTouchTrigger()) TouchMove();  // タップをキープしている状態
+            else if (InputManager.GetTouchRelease()) TouchRelease();                                // タップを解除した瞬間
 
-                //if (tTouchInfo.phase == TouchPhase.Began) TouchTrigger();
-                //else if (tTouchInfo.phase == TouchPhase.Moved || tTouchInfo.phase == TouchPhase.Stationary) TouchMove();
-                //else if (tTouchInfo.phase == TouchPhase.Ended) TouchRelease();
-            }
+            //if (tTouchInfo.phase == TouchPhase.Began) TouchTrigger();
+            //else if (tTouchInfo.phase == TouchPhase.Moved || tTouchInfo.phase == TouchPhase.Stationary) TouchMove();
+            //else if (tTouchInfo.phase == TouchPhase.Ended) TouchRelease();
+        }
 
-            ////        モバイルでの更新処理
-            ////////////////////////////////////////////////////////////////////////
-            else if (Application.isMobilePlatform)
+        ////        モバイルでの更新処理
+        ////////////////////////////////////////////////////////////////////////
+        else if (Application.isMobilePlatform)
+        {
+            if (Input.touchCount >= 1)
             {
                 if (tTouchInfo.phase == TouchPhase.Began) TouchTrigger();
                 else if (tTouchInfo.phase == TouchPhase.Moved || tTouchInfo.phase == TouchPhase.Stationary) TouchMove();
                 else if (tTouchInfo.phase == TouchPhase.Ended) TouchRelease();
             }
+        }
 
-            PuniPuniController.PuniPuniUpdate();
-        //}
+        PuniPuniController.PuniPuniUpdate();
     }
 
     //--------------------------------------------------------------------------
