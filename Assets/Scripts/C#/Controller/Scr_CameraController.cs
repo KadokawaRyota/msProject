@@ -34,22 +34,9 @@ public class Scr_CameraController : MonoBehaviour
     {
         if (Input.touchCount >= 2)
         {
-            if (tTouchInfo.phase == TouchPhase.Began)
-            {
-                TouchTrigger();   // トリガー
-            }
-            else if (tTouchInfo.phase == TouchPhase.Moved || tTouchInfo.phase == TouchPhase.Stationary)
-            {
-                TouchMove();      // 押下
-            }
-            else if (tTouchInfo.phase == TouchPhase.Ended)
-            {
-                TouchRelease();   // リリース
-            }
-        }
-        else
-        {
-            //ResetValue();
+            if (tTouchInfo.phase == TouchPhase.Began) TouchTrigger();   // トリガー
+            if (tTouchInfo.phase == TouchPhase.Moved || tTouchInfo.phase == TouchPhase.Stationary) TouchMove();      // 押下
+            if (tTouchInfo.phase == TouchPhase.Ended) TouchRelease();   // リリース
         }
 	}
 

@@ -16,7 +16,6 @@ public class scr_cameraDebugTest : MonoBehaviour
     [SerializeField]
     Text DebugTextLengthMin;
 
-
     Scr_CameraController CameraController;
     OfflineCameraStand Camera;
 

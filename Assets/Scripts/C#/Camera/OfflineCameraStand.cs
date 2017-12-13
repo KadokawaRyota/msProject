@@ -10,11 +10,10 @@ public class OfflineCameraStand : MonoBehaviour {
     public Vector3 localPos;                            // カメラローカル位置
     public float mouseInputX;
     public float mouseInputY;
-
+    public float rotSpeed = 1.0f;
 
     private Vector3 inputController;                    // コントローラー入力位置
-    private Vector3 inputCameraController_last;         // カメラコントローラー前回入力位置
-    private Vector3 inputCameraController_now;          // カメラコントローラー現在入力位置
+    private Vector3 inputCameraController;              // カメラコントローラー入力位置
 
     private Vector3 targetPos;                          // プレイヤー位置情報
     private Quaternion targetRot;                       // プレイヤー角度情報
@@ -22,8 +21,6 @@ public class OfflineCameraStand : MonoBehaviour {
     private Vector3 playerToCamera;                     // プレイヤーからカメラへのベクトル
     private Quaternion rotCamera;                       // カメラの傾き情報
     private float touchDiff;                            // マルチタップ,タッチ位置の差分
-    private float rotSpeed = 0.5f;                      // 回転読度調整用定数
-
 
     public Vector3 GetCameraDirection
     {
@@ -33,8 +30,6 @@ public class OfflineCameraStand : MonoBehaviour {
     Scr_ControllerManager controllerManager;            // コントローラのマネージャ
     Scr_CameraController cameraController;              // カメラコントローラのマネージャ
 
-    int debug_cnt = 0;
-    Vector3 _tes = Vector3.zero;
 
     void Start () {
         cameraDir = Vector3.Scale(transform.forward, new Vector3(1, 1, 1)).normalized;
@@ -49,6 +44,18 @@ public class OfflineCameraStand : MonoBehaviour {
 	
 	void Update () {
 
+        // コントローラー入力位置の取得
+        inputController = controllerManager.GetControllerTouchPos();
+
+        // カメラコントローラー入力値取得
+        inputCameraController = cameraController.GetCameraTouchPos();
+
+        // タッチ位置の差分の算出
+        touchDiff = inputCameraController.x - inputController.x;
+
+
+        //touchDiff /= 1080.0f;
+        //inputLength = 0.10f;
 
         // プレイヤー位置の取得
         targetPos = targetObj.transform.position;
@@ -73,37 +80,31 @@ public class OfflineCameraStand : MonoBehaviour {
         transform.position = targetObj.transform.position + rotCameraEvac * localPos;
         //transform.position = targetObj.transform.position + rotCamera * localPos;
 
-        // エディタ上の処理
-        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
+        // マウスの右クリックを押している間
+        if (Input.GetMouseButton(1))
         {
-            // マウスの右クリックを押している間
-            if (Input.GetMouseButton(1))
-            {
-                // マウスの移動量
-                mouseInputX = Input.GetAxis("Mouse X");
-                mouseInputY = Input.GetAxis("Mouse Y");
+            // マウスの移動量
+            mouseInputX = Input.GetAxis("Mouse X");
+            mouseInputY = Input.GetAxis("Mouse Y");
 
-                // カメラの回転処理
-                transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, mouseInputX * Time.deltaTime * 200f);
-                cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
+            // targetの位置のY軸を中心に、回転（公転）する
+            // playerToCamera = transform.position - targetPos;
+            // Vector3 proj;                                      // playerToCameraの法線に対する射影ベクトル
+
+            // proj = Vector3.Project(playerToCamera, postureController.GetsurfaceNormal);
+            // proj += targetPos;
+
+            //transform.RotateAround(targetPos, postureController.GetsurfaceNormal, mouseInputX * Time.deltaTime * 200f);
+            transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, mouseInputX * Time.deltaTime * 200f);
+            cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
 
 
-            }
         }
-        // スマホ上の処理
-        else if (Application.isMobilePlatform)
-        {
-            // 2本指以上の時
-            if (Input.touchCount == 2)
-            {
-                touchDiff = cameraController.GetCameraRotateLength();
 
-                if (Mathf.Abs( touchDiff ) > 50.0f)
-                {
-                    transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, touchDiff * Time.deltaTime * rotSpeed);
-                    cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
-                }
-            }
+        if( Input.touchCount == 2 )
+        {
+            transform.RotateAround(targetPos, offlinePostureController.GetsurfaceNormal, touchDiff * Time.deltaTime * rotSpeed);
+            cameraDir = Vector3.ProjectOnPlane(targetPos - transform.position, offlinePostureController.GetsurfaceNormal);
         }
 
     }
