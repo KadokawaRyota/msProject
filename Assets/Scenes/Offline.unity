@@ -720,6 +720,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1293679744269604, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
+      propertyPath: m_TagString
+      value: transportObject
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
   m_IsPrefabParent: 0

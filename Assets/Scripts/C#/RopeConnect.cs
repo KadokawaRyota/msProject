@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class RopeConnect : MonoBehaviour {
 
-    public GameObject pullObject;
-    public GameObject pullPlayer;
+    ObjectController pullObjectScript;
+
+    private GameObject pullObject;
+    private GameObject pullPlayer;
     private Vector3 midPos;             // オブジェクトの中間地
     private Vector3 surfaceVec;
 
@@ -17,12 +19,27 @@ public class RopeConnect : MonoBehaviour {
 	
 	void Update () {
 
-        if (pullObject == null) return;
+        pullObjectScript = GameObject.Find("MissionManager/Transportation/MissionObject/Object").GetComponent<ObjectController>();
+
+        // 引くオブジェクトとプレイヤーが紐づけされたか判断
+        if (pullObjectScript.player == null)
+        {
+            GetComponent<Renderer>().enabled = false;
+            return;
+        }
+        else
+        {
+            GetComponent<Renderer>().enabled = true; 
+        }
+
+        // 引くオブジェクトの取得
+        pullObject = pullObjectScript.gameObject;
+
 
         // オブジェクトの中間点を求めて配置
         midPos = (pullObject.transform.position - pullPlayer.transform.position) / 2.0f;
         surfaceVec = midPos;
-        transform.localPosition = pullPlayer.transform.position + midPos;
+        transform.position = pullPlayer.transform.position + midPos;
 
         // オブジェクト間の距離を求めてスケールの調整
         distX = Vector3.Distance(pullObject.transform.position, pullPlayer.transform.position);
