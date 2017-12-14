@@ -380,7 +380,7 @@ public class PunipuniController : MonoBehaviour
     {
         ////    レイヤーマスク作成
         ////////////////////////////////////////////////////////////////////////
-        LayerMask mask = 1 << LayerMask.NameToLayer("UI");      // この場合"UI"レイヤーを持っているオブジェクトのみ当たる
+        LayerMask mask = 1 << LayerMask.NameToLayer("Object");      // この場合"UI"レイヤーを持っているオブジェクトのみ当たる
 
         
         ////    レイの設定
@@ -398,18 +398,26 @@ public class PunipuniController : MonoBehaviour
         
         ////    レイが当たっていた場合の処理
         ////////////////////////////////////////////////////////////////////////
-        if (Physics.Raycast(ray, out hit, 1000.0f, mask) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        //if (Physics.Raycast(ray, out hit, 1000.0f, mask) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
-            //hit.collider.GetComponent<MeshRenderer>().material.color = Color.red; // ヒットしているオブジェクトの色を変える
-            //TapGameObject = hit.collider.gameObject;                                // ヒットしているオブジェクトの取得
-            Debug.Log(hit.collider.gameObject.name);                                // ヒットしているオブジェクトの名前をデバッグ表示
+            if (hit.collider.tag == "Object")                                       // ヒットしているオブジェクトの色を変える
+            {
+                TapGameObject = hit.collider.gameObject;                                // ヒットしているオブジェクトの取得
+                Debug.Log(hit.collider.gameObject.name);                                // ヒットしているオブジェクトの名前をデバッグ表示
+            }
+
+            else 
+            {
+                
+            }
         }
 
         ////    レイが当たっていない場合の処理
         ////////////////////////////////////////////////////////////////////////
         else
         {
-            Debug.Log(" UI無し ");
+            Debug.Log(" オブジェクト無し ");
         }
     }
 
