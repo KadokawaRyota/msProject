@@ -45,10 +45,12 @@ public class OfflineCameraStand : MonoBehaviour {
 	void Update () {
 
         // コントローラー入力位置の取得
-        inputController = controllerManager.GetControllerTouchPos();
+        if(null != controllerManager)
+            inputController = controllerManager.GetControllerTouchPos();
 
         // カメラコントローラー入力値取得
-        inputCameraController = cameraController.GetCameraTouchPos();
+        if(null != cameraController)
+            inputCameraController = cameraController.GetCameraTouchPos();
 
         // タッチ位置の差分の算出
         touchDiff = inputCameraController.x - inputController.x;
