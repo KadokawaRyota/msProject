@@ -515,7 +515,7 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
@@ -542,7 +542,7 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: serverIPAdress
-      value: 192.168.13.2
+      value: localhost
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}
@@ -1449,27 +1449,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1455531680024298, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
       propertyPath: m_TagString
-      value: Object
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1946202545046446, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
       propertyPath: m_TagString
-      value: Object
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1778720062574362, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
       propertyPath: m_TagString
-      value: Object
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1754030263630168, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
       propertyPath: m_TagString
-      value: Object
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1855499643914418, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
       propertyPath: m_TagString
-      value: Object
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1155633016410190, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
       propertyPath: m_TagString
-      value: Object
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
