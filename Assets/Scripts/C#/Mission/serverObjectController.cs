@@ -107,12 +107,22 @@ public class serverObjectController : NetworkBehaviour {
             Refresh();
         }
 
-
         //リストに何も入ってない！
         if (players.Count <= 0 ) return;
 
         foreach (GameObject player in players)
         {
+            //オブジェクトがゴールしていない時。
+            if (!bGoal)
+            {
+                //プレイヤーが引っ張るオブジェクトとの繋がりを切っていた場合。
+                if (player.GetComponent<playerTransportationScript>().GetTransportObject() == null)
+                {
+                    players.Remove(player);
+                    continue;
+                }
+            }
+
             //現在の紐付いているプレイヤーからプレイヤーが引く力を調節
             int playerNum = players.Count / transportNum;
             if(playerNum > 1) playerNum = 1;

@@ -20,6 +20,10 @@ public class PlayerNetworkSetup : NetworkBehaviour
             name = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().GetPlayerName();
             name = "Player";
 
+            //自分を操作するぷにコンに自分自身を伝える。
+            PunipuniController punipuni = GameObject.Find("PuniconCamera/Punicon").GetComponent<PunipuniController>();
+            punipuni.SetPlayer(this.gameObject);
+
             //ローディングイメージのアクティブを切る
             if (GameObject.Find("OnlineCanvas/LoadingImage") != null)
             {
