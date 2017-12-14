@@ -134,7 +134,14 @@ public class ObjectController : MonoBehaviour
     public void DispSwitch( bool bDisp )
     {
         GetComponent<MeshRenderer>().enabled = bDisp;
-        GetComponent<SphereCollider>().enabled = bDisp;
+        if (GetComponent<BoxCollider>() != null)
+        {
+            GetComponent<BoxCollider>().enabled = bDisp;
+        }
+        else if (GetComponent<SphereCollider>() != null)
+        {
+            GetComponent<SphereCollider>().enabled = bDisp;
+        }
         GetComponent<Rigidbody>().isKinematic = !bDisp;
         stencil.SetActive(true);
     }

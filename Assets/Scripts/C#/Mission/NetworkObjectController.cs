@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class NetworkObjectController : NetworkBehaviour
 {
+    [SerializeField]
+    GameObject stencil;
+
     // Use this for initialization
     void Start()
     {
@@ -15,8 +18,19 @@ public class NetworkObjectController : NetworkBehaviour
     public void DispSwitch(bool bDisp)
     {
         GetComponent<MeshRenderer>().enabled = bDisp;
-        GetComponent<BoxCollider>().enabled = bDisp;
+
+        if (GetComponent<BoxCollider>() != null)
+        {
+            GetComponent<BoxCollider>().enabled = bDisp;
+        }
+        else if (GetComponent<SphereCollider>() != null)
+        {
+            GetComponent<SphereCollider>().enabled = bDisp;
+        }
+
         GetComponent<Rigidbody>().isKinematic = !bDisp;
+
+        stencil.SetActive(true);
     }
 
 }

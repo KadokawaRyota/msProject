@@ -2039,6 +2039,7 @@ MonoBehaviour:
   playerSpringConstant: 0
   transportObject: {fileID: 0}
   SyncbRunTimeTransport: 0
+  Rope: {fileID: 0}
 --- !u!114 &114775995180779820
 MonoBehaviour:
   m_ObjectHideFlags: 1
