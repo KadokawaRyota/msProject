@@ -30,9 +30,11 @@ public class PunipuniController : MonoBehaviour
     public int TapDiscriminationFrame;                  // タップorホールド判別用変数タップorホールド判別時間(〇フレーム以内ならタップ、それ以上ならホールド)
     public int nStateCheckCounter;                      // タップorホールド判別用カウンター
     public TOUCH_STATE TouchState = TOUCH_STATE.NONE;   // タップの状況
-    //public static Touch tTouchInfo;                     // タップ情報
+    //public static Touch tTouchInfo;                   // タップ情報
     public Vector3 BeginMousePosition;                  // タップ位置
+    public GameObject TapGameObject;                    // タップしたオブジェクト
     private bool bStateCountFlug;
+
     
     #endregion
 
@@ -207,10 +209,13 @@ public class PunipuniController : MonoBehaviour
                 pos = Scr_ControllerManager.tTouchInfo.position;
             }
 
+             
+
             ////    コントローラに位置情報を設定
             ////////////////////////////////////////////////////////////////////   
             BeginMousePosition = TargetCamera.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 1.0f));
             transform.position = TargetCamera.ScreenToWorldPoint(new Vector3(pos.x, pos.y, 1.0f));
+            CheckUIObjectRay();
         }
 
     //--------------------------------------------------------------------------
@@ -371,17 +376,21 @@ public class PunipuniController : MonoBehaviour
 		return false;
 	}
 
-    private bool CheckUIObjectRay()     // レイでの判定(3D)
+    public void  CheckUIObjectRay()     // レイでの判定(3D)
     {
         ////    レイヤーマスク作成
         ////////////////////////////////////////////////////////////////////////
-        //int enablelayer = 1 << LayerMask.NameToLayer("UI");
+        LayerMask mask = 1 << LayerMask.NameToLayer("UI");      // この場合"UI"レイヤーを持っているオブジェクトのみ当たる
+
         
         ////    レイの設定
         ////////////////////////////////////////////////////////////////////////
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.Log(Input.mousePosition); 
-        Debug.Log(ray);      
+        
+        if (Application.isMobilePlatform)
+        {
+            ray = Camera.main.ScreenPointToRay(Scr_ControllerManager.tTouchInfo.position);        // レイの作成
+        }
 
         ////    レイの作成
         ////////////////////////////////////////////////////////////////////////
@@ -389,16 +398,19 @@ public class PunipuniController : MonoBehaviour
         
         ////    レイが当たっていた場合の処理
         ////////////////////////////////////////////////////////////////////////
-        if (Physics.Raycast(ray, out hit))  //,enablelayer
+        if (Physics.Raycast(ray, out hit, 1000.0f, mask) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log(hit.collider.gameObject.name);
-            return true;
+            //hit.collider.GetComponent<MeshRenderer>().material.color = Color.red; // ヒットしているオブジェクトの色を変える
+            //TapGameObject = hit.collider.gameObject;                                // ヒットしているオブジェクトの取得
+            Debug.Log(hit.collider.gameObject.name);                                // ヒットしているオブジェクトの名前をデバッグ表示
         }
 
         ////    レイが当たっていない場合の処理
         ////////////////////////////////////////////////////////////////////////
-        Debug.Log(" UI無し ");
-        return false;
+        else
+        {
+            Debug.Log(" UI無し ");
+        }
     }
 
     private bool CheckUIObjectRay2D()   // レイでの判定(2D)
