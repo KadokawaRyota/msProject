@@ -515,7 +515,7 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
@@ -1077,6 +1077,21 @@ Prefab:
       value: 
       objectReference: {fileID: 1988203635526700, guid: c03d61584204d9c4c8decaa6477a7d36,
         type: 2}
+    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: arrivalAreaPosition.y
+      value: 23.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: arrivalAreaPosition.x
+      value: 8.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114084016358167076, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: arrivalAreaPosition.z
+      value: 8.79
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
   m_IsPrefabParent: 0
