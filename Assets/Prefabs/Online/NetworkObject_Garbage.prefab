@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 114234370820656432}
   m_Layer: 0
   m_Name: NetworkObject_Garbage
-  m_TagString: Untagged
+  m_TagString: transportObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
