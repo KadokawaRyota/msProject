@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 //プレイヤー情報保持
 public class CharactorInfo : MonoBehaviour {
@@ -17,7 +18,6 @@ public class CharactorInfo : MonoBehaviour {
         MAX
     };
 
-    [SerializeField]
     static CHARA charSelectData = CHARA.TANUKI;   //種類格納
 
     [SerializeField]

@@ -1,17 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.Networking.NetworkSystem;
 
-class CharaConnect : NetworkBehaviour
+//Serverに情報を送るためにNetworkBehaviourを継承したクラスを用意
+/*class CharaConnect : NetworkBehaviour
 {
     [SyncVar]
-    public int chara;
+    public int chara;       //使用キャラ同期用
 
-    [ClientCallback]
+    [Client]
     public void CallCmd(int c)
     {
         Debug.Log("CallCmd OK");
         CmdSetCharactor(c);
+    }
+
+    public void CharaConnectUpdate(int c)
+    {
+        Debug.Log(c);
+        CallCmd(c);
     }
 
     //[Commond]が通らない
@@ -21,14 +29,16 @@ class CharaConnect : NetworkBehaviour
         Debug.Log("CmdSetCharactor OK");
         chara = c;
     }
-}
+}*/
+
+//ネットワーク接続に関するクラス
 public class NetConnector : NetworkManager
 {
 
-    NetworkManager manager;
+    NetworkManager manager; //NetwokManager取得用
 
 	[SerializeField]
-	Image loadingImage;
+	Image loadingImage;     //接続時に切り替え
 
     //サーバー切り替えフラグ
     public bool isStartAsServer = true;
@@ -40,27 +50,35 @@ public class NetConnector : NetworkManager
 
 	GameObject canvas;				//オンラインCanvasの取得
 
+    //ネットワークプレハブ
     [SerializeField]
     GameObject TransportationObject;
 
-    [SerializeField]
+    //プレイヤープレハブ    0:タヌキ
+    //                        1:ネコ
+    //                        2:キツネ
+    //                        3:イヌ
+
+    [Header("プレイヤー:タヌキ"),SerializeField]
     GameObject PlayerPrefab_0;
 
-    [SerializeField]
+    [Header("プレイヤー:ネコ"), SerializeField]
     GameObject PlayerPrefab_1;
 
-    [SerializeField]
+    [Header("プレイヤー:キツネ"), SerializeField]
     GameObject PlayerPrefab_2;
 
-    [SerializeField]
+    [Header("プレイヤー:イヌ"), SerializeField]
     GameObject PlayerPrefab_3;
 
-    CharactorInfo charaInfo;
-    CharaConnect charaConnect;
+
+    CharactorInfo charaInfo;    //選んだキャラクター情報
+
+    bool createPlayer = false;  //生成フラグ
+
 
     void Start()
 	{
-
 		//NetworkManagerの取得
 		manager = GetComponent<NetworkManager>();
 
@@ -89,32 +107,19 @@ public class NetConnector : NetworkManager
         {
             charaInfo = c.GetComponent<CharactorInfo>();
         }
-        //chara = charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData();
-       // int c = (int)charaInfo.GetComponent<CharactorInfo>().GetCharaSelectData();
-        //CmdSetCharactor(c);
+
+        //charaConnect = new CharaConnect();
+
+        
 
 
-        charaInfo.SetCharaSelectData(CharactorInfo.CHARA.DOG);
-
-        charaConnect = new CharaConnect();
-
-
-
-        //クライアント処理
-        if (!isStartAsServer)
-		{
-			//接続時のローディングイメージを有効
-			loadingImage.gameObject.SetActive(true);
-		}
+		//接続時のローディングイメージを有効
+		loadingImage.gameObject.SetActive(true);
 
 		OnlineSetup();  //オンライン時の設定
 
 	}
 
-    private void Update()
-    {
-        Debug.Log(charaConnect.chara);
-    }
     //オンラインセットアップ関数
     void OnlineSetup()
 	{
@@ -140,16 +145,12 @@ public class NetConnector : NetworkManager
                 //仮想コントローラーの実装
                 punioconCamera.SetActive(true);
 
-                charaConnect.CallCmd((int)charaInfo.GetCharaSelectData());
-
-                Debug.Log("CharaConnect更新後");
-                Debug.Log((CharactorInfo.CHARA)charaConnect.chara);
+                
+                //charaConnect.CallCmd((int)charaInfo.GetCharaSelectData());
 
                 manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
                 manager.StartClient();                      //クライアント処理開始
                 Debug.Log("Start as Client");   
-
-
             }
 
 		}
@@ -169,16 +170,43 @@ public class NetConnector : NetworkManager
         }
 	}
 
-    //指定したプレイヤーを生成するためにオーバーライド
-    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    void Update()
     {
-        if(isStartAsServer)
+        /////////////////////////////////////
+        //　名前のメッセージも追加する必要あり
+        ////////////////////////////////////
+
+        //プレイヤーを生成したかどうか
+        if (!createPlayer)
         {
-            charaConnect.chara = (int)charaInfo.GetCharaSelectData();
+            //未生成ならサーバへメッセージを飛ばす（自分が選んだキャラクター）
+            var message = new IntegerMessage((int)charaInfo.GetCharaSelectData());
+            if (!ClientScene.AddPlayer(ClientScene.readyConnection, 0, message))
+            {
+                return;
+            }
         }
+    }
+
+    /*public void SendMessageToServer(<T> mess)
+    {
+
+    }*/
+
+    //指定したプレイヤーを生成するためにオーバーライド
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader reader)
+    {
+        //メッセージの取得
+        var message = reader.ReadMessage<IntegerMessage>();
+
+        //メッセージの番号をintにキャスト
+        int playerNum = (int)message.value;
+
         GameObject obj = null;
 
-        switch ((CharactorInfo.CHARA)charaConnect.chara)
+        //生成するプレイヤーのプレハブ情報を取得
+        switch((CharactorInfo.CHARA)playerNum)
+        //switch ((CharactorInfo.CHARA)charaConnect.GetComponent<CharaConnect>().GetCharaNum())
         {
             case CharactorInfo.CHARA.TANUKI:
                 obj = (GameObject)Instantiate(PlayerPrefab_0, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
@@ -196,10 +224,14 @@ public class NetConnector : NetworkManager
                 obj = (GameObject)Instantiate(PlayerPrefab_3, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
                 break;
         }
+
+        //生成
         NetworkServer.AddPlayerForConnection(conn, obj, playerControllerId);
-        
+
+        createPlayer = true;        //プレイヤー生成完了フラグ
     }
 
+    //ネットワーク終了処理
     public void Disconnect()
     {
         //manager.StopClient();
