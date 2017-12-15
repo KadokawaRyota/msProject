@@ -32,7 +32,6 @@ public class PunipuniController : MonoBehaviour
     public TOUCH_STATE TouchState = TOUCH_STATE.NONE;   // タップの状況
     //public static Touch tTouchInfo;                   // タップ情報
     public Vector3 BeginMousePosition;                  // タップ位置
-    public GameObject TapGameObject;                    // タップしたオブジェクト
     private bool bStateCountFlug;
 
     
@@ -59,12 +58,16 @@ public class PunipuniController : MonoBehaviour
     Bezier BezierL = new Bezier();
     Bezier BezierR = new Bezier();
     #endregion
-    
+
+    ////    オブジェクトを引っ張る用
+    ////////////////////////////////////////////////////////////////////////
+    private playerTransportationScript playerTransportationscript;
+
     //--------------------------------------------------------------------------
     //          ぷにこん表示設定(表示のON/OFF)
     //--------------------------------------------------------------------------
-        #region プロパティ
-        private bool VisiblePunipuniController
+    #region プロパティ
+    private bool VisiblePunipuniController
         {
             get
             {
@@ -372,7 +375,7 @@ public class PunipuniController : MonoBehaviour
 
         ////    当たっていなかった場合の処理
         ////////////////////////////////////////////////////////////////////////
-        Debug.Log("UIなし"); 
+        Debug.Log("UIなし");
 		return false;
 	}
 
@@ -380,7 +383,7 @@ public class PunipuniController : MonoBehaviour
     {
         ////    レイヤーマスク作成
         ////////////////////////////////////////////////////////////////////////
-        LayerMask mask = 1 << LayerMask.NameToLayer("UI");      // この場合"UI"レイヤーを持っているオブジェクトのみ当たる
+        LayerMask mask = 1 << LayerMask.NameToLayer("Object");      // この場合"UI"レイヤーを持っているオブジェクトのみ当たる
 
         
         ////    レイの設定
@@ -398,18 +401,45 @@ public class PunipuniController : MonoBehaviour
         
         ////    レイが当たっていた場合の処理
         ////////////////////////////////////////////////////////////////////////
-        if (Physics.Raycast(ray, out hit, 1000.0f, mask) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        //if (Physics.Raycast(ray, out hit, 1000.0f, mask) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity) && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
-            //hit.collider.GetComponent<MeshRenderer>().material.color = Color.red; // ヒットしているオブジェクトの色を変える
-            //TapGameObject = hit.collider.gameObject;                                // ヒットしているオブジェクトの取得
-            Debug.Log(hit.collider.gameObject.name);                                // ヒットしているオブジェクトの名前をデバッグ表示
+            //引っ張れるオブジェクト　かつ　紐が伸びきる距離よりも近い。
+            if (hit.collider.tag == "transportObject")  // ヒットしているオブジェクトの色を変える
+            {
+                float fDistance = hit.collider.gameObject.GetComponent<serverObjectController>().GetfDistance();
+                float playerDistance = Vector3.Distance(playerTransportationscript.gameObject.transform.position, hit.collider.gameObject.transform.position);
+
+                if (fDistance > playerDistance)
+                {
+                    Vector3 vec = hit.collider.gameObject.transform.position - playerTransportationscript.gameObject.transform.position;
+                    vec = Vector3.ProjectOnPlane(vec, playerTransportationscript.gameObject.transform.up);
+                    playerTransportationscript.gameObject.GetComponent<OfflinePostureController>().dirVec = vec;
+
+
+                    playerTransportationscript.gameObject.GetComponent<OfflinePostureController>().actionPlay();
+
+                    //プレイヤーが何も引っ張っていない。
+                    if (playerTransportationscript.GetTransportObject() == null)
+                    {
+                        //プレイヤーとオブジェクトを繋ぐ処理
+                        playerTransportationscript.GetComponent<playerTransportationScript>().TouchTransportObject(hit.collider.gameObject);
+                    }
+                    //今引っ張ってるオブジェクトを再タッチした。
+                    else if (playerTransportationscript.GetTransportObject() == hit.collider.gameObject)
+                    {
+                        //プレイヤーとオブジェクトを解放する処理。
+                        playerTransportationscript.CmdProvidebPullToServer(false, null);
+                    }
+                }
+            }
         }
 
         ////    レイが当たっていない場合の処理
         ////////////////////////////////////////////////////////////////////////
         else
         {
-            Debug.Log(" UI無し ");
+            Debug.Log(" オブジェクト無し ");
         }
     }
 
@@ -723,6 +753,8 @@ public class PunipuniController : MonoBehaviour
         ////////////////////////////////////////////////////////////////////
         VisiblePunipuniController = false;
     }
+    public void SetPlayer(GameObject Player)
+    {
+        playerTransportationscript = Player.GetComponent<playerTransportationScript>();
+    }
 }
-
-

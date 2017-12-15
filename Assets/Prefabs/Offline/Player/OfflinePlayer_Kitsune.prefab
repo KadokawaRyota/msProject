@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 114874221147048082}
   m_Layer: 0
   m_Name: OfflinePlayer_Kitsune
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1739,6 +1739,8 @@ MonoBehaviour:
   localPos: {x: 0, y: 7, z: -7}
   mouseInputX: 0
   mouseInputY: 0
+  rotSpeed: 0.5
+  rotCameraThre: 50
 --- !u!114 &114954589016944400
 MonoBehaviour:
   m_ObjectHideFlags: 1

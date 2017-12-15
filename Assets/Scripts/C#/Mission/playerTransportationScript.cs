@@ -145,17 +145,17 @@ public class playerTransportationScript : NetworkBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    public void TouchTransportObject(GameObject touchTransportObject)
     {
         //オブジェクトに触った。オブジェクトを引っ張ってなかった。自分が操作可能プレイヤーである。
-        if (collision.gameObject.tag == "transportObject" && transportObject == null && isLocalPlayer == true)
+        if (transportObject == null && isLocalPlayer == true)
         {
             //サーバー側のオブジェクトにプレイヤーを追加して欲しいメッセージとプレイヤーにオブジェクトを紐付け
-            CmdProvidebPullToServer(true , collision.gameObject);
+            CmdProvidebPullToServer(true , touchTransportObject);
             //ロープにオブジェクトを渡す。
-            Rope.GetComponent<RopeConnect>().SetObject(collision.gameObject);
+            Rope.GetComponent<RopeConnect>().SetObject(touchTransportObject);
 
-            serverObjectController serverObjectControllerScript = collision.gameObject.GetComponent<serverObjectController>();
+            serverObjectController serverObjectControllerScript = touchTransportObject.GetComponent<serverObjectController>();
 
             ////オブジェクトを引っ張るステータス設定。
             fDistance = serverObjectControllerScript.GetfDistance();

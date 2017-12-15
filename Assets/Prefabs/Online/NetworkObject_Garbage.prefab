@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4098445289844298}
   - component: {fileID: 33625348753333382}
   - component: {fileID: 23017759787099366}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StencilShadow_Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 114150905304167766}
   - component: {fileID: 114625914274607186}
   - component: {fileID: 114234370820656432}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: NetworkObject_Garbage
-  m_TagString: Untagged
+  m_TagString: transportObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

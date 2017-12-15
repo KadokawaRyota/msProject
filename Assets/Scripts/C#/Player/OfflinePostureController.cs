@@ -30,7 +30,7 @@ public class OfflinePostureController : MonoBehaviour {
 	private Vector3 playerNormal;       // プレイヤーオブジェクトの法線
 	private Vector3 surfaceNormal;      // プレイヤー接地面の法線
 	private Animator animator;          // アニメーション情報
-	private Vector3 dirVec;             // 現在のプレイヤー進行方向
+	public Vector3 dirVec;             // 現在のプレイヤー進行方向
 	private Vector3 moveVec;            // プレイヤー移動量
     private Vector2 inputVec;           // 現在の入力移動方向   
     private Vector2 inputVecN;          // 現在の入力移動方向( 正規化 )
@@ -39,7 +39,7 @@ public class OfflinePostureController : MonoBehaviour {
 	private Vector3 difPosition;        // プレイヤー位置の差分
 
 
-    enum AnimationNum { Idle, Walk, Running };
+    enum AnimationNum { Idle, Walk, Running , Action };
     AnimationNum animationNum;
 
     Scr_ControllerManager controllerManager;    //コントローラのマネージャ
@@ -215,7 +215,8 @@ public class OfflinePostureController : MonoBehaviour {
         {
             case AnimationNum.Idle:
                 {
-					animator.SetBool("is_walk", false);
+                    animator.SetBool("is_action", false);
+                    animator.SetBool("is_walk", false);
                     animator.SetBool("is_running", false);
                     particleManager.SetSmokeFlg(false);
                     break;
@@ -274,5 +275,11 @@ public class OfflinePostureController : MonoBehaviour {
     public Vector3 GetSurfaceNormal()
     {
         return surfaceNormal;
+    }
+
+    public void actionPlay()
+    {
+        animator.SetBool("is_action",true);
+        animationNum = AnimationNum.Action;
     }
 }
