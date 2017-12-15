@@ -71,6 +71,7 @@ public class NetConnector : NetworkManager
     [Header("プレイヤー:イヌ"), SerializeField]
     GameObject PlayerPrefab_3;
 
+    GameObject localPlayer;
 
     CharactorInfo charaInfo;    //選んだキャラクター情報
 
@@ -185,6 +186,8 @@ public class NetConnector : NetworkManager
             {
                 return;
             }
+
+            createPlayer = true;
         }
     }
 
@@ -206,7 +209,6 @@ public class NetConnector : NetworkManager
 
         //生成するプレイヤーのプレハブ情報を取得
         switch((CharactorInfo.CHARA)playerNum)
-        //switch ((CharactorInfo.CHARA)charaConnect.GetComponent<CharaConnect>().GetCharaNum())
         {
             case CharactorInfo.CHARA.TANUKI:
                 obj = (GameObject)Instantiate(PlayerPrefab_0, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
@@ -225,10 +227,11 @@ public class NetConnector : NetworkManager
                 break;
         }
 
+        createPlayer = true;        //プレイヤー生成完了フラグ
+
         //生成
         NetworkServer.AddPlayerForConnection(conn, obj, playerControllerId);
 
-        createPlayer = true;        //プレイヤー生成完了フラグ
     }
 
     //ネットワーク終了処理
@@ -237,5 +240,16 @@ public class NetConnector : NetworkManager
         //manager.StopClient();
         //manager.OnClientDisconnect(GetComponent<NetworkIdentity>().connectionToClient);
         Shutdown();
+    }
+
+    //ローカルプレイヤーオブジェクトの設定
+    public void SetLocalPlayer(GameObject player)
+    {
+        localPlayer = player;
+    }
+
+    public GameObject GetLocalPlayer()
+    {
+        return localPlayer;
     }
 }
