@@ -467,6 +467,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
+      propertyPath: m_Channels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
       propertyPath: m_SpawnPrefabs.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -515,12 +520,12 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: m_AutoCreatePlayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
@@ -542,7 +547,32 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: serverIPAdress
-      value: 192.168.13.4
+      value: localhost
+      objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: m_Channels.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: m_CustomConfig
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: m_UseSimulator
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: charaConnect
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[6]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}

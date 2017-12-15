@@ -42,6 +42,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
             //ミッションマネージャに自分がスポーンした事を知らせる。
             GameObject.Find("NetworkMissionManager").GetComponent<NetworkMissionManager>().SetPlayer(this.gameObject);
 
+            //接続時のローディングイメージを有効
+//            GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
         }
 		else
 		{

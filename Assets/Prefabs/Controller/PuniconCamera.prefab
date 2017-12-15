@@ -837,6 +837,7 @@ MonoBehaviour:
   nStateCheckCounter: 0
   TouchState: 0
   BeginMousePosition: {x: 0, y: 0, z: 0}
+  TapGameObject: {fileID: 0}
   RadiusPixel: 40
 --- !u!114 &114085302318000494
 MonoBehaviour:
