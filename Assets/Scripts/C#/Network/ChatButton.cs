@@ -13,7 +13,7 @@ public class ChatButton : MonoBehaviour {
         if(null != localPlayer)
         {
             //チャット再生フラグの切り替え
-            localPlayer.GetComponent<PlayerSyncChat>().PlayChat();
+            localPlayer.GetComponent<PlayerSyncChat>().SendChatFlg(true);
         }
     }
 }

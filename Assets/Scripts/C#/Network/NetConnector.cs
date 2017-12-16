@@ -3,33 +3,6 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.Networking.NetworkSystem;
 
-//Serverに情報を送るためにNetworkBehaviourを継承したクラスを用意
-/*class CharaConnect : NetworkBehaviour
-{
-    [SyncVar]
-    public int chara;       //使用キャラ同期用
-
-    [Client]
-    public void CallCmd(int c)
-    {
-        Debug.Log("CallCmd OK");
-        CmdSetCharactor(c);
-    }
-
-    public void CharaConnectUpdate(int c)
-    {
-        Debug.Log(c);
-        CallCmd(c);
-    }
-
-    //[Commond]が通らない
-    [Command]
-    public void CmdSetCharactor(int c)
-    {
-        Debug.Log("CmdSetCharactor OK");
-        chara = c;
-    }
-}*/
 
 //ネットワーク接続に関するクラス
 public class NetConnector : NetworkManager
@@ -177,17 +150,20 @@ public class NetConnector : NetworkManager
         //　名前のメッセージも追加する必要あり
         ////////////////////////////////////
 
-        //プレイヤーを生成したかどうか
-        if (!createPlayer)
+        if (!isStartAsServer)
         {
-            //未生成ならサーバへメッセージを飛ばす（自分が選んだキャラクター）
-            var message = new IntegerMessage((int)charaInfo.GetCharaSelectData());
-            if (!ClientScene.AddPlayer(ClientScene.readyConnection, 0, message))
+            //プレイヤーを生成したかどうか
+            if (!createPlayer)
             {
-                return;
-            }
+                //未生成ならサーバへメッセージを飛ばす（自分が選んだキャラクター）
+                var message = new IntegerMessage((int)charaInfo.GetCharaSelectData());
+                if (!ClientScene.AddPlayer(ClientScene.readyConnection, 0, message))
+                {
+                    return;
+                }
 
-            createPlayer = true;
+                createPlayer = true;       //プレイヤー生成完了フラグ
+            }
         }
     }
 
@@ -203,7 +179,7 @@ public class NetConnector : NetworkManager
         var message = reader.ReadMessage<IntegerMessage>();
 
         //メッセージの番号をintにキャスト
-        int playerNum = (int)message.value;
+        int playerNum = message.value;
 
         GameObject obj = null;
 
@@ -226,8 +202,6 @@ public class NetConnector : NetworkManager
                 obj = (GameObject)Instantiate(PlayerPrefab_3, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
                 break;
         }
-
-        createPlayer = true;        //プレイヤー生成完了フラグ
 
         //生成
         NetworkServer.AddPlayerForConnection(conn, obj, playerControllerId);
