@@ -135,6 +135,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1174206075014852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4196083521093064}
+  - component: {fileID: 33539411819091728}
+  - component: {fileID: 23759288474874194}
+  - component: {fileID: 95174838628764188}
+  - component: {fileID: 114528728701844734}
+  m_Layer: 0
+  m_Name: ChatImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1175968932555250
 GameObject:
   m_ObjectHideFlags: 1
@@ -609,6 +628,7 @@ GameObject:
   - component: {fileID: 114163597985472832}
   - component: {fileID: 114691280310639112}
   - component: {fileID: 114570060317425658}
+  - component: {fileID: 114897485182606372}
   m_Layer: 0
   m_Name: OnlinePlayer_Neko
   m_TagString: Untagged
@@ -977,6 +997,19 @@ Transform:
   m_Father: {fileID: 4386423531672982}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 20.5, y: 0, z: 0}
+--- !u!4 &4196083521093064
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174206075014852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4386423531672982}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4208845498892790
 Transform:
   m_ObjectHideFlags: 1
@@ -1145,6 +1178,7 @@ Transform:
   - {fileID: 4145993792497564}
   - {fileID: 4192786194506572}
   - {fileID: 4502588289991184}
+  - {fileID: 4196083521093064}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1728,8 +1762,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1458729502754416}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1785,6 +1819,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &23759288474874194
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174206075014852}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: a42d7dcf24127ab40aa4e423636bbcd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!33 &33203994456765512
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1799,6 +1865,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1915016460893716}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &33539411819091728
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174206075014852}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &33945269717106344
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1849,6 +1922,23 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1300333099374486}
   m_Enabled: 1
+--- !u!95 &95174838628764188
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174206075014852}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 023db2e7f31500b429ce4b9008a70aec, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95234893302039964
 Animator:
   serializedVersion: 3
@@ -1957,6 +2047,7 @@ MonoBehaviour:
   mouseInputX: 0
   mouseInputY: 0
   rotSpeed: 1
+  rotCameraThre: 50
 --- !u!114 &114361087361441150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2002,6 +2093,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StandCameraObj: {fileID: 1915016460893716}
   rotPitch: 30
+--- !u!114 &114528728701844734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1174206075014852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50c0d57b58b8d04cbadc3458fe3c2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114570060317425658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2040,6 +2142,7 @@ MonoBehaviour:
   playerSpringConstant: 0
   transportObject: {fileID: 0}
   SyncbRunTimeTransport: 0
+  Rope: {fileID: 0}
 --- !u!114 &114737051488045582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2051,8 +2154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e92088024b4a14a9010a2c001552d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullObject: {fileID: 0}
-  pullPlayer: {fileID: 0}
 --- !u!114 &114799582955809462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2073,10 +2174,23 @@ MonoBehaviour:
   move: 0
   deadTrans: 0
   cameraStand: {fileID: 114213811295797382}
+  dirVec: {x: 0, y: 0, z: 0}
   particleManager: {fileID: 114101650237299760}
   footStampPrefab: {fileID: 1390423647849450, guid: 71feb10ad2285134e99904b3079576cc,
     type: 2}
   footStampSetTime: 0.25
+--- !u!114 &114897485182606372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1726364102298456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6a4f67a352b464d94ad86967cad20a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatImage: {fileID: 1174206075014852}
 --- !u!124 &124990274309129362
 Behaviour:
   m_ObjectHideFlags: 1

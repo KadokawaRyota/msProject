@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Networking;
 
 public class PlayerNetworkSetup : NetworkBehaviour
@@ -46,6 +45,13 @@ public class PlayerNetworkSetup : NetworkBehaviour
             //ミッションマネージャに自分がスポーンした事を知らせる。
             GameObject.Find("NetworkMissionManager").GetComponent<NetworkMissionManager>().SetPlayer(this.gameObject);
 
+
+            NetConnector con = GameObject.Find("NetConnector").GetComponent<NetConnector>();
+            if(null != con)
+            {
+                con.SetLocalPlayer(gameObject);
+            }
+
             //接続時のローディングイメージを有効
 //            GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
         }
@@ -64,4 +70,6 @@ public class PlayerNetworkSetup : NetworkBehaviour
 		//ClientのAnimatorパラメータを自動的に送る
 		GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
 	}
+
+
 }

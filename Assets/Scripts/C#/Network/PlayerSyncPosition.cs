@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
-
 
 //channel(SyncVar変数をUpdateする時の設定Qos参照)
 //sendInterval(どれくらいの頻度でUpdateするか)
@@ -13,7 +9,7 @@ public class PlayerSyncPosition : NetworkBehaviour {
 
 	[SyncVar]			//ホストから全クライアントへ送る
 	Vector3 syncPos;
-
+    
 	//Playerの現在位置
 	[SerializeField]
 	Transform myTransform;
