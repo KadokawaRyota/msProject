@@ -637,15 +637,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4435769753561998, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435769753561998, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435769753561998, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4435769753561998, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
       propertyPath: m_LocalRotation.w
@@ -724,6 +724,10 @@ Prefab:
       propertyPath: m_TagString
       value: transportObject
       objectReference: {fileID: 0}
+    - target: {fileID: 4435769753561998, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 10c4a04aafd319341aa360c92518c913, type: 2}
   m_IsPrefabParent: 0
@@ -748,6 +752,17 @@ MonoBehaviour:
   objectSpringConstant: 40
   playerSpringConstant: 10
   stencil: {fileID: 243474172}
+--- !u!114 &995032499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995032491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1046568682
 Prefab:
   m_ObjectHideFlags: 0
