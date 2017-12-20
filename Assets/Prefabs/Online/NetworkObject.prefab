@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968298e0db30a8d4cb0876c63ae79fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stencil: {fileID: 0}
 --- !u!114 &114284961021055488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,6 +155,7 @@ MonoBehaviour:
   playerSpringConstant: 20
   transportNum: 1
   players: []
+  Score: 0
 --- !u!114 &114875992232553222
 MonoBehaviour:
   m_ObjectHideFlags: 1
