@@ -188,11 +188,6 @@ public class NetConnector : NetworkManager
         }
     }
 
-    /*public void SendMessageToServer(<T> mess)
-    {
-
-    }*/
-
     //指定したプレイヤーを生成するためにオーバーライド
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader reader)
     {
@@ -206,7 +201,6 @@ public class NetConnector : NetworkManager
 
         //生成するプレイヤーのプレハブ情報を取得
         switch((CharactorInfo.CHARA)playerNum)
-        //switch ((CharactorInfo.CHARA)charaConnect.GetComponent<CharaConnect>().GetCharaNum())
         {
             case CharactorInfo.CHARA.TANUKI:
                 obj = (GameObject)Instantiate(PlayerPrefab_0, new Vector3(0f, 25.5f, 0f), Quaternion.identity);
@@ -234,8 +228,6 @@ public class NetConnector : NetworkManager
     //ネットワーク終了処理
     public void Disconnect()
     {
-        //manager.StopClient();
-        //manager.OnClientDisconnect(GetComponent<NetworkIdentity>().connectionToClient);
         Shutdown();
     }
 }
