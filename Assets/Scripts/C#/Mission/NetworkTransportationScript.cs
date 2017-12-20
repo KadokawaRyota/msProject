@@ -103,6 +103,11 @@ public class NetworkTransportationScript : NetworkBehaviour
                         NetworkServer.Spawn(missionObject);
                         break;
                 }
+                default:
+                {
+                        Debug.Log("-error---規定外のオブジェクトが置かれようとしました。");
+                        break;
+                }
             }
         }
 
