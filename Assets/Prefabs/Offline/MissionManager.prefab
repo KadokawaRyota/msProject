@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 224392646774663568}
   - component: {fileID: 222434115814855398}
   - component: {fileID: 114251917198441850}
-  - component: {fileID: 95893903381098878}
+  - component: {fileID: 95203612477515246}
   m_Layer: 5
   m_Name: MissionBg
   m_TagString: Untagged
@@ -826,7 +826,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &95893903381098878
+--- !u!95 &95203612477515246
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -835,7 +835,7 @@ Animator:
   m_GameObject: {fileID: 1626948225524896}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 023db2e7f31500b429ce4b9008a70aec, type: 2}
+  m_Controller: {fileID: 9100000, guid: b34a815f81c7c984a9798bd370dfb878, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1574,8 +1574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ea20f0ad0e0bc4f9aa0f1a5a4658ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MissionCanvas: {fileID: 0}
+  MissionCanvas: {fileID: 1524845264004826}
   MissionType: {fileID: 1520306888440428}
+  missionStartCount: 30
+  missionBg: {fileID: 114251917198441850}
+  timer: {fileID: 1821285782031846}
 --- !u!114 &114903648859705082
 MonoBehaviour:
   m_ObjectHideFlags: 1
