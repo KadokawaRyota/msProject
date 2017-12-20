@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 33891049533091720}
   - component: {fileID: 23254559885641386}
   - component: {fileID: 95259033292968268}
-  - component: {fileID: 114684248372977308}
+  - component: {fileID: 114081970974731084}
   m_Layer: 0
   m_Name: ChatImage
   m_TagString: Untagged
@@ -1786,6 +1786,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasAuthority: {fileID: 0}
+--- !u!114 &114081970974731084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1218109235037398}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0a9b9c146e9bc4c8f851438f811c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114119776347634640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1924,17 +1935,6 @@ MonoBehaviour:
   mouseInputY: 0
   rotSpeed: 1
   rotCameraThre: 50
---- !u!114 &114684248372977308
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1218109235037398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50c0d57b58b8d04cbadc3458fe3c2bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114714032829987616
 MonoBehaviour:
   m_ObjectHideFlags: 1
