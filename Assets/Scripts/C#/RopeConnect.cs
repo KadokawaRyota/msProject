@@ -8,6 +8,7 @@ public class RopeConnect : MonoBehaviour {
 
     private GameObject pullObject;
     private GameObject pullPlayer;
+    private Vector3 playerPos;
     private Vector3 midPos;             // オブジェクトの中間地
     private Vector3 surfaceVec;
 
@@ -32,17 +33,20 @@ public class RopeConnect : MonoBehaviour {
             GetComponent<Renderer>().enabled = true; 
         }
 
+        pullPlayer = GameObject.FindWithTag("body");
+        playerPos = pullPlayer.transform.position;
+
         // 引くオブジェクトの取得
         pullObject = pullObjectScript.gameObject;
 
 
         // オブジェクトの中間点を求めて配置
-        midPos = (pullObject.transform.position - pullPlayer.transform.position) / 2.0f;
+        midPos = (pullObject.transform.position - playerPos) / 2.0f;
         surfaceVec = midPos;
-        transform.position = pullPlayer.transform.position + midPos;
+        transform.position = playerPos + midPos;
 
         // オブジェクト間の距離を求めてスケールの調整
-        distX = Vector3.Distance(pullObject.transform.position, pullPlayer.transform.position);
+        distX = Vector3.Distance(pullObject.transform.position, playerPos);
         transform.localScale = new Vector3(0.1f, 1.0f, distX / 10.0f);
 
         // レンダラー呼び出しでtiling調整
@@ -54,7 +58,7 @@ public class RopeConnect : MonoBehaviour {
         transform.LookAt(pullObject.transform.position);
 
         // 地面に埋まらないように調整
-        transform.localPosition += transform.up * 0.50f;
+        //transform.localPosition += transform.up * 0.50f;
     }
 
     public void SetObject( GameObject transportObject )

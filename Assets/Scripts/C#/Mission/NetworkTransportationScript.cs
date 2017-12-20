@@ -14,15 +14,25 @@ public class NetworkTransportationScript : NetworkBehaviour
     GameObject ArrivalAreas;
 
    [SerializeField]
-    GameObject missionObjectPrefab;
+    GameObject transObj_S;
+    [SerializeField]
+    GameObject transObj_M;
+    [SerializeField]
+    GameObject transObj_L;
+
+    [System.Serializable]
+    public class SpawnObject
+    {
+        public char sizeName;                  //S、M、Lのどれかしか入らない。それ以外はエラー
+        public Vector3 missionObjectPosition;
+    }
 
     //ここを配列で増やす。
     [SerializeField]
-    Vector3 missionObjectPosition;
+    SpawnObject[] spawnObjectData = new SpawnObject[2];
 
-    //配列を増やしたら数も変える事
-    int objectCnt = 1;
 
+    //ゴール地点
     [SerializeField]
     GameObject arrivalAreaPrefab;
     [SerializeField]
@@ -58,16 +68,47 @@ public class NetworkTransportationScript : NetworkBehaviour
         //ミッションオブジェクトの生成
         GameObject missionObject;
         GameObject arrivalArea;
-        for( int cnt = 0; cnt < objectCnt; cnt++ )
+
+        for( int cnt = 0; cnt < spawnObjectData.Length; cnt++ )
         {
-            missionObject = Instantiate( missionObjectPrefab , missionObjectPosition , Quaternion.identity , MissionObjects.transform );
-			missionObject.GetComponent<MeshRenderer>().enabled = true;
-            missionObject.GetComponent<SphereCollider>().enabled = true;
+            switch(spawnObjectData[cnt].sizeName)
+            {
+                case 's':
+                case 'S':
+                {
+                    missionObject = Instantiate(transObj_S, spawnObjectData[cnt].missionObjectPosition, Quaternion.identity, MissionObjects.transform);
+                    missionObject.GetComponent<MeshRenderer>().enabled = true;
+                    missionObject.GetComponent<SphereCollider>().enabled = true;
 
-			NetworkServer.Spawn(missionObject);
-			//NetworkServer.SpawnWithClientAuthority(missionObject, gameObject);
-			//GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToServer);
+                    NetworkServer.Spawn(missionObject);
+                    break;
+                }
+                case 'm':
+                case 'M':
+                {
+                        missionObject = Instantiate(transObj_M, spawnObjectData[cnt].missionObjectPosition, Quaternion.identity, MissionObjects.transform);
+                        missionObject.GetComponent<MeshRenderer>().enabled = true;
+                        missionObject.GetComponent<SphereCollider>().enabled = true;
 
+                        NetworkServer.Spawn(missionObject);
+                        break;
+                }
+                case 'l':
+                case 'L':
+                {
+                        missionObject = Instantiate(transObj_L, spawnObjectData[cnt].missionObjectPosition, Quaternion.identity, MissionObjects.transform);
+                        missionObject.GetComponent<MeshRenderer>().enabled = true;
+                        missionObject.GetComponent<SphereCollider>().enabled = true;
+
+                        NetworkServer.Spawn(missionObject);
+                        break;
+                }
+                default:
+                {
+                        Debug.Log("-error---規定外のオブジェクトが置かれようとしました。");
+                        break;
+                }
+            }
         }
 
         //arraivalAreaの生成

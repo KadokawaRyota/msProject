@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 33826114445679078}
   - component: {fileID: 23755094549678072}
   - component: {fileID: 95551214436539324}
-  - component: {fileID: 114742980287826356}
+  - component: {fileID: 114562669583792434}
+  - component: {fileID: 114701966953374422}
+  - component: {fileID: 114258046926406144}
   m_Layer: 0
   m_Name: ChatImage
   m_TagString: Untagged
@@ -99,7 +101,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114742980287826356
+--- !u!114 &114258046926406144
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -107,6 +109,57 @@ MonoBehaviour:
   m_GameObject: {fileID: 1820698284607930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50c0d57b58b8d04cbadc3458fe3c2bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c0a9b9c146e9bc4c8f851438f811c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114562669583792434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820698284607930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 122
+    i1: 174
+    i2: 54
+    i3: 155
+    i4: 26
+    i5: 141
+    i6: 63
+    i7: 196
+    i8: 41
+    i9: 176
+    i10: 165
+    i11: 17
+    i12: 125
+    i13: 118
+    i14: 194
+    i15: 8
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114701966953374422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1820698284607930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95551214436539324}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 

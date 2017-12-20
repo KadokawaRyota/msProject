@@ -17,8 +17,7 @@ public class Timer : MonoBehaviour
     public int nTimeMin; 
     public int nTimeSec;
     public bool bCountDownFlug;
-    public float fTimeCounter;
-    public int secondTime;
+    private float fTimeCounter;
 
     public RawImage NumObjectMin00;
     public RawImage NumObjectMin01;
@@ -56,8 +55,6 @@ public class Timer : MonoBehaviour
                         nTimeMin = 0;
                         nTimeSec = 0;
                         bCountDownFlug = false;
-
-                        //タイムアップなので終了処理を呼ぶ（MissionManagerから）
                     }
 
                     else
@@ -84,8 +81,6 @@ public class Timer : MonoBehaviour
         NumObjectMin01.uvRect = new Rect((nTimeMin % 10) * TexWidth, 0, TexWidth, 1);   // 1の桁
         NumObjectSec00.uvRect = new Rect((nTimeSec / 10) * TexWidth, 0, TexWidth, 1);   // 10の桁
         NumObjectSec01.uvRect = new Rect((nTimeSec % 10) * TexWidth, 0, TexWidth, 1);   // 1の桁
-
-        secondTime = nTimeMin * 60 + nTimeSec;
     }
 }
 

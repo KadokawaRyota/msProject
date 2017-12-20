@@ -395,7 +395,7 @@ GameObject:
   - component: {fileID: 33181950877510302}
   - component: {fileID: 23486832098531386}
   - component: {fileID: 95007691877149792}
-  - component: {fileID: 114450497470611524}
+  - component: {fileID: 114033251310065282}
   m_Layer: 0
   m_Name: ChatImage
   m_TagString: Untagged
@@ -1778,6 +1778,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114033251310065282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381243898791488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0a9b9c146e9bc4c8f851438f811c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114044907825314006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1910,17 +1921,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 252b2b500640e604dac9a8ddb53616f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114450497470611524
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1381243898791488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50c0d57b58b8d04cbadc3458fe3c2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114515260382485442

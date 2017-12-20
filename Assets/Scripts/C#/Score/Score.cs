@@ -14,9 +14,9 @@ public class Score : MonoBehaviour
     //--------------------------------------------------------------------------
     //          変数定義
     //--------------------------------------------------------------------------
-    public int nScore;         // スコア(オブジェクト適用)
-    public int nTargetScore;   // 目標スコア
-    public float fPlusNum;     // 増加値
+    public static int nScore;         // スコア(オブジェクト適用)
+    public static int nTargetScore;   // 目標スコア
+    public static float fPlusNum;     // 増加値
     public float fCalcScore;          // 計算用スコア
     public int nColumnNum;            // 桁数
     public float PlusFrame;           // 増加速度
@@ -96,7 +96,7 @@ public class Score : MonoBehaviour
     //--------------------------------------------------------------------------
     //          スコア加算関数
     //--------------------------------------------------------------------------
-    public void SetPlusScore(int PlusScore)
+    public static void SetPlusScore(int PlusScore)
     {
         nTargetScore = nTargetScore + PlusScore;
         fPlusNum = nTargetScore - nScore;
