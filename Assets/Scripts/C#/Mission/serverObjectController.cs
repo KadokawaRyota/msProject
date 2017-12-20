@@ -59,6 +59,8 @@ public class serverObjectController : NetworkBehaviour {
     
     bool bGoal = false;
 
+    public int Score;
+
     // Use this for initialization
     void Start()
     {
