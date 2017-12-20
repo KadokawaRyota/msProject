@@ -21,18 +21,14 @@ public class PlayerSyncChat : NetworkBehaviour {
             {
                 PlayChat();
 
-                //SendChatFlg(false);
-            }
-            else
-            {
-                SendChatFlg(false);
+               // SendChatFlg(false);
             }
         }
 
        //リモートはフラグに合わせて再生する
         else
         {
-            if (syncPlayFlg)
+            if (syncPlayFlg && playFlg)
             {
                 PlayChat();
             }
@@ -62,7 +58,15 @@ public class PlayerSyncChat : NetworkBehaviour {
         if(isLocalPlayer)
         {
             playFlg = flg;
-            CmdChatFlgToServer(flg);
+            AnimatorStateInfo state = chatImage.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+            if (playFlg && state.fullPathHash == 0)
+            {       
+                CmdChatFlgToServer(flg);
+            }
+            else
+            {
+                playFlg = false;
+            }
         }
     }
 }
