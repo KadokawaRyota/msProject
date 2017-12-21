@@ -362,7 +362,8 @@ Transform:
   m_LocalRotation: {x: 0.7957371, y: 0.00816944, z: -0.6053543, w: -0.016785502}
   m_LocalPosition: {x: -0.2, y: -27.3, z: -1}
   m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 1126310879}
   m_Father: {fileID: 979063948}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -0.87900007, y: -105.463005, z: -172.438}
@@ -1092,6 +1093,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 29.1, y: 0, z: 0}
+--- !u!1 &801749078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 801749079}
+  m_Layer: 0
+  m_Name: ResultCameraPos3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &801749079
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 801749078}
+  m_LocalRotation: {x: -0.00000008940697, y: -0.9999978, z: -0.00000016391277, w: 0.0021212697}
+  m_LocalPosition: {x: 0.000011901061, y: -0.0000054041548, z: 1.0700264}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1274809668}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -179.757, z: 0}
 --- !u!1 &847441506
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1255,59 @@ Prefab:
       propertyPath: distance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1822943532047008, guid: 7aeda2a71f04b8b488ea73ae5a865eeb, type: 2}
+      propertyPath: m_TagString
+      value: ResultCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 114070496626444878, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: resultFlg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822943532047008, guid: 7aeda2a71f04b8b488ea73ae5a865eeb, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20634919015830532, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81112806078007024, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114070496626444878, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: Green_CameraPos
+      value: 
+      objectReference: {fileID: 1785885509}
+    - target: {fileID: 114070496626444878, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: Town_CameraPos
+      value: 
+      objectReference: {fileID: 1143596469}
+    - target: {fileID: 114070496626444878, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: Stand_CameraPos
+      value: 
+      objectReference: {fileID: 801749078}
+    - target: {fileID: 114070496626444878, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: Ice_CameraPos
+      value: 
+      objectReference: {fileID: 1126310878}
+    - target: {fileID: 20634919015830532, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: m_TargetDisplay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114070496626444878, guid: 7aeda2a71f04b8b488ea73ae5a865eeb,
+        type: 2}
+      propertyPath: Sand_CameraPos
+      value: 
+      objectReference: {fileID: 801749078}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7aeda2a71f04b8b488ea73ae5a865eeb, type: 2}
   m_IsPrefabParent: 0
@@ -1235,6 +1317,62 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 2011287169}
   m_Script: {fileID: 11500000, guid: 05ea20f0ad0e0bc4f9aa0f1a5a4658ee, type: 3}
+--- !u!1 &1126310878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1126310879}
+  m_Layer: 0
+  m_Name: ResultCameraPos4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1126310879
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1126310878}
+  m_LocalRotation: {x: 0.0000000032596292, y: -0.9989773, z: 0.0000000046566133, w: -0.04521477}
+  m_LocalPosition: {x: 0.0013250113, y: -0.000048620008, z: 1.1833323}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 343774862}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0.78700006, y: 79.721, z: -178.011}
+--- !u!1 &1143596469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1143596470}
+  m_Layer: 0
+  m_Name: ResultCameraPos2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1143596470
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1143596469}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.87, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1628880449}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0.42100003, y: -105.728004, z: 6.485}
 --- !u!1 &1274809667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1263,7 +1401,8 @@ Transform:
   m_LocalRotation: {x: -0.44368967, y: 0.6511737, z: -0.4552372, w: -0.4145738}
   m_LocalPosition: {x: -25.9, y: 5.2, z: -6.1}
   m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 801749079}
   m_Father: {fileID: 979063948}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 61.33, y: -127.509, z: -24.579}
@@ -1382,7 +1521,7 @@ Prefab:
     - target: {fileID: 114060383851061304, guid: ee9bb91c26f16434aa78d90709299efb,
         type: 2}
       propertyPath: charSelectData
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee9bb91c26f16434aa78d90709299efb, type: 2}
@@ -1525,7 +1664,8 @@ Transform:
   m_LocalRotation: {x: 0.075192414, y: -0.7922356, z: -0.066808455, w: 0.60186833}
   m_LocalPosition: {x: -1.12, y: 28.34, z: 5.68}
   m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 1143596470}
   m_Father: {fileID: 979063948}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0.42100003, y: -105.728004, z: 6.485}
@@ -1624,7 +1764,8 @@ Transform:
   m_LocalRotation: {x: 0.52525246, y: -0.34225342, z: -0.08103937, w: 0.7748581}
   m_LocalPosition: {x: -6.63, y: 12.33, z: 24.64}
   m_LocalScale: {x: 3, y: 3, z: 3}
-  m_Children: []
+  m_Children:
+  - {fileID: 1785885510}
   m_Father: {fileID: 979063948}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 49.334003, y: -70.834, z: -48.113003}
@@ -1695,6 +1836,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1640350896}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1785885509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1785885510}
+  m_Layer: 0
+  m_Name: ResultCameraPos1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1785885510
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1785885509}
+  m_LocalRotation: {x: -0.000000033527616, y: -0.9347514, z: -0.00000014901163, w: 0.3553026}
+  m_LocalPosition: {x: 1.6185484, y: -0.022126675, z: 1.7382597}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1640350897}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -62.779003, y: -175.011, z: -17.980001}
 --- !u!1001 &2011287169
 Prefab:
   m_ObjectHideFlags: 0
