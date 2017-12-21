@@ -430,6 +430,7 @@ public class PunipuniController : MonoBehaviour
                     {
                         //プレイヤーとオブジェクトを解放する処理。
                         playerTransportationscript.CmdProvidebPullToServer(false, null);
+                        playerTransportationscript.SetRopeConnect(null);
                     }
                 }
             }

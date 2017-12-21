@@ -48,8 +48,13 @@ public class playerTransportationScript : NetworkBehaviour
     bool runTimeTransportOld = false; //トランスポートミッション中ならtrue
 
     //ひも
-    [SerializeField]
     GameObject Rope;
+
+    //紐の接続部
+    GameObject RopeConnectionPoint;
+
+    //プレイヤーの体に巻き付くロープ
+    GameObject ropeFrame;
 
     // Use this for initialization
     void Start()
@@ -65,6 +70,25 @@ public class playerTransportationScript : NetworkBehaviour
                 Rope = child.gameObject;
             }
         }
+        foreach (Transform child in transform)
+        {
+            //child is your child transform
+            if (child.name == "RopeConnectionPoint")
+            {
+                RopeConnectionPoint = child.gameObject;
+            }
+        }
+        foreach (Transform child in transform)
+        {
+            //child is your child transform
+            if (child.name == "rope_Frame")
+            {
+                ropeFrame = child.gameObject.GetComponent<rope_FrameScript>().GetFreamMesh();
+            }
+        }
+
+        //腰のパーツをロープに渡しておく。
+        Rope.GetComponent<RopeConnect>().SetWaist(RopeConnectionPoint);
     }
 
     // Update is called once per frame
@@ -91,8 +115,9 @@ public class playerTransportationScript : NetworkBehaviour
         {
             if( transportObject.GetComponent<serverObjectController>().GetbGoal() )
             {
-                //ロープにオブジェクトを渡す。
+                //ロープの接続を解除する。
                 Rope.GetComponent<RopeConnect>().SetObject(null);
+                ropeFrame.GetComponent<RopeFrame>().SetEnable(false);
                 CmdProvidebPullToServer(false, null);
             }
         }
@@ -153,7 +178,9 @@ public class playerTransportationScript : NetworkBehaviour
             //サーバー側のオブジェクトにプレイヤーを追加して欲しいメッセージとプレイヤーにオブジェクトを紐付け
             CmdProvidebPullToServer(true , touchTransportObject);
             //ロープにオブジェクトを渡す。
-            Rope.GetComponent<RopeConnect>().SetObject(touchTransportObject);
+            Rope.GetComponent<RopeConnect>().SetObject( touchTransportObject );
+            //ロープを体にまく
+            ropeFrame.GetComponent<RopeFrame>().SetEnable(true);
 
             serverObjectController serverObjectControllerScript = touchTransportObject.GetComponent<serverObjectController>();
 
@@ -196,5 +223,11 @@ public class playerTransportationScript : NetworkBehaviour
     public GameObject GetTransportObject()
     {
         return transportObject;
+    }
+
+    public void SetRopeConnect( GameObject gameObject )
+    {
+        Rope.GetComponent<RopeConnect>().SetObject(gameObject);
+        ropeFrame.GetComponent<RopeFrame>().SetEnable(false);
     }
 }
