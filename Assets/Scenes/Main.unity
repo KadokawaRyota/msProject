@@ -199,7 +199,7 @@ Prefab:
         type: 2}
       propertyPath: missionCut
       value: 
-      objectReference: {fileID: 1968189730}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
   m_IsPrefabParent: 0
@@ -707,7 +707,7 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
