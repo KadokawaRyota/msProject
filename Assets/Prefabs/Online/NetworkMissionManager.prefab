@@ -719,6 +719,8 @@ MonoBehaviour:
     missionObjectPosition: {x: 15.3, y: 17, z: -16.4}
   - sizeName: 83
     missionObjectPosition: {x: 21.77, y: -15, z: 7.36}
+  - sizeName: 83
+    missionObjectPosition: {x: -15, y: -21.4, z: -4.6}
   arrivalAreaPrefab: {fileID: 1327068514790068, guid: 0c8c6a0f7c9c6354e9be4c489755e79d,
     type: 2}
   arrivalAreaPosition: {x: 8.4, y: 23.6, z: 6.655}

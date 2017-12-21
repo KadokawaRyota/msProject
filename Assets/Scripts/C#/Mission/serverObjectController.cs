@@ -78,7 +78,10 @@ public class serverObjectController : NetworkBehaviour {
             transportNum = 1;
         }
 
-        ServerStart();
+        if( isServer )
+        {
+            ServerStart();
+        }
     }
     [Server]
     void ServerStart()
@@ -88,17 +91,26 @@ public class serverObjectController : NetworkBehaviour {
         rot = transform.rotation;
     }
 
-	[Server]
     void Update()
+    {
+        //アトリビュート[Server]はクライアント側でも呼び出されるため。アトリビュートを付ける意味はクライアントで呼び出された時にWarningを吐きだす
+        if (isServer)
+        {
+            ServerUpdate();
+        }
+    }
+
+    [Server]
+    void ServerUpdate()
     {
         float pullPower = 0.0f;
 
         //オブジェクトがゴールしていたら、プレイヤー側の接続が切れているか確認する
-        if( bGoal )
+        if (bGoal)
         {
             foreach (GameObject player in players)
             {
-                if( player.GetComponent<playerTransportationScript>().GetTransportObject() != null )
+                if (player.GetComponent<playerTransportationScript>().GetTransportObject() != null)
                 {
                     return;
                 }
@@ -110,7 +122,7 @@ public class serverObjectController : NetworkBehaviour {
         }
 
         //リストに何も入ってない！
-        if (players.Count <= 0 ) return;
+        if (players.Count <= 0) return;
 
         foreach (GameObject player in players)
         {
@@ -127,7 +139,7 @@ public class serverObjectController : NetworkBehaviour {
 
             //現在の紐付いているプレイヤーからプレイヤーが引く力を調節
             int playerNum = players.Count / transportNum;
-            if(playerNum > 1) playerNum = 1;
+            if (playerNum > 1) playerNum = 1;
 
             ////紐の長さ
             fDistancePlayer = Vector3.Distance(player.transform.position, transform.position);
@@ -152,7 +164,7 @@ public class serverObjectController : NetworkBehaviour {
             {
                 //加速度を半分に
                 GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x / 2, GetComponent<Rigidbody>().velocity.y / 2, GetComponent<Rigidbody>().velocity.z / 2);
-           }
+            }
         }
     }
 
