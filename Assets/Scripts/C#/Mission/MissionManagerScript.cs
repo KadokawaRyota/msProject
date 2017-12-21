@@ -6,7 +6,7 @@ public class MissionManagerScript : MonoBehaviour
 {
 
     bool missionFlg = false;     //フラグの初期化
-    bool missionEndFlg = false; //終了フラグ（trueのときにリザルトフラグを立てる）
+    public bool missionEndFlg = false; //終了フラグ（trueのときにリザルトフラグを立てる）
 
     [SerializeField]
     GameObject MissionCanvas;
@@ -24,9 +24,24 @@ public class MissionManagerScript : MonoBehaviour
     [SerializeField]
     Image missionBg;
 
+    //カットイン関連
+    bool cutInFlg = false;
+
+    [SerializeField]
+    GameObject missionCut;
+
+    [SerializeField]
+    Image cutBg;
+
+    [SerializeField]
+    Image cutChara;
+
     //タイム関連
     [SerializeField]
-    GameObject timer;
+    Timer timer;
+
+    [SerializeField]
+    int timerStartCnt = 60;
 
     // Use this for initialization
     void Start()
@@ -39,17 +54,43 @@ public class MissionManagerScript : MonoBehaviour
     {
         //ミッションを決めたりする処理をここに入れる予定
 
+        //ミッション開始中
         if (missionFlg)
         {
+            //MissionUI
             if (!UIFlg)
             {
                 if (missionUICount > missionStartCount)
                 {
                     UIFlg = true;
                     missionBg.GetComponent<Animator>().SetTrigger("open");
+
                     return;
                 }
+
                 missionUICount++;
+            }
+
+            //タイマー再生
+            if (!timer.bCountDownFlug)
+            {
+                if (timerStartCnt <= 0)
+                {
+                    timer.bCountDownFlug = true;
+                    Destroy(missionCut);
+                    return;
+                }
+
+                timerStartCnt--;
+            }
+
+
+            //カットイン
+            if (!cutInFlg)
+            {
+                //cutBg.gameObject.SetActive(true);
+                cutChara.GetComponent<Animator>().SetTrigger("start");
+                cutInFlg = true;
             }
         }
     }
@@ -57,9 +98,13 @@ public class MissionManagerScript : MonoBehaviour
     public void StartMission()
     {
         missionFlg = true;
+        cutChara.gameObject.SetActive(true);
+        
         //ミッションキャンバスを表示して移動
         MissionCanvas.GetComponent<MissionCanvasScript>().ImgFlgSwitch(true);
         //オブジェクトの表示
         MissionType.GetComponent<TransportationScript>().dispMission();
+
+        
     }
 }
