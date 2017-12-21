@@ -193,14 +193,25 @@ Prefab:
     - target: {fileID: 114096047998135808, guid: 4e1811d44fb47384db63400a54843b72,
         type: 2}
       propertyPath: timerStartCnt
-      value: 200
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 114096047998135808, guid: 4e1811d44fb47384db63400a54843b72,
         type: 2}
       propertyPath: missionCut
       value: 
+      objectReference: {fileID: 1491784931}
+    - target: {fileID: 114893123705983488, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: nTimeMin
+      value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114893123705983488, guid: 4e1811d44fb47384db63400a54843b72,
+        type: 2}
+      propertyPath: nTimeSec
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114157040923169484, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4e1811d44fb47384db63400a54843b72, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &261782431
@@ -1537,6 +1548,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e643c806e54839d459673fc4bdcdd9e6, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1491784931 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1968571466110466, guid: 4e1811d44fb47384db63400a54843b72,
+    type: 2}
+  m_PrefabInternal: {fileID: 219205822}
 --- !u!114 &1787959106 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114976373009519234, guid: 32859000b690cb04ba34bab833e0ea68,

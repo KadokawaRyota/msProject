@@ -103,8 +103,6 @@ public class NetworkMissionManager : MonoBehaviour
 
         cutChara.gameObject.SetActive(true);
 
-        //ミッションキャンバスを表示して移動
-        MissionCanvas.GetComponent<MissionCanvasScript>().ImgFlgSwitch(true);
         //オブジェクトの表示（トランスポートミッション）
         MissionType.GetComponent<NetworkTransportationScript>().dispMission();
         //プレイヤーがトランスポートミッション中だとする。
