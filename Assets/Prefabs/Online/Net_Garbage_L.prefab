@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114293234800938770}
   - component: {fileID: 114437270544153856}
   - component: {fileID: 114978028523136298}
+  - component: {fileID: 114790389289972552}
   m_Layer: 11
   m_Name: Net_Garbage_L
   m_TagString: transportObject
@@ -117,7 +118,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1330110815174766}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_MotionVectors: 1
@@ -243,6 +244,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 252b2b500640e604dac9a8ddb53616f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114790389289972552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1330110815174766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114978028523136298
