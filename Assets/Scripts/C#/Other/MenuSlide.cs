@@ -14,10 +14,13 @@ public class MenuSlide : MonoBehaviour {
 
     public CharactorInfo.CHARA charNum = CharactorInfo.CHARA.TANUKI;    // キャラクタ識別番号
 
+    CharactorInfo charaInfo;
+
     void Start() {
         
         charNum = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().GetCharaSelectData();
-        GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().SetCharaSelectData(charNum);
+        charaInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
+        charaInfo.SetCharaSelectData(charNum);
         transform.position += new Vector3(10.0f, 0.0f, 0.0f) * ((int)charNum);
         destCameraPos = transform.position;
         startPosition += transform.position;
@@ -58,7 +61,7 @@ public class MenuSlide : MonoBehaviour {
                 {
                     charNum = CharactorInfo.CHARA.TANUKI;
                 }
-                GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().SetCharaSelectData(charNum);
+                charaInfo.SetCharaSelectData(charNum);
             }
             else if( dir == "left" )
             {
@@ -73,7 +76,7 @@ public class MenuSlide : MonoBehaviour {
                     charNum = CharactorInfo.CHARA.MAX;
                 }
                 charNum -= 1;
-                GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>().SetCharaSelectData(charNum);
+                charaInfo.SetCharaSelectData(charNum);
             }
         }
     }

@@ -8,7 +8,8 @@ public class Billboard : MonoBehaviour {
 	void FixedUpdate () {
 
         //カメラポジションの取得
-        // Quaternion rot = Camera.main.transform.rotation;
+         //Quaternion rot = Camera.main.transform.rotation;
+         //transform.rotation = rot;
         if (Camera.main != null)
         {
             Vector3 pos = Camera.main.transform.position;
