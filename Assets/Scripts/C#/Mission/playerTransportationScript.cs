@@ -56,6 +56,8 @@ public class playerTransportationScript : NetworkBehaviour
     //プレイヤーの体に巻き付くロープ
     GameObject ropeFrame;
 
+    NetworkMissionManager missionManager;
+
     // Use this for initialization
     void Start()
     {
@@ -68,6 +70,7 @@ public class playerTransportationScript : NetworkBehaviour
             if( child.name == "Rope" )
             {
                 Rope = child.gameObject;
+                break;
             }
         }
         foreach (Transform child in transform)
@@ -76,6 +79,7 @@ public class playerTransportationScript : NetworkBehaviour
             if (child.name == "RopeConnectionPoint")
             {
                 RopeConnectionPoint = child.gameObject;
+                break;
             }
         }
         foreach (Transform child in transform)
@@ -84,11 +88,16 @@ public class playerTransportationScript : NetworkBehaviour
             if (child.name == "rope_Frame")
             {
                 ropeFrame = child.gameObject.GetComponent<rope_FrameScript>().GetFreamMesh();
+                break;
             }
         }
 
         //腰のパーツをロープに渡しておく。
         Rope.GetComponent<RopeConnect>().SetWaist(RopeConnectionPoint);
+
+        //MissionManagerの取得
+        missionManager = GameObject.Find("NetworkMissionManager").GetComponent<NetworkMissionManager>();
+
     }
 
     // Update is called once per frame
@@ -115,6 +124,12 @@ public class playerTransportationScript : NetworkBehaviour
         {
             if( transportObject.GetComponent<serverObjectController>().GetbGoal() )
             {
+                //オブジェクトの得点を加算
+                if(null != missionManager)
+                {
+                    missionManager.score.SetPlusScore(transportObject.GetComponent<serverObjectController>().Score);
+                }
+
                 //ロープの接続を解除する。
                 Rope.GetComponent<RopeConnect>().SetObject(null);
                 ropeFrame.GetComponent<RopeFrame>().SetEnable(false);
