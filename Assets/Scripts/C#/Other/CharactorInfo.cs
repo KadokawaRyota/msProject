@@ -18,7 +18,7 @@ public class CharactorInfo : MonoBehaviour {
         MAX
     };
 
-    static CHARA charSelectData = CHARA.TANUKI;   //種類格納
+    public CHARA charSelectData = CHARA.TANUKI;   //種類格納
 
     [SerializeField]
     static string playerName = "Player";      //プレイヤーの名前
@@ -113,5 +113,10 @@ public class CharactorInfo : MonoBehaviour {
     public CHARA GetCharaSelectData()
     {
         return charSelectData;
+    }
+
+    public void DestoyCharactorObject()
+    {
+        Destroy(this.gameObject);
     }
 }

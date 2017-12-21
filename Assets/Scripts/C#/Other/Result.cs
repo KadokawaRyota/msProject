@@ -24,8 +24,13 @@ public class Result : MonoBehaviour {
     [SerializeField]
     GameObject targetObject_Ice;      //イヌの村のオブジェクト
 
+    CharactorInfo charInfo;                     // キャラ情報スクリプト
+    public CharactorInfo.CHARA resultCharNum;   // キャラ番号
+    public bool resultFlg = false;              // フラグ
+    public float distance;                     // オブジェクトからカメラへの距離
 
-    bool resultFlg = false;     //フラグ
+    private Vector3 dirCameraVec;               // オブジェクトからカメラへのベクトル
+
 
     void Awake()
     {
@@ -55,6 +60,8 @@ public class Result : MonoBehaviour {
             Debug.Log("ネコのリザルトオブジェクトの設定してー");
         }
 
+        charInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
+
     }
 	
 	// Update is called once per frame
@@ -62,6 +69,61 @@ public class Result : MonoBehaviour {
 
         if (resultFlg)
         {
+            /// リザルトカメラの配置
+
+            // キャラ情報の取得
+            resultCharNum = charInfo.GetCharaSelectData();
+
+            switch (resultCharNum)
+            {
+                // タヌキ
+                case CharactorInfo.CHARA.TANUKI:
+                    {
+                        dirCameraVec = targetObject_Green.transform.forward.normalized;
+                        resultCamera.transform.position = targetObject_Green.transform.position + dirCameraVec * distance;
+                        return;
+                    }
+                // ネコ
+                case CharactorInfo.CHARA.CAT:
+                    {
+                        dirCameraVec = targetObject_Town.transform.forward.normalized;
+                        resultCamera.transform.position = targetObject_Town.transform.position + dirCameraVec * distance;
+                        return;
+                    }
+                // キツネ
+                case CharactorInfo.CHARA.FOX:
+                    {
+                        dirCameraVec = targetObject_Sand.transform.forward.normalized;
+                        resultCamera.transform.position = targetObject_Sand.transform.position + dirCameraVec * distance;
+                        return;
+                    }
+                // イヌ
+                case CharactorInfo.CHARA.DOG:
+                    {
+                        dirCameraVec = targetObject_Ice.transform.forward.normalized;
+                        resultCamera.transform.position = targetObject_Ice.transform.position + dirCameraVec * distance;
+                        return;
+                    }
+                default:
+                    {
+                        return;
+                    }
+            }
+
+
+
+            /// 不要なオブジェクトの削除
+
+            // プレイヤーオブジェクトの削除
+            if(  )
+
+            //
+
+            // ぷにコンの先所
+
+            // Missionオブジェクトの削除
+
+            // OfflineCanvasの削除
 
         }
 	}
