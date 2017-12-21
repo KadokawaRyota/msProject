@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 114691280310639112}
   - component: {fileID: 114570060317425658}
   - component: {fileID: 114897485182606372}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OnlinePlayer_Neko
   m_TagString: Untagged
   m_Icon: {fileID: 0}

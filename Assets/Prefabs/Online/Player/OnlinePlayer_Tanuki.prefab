@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 114049168162091786}
   - component: {fileID: 114614576522819178}
   - component: {fileID: 114830753060304822}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OnlinePlayer_Tanuki
   m_TagString: Untagged
   m_Icon: {fileID: 0}

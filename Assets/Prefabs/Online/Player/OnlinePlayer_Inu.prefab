@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 114802832061296394}
   - component: {fileID: 114913967438791794}
   - component: {fileID: 114694497791368504}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OnlinePlayer_Inu
   m_TagString: Player
   m_Icon: {fileID: 0}
