@@ -799,7 +799,7 @@ GameObject:
   - component: {fileID: 114882612797915124}
   - component: {fileID: 114024616150990652}
   - component: {fileID: 114438597664877232}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OnlinePlayer_Kitsune
   m_TagString: Untagged
   m_Icon: {fileID: 0}

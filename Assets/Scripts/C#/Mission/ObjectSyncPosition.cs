@@ -66,20 +66,20 @@ public class ObjectSyncPosition : NetworkBehaviour
 
 
     //クライアントからホストへ、Position情報を送る
-    [Command]
-    void CmdProvidePositionToServer(Vector3 pos)
+    [ClientRpc]
+    void RpcProvidePositionToServer(Vector3 pos)
     {
-        //サーバーが受け取る値
-        syncPos += Vector3.zero;
+        //サーバーで呼び出し、クライアント側で実行。syncPosにサーバーの値を格納する。
+        syncPos = pos;
     }
 
     //クライアントのみ実行される
-    [ClientCallback]
+    [ServerCallback]
     //位置情報を送るメソッド
     void TransmitPosition()
     {
 
-				CmdProvidePositionToServer(myTransform.position);
+                RpcProvidePositionToServer(myTransform.position);
 
 				//現在位置を最終位置として保存
 				lastPos = myTransform.position;
