@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class RopeConnect : MonoBehaviour {
 
+
     ObjectController pullObjectScript;
 
     private GameObject pullObject;
-    private GameObject pullPlayer;
+    private GameObject pullPlayer;      //腰のオブジェクトに限る。
     private Vector3 playerPos;
     private Vector3 pullObjectPos;
     private Vector3 midPos;             // オブジェクトの中間地
@@ -15,39 +16,25 @@ public class RopeConnect : MonoBehaviour {
 
     float distX;                        // オブジェクトの伸縮値
 
+    GameObject ropeFrame;
+
 	void Start () {
-        pullPlayer = GameObject.FindWithTag("body"); ;
-	}
+    }
 	
 	void Update () {
 
-        pullObjectScript = GameObject.Find("MissionManager/Transportation/MissionObject/Object").GetComponent<ObjectController>();
-
-        // 引くオブジェクトとプレイヤーが紐づけされたか判断
-        if (pullObjectScript.player == null)
-        {
-            GetComponent<Renderer>().enabled = false;
-            return;
-        }
-        else
-        {
-            GetComponent<Renderer>().enabled = true; 
-        }
+        if (pullObject == null) return;
 
         // プレイヤー体のタグ判別で中心位置の取得
         playerPos = pullPlayer.transform.position;
 
-        // 引くオブジェクトの取得
-        pullObject = pullObjectScript.gameObject;
-        pullObjectPos = pullObject.GetComponent<Renderer>().bounds.center;
-
         // オブジェクトの中間点を求めて配置
-        midPos = (pullObjectPos - playerPos) / 2.0f;
+        midPos = (pullObject.transform.position - playerPos) / 2.0f;
         surfaceVec = midPos;
         transform.position = playerPos + midPos;
 
         // オブジェクト間の距離を求めてスケールの調整
-        distX = Vector3.Distance(pullObjectPos, playerPos);
+        distX = Vector3.Distance(pullObject.transform.position, playerPos);
         transform.localScale = new Vector3(0.1f, 1.0f, distX / 10.0f);
 
         // レンダラー呼び出しでtiling調整
@@ -56,12 +43,30 @@ public class RopeConnect : MonoBehaviour {
 
 
         // オブジェクト間をつなぐように回転
-        transform.LookAt(pullObjectPos);
+        transform.LookAt(pullObject.transform.position);
 
     }
 
-    public void SetObject( GameObject transportObject )
+    public void SetWaist( GameObject PlayerWaist )
     {
-        pullObject = transportObject;
+        pullPlayer = PlayerWaist;
     }
+
+    public void SetObject( GameObject Object )
+    {
+        if( Object == null )
+        {
+            this.GetComponent<Renderer>().enabled = false;
+        }
+        else
+        {
+            this.GetComponent<Renderer>().enabled = true;
+        }
+        pullObject = Object;
+    }
+    public void SetRopeFrame(GameObject gameObject)
+    {
+        ropeFrame = gameObject;
+    }
+
 }

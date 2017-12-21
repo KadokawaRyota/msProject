@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class RopeFrame : MonoBehaviour {
 
-    ObjectController pullObjectScript;
-    private GameObject ropeObject;
+    bool enable;
     private Renderer render;
     private float offset;
 
@@ -13,27 +12,21 @@ public class RopeFrame : MonoBehaviour {
 
 
     void Start () {
+        render = GetComponent<Renderer>();
     }
 	
 	void Update () {
 
-        
-        pullObjectScript = GameObject.Find("MissionManager/Transportation/MissionObject/Object").GetComponent<ObjectController>();
-
-        // 引くオブジェクトとプレイヤーが紐づけされたか判断
-        if (pullObjectScript.player == null)
-        {
-            GetComponent<Renderer>().enabled = false;
-            return;
-        }
-        else
-        {
-            GetComponent<Renderer>().enabled = true;
-        }
+        if (!enable) return;
 
         // レンダラー呼び出しでoffset調整
         offset = scrollSpeed;
-        Renderer render = GetComponent<Renderer>();
         render.material.mainTextureOffset += new Vector2(scrollSpeed, 0);
+    }
+
+    public void SetEnable( bool bEnable )
+    {
+        enable = bEnable;
+        GetComponent<Renderer>().enabled = bEnable;
     }
 }
