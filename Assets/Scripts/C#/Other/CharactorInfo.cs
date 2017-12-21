@@ -115,8 +115,5 @@ public class CharactorInfo : MonoBehaviour {
         return charSelectData;
     }
 
-    public void DestoyCharactorObject()
-    {
-        Destroy(this.gameObject);
-    }
 }
+    
