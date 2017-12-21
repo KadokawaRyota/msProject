@@ -19,6 +19,7 @@ public class RopeConnect : MonoBehaviour {
     GameObject ropeFrame;
 
 	void Start () {
+        this.GetComponent<Renderer>().enabled = false;
     }
 	
 	void Update () {

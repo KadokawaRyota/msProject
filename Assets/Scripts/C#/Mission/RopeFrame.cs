@@ -13,6 +13,7 @@ public class RopeFrame : MonoBehaviour {
 
     void Start () {
         render = GetComponent<Renderer>();
+        GetComponent<Renderer>().enabled = false;
     }
 	
 	void Update () {
