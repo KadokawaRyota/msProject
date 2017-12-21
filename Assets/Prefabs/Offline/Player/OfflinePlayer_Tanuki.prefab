@@ -718,8 +718,9 @@ GameObject:
   - component: {fileID: 4782184878341924}
   - component: {fileID: 33463946553040808}
   - component: {fileID: 23765991985036062}
+  - component: {fileID: 114420243430196252}
   m_Layer: 0
-  m_Name: $dummy_node
+  m_Name: frame_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -779,14 +780,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4261527334198644}
-  - component: {fileID: 114904380130813628}
   m_Layer: 0
-  m_Name: rope_waku01
+  m_Name: rope_Frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1869732280466890
 GameObject:
   m_ObjectHideFlags: 1
@@ -1132,7 +1132,7 @@ Transform:
   m_GameObject: {fileID: 1837719132397616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.27, z: 0}
-  m_LocalScale: {x: 0.05, y: 0.17, z: 0.05}
+  m_LocalScale: {x: 0.03, y: 0.3, z: 0.03}
   m_Children:
   - {fileID: 4782184878341924}
   m_Father: {fileID: 4249358195127918}
@@ -2082,6 +2082,7 @@ MonoBehaviour:
   move: 0
   deadTrans: 1
   cameraStand: {fileID: 114929563258579018}
+  dirVec: {x: 0, y: 0, z: 0}
   particleManager: {fileID: 114968332964952372}
   footStampPrefab: {fileID: 1390423647849450, guid: 71feb10ad2285134e99904b3079576cc,
     type: 2}
@@ -2097,6 +2098,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114420243430196252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762625673046256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e115e878178046d4f814ef478de5bc88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 0.01
 --- !u!114 &114437045144859338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2143,17 +2156,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 252b2b500640e604dac9a8ddb53616f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114904380130813628
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1837719132397616}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e115e878178046d4f814ef478de5bc88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114929563258579018

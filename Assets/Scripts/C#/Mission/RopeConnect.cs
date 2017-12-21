@@ -16,7 +16,7 @@ public class RopeConnect : MonoBehaviour {
     float distX;                        // オブジェクトの伸縮値
 
 	void Start () {
-        pullPlayer = transform.parent.gameObject;
+        pullPlayer = GameObject.FindWithTag("body"); ;
 	}
 	
 	void Update () {
@@ -35,7 +35,6 @@ public class RopeConnect : MonoBehaviour {
         }
 
         // プレイヤー体のタグ判別で中心位置の取得
-        pullPlayer = GameObject.FindWithTag("body");
         playerPos = pullPlayer.transform.position;
 
         // 引くオブジェクトの取得

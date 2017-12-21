@@ -6,15 +6,22 @@ public class RopeFrame : MonoBehaviour {
 
     ObjectController pullObjectScript;
     private GameObject ropeObject;
+    private Renderer render;
+    private float offset;
 
-	void Start () {
-		
-	}
+    public float scrollSpeed = 0.01f;
+
+
+    void Start () {
+    }
 	
 	void Update () {
 
-        ropeObject = transform.parent.gameObject;
-        if (ropeObject == null)
+        
+        pullObjectScript = GameObject.Find("MissionManager/Transportation/MissionObject/Object").GetComponent<ObjectController>();
+
+        // 引くオブジェクトとプレイヤーが紐づけされたか判断
+        if (pullObjectScript.player == null)
         {
             GetComponent<Renderer>().enabled = false;
             return;
@@ -24,5 +31,9 @@ public class RopeFrame : MonoBehaviour {
             GetComponent<Renderer>().enabled = true;
         }
 
+        // レンダラー呼び出しでoffset調整
+        offset = scrollSpeed;
+        Renderer render = GetComponent<Renderer>();
+        render.material.mainTextureOffset += new Vector2(scrollSpeed, 0);
     }
 }
