@@ -1495,7 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b14f25d9f395c4b8ac48bf8d4088fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fCalcScore: 0
+  nScore: 0
   nColumnNum: 6
   PlusFrame: 30
   NumObject:
@@ -1624,10 +1624,11 @@ MonoBehaviour:
   MissionType: {fileID: 1520306888440428}
   missionStartCount: 30
   missionBg: {fileID: 114251917198441850}
+  missionCut: {fileID: 1232920094510712}
   cutBg: {fileID: 114355851540598450}
   cutChara: {fileID: 114289851107982414}
   timer: {fileID: 114996660098953790}
-  timerStartCnt: 180
+  timerStartCnt: 200
 --- !u!114 &114948679817288070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1741,7 +1742,7 @@ MonoBehaviour:
   NumObjectMin01: {fileID: 114525059487240172}
   NumObjectSec00: {fileID: 114239716930610124}
   NumObjectSec01: {fileID: 114608424649384554}
-  missionManager: {fileID: 0}
+  manager: {fileID: 1007064856673990}
 --- !u!135 &135911468273030866
 SphereCollider:
   m_ObjectHideFlags: 1

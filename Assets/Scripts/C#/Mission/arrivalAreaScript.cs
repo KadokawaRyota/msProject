@@ -8,6 +8,8 @@ public class arrivalAreaScript : MonoBehaviour {
 
     GameObject player;
 
+    
+
 	void Start () {
         player = GameObject.Find("Player");
 	}
@@ -26,6 +28,7 @@ public class arrivalAreaScript : MonoBehaviour {
             {
                 collider.GetComponent<ObjectController>().Refresh();
                 //加点する
+                
             }
         }
         else if(SceneManager.GetActiveScene().name == ("Main"))

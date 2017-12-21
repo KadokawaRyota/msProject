@@ -43,6 +43,8 @@ public class NetworkMissionManager : MonoBehaviour
     [SerializeField]
     int timerStartCnt = 60;
 
+    public Score score;
+
 
     // Use this for initialization
     void Start()

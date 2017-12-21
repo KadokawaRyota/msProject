@@ -1,10 +1,9 @@
 ﻿//------------------------------------------------------------------------------
 //          ファイルインクルード
 //------------------------------------------------------------------------------
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 //------------------------------------------------------------------------------
 //          メイン
@@ -41,7 +40,7 @@ public class Timer : MonoBehaviour
         bCountDownFlug = false;     // カウントダウンフラグfalse
         fTimeCounter = 0.0f;        // フレームカウンタ初期化
 
-        if(LoadSceneManager.nowSceneName == "Offline")
+        if(SceneManager.GetActiveScene().name == "Offline")
         {
             missionManager = manager.GetComponent<MissionManagerScript>();
         }
