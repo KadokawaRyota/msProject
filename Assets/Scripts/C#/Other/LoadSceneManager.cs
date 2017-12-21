@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 //ローディング遷移
 public class LoadSceneManager : MonoBehaviour {
 
-    public static string nowSceneName { get; private set; }
-
     AsyncOperation async;
 	public GameObject loadingUI;
 	public Slider slider;
@@ -75,8 +73,6 @@ public class LoadSceneManager : MonoBehaviour {
                     break;
             }
 
-            //現在のシーン名を設定
-            nowSceneName = name;
         }
     }
 
