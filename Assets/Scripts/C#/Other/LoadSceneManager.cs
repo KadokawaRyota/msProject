@@ -26,7 +26,7 @@ public class LoadSceneManager : MonoBehaviour {
 
             int random = 0;
 
-            //取得したシーンの次のシーンのBGMを再生
+            //取得したシーンのBGMを再生
             switch (name)
             {
                 case "Title":
@@ -72,6 +72,7 @@ public class LoadSceneManager : MonoBehaviour {
                     }
                     break;
             }
+
         }
     }
 
