@@ -115,7 +115,6 @@ public class Result : MonoBehaviour {
             /// 不要なオブジェクトの削除
 
             // プレイヤーオブジェクトの削除
-            if(  )
 
             //
 
