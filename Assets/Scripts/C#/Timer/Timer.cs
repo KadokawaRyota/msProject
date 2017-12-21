@@ -26,6 +26,13 @@ public class Timer : MonoBehaviour
 
     private float TexWidth = 1.0f / 11.0f;
 
+    public int secondTime { get; private set; }
+
+    [SerializeField]
+    GameObject manager;
+    MissionManagerScript missionManager;
+    NetworkMissionManager netMissionManager;
+
     //--------------------------------------------------------------------------
     //          初期化処理
     //--------------------------------------------------------------------------
@@ -33,6 +40,15 @@ public class Timer : MonoBehaviour
     {
         bCountDownFlug = false;     // カウントダウンフラグfalse
         fTimeCounter = 0.0f;        // フレームカウンタ初期化
+
+        if(LoadSceneManager.nowSceneName == "Offline")
+        {
+            missionManager = manager.GetComponent<MissionManagerScript>();
+        }
+        else
+        {
+            netMissionManager = manager.GetComponent<NetworkMissionManager>();
+        }
 	}
 
     //--------------------------------------------------------------------------
@@ -55,6 +71,7 @@ public class Timer : MonoBehaviour
                         nTimeMin = 0;
                         nTimeSec = 0;
                         bCountDownFlug = false;
+                        missionManager.missionEndFlg = true;    //ミッション終了フラグを切り替え
                     }
 
                     else
@@ -81,6 +98,8 @@ public class Timer : MonoBehaviour
         NumObjectMin01.uvRect = new Rect((nTimeMin % 10) * TexWidth, 0, TexWidth, 1);   // 1の桁
         NumObjectSec00.uvRect = new Rect((nTimeSec / 10) * TexWidth, 0, TexWidth, 1);   // 10の桁
         NumObjectSec01.uvRect = new Rect((nTimeSec % 10) * TexWidth, 0, TexWidth, 1);   // 1の桁
+
+        secondTime = nTimeMin * 60 + nTimeSec;
     }
 }
 
