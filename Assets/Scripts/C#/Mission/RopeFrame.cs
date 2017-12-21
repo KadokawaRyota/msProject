@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RopeFrame : MonoBehaviour {
 
-
+    ObjectController pullObjectScript;
     private GameObject ropeObject;
 
 	void Start () {
