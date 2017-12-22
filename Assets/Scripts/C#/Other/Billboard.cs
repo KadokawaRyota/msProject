@@ -5,16 +5,13 @@ using UnityEngine;
 //ビルボード
 public class Billboard : MonoBehaviour {
 
-	void FixedUpdate () {
+    void Update()
+    {
 
         //カメラポジションの取得
-         //Quaternion rot = Camera.main.transform.rotation;
-         //transform.rotation = rot;
         if (Camera.main != null)
         {
-            Vector3 pos = Camera.main.transform.position;
-            Vector3 a = (pos - transform.position).normalized;
-            transform.up = a * Time.deltaTime;
+            transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
         }
     }
 }
