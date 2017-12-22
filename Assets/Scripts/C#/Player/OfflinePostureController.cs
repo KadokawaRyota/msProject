@@ -15,6 +15,7 @@ public class OfflinePostureController : MonoBehaviour {
     public float moveRunSpeed = 0.08f;    // 走り移動速度係数
     public float moveIn = 0.1f;         // 慣性
     public float moveThre = 0.1f;       // 移動速度変化の閾値
+    public float moveDeadMin = 25.0f;
     public float moveDead = 70.0f;       // ぷにコンデッドゾーン
     public bool move = false;            // プレイヤー移動可否
     public bool deadTrans = false;       // デッドゾーン時の回転可否
@@ -195,7 +196,7 @@ public class OfflinePostureController : MonoBehaviour {
 		}
 
         // プレイヤーの回転
-        if (move || deadTrans)
+        if (move || ( deadTrans && (VecLength > moveDeadMin)))
         {
             transform.rotation = Quaternion.LookRotation(dirVec, surfaceNormal);
         }

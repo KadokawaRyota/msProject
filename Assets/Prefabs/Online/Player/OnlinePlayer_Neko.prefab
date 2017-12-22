@@ -275,6 +275,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4951786392356646}
+  - component: {fileID: 114380291899199088}
   m_Layer: 0
   m_Name: rope_Frame
   m_TagString: Untagged
@@ -2219,6 +2220,17 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114380291899199088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1307378632627978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d8772db7b75fba408473dd55d6ca310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114417578553079622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2310,6 +2322,7 @@ MonoBehaviour:
   moveRunSpeed: 0.08
   moveIn: 0.1
   moveThre: 0.1
+  moveDeadMin: 25
   moveDead: 70
   move: 0
   deadTrans: 0

@@ -43,9 +43,7 @@ public class Result : MonoBehaviour {
     public bool resultFlg = false;              // フラグ
     public float distance;                     // オブジェクトからカメラへの距離
 
-    private Vector3 dirCameraVec;               // オブジェクトからカメラへのベクトル
-    private string playerName;
-
+    private int score;                          // プレイヤーの最終スコア
 
     void Awake()
     {
@@ -76,7 +74,7 @@ public class Result : MonoBehaviour {
         }
 
         charInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
-
+        player = GameObject.FindWithTag("Player");
     }
 	
 	// Update is called once per frame
@@ -90,7 +88,6 @@ public class Result : MonoBehaviour {
 
             // キャラ情報の取得
             resultCharNum = charInfo.GetCharaSelectData();
-            player = GameObject.FindWithTag("Player");
 
             if (player != null)
             {
@@ -101,7 +98,6 @@ public class Result : MonoBehaviour {
                     case CharactorInfo.CHARA.TANUKI:
                         {
                             resultObject = targetObject_Green;
-                            dirCameraVec = resultObject.transform.forward.normalized;
                             resultCamera.transform.position = Green_CameraPos.transform.position;
                             resultCamera.transform.rotation = Green_CameraPos.transform.rotation;
                             break;
@@ -110,7 +106,6 @@ public class Result : MonoBehaviour {
                     case CharactorInfo.CHARA.CAT:
                         {
                             resultObject = targetObject_Town;
-                            dirCameraVec = resultObject.transform.forward.normalized;
                             resultCamera.transform.position = Town_CameraPos.transform.position;
                             resultCamera.transform.rotation = Town_CameraPos.transform.rotation;
                             break;
@@ -119,7 +114,6 @@ public class Result : MonoBehaviour {
                     case CharactorInfo.CHARA.FOX:
                         {
                             resultObject = targetObject_Sand;
-                            dirCameraVec = resultObject.transform.forward.normalized;
                             resultCamera.transform.position = Sand_CameraPos.transform.position;
                             resultCamera.transform.rotation = Sand_CameraPos.transform.rotation;
                             break;
@@ -128,7 +122,6 @@ public class Result : MonoBehaviour {
                     case CharactorInfo.CHARA.DOG:
                         {
                             resultObject = targetObject_Ice;
-                            dirCameraVec = resultObject.transform.forward.normalized;
                             resultCamera.transform.position = Ice_CameraPos.transform.position;
                             resultCamera.transform.rotation = Ice_CameraPos.transform.rotation;
                             break;
@@ -138,14 +131,6 @@ public class Result : MonoBehaviour {
                             break;
                         }
                 }
-
-                /// スコアに必要な情報の保持
-
-                // プレイヤーの名前の取得
-                playerName = charInfo.GetPlayerName();
-
-                // スコアの取得
-
 
 
                 /// 不要なオブジェクトの削除
@@ -160,6 +145,7 @@ public class Result : MonoBehaviour {
                 // Canvasの削除
                 if (Application.loadedLevelName == "Offline")
                 {
+                    if(GameObject.Find("OfflineCanvas") != null)
                     Destroy(GameObject.Find("OfflineCanvas"));
                 }
                 else if(Application.loadedLevelName == "Online")
@@ -168,7 +154,7 @@ public class Result : MonoBehaviour {
                 }
 
                 // NPCの削除
-                Destroy(GameObject.Find("NPC"));
+                //Destroy(GameObject.Find("NPC"));
 
             }
 
