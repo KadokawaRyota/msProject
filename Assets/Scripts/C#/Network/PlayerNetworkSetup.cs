@@ -30,7 +30,11 @@ public class PlayerNetworkSetup : NetworkBehaviour
             }
 
             //PlayerCameraを使うため、Scene Cameraを非アクティブ化
-            GameObject.Find("Scene Camera").SetActive(false);
+            GameObject cam = GameObject.Find("Scene Camera");
+            if (null != cam)
+            {
+                cam.SetActive(false);
+            }
 
 			//Camera,AudioListenerの各コンポーネントをアクティブ化
 			PlayerCamera.GetComponent<Camera>().enabled = true;

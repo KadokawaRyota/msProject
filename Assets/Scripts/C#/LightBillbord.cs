@@ -5,7 +5,11 @@ using UnityEngine;
 public class LightBillbord : MonoBehaviour {
 
 	void Update () {
-        Vector3 dirVec = Camera.main.transform.position - transform.position;
-        transform.up = dirVec.normalized; 
+
+        if (Camera.main != null)
+        {
+            Vector3 dirVec = Camera.main.transform.position - transform.position;
+            transform.up = dirVec.normalized;
+        }
 	}
 }

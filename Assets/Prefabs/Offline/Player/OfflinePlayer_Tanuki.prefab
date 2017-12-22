@@ -2078,6 +2078,7 @@ MonoBehaviour:
   moveRunSpeed: 0.08
   moveIn: 0.1
   moveThre: 0.1
+  moveDeadMin: 25
   moveDead: 70
   move: 0
   deadTrans: 1
