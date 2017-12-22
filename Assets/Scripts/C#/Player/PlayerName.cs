@@ -30,8 +30,8 @@ public class PlayerName : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.transform.rotation = camera.gameObject.transform.rotation;
-	}
+        transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward, Camera.main.transform.rotation * Vector3.up);
+    }
 
     public void SetNameText(string name)
     {
