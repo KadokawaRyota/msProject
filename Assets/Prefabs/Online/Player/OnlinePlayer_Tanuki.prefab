@@ -292,8 +292,6 @@ GameObject:
   - component: {fileID: 33190662788396266}
   - component: {fileID: 23534986141717670}
   - component: {fileID: 95385291066059544}
-  - component: {fileID: 114510665678039874}
-  - component: {fileID: 114559309702963684}
   - component: {fileID: 114463569637322102}
   m_Layer: 0
   m_Name: ChatImage
@@ -2323,57 +2321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0a9b9c146e9bc4c8f851438f811c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114510665678039874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285225098171142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 140
-    i1: 152
-    i2: 15
-    i3: 221
-    i4: 239
-    i5: 248
-    i6: 114
-    i7: 68
-    i8: 25
-    i9: 221
-    i10: 156
-    i11: 4
-    i12: 197
-    i13: 107
-    i14: 227
-    i15: 54
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114559309702963684
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1285225098171142}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Animator: {fileID: 95385291066059544}
-  m_ParameterSendBits: 0
-  param0: 
-  param1: 
-  param2: 
-  param3: 
-  param4: 
-  param5: 
 --- !u!114 &114605510383713032
 MonoBehaviour:
   m_ObjectHideFlags: 1

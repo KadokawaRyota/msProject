@@ -21,7 +21,7 @@ public class CharactorInfo : MonoBehaviour {
     public static CHARA charSelectData = CHARA.TANUKI;   //種類格納
 
     [SerializeField]
-    static string playerName = "Player";      //プレイヤーの名前
+    static string playerName = "";      //プレイヤーの名前
 
     [SerializeField]
     GameObject playerPrefab_0;
@@ -81,14 +81,6 @@ public class CharactorInfo : MonoBehaviour {
 
             player.name = playerName;
         }
-    }
-
-    void Start()
-    {
-        /////キャラセレクトができるようになったら消す/////
-        //charSelectData = CHARA.DOG;
-        playerName = "Player";
-        /////////////////////////////////////
     }
 
     //プレイヤー名設定

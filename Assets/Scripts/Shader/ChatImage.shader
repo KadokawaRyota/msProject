@@ -36,6 +36,7 @@
 			v2f vert(appdata i)
 			{
 				v2f o;
+				UNITY_INITIALIZE_OUTPUT(v2f, o);
 				o.position = UnityObjectToClipPos(i.position);	//座標変換
 
 				o.uv = i.uv;
