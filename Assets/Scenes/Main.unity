@@ -329,7 +329,7 @@ Prefab:
     - target: {fileID: 114096047998135808, guid: 4e1811d44fb47384db63400a54843b72,
         type: 2}
       propertyPath: timerStartCnt
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 114096047998135808, guid: 4e1811d44fb47384db63400a54843b72,
         type: 2}
@@ -744,7 +744,7 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}

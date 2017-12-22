@@ -8,6 +8,9 @@ public class TutorialManager : MonoBehaviour {
     //現在存在しているオブジェクト実態の記憶領域
     static TutorialManager instance;
 
+    public static bool nameTuto = false;       //名前入力
+    public static bool offlineTuto = false;    //Offline時
+
     //シングルトン処理
     void Awake()
     {
@@ -30,16 +33,14 @@ public class TutorialManager : MonoBehaviour {
 
     }
 
-    public static bool nameTuto = false;       //名前入力
-    public static bool offlineTuto = false;    //Offline時
-       
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public bool GetNameTuto()
+    {
+        return nameTuto;
+    }
+
+    public void SetNameTuto(bool flg)
+    {
+        nameTuto = flg;
+    }
+
 }

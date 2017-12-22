@@ -459,6 +459,48 @@ AudioSource:
   m_PrefabParentObject: {fileID: 82619743498005932, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f,
     type: 2}
   m_PrefabInternal: {fileID: 2086229873}
+--- !u!1001 &676524143
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 81.32947
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1027.1497
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 623.3135
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4604004248327462, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e7fa3c0d10c39864985b9d7b97b001ab, type: 2}
+  m_IsPrefabParent: 0
 --- !u!114 &713327009 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114082493359198330, guid: f5bd7be76b27bb4498efcdcd74b55ce2,
