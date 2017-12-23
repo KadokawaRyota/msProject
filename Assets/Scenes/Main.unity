@@ -75148,7 +75148,9 @@ MonoBehaviour:
   NumObjectMin01: {fileID: 3762}
   NumObjectSec00: {fileID: 3594}
   NumObjectSec01: {fileID: 3648}
-  manager: {fileID: 0}
+  manager: {fileID: 542}
+  missionManager: {fileID: 0}
+  netMissionManager: {fileID: 0}
 --- !u!114 &3660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76038,6 +76040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5e04c006a9eae48b469d321765e6fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionEndFlg: 0
   MissionCanvas: {fileID: 91}
   MissionType: {fileID: 184}
   missionStartCount: 30
@@ -76048,6 +76051,7 @@ MonoBehaviour:
   timer: {fileID: 3659}
   timerStartCnt: 200
   score: {fileID: 3784}
+  resultManager: {fileID: 1091389910}
 --- !u!114 &3697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78598,6 +78602,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 18
   m_IsActive: 1
+--- !u!1 &1091389910 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1559716450884798, guid: c8540eee81ccf454ab12101ab50cf75b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1605890065}
 --- !u!1001 &1605890065
 Prefab:
   m_ObjectHideFlags: 0
@@ -78726,6 +78735,16 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 114090263054289346, guid: c8540eee81ccf454ab12101ab50cf75b,
+        type: 2}
+      propertyPath: netConnector
+      value: 
+      objectReference: {fileID: 3682}
+    - target: {fileID: 114090263054289346, guid: c8540eee81ccf454ab12101ab50cf75b,
+        type: 2}
+      propertyPath: score
+      value: 
+      objectReference: {fileID: 3784}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8540eee81ccf454ab12101ab50cf75b, type: 2}
   m_IsPrefabParent: 0

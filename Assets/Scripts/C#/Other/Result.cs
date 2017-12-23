@@ -53,8 +53,11 @@ public class Result : MonoBehaviour {
     public CharactorInfo.CHARA resultCharNum;   // キャラ番号
     public bool resultFlg = false;              // フラグ
 
-    private int score;                          // プレイヤーの最終スコア
+    //private int score = 0;                          // プレイヤーの最終スコア
+	private int serverScore = 0;
 
+	[SerializeField]
+	Score score;
     void Awake()
     {
         resultFlg = false;
@@ -184,10 +187,10 @@ public class Result : MonoBehaviour {
 
                 // プレイヤースコアの取得
                 // ←ここでリザルト時のプレイヤーの得点を保持
-                score = 777;
+                //score = 777;
 
                 // 得点をリザルト用オブジェクトに加算
-                GameObject.Find("ResultManager/ResultObjectScore/Canvas").GetComponent<Score>().SetPlusScore(score);
+				GameObject.Find("ResultManager/ResultObjectScore/Canvas").GetComponent<Score>().SetPlusScore(serverScore + score.GetScore ());
 
                 /// 不要なオブジェクトの削除
 
