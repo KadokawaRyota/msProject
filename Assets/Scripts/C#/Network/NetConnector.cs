@@ -7,7 +7,6 @@ using UnityEngine.Networking.NetworkSystem;
 //ネットワーク接続に関するクラス
 public class NetConnector : NetworkManager
 {
-
     NetworkManager manager; //NetwokManager取得用
 
 	[SerializeField]
@@ -49,6 +48,9 @@ public class NetConnector : NetworkManager
     CharactorInfo charaInfo;    //選んだキャラクター情報
 
     bool createPlayer = false;  //生成フラグ
+
+	[SerializeField]
+	ScoreManager scoreManager;
 
 
     void Start()
@@ -124,6 +126,7 @@ public class NetConnector : NetworkManager
 
                 manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
                 manager.StartClient();                      //クライアント処理開始
+
                 Debug.Log("Start as Client");   
             }
 
@@ -140,6 +143,7 @@ public class NetConnector : NetworkManager
 			//アンドロイドでは常にクライアント（ホストにはならない）
 			manager.networkAddress = serverIPAdress;
 			manager.StartClient();
+
 			Debug.Log("Start as Client");
         }
 	}
@@ -167,7 +171,7 @@ public class NetConnector : NetworkManager
             }
         }
     }
-
+		
     //指定したプレイヤーを生成するためにオーバーライド
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader reader)
     {

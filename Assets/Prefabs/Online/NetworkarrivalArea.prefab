@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114854250856674450}
   - component: {fileID: 114101280076411188}
   - component: {fileID: 114033574884769400}
+  - component: {fileID: 114805973801008880}
   m_Layer: 0
   m_Name: NetworkarrivalArea
   m_TagString: Untagged
@@ -100,6 +101,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ddc06e000807747939293a94d9f862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114805973801008880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327068514790068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920c5b3bb21c5ae478e611080f898e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standX: 0
+  standY: 1
+  standZ: 0
+  reverse: 0
 --- !u!114 &114854250856674450
 MonoBehaviour:
   m_ObjectHideFlags: 1

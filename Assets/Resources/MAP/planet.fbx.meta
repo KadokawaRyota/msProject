@@ -1,0 +1,485 @@
+fileFormatVersion: 2
+guid: 4ed4fb622eba6a14d848b62fb5f50ca4
+timeCreated: 1514060823
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: backBoard_mesh
+    100002: backBoard_mesh 1
+    100004: backBoard_mesh 10
+    100006: backBoard_mesh 11
+    100008: backBoard_mesh 2
+    100010: backBoard_mesh 3
+    100012: backBoard_mesh 4
+    100014: backBoard_mesh 5
+    100016: backBoard_mesh 6
+    100018: backBoard_mesh 7
+    100020: backBoard_mesh 8
+    100022: backBoard_mesh 9
+    100024: bridge1
+    100026: bridge2
+    100028: bridge3
+    100030: bridge4
+    100032: bridge5
+    100034: bridge6
+    100036: bridge_mesh
+    100038: bridge_mesh 1
+    100040: bridge_mesh 2
+    100042: bridge_mesh 3
+    100044: bridge_mesh 4
+    100046: bridge_mesh 5
+    100048: collision_mesh
+    100050: desertIsland_mesh
+    100052: frontBoard_mesh
+    100054: frontBoard_mesh 1
+    100056: frontBoard_mesh 10
+    100058: frontBoard_mesh 11
+    100060: frontBoard_mesh 2
+    100062: frontBoard_mesh 3
+    100064: frontBoard_mesh 4
+    100066: frontBoard_mesh 5
+    100068: frontBoard_mesh 6
+    100070: frontBoard_mesh 7
+    100072: frontBoard_mesh 8
+    100074: frontBoard_mesh 9
+    100076: greenIsland_mesh
+    100078: group1
+    100080: group1 1
+    100082: group1 2
+    100084: group1 3
+    100086: group2
+    100088: group2 1
+    100090: group2 2
+    100092: group2 3
+    100094: group3
+    100096: group3 1
+    100098: group3 2
+    100100: group3 3
+    100102: grp_bridge
+    100104: grp_desert
+    100106: grp_desertIsland
+    100108: grp_green
+    100110: grp_greenIsland
+    100112: grp_island
+    100114: grp_signBoard
+    100116: grp_signBoard1
+    100118: grp_signBoard1 1
+    100120: grp_signBoard1 10
+    100122: grp_signBoard1 11
+    100124: grp_signBoard1 2
+    100126: grp_signBoard1 3
+    100128: grp_signBoard1 4
+    100130: grp_signBoard1 5
+    100132: grp_signBoard1 6
+    100134: grp_signBoard1 7
+    100136: grp_signBoard1 8
+    100138: grp_signBoard1 9
+    100140: grp_snow
+    100142: grp_snowIsland
+    100144: grp_town
+    100146: grp_townIsland
+    100148: //RootNode
+    100150: propA_mesh
+    100152: propA_mesh 1
+    100154: propA_mesh 10
+    100156: propA_mesh 11
+    100158: propA_mesh 2
+    100160: propA_mesh 3
+    100162: propA_mesh 4
+    100164: propA_mesh 5
+    100166: propA_mesh 6
+    100168: propA_mesh 7
+    100170: propA_mesh 8
+    100172: propA_mesh 9
+    100174: propB_mesh
+    100176: propB_mesh 1
+    100178: propB_mesh 10
+    100180: propB_mesh 11
+    100182: propB_mesh 2
+    100184: propB_mesh 3
+    100186: propB_mesh 4
+    100188: propB_mesh 5
+    100190: propB_mesh 6
+    100192: propB_mesh 7
+    100194: propB_mesh 8
+    100196: propB_mesh 9
+    100198: sea_mesh
+    100200: signBoard_mesh
+    100202: signBoard_mesh 1
+    100204: signBoard_mesh 10
+    100206: signBoard_mesh 11
+    100208: signBoard_mesh 2
+    100210: signBoard_mesh 3
+    100212: signBoard_mesh 4
+    100214: signBoard_mesh 5
+    100216: signBoard_mesh 6
+    100218: signBoard_mesh 7
+    100220: signBoard_mesh 8
+    100222: signBoard_mesh 9
+    100224: snowIsland_mesh
+    100226: townIsland_mesh
+    400000: backBoard_mesh
+    400002: backBoard_mesh 1
+    400004: backBoard_mesh 10
+    400006: backBoard_mesh 11
+    400008: backBoard_mesh 2
+    400010: backBoard_mesh 3
+    400012: backBoard_mesh 4
+    400014: backBoard_mesh 5
+    400016: backBoard_mesh 6
+    400018: backBoard_mesh 7
+    400020: backBoard_mesh 8
+    400022: backBoard_mesh 9
+    400024: bridge1
+    400026: bridge2
+    400028: bridge3
+    400030: bridge4
+    400032: bridge5
+    400034: bridge6
+    400036: bridge_mesh
+    400038: bridge_mesh 1
+    400040: bridge_mesh 2
+    400042: bridge_mesh 3
+    400044: bridge_mesh 4
+    400046: bridge_mesh 5
+    400048: collision_mesh
+    400050: desertIsland_mesh
+    400052: frontBoard_mesh
+    400054: frontBoard_mesh 1
+    400056: frontBoard_mesh 10
+    400058: frontBoard_mesh 11
+    400060: frontBoard_mesh 2
+    400062: frontBoard_mesh 3
+    400064: frontBoard_mesh 4
+    400066: frontBoard_mesh 5
+    400068: frontBoard_mesh 6
+    400070: frontBoard_mesh 7
+    400072: frontBoard_mesh 8
+    400074: frontBoard_mesh 9
+    400076: greenIsland_mesh
+    400078: group1
+    400080: group1 1
+    400082: group1 2
+    400084: group1 3
+    400086: group2
+    400088: group2 1
+    400090: group2 2
+    400092: group2 3
+    400094: group3
+    400096: group3 1
+    400098: group3 2
+    400100: group3 3
+    400102: grp_bridge
+    400104: grp_desert
+    400106: grp_desertIsland
+    400108: grp_green
+    400110: grp_greenIsland
+    400112: grp_island
+    400114: grp_signBoard
+    400116: grp_signBoard1
+    400118: grp_signBoard1 1
+    400120: grp_signBoard1 10
+    400122: grp_signBoard1 11
+    400124: grp_signBoard1 2
+    400126: grp_signBoard1 3
+    400128: grp_signBoard1 4
+    400130: grp_signBoard1 5
+    400132: grp_signBoard1 6
+    400134: grp_signBoard1 7
+    400136: grp_signBoard1 8
+    400138: grp_signBoard1 9
+    400140: grp_snow
+    400142: grp_snowIsland
+    400144: grp_town
+    400146: grp_townIsland
+    400148: //RootNode
+    400150: propA_mesh
+    400152: propA_mesh 1
+    400154: propA_mesh 10
+    400156: propA_mesh 11
+    400158: propA_mesh 2
+    400160: propA_mesh 3
+    400162: propA_mesh 4
+    400164: propA_mesh 5
+    400166: propA_mesh 6
+    400168: propA_mesh 7
+    400170: propA_mesh 8
+    400172: propA_mesh 9
+    400174: propB_mesh
+    400176: propB_mesh 1
+    400178: propB_mesh 10
+    400180: propB_mesh 11
+    400182: propB_mesh 2
+    400184: propB_mesh 3
+    400186: propB_mesh 4
+    400188: propB_mesh 5
+    400190: propB_mesh 6
+    400192: propB_mesh 7
+    400194: propB_mesh 8
+    400196: propB_mesh 9
+    400198: sea_mesh
+    400200: signBoard_mesh
+    400202: signBoard_mesh 1
+    400204: signBoard_mesh 10
+    400206: signBoard_mesh 11
+    400208: signBoard_mesh 2
+    400210: signBoard_mesh 3
+    400212: signBoard_mesh 4
+    400214: signBoard_mesh 5
+    400216: signBoard_mesh 6
+    400218: signBoard_mesh 7
+    400220: signBoard_mesh 8
+    400222: signBoard_mesh 9
+    400224: snowIsland_mesh
+    400226: townIsland_mesh
+    2300000: backBoard_mesh
+    2300002: backBoard_mesh 1
+    2300004: backBoard_mesh 10
+    2300006: backBoard_mesh 11
+    2300008: backBoard_mesh 2
+    2300010: backBoard_mesh 3
+    2300012: backBoard_mesh 4
+    2300014: backBoard_mesh 5
+    2300016: backBoard_mesh 6
+    2300018: backBoard_mesh 7
+    2300020: backBoard_mesh 8
+    2300022: backBoard_mesh 9
+    2300024: bridge_mesh
+    2300026: bridge_mesh 1
+    2300028: bridge_mesh 2
+    2300030: bridge_mesh 3
+    2300032: bridge_mesh 4
+    2300034: bridge_mesh 5
+    2300036: collision_mesh
+    2300038: desertIsland_mesh
+    2300040: frontBoard_mesh
+    2300042: frontBoard_mesh 1
+    2300044: frontBoard_mesh 10
+    2300046: frontBoard_mesh 11
+    2300048: frontBoard_mesh 2
+    2300050: frontBoard_mesh 3
+    2300052: frontBoard_mesh 4
+    2300054: frontBoard_mesh 5
+    2300056: frontBoard_mesh 6
+    2300058: frontBoard_mesh 7
+    2300060: frontBoard_mesh 8
+    2300062: frontBoard_mesh 9
+    2300064: greenIsland_mesh
+    2300066: propA_mesh
+    2300068: propA_mesh 1
+    2300070: propA_mesh 10
+    2300072: propA_mesh 11
+    2300074: propA_mesh 2
+    2300076: propA_mesh 3
+    2300078: propA_mesh 4
+    2300080: propA_mesh 5
+    2300082: propA_mesh 6
+    2300084: propA_mesh 7
+    2300086: propA_mesh 8
+    2300088: propA_mesh 9
+    2300090: propB_mesh
+    2300092: propB_mesh 1
+    2300094: propB_mesh 10
+    2300096: propB_mesh 11
+    2300098: propB_mesh 2
+    2300100: propB_mesh 3
+    2300102: propB_mesh 4
+    2300104: propB_mesh 5
+    2300106: propB_mesh 6
+    2300108: propB_mesh 7
+    2300110: propB_mesh 8
+    2300112: propB_mesh 9
+    2300114: sea_mesh
+    2300116: snowIsland_mesh
+    2300118: townIsland_mesh
+    3300000: backBoard_mesh
+    3300002: backBoard_mesh 1
+    3300004: backBoard_mesh 10
+    3300006: backBoard_mesh 11
+    3300008: backBoard_mesh 2
+    3300010: backBoard_mesh 3
+    3300012: backBoard_mesh 4
+    3300014: backBoard_mesh 5
+    3300016: backBoard_mesh 6
+    3300018: backBoard_mesh 7
+    3300020: backBoard_mesh 8
+    3300022: backBoard_mesh 9
+    3300024: bridge_mesh
+    3300026: bridge_mesh 1
+    3300028: bridge_mesh 2
+    3300030: bridge_mesh 3
+    3300032: bridge_mesh 4
+    3300034: bridge_mesh 5
+    3300036: collision_mesh
+    3300038: desertIsland_mesh
+    3300040: frontBoard_mesh
+    3300042: frontBoard_mesh 1
+    3300044: frontBoard_mesh 10
+    3300046: frontBoard_mesh 11
+    3300048: frontBoard_mesh 2
+    3300050: frontBoard_mesh 3
+    3300052: frontBoard_mesh 4
+    3300054: frontBoard_mesh 5
+    3300056: frontBoard_mesh 6
+    3300058: frontBoard_mesh 7
+    3300060: frontBoard_mesh 8
+    3300062: frontBoard_mesh 9
+    3300064: greenIsland_mesh
+    3300066: propA_mesh
+    3300068: propA_mesh 1
+    3300070: propA_mesh 10
+    3300072: propA_mesh 11
+    3300074: propA_mesh 2
+    3300076: propA_mesh 3
+    3300078: propA_mesh 4
+    3300080: propA_mesh 5
+    3300082: propA_mesh 6
+    3300084: propA_mesh 7
+    3300086: propA_mesh 8
+    3300088: propA_mesh 9
+    3300090: propB_mesh
+    3300092: propB_mesh 1
+    3300094: propB_mesh 10
+    3300096: propB_mesh 11
+    3300098: propB_mesh 2
+    3300100: propB_mesh 3
+    3300102: propB_mesh 4
+    3300104: propB_mesh 5
+    3300106: propB_mesh 6
+    3300108: propB_mesh 7
+    3300110: propB_mesh 8
+    3300112: propB_mesh 9
+    3300114: sea_mesh
+    3300116: snowIsland_mesh
+    3300118: townIsland_mesh
+    4300000: sea_mesh
+    4300002: snowIsland_mesh
+    4300004: townIsland_mesh
+    4300006: desertIsland_mesh
+    4300008: greenIsland_mesh
+    4300010: collision_mesh
+    4300012: bridge_mesh
+    4300014: bridge_mesh
+    4300016: bridge_mesh
+    4300018: bridge_mesh
+    4300020: bridge_mesh
+    4300022: bridge_mesh
+    4300024: propA_mesh
+    4300026: propB_mesh
+    4300028: frontBoard_mesh
+    4300030: backBoard_mesh
+    4300032: propA_mesh
+    4300034: propB_mesh
+    4300036: frontBoard_mesh
+    4300038: backBoard_mesh
+    4300040: propA_mesh
+    4300042: propB_mesh
+    4300044: frontBoard_mesh
+    4300046: backBoard_mesh
+    4300048: propA_mesh
+    4300050: propB_mesh
+    4300052: frontBoard_mesh
+    4300054: backBoard_mesh
+    4300056: propA_mesh
+    4300058: propB_mesh
+    4300060: frontBoard_mesh
+    4300062: backBoard_mesh
+    4300064: propA_mesh
+    4300066: propB_mesh
+    4300068: frontBoard_mesh
+    4300070: backBoard_mesh
+    4300072: propA_mesh
+    4300074: propB_mesh
+    4300076: frontBoard_mesh
+    4300078: backBoard_mesh
+    4300080: propA_mesh
+    4300082: propB_mesh
+    4300084: frontBoard_mesh
+    4300086: backBoard_mesh
+    4300088: propA_mesh
+    4300090: propB_mesh
+    4300092: frontBoard_mesh
+    4300094: backBoard_mesh
+    4300096: propA_mesh
+    4300098: propB_mesh
+    4300100: frontBoard_mesh
+    4300102: backBoard_mesh
+    4300104: propA_mesh
+    4300106: propB_mesh
+    4300108: frontBoard_mesh
+    4300110: backBoard_mesh
+    4300112: propA_mesh
+    4300114: propB_mesh
+    4300116: frontBoard_mesh
+    4300118: backBoard_mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
