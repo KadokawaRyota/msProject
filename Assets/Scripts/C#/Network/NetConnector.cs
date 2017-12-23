@@ -156,8 +156,9 @@ public class NetConnector : NetworkManager
             if (!createPlayer)
             {
                 //未生成ならサーバへメッセージを飛ばす（自分が選んだキャラクター）
-                var message = new IntegerMessage((int)charaInfo.GetCharaSelectData());
-                if (!ClientScene.AddPlayer(ClientScene.readyConnection, 0, message))
+                var type = new IntegerMessage((int)charaInfo.GetCharaSelectData());
+
+                if (!ClientScene.AddPlayer(ClientScene.readyConnection, 0, type))
                 {
                     return;
                 }
@@ -171,10 +172,10 @@ public class NetConnector : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader reader)
     {
         //メッセージの取得
-        var message = reader.ReadMessage<IntegerMessage>();
+        var type = reader.ReadMessage<IntegerMessage>();
 
         //メッセージの番号をintにキャスト
-        int playerNum = message.value;
+        int playerNum = type.value;
 
         GameObject obj = null;
 
@@ -218,5 +219,10 @@ public class NetConnector : NetworkManager
     public GameObject GetLocalPlayer()
     {
         return localPlayer;
+    }
+
+    public CharactorInfo GetCharactorInfo()
+    {
+        return charaInfo;
     }
 }
