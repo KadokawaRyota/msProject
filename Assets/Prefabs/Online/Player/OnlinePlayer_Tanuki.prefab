@@ -47,9 +47,10 @@ GameObject:
   - component: {fileID: 114049168162091786}
   - component: {fileID: 114614576522819178}
   - component: {fileID: 114830753060304822}
+  - component: {fileID: 114473701391960894}
   m_Layer: 9
   m_Name: OnlinePlayer_Tanuki
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2321,6 +2322,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c0a9b9c146e9bc4c8f851438f811c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114473701391960894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1076935737701120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10a60c7a3622bbd4ea5c4247a8d604c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  netSet: {fileID: 114855406720624180}
+  playerName: {fileID: 114841917695617544}
 --- !u!114 &114605510383713032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2491,6 +2505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 20193335588752000}
   audioListener: {fileID: 81050361596351408}
+  playerName: {fileID: 114841917695617544}
 --- !u!114 &114907719032916018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6706,6 +6721,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -540.05, y: -931.55}
+  m_AnchoredPosition: {x: -540.05, y: -931.8}
   m_SizeDelta: {x: 90, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
