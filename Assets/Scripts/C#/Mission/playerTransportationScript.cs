@@ -128,6 +128,8 @@ public class playerTransportationScript : NetworkBehaviour
                 if(null != missionManager)
                 {
                     missionManager.score.SetPlusScore(transportObject.GetComponent<serverObjectController>().Score);
+
+					gameObject.GetComponent<ScoreManager> ().TransmitScore (transportObject.GetComponent<serverObjectController> ().Score);
                 }
 
                 //ロープの接続を解除する。

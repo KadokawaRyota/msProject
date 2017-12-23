@@ -107,4 +107,9 @@ public class Score : MonoBehaviour
         nTargetScore = nTargetScore + PlusScore;
         fPlusNum = nTargetScore - nScore;
     }
+
+	public int GetScore()
+	{
+		return nScore;
+	}
 }

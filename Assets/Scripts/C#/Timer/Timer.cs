@@ -29,7 +29,11 @@ public class Timer : MonoBehaviour
 
     [SerializeField]
     GameObject manager;
+
+	[SerializeField]
     MissionManagerScript missionManager;
+
+	[SerializeField]
     NetworkMissionManager netMissionManager;
 
     //--------------------------------------------------------------------------
@@ -70,7 +74,13 @@ public class Timer : MonoBehaviour
                         nTimeMin = 0;
                         nTimeSec = 0;
                         bCountDownFlug = false;
-                        missionManager.missionEndFlg = true;    //ミッション終了フラグを切り替え
+
+						if (null != missionManager)
+							missionManager.missionEndFlg = true;    //ミッション終了フラグを切り替え
+						else if (null != netMissionManager) {
+							netMissionManager.missionEndFlg = true;
+						}
+
                     }
 
                     else

@@ -5,7 +5,7 @@ public class NetworkMissionManager : MonoBehaviour
     GameObject Player = null;
 
     bool missionFlg = false;     //フラグの初期化
-    bool missionEndFlg = false; //終了フラグ（trueのときにリザルトフラグを立てる）
+    public bool missionEndFlg = false; //終了フラグ（trueのときにリザルトフラグを立てる）
 
     [SerializeField]
     GameObject MissionCanvas;
@@ -44,6 +44,9 @@ public class NetworkMissionManager : MonoBehaviour
     int timerStartCnt = 60;
 
     public Score score;
+
+	[SerializeField]
+	GameObject resultManager;
 
 
     // Use this for initialization
@@ -94,6 +97,14 @@ public class NetworkMissionManager : MonoBehaviour
                 cutChara.GetComponent<Animator>().SetTrigger("start");
                 cutInFlg = true;
             }
+
+			if (missionEndFlg) {
+
+				//リザルト処理開始
+				resultManager.GetComponent<Result> ().StartResult();
+				missionFlg = false;
+			}
+				
         }
     }
 
