@@ -36,12 +36,22 @@ public class Result : MonoBehaviour {
     [SerializeField]
     GameObject Ice_CameraPos;            //イヌの村のカメラ位置
 
+    [SerializeField]
+    GameObject Score1;
+    [SerializeField]
+    GameObject Score2;
+    [SerializeField]
+    GameObject Score3;
+    [SerializeField]
+    GameObject Score4;
+
+
     CharactorInfo charInfo;                 // キャラ情報スクリプト
     GameObject player;
+    GameObject scoreObject;
 
     public CharactorInfo.CHARA resultCharNum;   // キャラ番号
     public bool resultFlg = false;              // フラグ
-    public float distance;                     // オブジェクトからカメラへの距離
 
     private int score;                          // プレイヤーの最終スコア
 
@@ -75,10 +85,18 @@ public class Result : MonoBehaviour {
 
         charInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
         player = GameObject.FindWithTag("Player");
+        scoreObject = GameObject.Find("ResultManager/ResultObjectScore/Canvas/Score000");
+
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameObject.Find("ResultManager").GetComponent<Result>().StartResult();
+        }
 
         if (resultFlg)
         {
@@ -97,33 +115,62 @@ public class Result : MonoBehaviour {
                     // タヌキ
                     case CharactorInfo.CHARA.TANUKI:
                         {
+                            // リザルトオブジェクトの指定
                             resultObject = targetObject_Green;
+
+                            // リザルトカメラ位置の指定
                             resultCamera.transform.position = Green_CameraPos.transform.position;
                             resultCamera.transform.rotation = Green_CameraPos.transform.rotation;
+
+                            // スコア位置の指定
+                            scoreObject.transform.position = Score1.transform.position;
+                            scoreObject.transform.rotation = Score1.transform.rotation;
+
                             break;
                         }
                     // ネコ
                     case CharactorInfo.CHARA.CAT:
                         {
+                            // リザルトオブジェクトの指定
                             resultObject = targetObject_Town;
+
+                            // リザルトカメラ位置の指定
                             resultCamera.transform.position = Town_CameraPos.transform.position;
                             resultCamera.transform.rotation = Town_CameraPos.transform.rotation;
+
+                            // スコア位置の指定
+                            scoreObject.transform.position = Score2.transform.position;
+                            scoreObject.transform.rotation = Score2.transform.rotation;
                             break;
                         }
                     // キツネ
                     case CharactorInfo.CHARA.FOX:
                         {
+                            // リザルトオブジェクトの指定
                             resultObject = targetObject_Sand;
+
+                            // リザルトカメラ位置の指定
                             resultCamera.transform.position = Sand_CameraPos.transform.position;
                             resultCamera.transform.rotation = Sand_CameraPos.transform.rotation;
+
+                            // スコア位置の指定
+                            scoreObject.transform.position = Score3.transform.position;
+                            scoreObject.transform.rotation = Score3.transform.rotation;
                             break;
                         }
                     // イヌ
                     case CharactorInfo.CHARA.DOG:
                         {
+                            // リザルトオブジェクトの指定
                             resultObject = targetObject_Ice;
+
+                            // リザルトカメラ位置の指定
                             resultCamera.transform.position = Ice_CameraPos.transform.position;
                             resultCamera.transform.rotation = Ice_CameraPos.transform.rotation;
+
+                            // スコア位置の指定
+                            scoreObject.transform.position = Score4.transform.position;
+                            scoreObject.transform.rotation = Score4.transform.rotation;
                             break;
                         }
                     default:
@@ -132,6 +179,15 @@ public class Result : MonoBehaviour {
                         }
                 }
 
+
+                /// プレイヤー情報の保持
+
+                // プレイヤースコアの取得
+                // ←ここでリザルト時のプレイヤーの得点を保持
+                score = 777;
+
+                // 得点をリザルト用オブジェクトに加算
+                GameObject.Find("ResultManager/ResultObjectScore/Canvas").GetComponent<Score>().SetPlusScore(score);
 
                 /// 不要なオブジェクトの削除
 
@@ -166,12 +222,14 @@ public class Result : MonoBehaviour {
     {
         resultFlg = true;
 
-        GameObject player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
 
-        player.SetActive(false);
+        //player.SetActive(false);
 
-        resultCamera.gameObject.SetActive(true);
+        //resultCamera.gameObject.SetActive(true);
 
-        resultCanvas.gameObject.SetActive(true);
+        //resultCanvas.gameObject.SetActive(true);
     }
+
+
 }
