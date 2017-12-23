@@ -17,6 +17,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
 
     CharactorInfo charaInfo;
 
+	NetConnector netConnector;
+
     // Use this for initialization
     void Start()
 	{
@@ -59,10 +61,10 @@ public class PlayerNetworkSetup : NetworkBehaviour
             GameObject.Find("NetworkMissionManager").GetComponent<NetworkMissionManager>().SetPlayer(this.gameObject);
 
 
-            NetConnector con = GameObject.Find("NetConnector").GetComponent<NetConnector>();
-            if(null != con)
+			netConnector = GameObject.Find("NetConnector").GetComponent<NetConnector>();
+			if(null != netConnector)
             {
-                con.SetLocalPlayer(gameObject);
+				netConnector.SetLocalPlayer(gameObject);
             }
 
             charaInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
@@ -96,4 +98,9 @@ public class PlayerNetworkSetup : NetworkBehaviour
     {
         return charaInfo;
     }
+
+	public NetConnector GetNetConnector()
+	{
+		return netConnector;
+	}
 }

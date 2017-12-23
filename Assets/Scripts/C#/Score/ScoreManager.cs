@@ -11,36 +11,64 @@ public class ScoreManager : NetworkBehaviour {
 	[SyncVar,SerializeField]
 	int syncScore = 0;
 
+	[SyncVar,SerializeField]
+	int syncServerScore = 0;
+
 	[SerializeField]
 	int localScore = 0;
 
 	[SerializeField]
-	NetConnector netConnector;
+	int localServerScore = 100;
 
+	[SerializeField]
+	CharactorInfo charaInfo;
+
+	void Start()
+	{
+		//netConnector = gameObject.GetComponent<PlayerNetworkSetup> ().GetNetConnector ();
+		charaInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
+		ServerScore ();
+
+
+	}
 	void Update()
 	{
-		TransmitScore (10);
-
-		if (!netConnector.GetLocalPlayer()) {
+		if (!gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) {
 			localScore = syncScore;
 		}
 	}
 
 	//クライアントからホストへ、Position情報を送る
 	[Command]
-	void CmdProvideScoreToServer(int score)
+	void CmdProvideScoreToServer(int charaNum, int score)
 	{
 		//サーバーが受け取る値
-		syncScore = score;
+		syncScore += score;
+		if (isServer) {
+			GameObject.Find ("ScoreManager").GetComponent<ServerScore> ().SetServerScore (charaNum, score);
+		}
 	}
 
 	//クライアントのみ実行される
 	[ClientCallback]
 	//位置情報を送るメソッド
-	void TransmitScore(int i)
+	public void TransmitScore(int score)
 	{
-		if (netConnector.GetLocalPlayer()) {
-			CmdProvideScoreToServer (i);
+		if (gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) {
+			localScore += score;
+			CmdProvideScoreToServer ((int)charaInfo.GetCharaSelectData(),score);
 		}
+	}
+
+	[ClientRpc]
+	void RpcServerScoreToClient()
+	{
+		syncServerScore = localServerScore;
+	}
+
+	[ServerCallback]
+	void ServerScore()
+	{
+		RpcServerScoreToClient ();
 	}
 }

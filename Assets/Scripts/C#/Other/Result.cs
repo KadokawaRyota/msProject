@@ -189,6 +189,8 @@ public class Result : MonoBehaviour {
                 // ←ここでリザルト時のプレイヤーの得点を保持
                 //score = 777;
 
+				//serverScore = 
+
                 // 得点をリザルト用オブジェクトに加算
 				GameObject.Find("ResultManager/ResultObjectScore/Canvas").GetComponent<Score>().SetPlusScore(serverScore + score.GetScore ());
 
