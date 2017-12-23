@@ -64,7 +64,8 @@ public class Score : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(1))
         {
-            SetPlusScore(100);
+            //SetPlusScore(100);
+            //GameObject.Find("ResultManager").GetComponent<Result>().StartResult();
         } 
 		
 	}
