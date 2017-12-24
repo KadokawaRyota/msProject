@@ -421,6 +421,7 @@ GameObject:
   - component: {fileID: 64496329192210762}
   - component: {fileID: 23097967653183818}
   - component: {fileID: 114737051488045582}
+  - component: {fileID: 114721507929484866}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -2180,7 +2181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 114708865195864748}
-  camera: {fileID: 1300333099374486}
 --- !u!114 &114101650237299760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2371,7 +2371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e23042705191340a5923436cddd3d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasAuthority: {fileID: 0}
+  objectHasAuthority: {fileID: 0}
 --- !u!114 &114600901813548890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2460,6 +2460,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u3042\u3044\u3046\u3048\u304A"
+--- !u!114 &114721507929484866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458729502754416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114737051488045582
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2508,11 +2519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b27681f0a4af54e87ac66d89936f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncUsePlayerNum: 0
   syncScore: 0
   syncServerScore: 0
-  localScore: 0
-  localServerScore: 0
-  charaInfo: {fileID: 0}
 --- !u!114 &114897485182606372
 MonoBehaviour:
   m_ObjectHideFlags: 1

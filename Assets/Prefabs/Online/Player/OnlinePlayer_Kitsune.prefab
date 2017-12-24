@@ -444,6 +444,7 @@ GameObject:
   - component: {fileID: 64759782148617774}
   - component: {fileID: 23909413142125198}
   - component: {fileID: 114570471957750648}
+  - component: {fileID: 114617859931938598}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -1983,7 +1984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e23042705191340a5923436cddd3d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasAuthority: {fileID: 0}
+  objectHasAuthority: {fileID: 0}
 --- !u!114 &114024826069875422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2009,7 +2010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 114272877029665166}
-  camera: {fileID: 1845961059864254}
 --- !u!114 &114081970974731084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2159,8 +2159,6 @@ MonoBehaviour:
   syncUsePlayerNum: 0
   syncScore: 0
   syncServerScore: 0
-  localScore: 0
-  localServerScore: 0
 --- !u!114 &114490934697870732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2223,6 +2221,17 @@ MonoBehaviour:
   PlayerCamera: {fileID: 20038078049342542}
   audioListener: {fileID: 81261570322921032}
   playerName: {fileID: 0}
+--- !u!114 &114617859931938598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462762965262296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114648065914524410
 MonoBehaviour:
   m_ObjectHideFlags: 1
