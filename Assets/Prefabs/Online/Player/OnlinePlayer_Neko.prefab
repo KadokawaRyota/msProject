@@ -713,6 +713,7 @@ GameObject:
   - component: {fileID: 114570060317425658}
   - component: {fileID: 114897485182606372}
   - component: {fileID: 114681380552723276}
+  - component: {fileID: 114803753681301642}
   m_Layer: 9
   m_Name: OnlinePlayer_Neko
   m_TagString: Player
@@ -2496,6 +2497,22 @@ MonoBehaviour:
   footStampPrefab: {fileID: 1390423647849450, guid: 71feb10ad2285134e99904b3079576cc,
     type: 2}
   footStampSetTime: 0.25
+--- !u!114 &114803753681301642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1726364102298456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43b27681f0a4af54e87ac66d89936f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncScore: 0
+  syncServerScore: 0
+  localScore: 0
+  localServerScore: 0
+  charaInfo: {fileID: 0}
 --- !u!114 &114897485182606372
 MonoBehaviour:
   m_ObjectHideFlags: 1
