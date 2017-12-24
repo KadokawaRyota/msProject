@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class PostureController : NetworkBehaviour
 {
-    Camera camera;
+    Camera cam;
     public Vector3 GetsurfaceNormal      // プレイヤー位置の地面の法線
     {
         get { return this.surfaceNormal; }
@@ -63,7 +63,7 @@ public class PostureController : NetworkBehaviour
 
         prePosition = transform.position;
 
-		camera = GameObject.Find("PlayerCamera").GetComponent<Camera>();
+		cam = GameObject.Find("PlayerCamera").GetComponent<Camera>();
 
 		NetConnector netConnector = GameObject.Find("NetConnector").GetComponent<NetConnector>();
 
@@ -104,12 +104,12 @@ public class PostureController : NetworkBehaviour
 		// カメラ進行方向ベクトルを取得
 		if (isLocalPlayer)
 		{
-			Vector3 cameraForward = Vector3.Scale(camera.transform.forward, new Vector3(1, 1, 1)).normalized;
+			Vector3 cameraForward = Vector3.Scale(cam.transform.forward, new Vector3(1, 1, 1)).normalized;
 			Vector3 moveForward;
 
 			// 方向キーの入力値とカメラの向きから、移動方向を決定
 			//moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
-			moveForward = cameraForward * inputVec.y + camera.transform.right * inputVec.x;
+			moveForward = cameraForward * inputVec.y + cam.transform.right * inputVec.x;
 
 			// 移動方向にスピードを掛ける
 			moveVec = moveForward * 0.05f;
