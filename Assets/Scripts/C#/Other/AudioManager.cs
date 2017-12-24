@@ -24,14 +24,19 @@ public class AudioManager : MonoBehaviour {
 		Home,
 		Game001,
 		Game002,
-		Game003
+		Game003,
+		Game004,
+		Mission
 	};
 		
 
 	public enum SE{
 		Walk = 0,
 		Run,
-		Action
+		SetRope,
+		DisObject,
+		OpenChat,
+		MissionStart
 	};
 
     //シングルトン処理
@@ -69,7 +74,7 @@ public class AudioManager : MonoBehaviour {
                 break;
 
             case "Offline":
-                random = Random.Range(0, 3);
+                random = Random.Range(0, 4);
                 switch (random)
                 {
                     case 0:
@@ -83,11 +88,15 @@ public class AudioManager : MonoBehaviour {
                     case 2:
                         Play_BGM(BGM.Game003);
                         break;
+
+					case 3:
+						Play_BGM(BGM.Game004);
+						break;
                 }
                 break;
 
             case "Main":
-                random = Random.Range(0, 3);
+                random = Random.Range(0, 4);
                 switch (random)
                 {
                     case 0:
@@ -101,6 +110,10 @@ public class AudioManager : MonoBehaviour {
                     case 2:
                         Play_BGM(BGM.Game003);
                         break;
+
+					case 3:
+						Play_BGM(BGM.Game004);
+						break;
                 }
                 break;
         }
@@ -110,32 +123,27 @@ public class AudioManager : MonoBehaviour {
     //引数のBGMをマスターソースに入れて再生
 	public void Play_BGM(BGM bgm)
 	{
-        bgmSourceMaster = bgmSource [(int)bgm];
-        bgmSourceMaster.Play();
+		bgmSourceMaster = bgmSource [(int)bgm];
+		
+		bgmSourceMaster.Play ();
 
     }
 
     //マスターソースを停止
 	public void Stop_BGM()
 	{
-        bgmSourceMaster.Stop();
+		bgmSourceMaster.Stop ();
     }
 
-
-	public void Play_SE(SE se,bool loop)
+	public void Play_SE(SE se)
 	{
-		seSource [(int)se].loop = loop;
-		seSource [(int)se].Play ();
+		seSource [(int)se].PlayOneShot (seSource [(int)se].clip);
 	}
 
-	public void Stop_SE()
+	public AudioSource GetBGMMasterSource()
 	{
-		
+		return bgmSourceMaster;
 	}
 
-	public void StopAll_SE()
-	{
-
-	}
 }
 

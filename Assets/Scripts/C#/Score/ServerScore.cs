@@ -5,17 +5,20 @@ using UnityEngine;
 public class ServerScore : MonoBehaviour {
 
 	//確認用
-	[SerializeField]
-	int scoreA = 0;
+	/*[SerializeField]
+	Score tanukiScore;
 
 	[SerializeField]
-	int scoreB = 0;
+	Score nekoScore;
 
 	[SerializeField]
-	int scoreC = 0;
+	Score kitsuneScore;
 
 	[SerializeField]
-	int scoreD = 0;
+	Score inuScore;*/
+
+	[SerializeField]
+	Score[] charaScore;
 
 	//町の総合得点を配列で格納
 	int[] score;
@@ -33,10 +36,7 @@ public class ServerScore : MonoBehaviour {
 		score [num] += Score;
 
 		//確認用
-		scoreA = score [0];
-		scoreB = score [1];
-		scoreC = score [2];
-		scoreD = score [3];
+		charaScore[num].SetPlusScore(Score);
 	}
 
 	//総合得点を渡す（引数でキャラの得点を指定）

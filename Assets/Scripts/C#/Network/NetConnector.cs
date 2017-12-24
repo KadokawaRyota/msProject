@@ -49,6 +49,9 @@ public class NetConnector : NetworkManager
 
     bool createPlayer = false;  //生成フラグ
 
+	[SerializeField]
+	GameObject serverScore;
+
 
     void Start()
 	{
@@ -109,6 +112,8 @@ public class NetConnector : NetworkManager
 
                 punioconCamera.SetActive(false);
                 canvas.SetActive(false);
+
+				serverScore.SetActive (true);
 
                 TransportationObject.GetComponent<NetworkTransportationScript>().CreateObject();
             }
@@ -208,6 +213,7 @@ public class NetConnector : NetworkManager
     //ネットワーク終了処理
     public void NetDisconnect()
     {
+		//Network.Disconnect ();
         Shutdown();
     }
 

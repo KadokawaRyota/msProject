@@ -18,8 +18,11 @@ public class RopeConnect : MonoBehaviour {
 
     GameObject ropeFrame;
 
+	AudioManager audioManager;
+
 	void Start () {
         this.GetComponent<Renderer>().enabled = false;
+		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
     }
 	
 	void Update () {
@@ -64,6 +67,9 @@ public class RopeConnect : MonoBehaviour {
             this.GetComponent<Renderer>().enabled = true;
         }
         pullObject = Object;
+
+		//ロープ接続SE
+		audioManager.Play_SE (AudioManager.SE.SetRope);
     }
     public void SetRopeFrame(GameObject gameObject)
     {

@@ -11,6 +11,12 @@ public class PlayerSyncChat : NetworkBehaviour {
     [SerializeField]
     GameObject chatImage;       //再生するチャットイメージ
 
+	AudioManager audioManager;
+
+	void Start()
+	{
+		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
+	}
     //更新
     void FixedUpdate()
     {
@@ -46,6 +52,9 @@ public class PlayerSyncChat : NetworkBehaviour {
         chatImage.GetComponent<Animator>().SetTrigger("open");
 
         playFlg = false;
+
+		//チャット再生SE
+		audioManager.Play_SE (AudioManager.SE.OpenChat);
     }
 
     //サーバー送信

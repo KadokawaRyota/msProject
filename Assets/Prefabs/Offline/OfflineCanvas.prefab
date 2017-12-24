@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 222169817286032160}
   - component: {fileID: 114761035386668030}
   - component: {fileID: 114560866639219450}
-  - component: {fileID: 114908938755282070}
   m_Layer: 5
   m_Name: ConnectButton
   m_TagString: Untagged
@@ -78,7 +77,6 @@ GameObject:
   - component: {fileID: 222571592650712962}
   - component: {fileID: 114448462666513488}
   - component: {fileID: 114907012850116160}
-  - component: {fileID: 114728961598330842}
   m_Layer: 5
   m_Name: HomeButton
   m_TagString: Untagged
@@ -325,17 +323,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114728961598330842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1771053426947298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114761035386668030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,17 +417,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114908938755282070
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1690320700217604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &222169817286032160
 CanvasRenderer:
   m_ObjectHideFlags: 1

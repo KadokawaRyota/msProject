@@ -48,11 +48,13 @@ public class NetworkMissionManager : MonoBehaviour
 	[SerializeField]
 	GameObject resultManager;
 
+	AudioManager audioManager;
 
     // Use this for initialization
     void Start()
     {
         missionFlg = false;     //フラグの初期化
+		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
     }
 
     // Update is called once per frame
@@ -83,6 +85,8 @@ public class NetworkMissionManager : MonoBehaviour
                 {
                     timer.bCountDownFlug = true;
                     Destroy(missionCut);
+					audioManager.Play_BGM (AudioManager.BGM.Mission);
+					audioManager.GetBGMMasterSource ().volume = 0.7f;
                     return;
                 }
 
@@ -118,6 +122,9 @@ public class NetworkMissionManager : MonoBehaviour
         MissionType.GetComponent<NetworkTransportationScript>().dispMission();
         //プレイヤーがトランスポートミッション中だとする。
         Player.GetComponent<playerTransportationScript>().CmdProvidebRunTimeToServer(true);
+
+		//audioManager.GetBGMMasterSource ().volume = 0.2f;
+		audioManager.Play_SE (AudioManager.SE.MissionStart);
     }
 
     public void SetPlayer( GameObject player )

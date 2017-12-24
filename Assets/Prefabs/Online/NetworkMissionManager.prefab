@@ -90,7 +90,6 @@ GameObject:
   - component: {fileID: 223691246125901592}
   - component: {fileID: 114624425880077168}
   - component: {fileID: 114096802867320958}
-  - component: {fileID: 114157040923169484}
   m_Layer: 5
   m_Name: MissionCanvas
   m_TagString: Untagged
@@ -340,6 +339,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1630324115123246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4364587283009838}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1673380502344838
 GameObject:
   m_ObjectHideFlags: 1
@@ -486,6 +500,19 @@ Transform:
   m_Father: {fileID: 4860642458190604}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4364587283009838
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1630324115123246}
+  m_LocalRotation: {x: -0.054880846, y: 0.026759293, z: -0.4389998, w: 0.8964102}
+  m_LocalPosition: {x: 24.44, y: -4.26, z: -15.4}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 4548863021993480}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4548863021993480
 Transform:
   m_ObjectHideFlags: 1
@@ -497,6 +524,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224311930376586104}
+  - {fileID: 4364587283009838}
   - {fileID: 4860642458190604}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -514,7 +542,7 @@ Transform:
   - {fileID: 4322270278018672}
   - {fileID: 4246544573174180}
   m_Father: {fileID: 4548863021993480}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &95446788585928170
 Animator:
@@ -690,32 +718,32 @@ MonoBehaviour:
   transObj_L: {fileID: 1330110815174766, guid: 1748a905cb6d9d643bb2c8525b8ee371, type: 2}
   spawnObjectData:
   - sizeName: 83
-    missionObjectPosition: {x: 10.7, y: 24.2, z: -1.47}
+    missionObjectPosition: {x: 10.7, y: 29, z: -1.47}
   - sizeName: 83
-    missionObjectPosition: {x: 12, y: 5, z: -23.7}
+    missionObjectPosition: {x: 11, y: -5, z: -29}
   - sizeName: 77
-    missionObjectPosition: {x: 24.3, y: 10.4, z: -4}
+    missionObjectPosition: {x: 24.3, y: -4, z: -14}
   - sizeName: 77
-    missionObjectPosition: {x: -2.5, y: 25.5, z: -7.2}
+    missionObjectPosition: {x: -2.5, y: 35, z: -7.2}
   - sizeName: 83
-    missionObjectPosition: {x: -4.9, y: 25.5, z: 6.655}
+    missionObjectPosition: {x: -4.9, y: 35, z: 6.655}
   - sizeName: 76
-    missionObjectPosition: {x: 15.3, y: 16.6, z: -16.4}
+    missionObjectPosition: {x: 3.68, y: 29.95, z: -13}
   - sizeName: 83
-    missionObjectPosition: {x: 21.77, y: -15, z: 7.36}
+    missionObjectPosition: {x: 4, y: -5, z: 27}
   - sizeName: 83
-    missionObjectPosition: {x: -15, y: -21.4, z: -4.6}
+    missionObjectPosition: {x: -15, y: -30, z: -4.6}
   - sizeName: 83
-    missionObjectPosition: {x: -0.6, y: -24.7, z: -8.7}
+    missionObjectPosition: {x: -24, y: -16, z: 2}
   - sizeName: 77
-    missionObjectPosition: {x: -11.02, y: -23.25, z: 6}
+    missionObjectPosition: {x: -11.02, y: -33, z: 6}
   - sizeName: 77
-    missionObjectPosition: {x: 20.4, y: -16.3, z: -4}
+    missionObjectPosition: {x: 17, y: -14.88, z: -16}
   - sizeName: 76
-    missionObjectPosition: {x: 15.14, y: -21.2, z: 5.21}
+    missionObjectPosition: {x: 11, y: -11, z: 21}
   arrivalAreaPrefab: {fileID: 1327068514790068, guid: 0c8c6a0f7c9c6354e9be4c489755e79d,
     type: 2}
-  arrivalAreaPosition: {x: 8.4, y: 23.6, z: 6.655}
+  arrivalAreaPosition: {x: 12, y: 24, z: -9}
 --- !u!114 &114088836532491098
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -738,6 +766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5e04c006a9eae48b469d321765e6fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionEndFlg: 0
   MissionCanvas: {fileID: 1126547931400376}
   MissionType: {fileID: 1834333953302386}
   missionStartCount: 30
@@ -748,6 +777,7 @@ MonoBehaviour:
   timer: {fileID: 114893123705983488}
   timerStartCnt: 200
   score: {fileID: 114210986794349936}
+  resultManager: {fileID: 0}
 --- !u!114 &114096802867320958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -764,18 +794,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114157040923169484
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1126547931400376}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46f11f01b6becfc4b9655aea8e249b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missionImage: {fileID: 0}
 --- !u!114 &114175947970408544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1059,12 +1077,12 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1292,14 +1310,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8ddd57aef3ca64ba027ea6bcba5663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nTimeMin: 0
-  nTimeSec: 10
+  nTimeMin: 3
+  nTimeSec: 0
   bCountDownFlug: 1
   NumObjectMin00: {fileID: 114187343278716440}
   NumObjectMin01: {fileID: 114599704166375612}
   NumObjectSec00: {fileID: 114723354408681170}
   NumObjectSec01: {fileID: 114458008297215224}
-  manager: {fileID: 0}
+  manager: {fileID: 1832854120272758}
+  missionManager: {fileID: 0}
+  netMissionManager: {fileID: 0}
 --- !u!114 &114983948481371536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1659,7 +1679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -367, y: 60}
+  m_AnchoredPosition: {x: -317, y: 60}
   m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224479087647927990
@@ -1772,7 +1792,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 58.3, y: 0}
   m_SizeDelta: {x: 60, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224748196499860400
