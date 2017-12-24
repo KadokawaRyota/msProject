@@ -57,6 +57,8 @@ public class OfflinePostureController : MonoBehaviour {
 	float footStampSetTime;
 	float footStampTime = 0.25f;					//足跡の生成時間
 
+	AudioManager audioManager;
+	int seCnt = 0;
 	void Start()
 	{
         if (Application.loadedLevelName == "Offline")
@@ -110,6 +112,8 @@ public class OfflinePostureController : MonoBehaviour {
 
         // アニメーション状態の初期化
         animationNum = AnimationNum.Idle;
+
+		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
 
     }
 
@@ -220,6 +224,8 @@ public class OfflinePostureController : MonoBehaviour {
                     animator.SetBool("is_walk", false);
                     animator.SetBool("is_running", false);
                     particleManager.SetSmokeFlg(false);
+
+				seCnt = 0;
                     break;
                 }
             case AnimationNum.Walk:
@@ -235,6 +241,13 @@ public class OfflinePostureController : MonoBehaviour {
                         footStampTime = 0;
                         Instantiate(footStampPrefab, transform.position, transform.rotation);
                     }
+
+				if (seCnt == 20) {
+					audioManager.Play_SE (AudioManager.SE.Run);
+					seCnt = 0;
+				} else {
+					seCnt++;
+				}
                     break;
                 }
             case AnimationNum.Running:
@@ -250,6 +263,13 @@ public class OfflinePostureController : MonoBehaviour {
                         footStampTime = 0;
                         Instantiate(footStampPrefab, transform.position, transform.rotation);
                     }
+
+				if (seCnt == 15) {
+					audioManager.Play_SE (AudioManager.SE.Run);
+					seCnt = 0;
+				}else {
+					seCnt++;
+				}
                     break;
                 }
         }

@@ -29,8 +29,11 @@ public class ObjectSyncPosition : NetworkBehaviour
     //0.5unitを越えなければ移動していないこととする
     float threshold = 0;
 
+	int seCount = 0;
+	AudioManager audioManager;
 	void Start()
     {
+		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
         if(isServer == true)
         syncPos = this.transform.localPosition;
     }
@@ -79,9 +82,9 @@ public class ObjectSyncPosition : NetworkBehaviour
     void TransmitPosition()
     {
 
-                RpcProvidePositionToServer(myTransform.position);
+    	RpcProvidePositionToServer(myTransform.position);
 
-				//現在位置を最終位置として保存
-				lastPos = myTransform.position;
+		//現在位置を最終位置として保存
+		lastPos = myTransform.position;
     }
 }

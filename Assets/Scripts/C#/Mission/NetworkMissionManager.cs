@@ -123,7 +123,7 @@ public class NetworkMissionManager : MonoBehaviour
         //プレイヤーがトランスポートミッション中だとする。
         Player.GetComponent<playerTransportationScript>().CmdProvidebRunTimeToServer(true);
 
-		//audioManager.GetBGMMasterSource ().volume = 0.2f;
+		audioManager.GetBGMMasterSource ().volume = 0.2f;
 		audioManager.Play_SE (AudioManager.SE.MissionStart);
     }
 

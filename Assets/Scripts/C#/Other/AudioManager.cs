@@ -36,7 +36,8 @@ public class AudioManager : MonoBehaviour {
 		SetRope,
 		DisObject,
 		OpenChat,
-		MissionStart
+		MissionStart,
+		ObjectMove
 	};
 
     //シングルトン処理
@@ -54,6 +55,7 @@ public class AudioManager : MonoBehaviour {
             //このAudioManagerをインスタンスとする
             instance = this;
         }
+
         //シーンを跨いでもAudioManagerインスタンスを破棄しない
         DontDestroyOnLoad(gameObject);
 
@@ -92,6 +94,10 @@ public class AudioManager : MonoBehaviour {
 					case 3:
 						Play_BGM(BGM.Game004);
 						break;
+					
+					default:
+						Play_BGM(BGM.Game004);
+						break;
                 }
                 break;
 
@@ -114,6 +120,10 @@ public class AudioManager : MonoBehaviour {
 					case 3:
 						Play_BGM(BGM.Game004);
 						break;
+
+					default:
+						Play_BGM(BGM.Game004);
+						break;
                 }
                 break;
         }
@@ -123,8 +133,7 @@ public class AudioManager : MonoBehaviour {
     //引数のBGMをマスターソースに入れて再生
 	public void Play_BGM(BGM bgm)
 	{
-		bgmSourceMaster = bgmSource [(int)bgm];
-		
+		bgmSourceMaster = bgmSource [(int)bgm];	
 		bgmSourceMaster.Play ();
 
     }
