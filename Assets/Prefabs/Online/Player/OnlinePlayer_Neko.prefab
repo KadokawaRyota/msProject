@@ -401,6 +401,7 @@ GameObject:
   - component: {fileID: 64496329192210762}
   - component: {fileID: 23097967653183818}
   - component: {fileID: 114737051488045582}
+  - component: {fileID: 114863347631139822}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -2594,6 +2595,17 @@ MonoBehaviour:
   syncUsePlayerNum: 0
   syncScore: 0
   syncServerScore: 0
+--- !u!114 &114863347631139822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458729502754416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114897485182606372
 MonoBehaviour:
   m_ObjectHideFlags: 1
