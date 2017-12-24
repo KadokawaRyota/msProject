@@ -18,7 +18,7 @@ public class ScoreManager : NetworkBehaviour {
 	int localScore = 0;
 
 	[SerializeField]
-	int localServerScore = 100;
+	int localServerScore = 0;
 
 	[SerializeField]
 	CharactorInfo charaInfo;
@@ -28,8 +28,7 @@ public class ScoreManager : NetworkBehaviour {
 		//netConnector = gameObject.GetComponent<PlayerNetworkSetup> ().GetNetConnector ();
 		charaInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
 		ServerScore ();
-
-
+		localServerScore = syncServerScore;
 	}
 	void Update()
 	{
@@ -63,7 +62,7 @@ public class ScoreManager : NetworkBehaviour {
 	[ClientRpc]
 	void RpcServerScoreToClient()
 	{
-		syncServerScore = localServerScore;
+		syncServerScore = GameObject.Find ("ScoreManager").GetComponent<ServerScore> ().GetServerScore((int)charaInfo.GetCharaSelectData());
 	}
 
 	[ServerCallback]

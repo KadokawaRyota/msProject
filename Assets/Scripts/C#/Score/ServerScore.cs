@@ -31,9 +31,14 @@ public class ServerScore : MonoBehaviour {
 	{
 		score [num] += Score;
 
-		scoreA += score [0];
-		scoreB += score [1];
-		scoreC += score [2];
-		scoreD += score [3];
+		scoreA = score [0];
+		scoreB = score [1];
+		scoreC = score [2];
+		scoreD = score [3];
+	}
+
+	public int GetServerScore(int charaNum)
+	{
+		return score[charaNum];
 	}
 }
