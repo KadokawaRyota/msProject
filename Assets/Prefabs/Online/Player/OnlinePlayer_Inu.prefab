@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 64809919933053582}
   - component: {fileID: 23596939796957978}
   - component: {fileID: 114515260382485442}
+  - component: {fileID: 114573067419478852}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -2252,6 +2253,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114573067419478852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1472479659977698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114615973658371692
 MonoBehaviour:
   m_ObjectHideFlags: 1
