@@ -57,7 +57,14 @@ public class Result : MonoBehaviour {
 	private int serverScore = 0;
 
 	[SerializeField]
-	Score score;
+	NetConnector netConnector;
+
+	//[SerializeField]
+	////Score score;
+
+	[SerializeField]
+	GameObject canvas;
+
     void Awake()
     {
         resultFlg = false;
@@ -87,7 +94,7 @@ public class Result : MonoBehaviour {
         }
 
         charInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
-        player = GameObject.FindWithTag("Player");
+		player = netConnector.GetLocalPlayer ();
         scoreObject = GameObject.Find("ResultManager/ResultObjectScore/Canvas/Score000");
 
     }
@@ -189,10 +196,12 @@ public class Result : MonoBehaviour {
                 // ←ここでリザルト時のプレイヤーの得点を保持
                 //score = 777;
 
-				//serverScore = 
+				//プレイヤーから町の総合得点を受け取る
+				serverScore = netConnector.GetLocalPlayer ().GetComponent<PlayerSyncScore> ().GetServerScore ();
+					
 
                 // 得点をリザルト用オブジェクトに加算
-				GameObject.Find("ResultManager/ResultObjectScore/Canvas").GetComponent<Score>().SetPlusScore(serverScore + score.GetScore ());
+				GameObject.Find("ResultManager/ResultObjectScore/Canvas").GetComponent<Score>().SetPlusScore(serverScore);
 
                 /// 不要なオブジェクトの削除
 
@@ -209,14 +218,18 @@ public class Result : MonoBehaviour {
                     if(GameObject.Find("OfflineCanvas") != null)
                     Destroy(GameObject.Find("OfflineCanvas"));
                 }
-                else if(Application.loadedLevelName == "Online")
+                else if(Application.loadedLevelName == "Main")
                 {
                     Destroy(GameObject.Find("OnlineCanvas"));
                 }
 
+				GameObject.Find ("PuniconCamera").gameObject.SetActive (false);
+				GameObject.Find ("NetworkMissionManager").gameObject.SetActive(false);
+
                 // NPCの削除
                 //Destroy(GameObject.Find("NPC"));
 
+				canvas.gameObject.SetActive (true);
             }
 
         }

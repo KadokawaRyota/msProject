@@ -49,9 +49,6 @@ public class NetConnector : NetworkManager
 
     bool createPlayer = false;  //生成フラグ
 
-	[SerializeField]
-	ScoreManager scoreManager;
-
 
     void Start()
 	{
@@ -209,7 +206,7 @@ public class NetConnector : NetworkManager
     }
 
     //ネットワーク終了処理
-    public void Disconnect()
+    public void NetDisconnect()
     {
         Shutdown();
     }

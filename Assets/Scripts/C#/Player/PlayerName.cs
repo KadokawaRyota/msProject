@@ -8,9 +8,6 @@ public class PlayerName : MonoBehaviour {
     [SerializeField]
     Text nameText;      //NameTextUI
 
-    [SerializeField]
-    GameObject camera;
-
 	// Use this for initialization
 	void Start () {
 

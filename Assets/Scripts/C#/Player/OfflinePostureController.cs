@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OfflinePostureController : MonoBehaviour {
 
-	Camera camera;
+	Camera cam;
 
     static float screenWidth = 1080.0f;
     static float screenHeight = 1920.0f;
@@ -66,9 +66,9 @@ public class OfflinePostureController : MonoBehaviour {
 
         transform.position = spawnPoint;
 
-        camera = GetComponentInChildren<Camera>();
-		camera.enabled = true;
-		AudioListener audio = camera.GetComponent<AudioListener>();
+		cam = GetComponentInChildren<Camera>();
+		cam.enabled = true;
+		AudioListener audio = cam.GetComponent<AudioListener>();
 		audio.enabled = true;
 
 		// アニメーション情報の取得
@@ -146,7 +146,7 @@ public class OfflinePostureController : MonoBehaviour {
 
 		// 方向キーの入力値とカメラの向きから、移動方向を決定
 		//moveForward = cameraForward * inputVertical + Camera.main.transform.right * inputHorizontal;
-		moveForward = cameraForward * inputVecN.y + camera.transform.right * inputVecN.x;
+		moveForward = cameraForward * inputVecN.y + cam.transform.right * inputVecN.x;
 
         // 入力量によって移動速度を変える
 
