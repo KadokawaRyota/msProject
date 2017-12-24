@@ -34,6 +34,7 @@ public class TextManager : MonoBehaviour {
 
     CharactorInfo charaInfo;
 
+	AudioManager audioManager;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +45,8 @@ public class TextManager : MonoBehaviour {
         }
         text.text = textLine[0];
         text.fontSize = textSize[0];
+
+		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
 	}
 
     public void NextTextHome()
@@ -60,6 +63,8 @@ public class TextManager : MonoBehaviour {
         if (textLineNum == 4)
         {
             string name = inputField.text;
+
+			//名前未入力時テキスト　
             if (name == "")
             {
                 text.fontSize = 40;
@@ -80,13 +85,17 @@ public class TextManager : MonoBehaviour {
         }
 
 
-        if(textLineNum == 3)
-        {
-            NextButton.SetActive(false);
-            inputField.gameObject.SetActive(true);
-        }
+		if (textLineNum == 3) {
+			NextButton.SetActive (false);
+			inputField.gameObject.SetActive (true);
+		} else if (textLineNum >= 3) {
+			NextButton.SetActive (true);
+			inputField.gameObject.SetActive (false);
+		}
 
         text.fontSize = textSize[textLineNum];
+
+		audioManager.Play_SE (AudioManager.SE.OpenChat);
 
     }
 }

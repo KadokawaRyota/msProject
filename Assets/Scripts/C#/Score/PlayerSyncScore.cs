@@ -35,14 +35,15 @@ public class PlayerSyncScore : NetworkBehaviour {
 			Debug.Log ("PlayerSyncScore:Not charaInfo");
 		}
 
-		//サーバ側でクライアントへ町の総合得点を送信する為取得
-		serverScore = GameObject.Find ("ServerScore").GetComponent<ServerScore> ();
-		if (null == serverScore) {
+		if (isServer) {
+			//サーバ側でクライアントへ町の総合得点を送信する為取得
+			serverScore = GameObject.Find ("ServerScore").GetComponent<ServerScore> ();
+			if (null == serverScore) {
 
-			//エラーログ
-			Debug.Log ("PlayerSyncScore:Not serverScore");
+				//エラーログ
+				Debug.Log ("PlayerSyncScore:Not serverScore");
+			}
 		}
-
 		//サーバへ使用キャラを送信
 		SendUseCharaToServer ();
 		//ServerScore ();

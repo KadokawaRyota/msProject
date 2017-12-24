@@ -58,6 +58,8 @@ public class playerTransportationScript : NetworkBehaviour
 
     NetworkMissionManager missionManager;
 
+	AudioManager audioManager;
+
     // Use this for initialization
     void Start()
     {
@@ -98,6 +100,7 @@ public class playerTransportationScript : NetworkBehaviour
         //MissionManagerの取得
         missionManager = GameObject.Find("NetworkMissionManager").GetComponent<NetworkMissionManager>();
 
+		audioManager = GameObject.Find ("AudioManager").GetComponent<AudioManager> ();
     }
 
     // Update is called once per frame
@@ -130,6 +133,9 @@ public class playerTransportationScript : NetworkBehaviour
                     missionManager.score.SetPlusScore(transportObject.GetComponent<serverObjectController>().Score);
 
 					gameObject.GetComponent<PlayerSyncScore> ().TransmitScore (transportObject.GetComponent<serverObjectController> ().Score);
+
+					//オブジェクトが運ばれた消滅SE
+					audioManager.Play_SE (AudioManager.SE.DisObject);
                 }
 
                 //ロープの接続を解除する。
