@@ -162,7 +162,6 @@ GameObject:
   - component: {fileID: 64801805187448588}
   - component: {fileID: 23592791252887682}
   - component: {fileID: 114325149890285210}
-  - component: {fileID: 114238688132436182}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -2230,17 +2229,6 @@ MonoBehaviour:
   mouseInputY: 0
   rotSpeed: 1
   rotCameraThre: 50
---- !u!114 &114238688132436182
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1196019809498036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 690c2b9a03c01864fb546503cd0c391e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114265112354886624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2321,9 +2309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b27681f0a4af54e87ac66d89936f43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncUsePlayerNum: 0
   syncScore: 0
-  syncServerScore: 0
+  localScore: 0
 --- !u!114 &114455231751111618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2519,6 +2506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameText: {fileID: 114741557438401138}
+  camera: {fileID: 1674118211908816}
 --- !u!114 &114855406720624180
 MonoBehaviour:
   m_ObjectHideFlags: 1
