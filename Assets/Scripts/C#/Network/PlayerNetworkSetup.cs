@@ -19,6 +19,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
 
 	NetConnector netConnector;
 
+	CharactorInfo.CHARA useChara;
+
     // Use this for initialization
     void Start()
 	{
@@ -73,6 +75,7 @@ public class PlayerNetworkSetup : NetworkBehaviour
             {
                // SendName(charaInfo.GetPlayerName());
                 //playerName.SetNameText(charaInfo.GetPlayerName());
+				useChara = charaInfo.GetCharaSelectData();
             }
 
             //接続時のローディングイメージを有効
@@ -102,5 +105,10 @@ public class PlayerNetworkSetup : NetworkBehaviour
 	public NetConnector GetNetConnector()
 	{
 		return netConnector;
+	}
+
+	public CharactorInfo.CHARA GetUseChara()
+	{
+		return useChara;
 	}
 }

@@ -9,6 +9,9 @@ using UnityEngine.Networking;
 public class ScoreManager : NetworkBehaviour {
 
 	[SyncVar,SerializeField]
+	int syncUsePlayerNum;
+
+	[SyncVar,SerializeField]
 	int syncScore = 0;
 
 	[SyncVar,SerializeField]
@@ -21,18 +24,23 @@ public class ScoreManager : NetworkBehaviour {
 	int localServerScore = 0;
 
 	[SerializeField]
+	PlayerNetworkSetup pNetSet;
+
 	CharactorInfo charaInfo;
 
 	void Start()
 	{
 		//netConnector = gameObject.GetComponent<PlayerNetworkSetup> ().GetNetConnector ();
 		charaInfo = GameObject.Find("CharactorInfo").GetComponent<CharactorInfo>();
+		pNetSet = GetComponent<PlayerNetworkSetup>();
+		SendUseCharaToServer ();
 		ServerScore ();
 		localServerScore = syncServerScore;
 	}
 	void Update()
 	{
-		if (!gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) {
+		//ServerScore ();
+		if (!isServer) {
 			localScore = syncScore;
 		}
 	}
@@ -55,19 +63,36 @@ public class ScoreManager : NetworkBehaviour {
 	{
 		if (gameObject.GetComponent<NetworkIdentity>().isLocalPlayer) {
 			localScore += score;
-			CmdProvideScoreToServer ((int)charaInfo.GetCharaSelectData(),score);
+			CmdProvideScoreToServer ((int)pNetSet.GetUseChara(),score);
 		}
 	}
 
 	[ClientRpc]
-	void RpcServerScoreToClient()
+	void RpcServerScoreToClient(int score)
 	{
-		syncServerScore = GameObject.Find ("ScoreManager").GetComponent<ServerScore> ().GetServerScore((int)charaInfo.GetCharaSelectData());
+		syncServerScore = score;
 	}
 
 	[ServerCallback]
 	void ServerScore()
 	{
-		RpcServerScoreToClient ();
+		RpcServerScoreToClient (GameObject.Find ("ScoreManager").GetComponent<ServerScore> ().GetServerScore((int)pNetSet.GetUseChara()));
 	}
+
+
+	[Command]
+	void CmdUseChara(int num)
+	{
+		syncUsePlayerNum = num;
+	}
+
+	[ClientCallback]
+	void SendUseCharaToServer()
+	{
+		if (gameObject.GetComponent<NetworkIdentity> ().isLocalPlayer) {
+			CmdUseChara ((int)charaInfo.GetCharaSelectData ());
+		}
+	}
+
+	
 }
