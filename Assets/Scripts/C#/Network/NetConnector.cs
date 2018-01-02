@@ -53,7 +53,7 @@ public class NetConnector : NetworkManager
 	GameObject serverScore;
 
 
-    void Start()
+    void Awake()
 	{
 		//NetworkManagerの取得
 		manager = GetComponent<NetworkManager>();

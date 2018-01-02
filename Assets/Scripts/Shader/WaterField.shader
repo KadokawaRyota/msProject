@@ -8,7 +8,7 @@
 		_SubTex("SubTexture", 2D) = "white" {}
 		_SubSpeedX("SubSpeed X",Range(-2.0,2.0)) = 0.5
 		_SubSpeedY("SubSpeed Y",Range(-2.0,2.0)) = 0.5
-		_Power("Power",Range(0.0,0.01)) = 0.001
+		_Power("Power",Range(0.0,0.05)) = 0.001
 
 	}
 	SubShader{
