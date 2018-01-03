@@ -44,7 +44,7 @@ public class serverObjectController : NetworkBehaviour {
     [SerializeField]
     List<GameObject> players = new List<GameObject>();
 
-    private const float RESPAWN_COUNT = 1.0f;   //リスポーンするまでの時間
+    private const float RESPAWN_COUNT = 5.0f;   //リスポーンするまでの時間
 
     //位置記憶用
     Vector3 pos;
@@ -246,13 +246,15 @@ public class serverObjectController : NetworkBehaviour {
     [ServerCallback]
     public bool GoalCounter(bool bCount)
     {
+        if (!isServer) return false;
+
         if (!bCount)
         {
             count = 0;
         }
         else
         {
-            count = Time.deltaTime;
+            count += Time.deltaTime;
             if( count > RESPAWN_COUNT)
             {
                 count = 0;
