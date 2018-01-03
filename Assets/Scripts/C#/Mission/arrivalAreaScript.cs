@@ -19,7 +19,7 @@ public class arrivalAreaScript : MonoBehaviour {
 		
 	}
 
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerStay(Collider collider)
     {
         if (SceneManager.GetActiveScene().name == ("Offline"))
         {
@@ -27,13 +27,11 @@ public class arrivalAreaScript : MonoBehaviour {
             if (collider.gameObject.tag == "transportObject")
             {
                 collider.GetComponent<ObjectController>().Refresh();
-                //加点する
-                
             }
         }
         else if(SceneManager.GetActiveScene().name == ("Main"))
         {
-            /*オブジェクトを綺麗に確実に他プレイヤーとの紐付けを切る手順
+            /*.....オブジェクトを綺麗に確実に他プレイヤーとの紐付けを切る手順
             1:サーバー側でオブジェクトの判定を取り、全プレイヤーにオブジェクトがゴールエリアに入った事を通知する。
             2：ゴールエリアに入ってるかどうかをローカルのプレイヤー側で判別後、プレイヤー側のオブジェクトとの紐付けを解除する。
             2.5：ここでプレイヤーに加点する。
@@ -42,14 +40,25 @@ public class arrivalAreaScript : MonoBehaviour {
 
             if (collider.gameObject.tag == "transportObject")
             {
+                //ゴールしたオブジェクトがゴール内で何秒たったか数える
+                bool bCountCheck = collider.GetComponent<serverObjectController>().GoalCounter(true);
+
                 //サーバー側でゴールした事を繋がってるプレイヤーに通知する。
-                collider.GetComponent<serverObjectController>().RpcInGoalArea(true);
+                if ( bCountCheck )
+                {
+                    collider.GetComponent<serverObjectController>().RpcInGoalArea(true);
 
-                //オブジェクトを元の場所に戻す。オブジェクト側のプレイヤーを削除
-                //collider.GetComponent<serverObjectController>().Refresh();
-
-                //加点する
+                    //ゴールカウンターを0にする。
+                    collider.GetComponent<serverObjectController>().GoalCounter(false);
+                }
             }
         }
+    }
+
+    //オブジェクトが外に出された場合。
+    void OnTriggerExit(Collider collider)
+    {
+        //ゴールカウンターを0にする。
+        collider.GetComponent<serverObjectController>().GoalCounter(false);
     }
 }
