@@ -44,6 +44,8 @@ public class serverObjectController : NetworkBehaviour {
     [SerializeField]
     List<GameObject> players = new List<GameObject>();
 
+    private const float RESPAWN_COUNT = 5.0f;   //リスポーンするまでの時間
+
     //位置記憶用
     Vector3 pos;
     Quaternion rot;
@@ -69,7 +71,7 @@ public class serverObjectController : NetworkBehaviour {
         //__________デバッグ用にキネマティック解除
         GetComponent<Rigidbody>().isKinematic = false;
 
-        //リスポーンしたオブジェクトをMissionObject階層へ移動させる。
+        //スポーンしたオブジェクトをMissionObject階層へ移動させる。
         GameObject parent = GameObject.Find("NetworkMissionManager/NetworkTransportation/MissionObject");
         transform.parent = parent.transform;
 
@@ -236,5 +238,30 @@ public class serverObjectController : NetworkBehaviour {
     public bool GetbGoal()
     {
         return SyncbGoal;
+    }
+
+
+    private static float count = 0.0f;
+
+    [ServerCallback]
+    public bool GoalCounter(bool bCount)
+    {
+        if (!isServer) return false;
+
+        if (!bCount)
+        {
+            count = 0;
+        }
+        else
+        {
+            count += Time.deltaTime;
+            if( count > RESPAWN_COUNT)
+            {
+                count = 0;
+                return true;
+            }
+        }
+
+        return false;
     }
 }
