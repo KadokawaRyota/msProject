@@ -18,6 +18,7 @@ public class AudioManager : MonoBehaviour {
     AudioSource bgmSourceMaster;
 	AudioSource[] bgmSource;
 	AudioSource[] seSource;
+	AudioSource audioSource;
 
 	public enum BGM{
 		Title = 0,
@@ -26,7 +27,8 @@ public class AudioManager : MonoBehaviour {
 		Game002,
 		Game003,
 		Game004,
-		Mission
+		Mission,
+		MAX
 	};
 		
 
@@ -37,9 +39,12 @@ public class AudioManager : MonoBehaviour {
 		DisObject,
 		OpenChat,
 		MissionStart,
-		ObjectMove
+		ObjectMove,
+		MAX
 	};
 
+	AudioClip[] bgmClip;
+	AudioClip[] seClip;
     //シングルトン処理
 	void Awake(){
 
@@ -147,6 +152,8 @@ public class AudioManager : MonoBehaviour {
 	public void Play_SE(SE se)
 	{
 		seSource [(int)se].PlayOneShot (seSource [(int)se].clip);
+		//audioSource.PlayOneShot(seClip[(int)se]);
+	
 	}
 
 	public AudioSource GetBGMMasterSource()
@@ -155,4 +162,3 @@ public class AudioManager : MonoBehaviour {
 	}
 
 }
-

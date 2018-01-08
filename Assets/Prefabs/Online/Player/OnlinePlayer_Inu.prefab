@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1113406391734300
 GameObject:
   m_ObjectHideFlags: 1
@@ -2106,6 +2106,7 @@ MonoBehaviour:
   PlayerCamera: {fileID: 20024594201520590}
   audioListener: {fileID: 81673137769345186}
   playerName: {fileID: 114950719848211334}
+  skyBg: {fileID: 1101080400501972}
 --- !u!114 &114195032182893542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6334,7 +6335,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 128
   m_TargetDisplay: 0
 --- !u!224 &224365075782908752
 RectTransform:

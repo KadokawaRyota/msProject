@@ -15,6 +15,9 @@ public class PlayerNetworkSetup : NetworkBehaviour
     [SerializeField]
     PlayerName playerName;
 
+	[SerializeField]
+	GameObject skyBg;
+
     CharactorInfo charaInfo;
 
 	NetConnector netConnector;
@@ -78,8 +81,11 @@ public class PlayerNetworkSetup : NetworkBehaviour
 				useChara = charaInfo.GetCharaSelectData();
             }
 
+			skyBg.gameObject.SetActive (true);
             //接続時のローディングイメージを有効
 //            GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
+
+			netConnector.createPlayer = true;
         }
 		else
 		{
@@ -87,6 +93,7 @@ public class PlayerNetworkSetup : NetworkBehaviour
 			GetComponent<OfflinePostureController>().enabled = false;
             PlayerCamera.GetComponent<Camera>().enabled = false;
             audioListener.GetComponent<AudioListener>().enabled = false;
+			skyBg.gameObject.SetActive (false);
         }
         
 	}

@@ -517,7 +517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1624770183656132
 GameObject:
   m_ObjectHideFlags: 1
@@ -2431,6 +2431,7 @@ MonoBehaviour:
   PlayerCamera: {fileID: 20830935605613920}
   audioListener: {fileID: 81304834832696474}
   playerName: {fileID: 114093381848297834}
+  skyBg: {fileID: 1590353918551456}
 --- !u!114 &114534173914019446
 MonoBehaviour:
   m_ObjectHideFlags: 1
