@@ -47,7 +47,7 @@ public class NetConnector : NetworkManager
 
     CharactorInfo charaInfo;    //選んだキャラクター情報
 
-    bool createPlayer = false;  //生成フラグ
+    public bool createPlayer = false;  //生成フラグ
 
 	[SerializeField]
 	GameObject serverScore;
@@ -169,7 +169,7 @@ public class NetConnector : NetworkManager
                     return;
                 }
 
-                createPlayer = true;       //プレイヤー生成完了フラグ
+                //createPlayer = true;       //プレイヤー生成完了フラグ
             }
         }
     }
@@ -213,8 +213,9 @@ public class NetConnector : NetworkManager
     //ネットワーク終了処理
     public void NetDisconnect()
     {
-		//Network.Disconnect ();
+		//manager.StopClient ();
         Shutdown();
+		//Destroy (this.gameObject);
     }
 
     //ローカルプレイヤーオブジェクトの設定

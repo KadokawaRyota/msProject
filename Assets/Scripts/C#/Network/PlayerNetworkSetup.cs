@@ -84,6 +84,8 @@ public class PlayerNetworkSetup : NetworkBehaviour
 			skyBg.gameObject.SetActive (true);
             //接続時のローディングイメージを有効
 //            GameObject.Find("OnlineCanvas/LoadingImage").SetActive(false);
+
+			netConnector.createPlayer = true;
         }
 		else
 		{
