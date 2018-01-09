@@ -27,7 +27,7 @@ public class ObjectSyncPosition : NetworkBehaviour
 
     //threshold:しきい値、境目となる値のこと
     //0.5unitを越えなければ移動していないこととする
-    float threshold = 0;
+    float threshold = 0.1f;
 
 	int seCount = 0;
 	AudioManager audioManager;
@@ -81,10 +81,12 @@ public class ObjectSyncPosition : NetworkBehaviour
     //位置情報を送るメソッド
     void TransmitPosition()
     {
+        if(isServer && Vector3.Distance(myTransform.position,lastPos) > threshold)
+        {
+        	RpcProvidePositionToServer(myTransform.position);
+        }
 
-    	RpcProvidePositionToServer(myTransform.position);
-
-		//現在位置を最終位置として保存
-		lastPos = myTransform.position;
+        //現在位置を最終位置として保存
+        lastPos = myTransform.position;
     }
 }

@@ -58,7 +58,10 @@ public class arrivalAreaScript : MonoBehaviour {
     //オブジェクトが外に出された場合。
     void OnTriggerExit(Collider collider)
     {
-        //ゴールカウンターを0にする。
-        collider.GetComponent<serverObjectController>().GoalCounter(false);
+        if (collider.gameObject.tag == "transportObject")
+        {
+            //ゴールカウンターを0にする。
+            collider.GetComponent<serverObjectController>().GoalCounter(false);
+        }
     }
 }
