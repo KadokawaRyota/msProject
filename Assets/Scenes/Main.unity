@@ -10812,6 +10812,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 82803105146642778, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f,
+        type: 2}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82803105146642778, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f,
+        type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 81632373320378208, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f, type: 2}
@@ -11193,19 +11203,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e632cac47950d409508e39af3de9f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  homeTuto: {fileID: 1282053692}
+  homeTuto: {fileID: 0}
   homeCanvas: {fileID: 0}
+  missionTuto: {fileID: 1282053691}
+  missionManager: {fileID: 3696}
   text: {fileID: 1269882346}
   textLineMax: 5
   textLine:
   - "\u307E\u3061\u306B\u7740\u304D\u307E\u3057\u305F\uFF01 \u4ECA\u304B\u3089\u30DF\u30C3\u30B7\u30E7\u30F3\u306B\u53C2\u52A0\u3057\u3066\u3082\u3089\u3044\u307E\u3059!"
   - "\u30DF\u30C3\u30B7\u30E7\u30F3\u3068\u8A00\u3063\u3066\u3082 \u307E\u3061\u3092\u7DBA\u9E97\u3059\u308B
     \u304A\u624B\u4F1D\u3044\u3067\u3059!"
-  - "\u30B4\u30DF\u888B\u3092\u5F15\u3063\u5F35\u3063\u3066 \u307E\u3061\u306B\u6B62\u307E\u3063\u3066\u3044\u308B\u8ECA\u306E\u3068\u3053\u308D\u3078\u904B\u3093\u3067\u306D\uFF01"
+  - "\u30B4\u30DF\u888B\u3092\u5F15\u3063\u5F35\u3063\u3066 \u307E\u3061\u306B\u6B62\u307E\u3063\u3066\u3044\u308B\u8ECA\u306B\u904B\u3093\u3067\u306D\uFF01"
   - "\u6642\u9593\u306F3\u5206\u9593! \u96C6\u3081\u305F\u30DD\u30A4\u30F3\u30C8\u304C
     \u3042\u306A\u305F\u306E\u307E\u3061\u306B \u8CA2\u732E\u3055\u308C\u308B\u3088\uFF01"
   - "\u307F\u3093\u306A\u3067\u307E\u3061\u3092 \u80B2\u3066\u3088\u3046\uFF01"
-  textSize: 460000004600000046000000460000004600000050000000
+  textSize: 4600000046000000460000004600000050000000
   inputField: {fileID: 0}
   NextButton: {fileID: 1131240401}
 --- !u!224 &933866283
@@ -11514,27 +11526,13 @@ GameObject:
   - component: {fileID: 1282053695}
   - component: {fileID: 1282053694}
   - component: {fileID: 1282053693}
-  - component: {fileID: 1282053692}
   m_Layer: 0
   m_Name: MissionTutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1282053692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114140741241100862, guid: ef3e0f986be08cf49a30eee58f50bc65,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1282053691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9af54aac39334348a154a768e80d7e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textManager: {fileID: 933866282}
+  m_IsActive: 0
 --- !u!114 &1282053693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11757,6 +11755,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: NetDisconnect
+      objectReference: {fileID: 0}
+    - target: {fileID: 224050464818190608, guid: 32859000b690cb04ba34bab833e0ea68,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 577
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 32859000b690cb04ba34bab833e0ea68, type: 2}
@@ -12443,6 +12446,11 @@ Prefab:
       propertyPath: m_RunInBackground
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
+        type: 2}
+      propertyPath: missionTuto
+      value: 
+      objectReference: {fileID: 1282053691}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c341415438230494da36b51dc59070f4, type: 2}
   m_IsPrefabParent: 0

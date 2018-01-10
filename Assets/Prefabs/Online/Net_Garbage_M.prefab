@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86f579eebc4f93942b0c11d76b7b9c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fDistance: 2
+  fDistance: 3
   objectSpringConstant: 40
   playerSpringConstant: 20
   transportNum: 2
