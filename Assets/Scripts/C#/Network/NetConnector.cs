@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.Networking.NetworkSystem;
@@ -52,6 +53,13 @@ public class NetConnector : NetworkManager
 	[SerializeField]
 	GameObject serverScore;
 
+    public struct PLAYER_DICTIONARY
+    {
+        public NetworkConnection playerConn;
+        public GameObject player;
+    }
+
+    List<PLAYER_DICTIONARY> playerDictionary = new List<PLAYER_DICTIONARY>();
 
     void Awake()
 	{
@@ -208,11 +216,18 @@ public class NetConnector : NetworkManager
         //生成
         NetworkServer.AddPlayerForConnection(conn, obj, playerControllerId);
 
+        //プレイヤーを辞書に登録。
+        PLAYER_DICTIONARY playerDic;
+        playerDic.playerConn = conn;
+        playerDic.player = obj;
+
+        playerDictionary.Add(playerDic);
     }
 
     //ネットワーク終了処理
     public void NetDisconnect()
     {
+        playerDictionary.Clear();
 		//manager.StopClient ();
         Shutdown();
 		//Destroy (this.gameObject);
@@ -232,5 +247,30 @@ public class NetConnector : NetworkManager
     public CharactorInfo GetCharactorInfo()
     {
         return charaInfo;
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        foreach (PLAYER_DICTIONARY playerdic in playerDictionary)
+        {
+            //消される予定のやつを検索
+            if( playerdic.playerConn == conn )
+            {
+                GameObject gomi = playerdic.player.GetComponent<playerTransportationScript>().GetTransportObject();
+                if (gomi != null)
+                {
+                    //ごみのリストから繋がってるプレイヤーを開放。
+                    gomi.GetComponent<serverObjectController>().DisconnectPlayer(playerdic.player);
+                    //基底クラスを呼び出す（おそらく終了処理）
+                    base.OnServerDisconnect(conn);
+                    return;
+                }
+            }
+        }
+
+        ////ゴミが誰ともつながってなかった場合、ここで終了処理をする。
+        //基底クラスを呼び出す（おそらく終了処理）
+        base.OnServerDisconnect(conn);
+        return;
     }
 }
