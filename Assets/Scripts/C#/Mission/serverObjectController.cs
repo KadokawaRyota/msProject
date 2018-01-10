@@ -75,6 +75,9 @@ public class serverObjectController : NetworkBehaviour {
 
     public int Score;
 
+	[SyncVar]
+	int syncSetPlayerNum;
+
     // Use this for initialization
     void Start()
     {
@@ -117,20 +120,23 @@ public class serverObjectController : NetworkBehaviour {
 		if (isServer) {
 			ServerUpdate ();
 		} else {
-
+			
 			int num = 0;
-			num = transportNum - players.Count;
+			num = transportNum - syncSetPlayerNum;
 			numText.text = num.ToString ();
+
 			if(null != netConnector.GetLocalPlayer ())
 			{
 				Vector3 playerPos = netConnector.GetLocalPlayer ().gameObject.transform.localPosition;
 				length = Vector3.Distance (playerPos, gameObject.transform.localPosition);
 
-				if (length < fDistance) {
+				if (length < fDistance * 3) {
 
 					if (!fukidashi.gameObject.activeSelf)
 						fukidashi.gameObject.SetActive (true);
-				} else if(length >= fDistance) {
+				}
+
+				if(length >= fDistance || num <= 0) {
 					if (fukidashi.gameObject.activeSelf)
 						fukidashi.gameObject.SetActive (false);
 				}
@@ -138,6 +144,7 @@ public class serverObjectController : NetworkBehaviour {
 				
 		}
     }
+
 
     [Server]
     void ServerUpdate()
@@ -159,6 +166,8 @@ public class serverObjectController : NetworkBehaviour {
             GetComponent<serverObjectController>().SetGoal(false);
             Refresh();
         }
+
+		RpcSetPlayerNum (players.Count);
 
         //リストに何も入ってない！
         if (players.Count <= 0) return;
@@ -301,4 +310,10 @@ public class serverObjectController : NetworkBehaviour {
 
         return false;
     }
+
+	[ClientRpc]
+	void RpcSetPlayerNum(int num)
+	{
+		syncSetPlayerNum = num;
+	}
 }
