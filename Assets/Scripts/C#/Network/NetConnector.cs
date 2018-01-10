@@ -61,6 +61,9 @@ public class NetConnector : NetworkManager
 
     List<PLAYER_DICTIONARY> playerDictionary = new List<PLAYER_DICTIONARY>();
 
+	[SerializeField]
+	GameObject missionTuto;
+
     void Awake()
 	{
 		//NetworkManagerの取得
@@ -124,6 +127,8 @@ public class NetConnector : NetworkManager
 				serverScore.SetActive (true);
 
                 TransportationObject.GetComponent<NetworkTransportationScript>().CreateObject();
+
+				Destroy (missionTuto.gameObject);
             }
 
             else
@@ -137,7 +142,9 @@ public class NetConnector : NetworkManager
                 manager.networkAddress = serverIPAdress;    //クライアントの時は設定したIPアドレスを代入
                 manager.StartClient();                      //クライアント処理開始
 
-                Debug.Log("Start as Client");   
+                Debug.Log("Start as Client");  
+
+				missionTuto.SetActive (true);
             }
 
 		}
@@ -155,6 +162,8 @@ public class NetConnector : NetworkManager
 			manager.StartClient();
 
 			Debug.Log("Start as Client");
+
+			missionTuto.SetActive (true);
         }
 	}
 

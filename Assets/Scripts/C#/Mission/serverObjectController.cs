@@ -46,7 +46,7 @@ public class serverObjectController : NetworkBehaviour {
     List<GameObject> players = new List<GameObject>();
 
 	[SerializeField]
-	GameObject fukidashi;
+	GameObject fukidashi;			//吹き出し
 	bool fukidashiFlg = false;
 
 	[SerializeField]
@@ -76,7 +76,9 @@ public class serverObjectController : NetworkBehaviour {
     public int Score;
 
 	[SyncVar]
-	int syncSetPlayerNum;
+	int syncSetPlayerNum;		//ひもづいている人数
+
+	NetworkMissionManager missionManager;		//ミッションマネージャ
 
     // Use this for initialization
     void Start()
@@ -105,6 +107,13 @@ public class serverObjectController : NetworkBehaviour {
 		if (null != netcon) {
 			netConnector = netcon.GetComponent<NetConnector> ();
 		}
+
+		//MissionManagerの取得
+		GameObject manager = GameObject.Find ("NetworkMissionManager");
+
+		if (null != manager) {
+			missionManager = manager.GetComponent<NetworkMissionManager> ();
+		}
     }
     [Server]
     void ServerStart()
@@ -120,28 +129,46 @@ public class serverObjectController : NetworkBehaviour {
 		if (isServer) {
 			ServerUpdate ();
 		} else {
-			
-			int num = 0;
-			num = transportNum - syncSetPlayerNum;
-			numText.text = num.ToString ();
 
-			if(null != netConnector.GetLocalPlayer ())
-			{
-				Vector3 playerPos = netConnector.GetLocalPlayer ().gameObject.transform.localPosition;
-				length = Vector3.Distance (playerPos, gameObject.transform.localPosition);
+			//吹き出しフラグ有効時
+			if (fukidashiFlg) {
 
-				if (length < fDistance * 3) {
+				//紐づいている人数を算出
+				int num = 0;
+				num = transportNum - syncSetPlayerNum;
+				numText.text = num.ToString ();
 
-					if (!fukidashi.gameObject.activeSelf)
-						fukidashi.gameObject.SetActive (true);
+				if (num == 1) {
+					numText.color = new Color (1f, 0.2f, 0.2f);
+				} else {
+					numText.color = new Color (0f, 0f, 0f);
 				}
 
-				if(length >= fDistance || num <= 0) {
-					if (fukidashi.gameObject.activeSelf)
-						fukidashi.gameObject.SetActive (false);
+				//ローカルプレイヤーとの距離を出す
+				if (null != netConnector.GetLocalPlayer ()) {
+					Vector3 playerPos = netConnector.GetLocalPlayer ().gameObject.transform.localPosition;
+					length = Vector3.Distance (playerPos, gameObject.transform.localPosition);
+
+					//距離に応じて吹き出しを描画する
+					if (length < fDistance * 3) {
+
+						if (!fukidashi.gameObject.activeSelf)
+							fukidashi.gameObject.SetActive (true);
+					}
+
+					//規定人数もしくは距離が離れていたら消す
+					if (length >= fDistance || num <= 0) {
+						if (fukidashi.gameObject.activeSelf)
+							fukidashi.gameObject.SetActive (false);
+					}
+				}
+			} else {
+				//ミッションフラグ有効時に表示させる
+				if (missionManager.GetMissionFlg ()) {
+					fukidashiFlg = true;
 				}
 			}
-				
+
 		}
     }
 

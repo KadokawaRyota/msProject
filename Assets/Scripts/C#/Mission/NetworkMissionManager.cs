@@ -131,4 +131,9 @@ public class NetworkMissionManager : MonoBehaviour
     {
         Player = player;
     }
+
+	public bool GetMissionFlg()
+	{
+		return missionFlg;
+	}
 }

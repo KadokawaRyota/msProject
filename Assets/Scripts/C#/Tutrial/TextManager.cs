@@ -9,6 +9,12 @@ public class TextManager : MonoBehaviour {
     [SerializeField]
     Home homeCanvas;
 
+	[SerializeField]
+	GameObject missionTuto;
+
+	[SerializeField]
+	NetworkMissionManager missionManager;
+
     //文字出力用
     [SerializeField]
     Text text;
@@ -105,7 +111,8 @@ public class TextManager : MonoBehaviour {
 
 		if(textLineNum == textLineMax)
 		{
-			Destroy(homeTuto.gameObject);
+			Destroy(missionTuto.gameObject);
+			missionManager.StartMission ();
 			return;
 		}
 		text.text = textLine[textLineNum];
