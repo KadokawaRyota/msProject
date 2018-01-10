@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 //紐に対して複数のプレイヤーが紐づく処理
 //サーバーのみで引っ張る時用。
@@ -44,6 +45,17 @@ public class serverObjectController : NetworkBehaviour {
     [SerializeField]
     List<GameObject> players = new List<GameObject>();
 
+	[SerializeField]
+	GameObject fukidashi;
+	bool fukidashiFlg = false;
+
+	[SerializeField]
+	Text numText;
+
+	NetConnector netConnector;
+
+	float length = 0;
+
     private const float RESPAWN_COUNT = 5.0f;   //リスポーンするまでの時間
 
     //位置記憶用
@@ -84,6 +96,12 @@ public class serverObjectController : NetworkBehaviour {
         {
             ServerStart();
         }
+
+		//NetConnectorの取得
+		GameObject netcon = GameObject.Find ("NetConnector");
+		if (null != netcon) {
+			netConnector = netcon.GetComponent<NetConnector> ();
+		}
     }
     [Server]
     void ServerStart()
@@ -96,10 +114,29 @@ public class serverObjectController : NetworkBehaviour {
     void Update()
     {
         //アトリビュート[Server]はクライアント側でも呼び出されるため。アトリビュートを付ける意味はクライアントで呼び出された時にWarningを吐きだす
-        if (isServer)
-        {
-            ServerUpdate();
-        }
+		if (isServer) {
+			ServerUpdate ();
+		} else {
+
+			int num = 0;
+			num = transportNum - players.Count;
+			numText.text = num.ToString ();
+			if(null != netConnector.GetLocalPlayer ())
+			{
+				Vector3 playerPos = netConnector.GetLocalPlayer ().gameObject.transform.localPosition;
+				length = Vector3.Distance (playerPos, gameObject.transform.localPosition);
+
+				if (length < fDistance) {
+
+					if (!fukidashi.gameObject.activeSelf)
+						fukidashi.gameObject.SetActive (true);
+				} else {
+					if (fukidashi.gameObject.activeSelf)
+						fukidashi.gameObject.SetActive (false);
+				}
+			}
+				
+		}
     }
 
     [Server]

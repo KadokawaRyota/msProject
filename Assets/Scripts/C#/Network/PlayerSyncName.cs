@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class PlayerSyncName : NetworkBehaviour {
@@ -11,8 +12,49 @@ public class PlayerSyncName : NetworkBehaviour {
     [SyncVar]
     string syncPlayerName;
 
+	[SyncVar]
+	int syncPlayerType;
+
     [SerializeField]
     PlayerName playerName;
+
+	[SerializeField]
+	Text nameText;
+
+	int playerType;
+
+	void Start()
+	{
+		//仕様キャラ
+		if(isLocalPlayer)
+		{
+			GameObject charaInfo = GameObject.Find ("CharactorInfo");
+
+			if (null != charaInfo) {
+				playerType = (int)charaInfo.GetComponent<CharactorInfo> ().GetCharaSelectData ();
+			}
+
+			switch (charaInfo.GetComponent<CharactorInfo> ().GetCharaSelectData ()) {
+
+			case CharactorInfo.CHARA.TANUKI:
+				nameText.color = new Color (100f / 255f, 255f / 255f, 100f / 255f);
+				break;
+
+			case CharactorInfo.CHARA.CAT:
+				nameText.color = new Color (255f / 255f, 150f / 255f, 200f / 255f);
+				break;
+
+			case CharactorInfo.CHARA.FOX:
+				nameText.color = new Color (255f / 255f, 80f / 255f, 0f / 255f);
+				break;
+
+			case CharactorInfo.CHARA.DOG:
+				nameText.color = new Color (0f / 255f, 170f / 255f, 255f / 255f);
+				break;
+			}
+		}
+
+	}
 
     void FixedUpdate()
     {
@@ -23,9 +65,10 @@ public class PlayerSyncName : NetworkBehaviour {
 
     //クライアントからホストへ送られる
     [Command]
-    void CmdProvideNameToServer(string name)
+	void CmdProvideNameToServer(string name,int type)
     {
         syncPlayerName = name;
+		syncPlayerType = type;
     }
 
     //クライアント側だけが実行できるメソッド
@@ -34,12 +77,32 @@ public class PlayerSyncName : NetworkBehaviour {
     {
         if (isLocalPlayer)
         {
-            CmdProvideNameToServer(netSet.GetCharaInfo().GetPlayerName());
+			CmdProvideNameToServer(netSet.GetCharaInfo().GetPlayerName(),playerType);
+
         }
         //自プレイヤー以外のPlayerの時
         else
         {
             playerName.SetNameText(syncPlayerName);
+
+			switch ((CharactorInfo.CHARA)syncPlayerType) {
+
+			case CharactorInfo.CHARA.TANUKI:
+				nameText.color = new Color (100f / 255f, 255f / 255f, 100f / 255f);
+				break;
+
+			case CharactorInfo.CHARA.CAT:
+				nameText.color = new Color (255f / 255f, 150f / 255f, 200f / 255f);
+				break;
+
+			case CharactorInfo.CHARA.FOX:
+				nameText.color = new Color (255f / 255f, 80f / 255f, 0f / 255f);
+				break;
+
+			case CharactorInfo.CHARA.DOG:
+				nameText.color = new Color (0f / 255f, 170f / 255f, 255f / 255f);
+				break;
+			}
         }
     }
 }
