@@ -98,4 +98,19 @@ public class TextManager : MonoBehaviour {
 		audioManager.Play_SE (AudioManager.SE.OpenChat);
 
     }
+
+	public void NextTextMission()
+	{
+		textLineNum++;      //次の文字へ
+
+		if(textLineNum == textLineMax)
+		{
+			Destroy(homeTuto.gameObject);
+			return;
+		}
+		text.text = textLine[textLineNum];
+		text.fontSize = textSize[textLineNum];
+
+		audioManager.Play_SE (AudioManager.SE.OpenChat);
+	}
 }
