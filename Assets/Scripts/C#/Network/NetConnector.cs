@@ -169,7 +169,7 @@ public class NetConnector : NetworkManager
                     return;
                 }
 
-                //createPlayer = true;       //プレイヤー生成完了フラグ
+                createPlayer = true;       //プレイヤー生成完了フラグ
             }
         }
     }
