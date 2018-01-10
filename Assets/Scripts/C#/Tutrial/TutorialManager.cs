@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 //すべてのチュートリアルを管理
 public class TutorialManager : MonoBehaviour {
@@ -14,6 +16,11 @@ public class TutorialManager : MonoBehaviour {
     //シングルトン処理
     void Awake()
     {
+        if(SceneManager.GetActiveScene().name == "Result")
+        {
+            Destroy(gameObject);
+            return;
+        }
         //TutorialManagerインスタンスが存在したら
         if (instance != null)
         {
