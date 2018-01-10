@@ -130,7 +130,7 @@ public class serverObjectController : NetworkBehaviour {
 
 					if (!fukidashi.gameObject.activeSelf)
 						fukidashi.gameObject.SetActive (true);
-				} else {
+				} else if(length >= fDistance) {
 					if (fukidashi.gameObject.activeSelf)
 						fukidashi.gameObject.SetActive (false);
 				}
