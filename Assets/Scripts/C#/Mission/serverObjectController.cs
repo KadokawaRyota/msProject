@@ -165,6 +165,7 @@ public class serverObjectController : NetworkBehaviour {
 
         foreach (GameObject player in players)
         {
+
             //オブジェクトがゴールしていない時。
             if (!bGoal)
             {
@@ -300,5 +301,11 @@ public class serverObjectController : NetworkBehaviour {
         }
 
         return false;
+    }
+
+    public void DisconnectPlayer(GameObject player )
+    {
+        players.Remove(player);
+        return;
     }
 }
