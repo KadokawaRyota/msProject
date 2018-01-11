@@ -65,6 +65,13 @@ public class Result : MonoBehaviour {
 	[SerializeField]
 	GameObject canvas;
 
+	int count = 0;
+
+	[SerializeField]
+	int nextSceneTime = 5;
+
+	LoadSceneManager loadSceneManager;
+
     void Awake()
     {
         resultFlg = false;
@@ -97,6 +104,11 @@ public class Result : MonoBehaviour {
 		player = netConnector.GetLocalPlayer ();
         scoreObject = GameObject.Find("ResultManager/ResultObjectScore/Canvas/Score000");
 
+		GameObject manager = GameObject.Find ("LoadSceneManager");
+
+		if (null != manager) {
+			loadSceneManager = manager.GetComponent<LoadSceneManager> ();
+		}
     }
 	
 	// Update is called once per frame
@@ -232,6 +244,13 @@ public class Result : MonoBehaviour {
 				canvas.gameObject.SetActive (true);
             }
 
+			if (count >= nextSceneTime * 60) {
+
+				loadSceneManager.LoadNextScene ("Result");
+			} else {
+				
+				count++;
+			}
         }
 	}
 

@@ -74,7 +74,7 @@ public class TextManager : MonoBehaviour {
             if (name == "")
             {
                 text.fontSize = 40;
-                text.text = "んっ?\n言いたくないのかな？\nじゃぁ「ふれんず」\nって呼ぶね!";
+                text.text = "んっ?\n言いたくないのかな？\nじゃぁ「ふれんず」\nって呼ばせてもらうね!";
                 charaInfo.SetPlayerName("ふれんず");
                 homeCanvas.SetName("ふれんず");
             }

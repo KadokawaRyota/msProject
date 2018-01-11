@@ -50,4 +50,11 @@ public class TutorialManager : MonoBehaviour {
         nameTuto = flg;
     }
 
+	//リセット
+	public void ClearFlg()
+	{
+		nameTuto = false;
+		offlineTuto = false;
+	}
+
 }
