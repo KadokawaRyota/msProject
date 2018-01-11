@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 114450455121849796}
   - component: {fileID: 114497476874445324}
   m_Layer: 5
-  m_Name: OfflineButton
+  m_Name: TownButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 20a8ad94ba1fc7e4cb103c95bc1a0afe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 41e3de3fe89ceec4c84b528c7ff7e0da, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -344,7 +344,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Offline
+          m_StringArgument: Main
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -461,7 +461,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9366b5d0392dcbd478824832c64dfa73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 404f352c38a74b24aa0555470ae45de5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -2264,7 +2264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e793b1585e2284499fde288d65ecb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   nameText: {fileID: 114708865195864748}
 --- !u!114 &114101650237299760
 MonoBehaviour:
@@ -2525,7 +2524,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: 04aabed583e0621499e993c13bab2141, type: 2}
   m_Color: {r: 1, g: 0.88965523, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:

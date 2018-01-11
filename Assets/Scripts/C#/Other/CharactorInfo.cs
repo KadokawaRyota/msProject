@@ -107,5 +107,13 @@ public class CharactorInfo : MonoBehaviour {
         return charSelectData;
     }
 
+	//リセット
+	public void ClearFlg()
+	{
+		playerName = null;
+		charSelectData = CHARA.TANUKI;
+		instance = null;
+	}
+
 }
     
