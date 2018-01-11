@@ -72,6 +72,7 @@ public class Result : MonoBehaviour {
 
 	LoadSceneManager loadSceneManager;
 
+	AudioManager audioManager;
     void Awake()
     {
         resultFlg = false;
@@ -109,16 +110,22 @@ public class Result : MonoBehaviour {
 		if (null != manager) {
 			loadSceneManager = manager.GetComponent<LoadSceneManager> ();
 		}
+
+		GameObject audio = GameObject.Find ("AudioManager");
+
+		if (null != audio) {
+			audioManager = audio.GetComponent<AudioManager> ();
+		}
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-
-        if (Input.GetKeyDown(KeyCode.Space))
+		//debug
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject.Find("ResultManager").GetComponent<Result>().StartResult();
-        }
+        }*/
 
         if (resultFlg)
         {
@@ -246,7 +253,9 @@ public class Result : MonoBehaviour {
 
 			if (count >= nextSceneTime * 60) {
 
+				netConnector.NetDisconnect ();
 				loadSceneManager.LoadNextScene ("Result");
+
 			} else {
 				
 				count++;
@@ -260,6 +269,9 @@ public class Result : MonoBehaviour {
         resultFlg = true;
 
         player = GameObject.FindWithTag("Player");
+
+		audioManager.Stop_BGM ();
+		audioManager.Play_SE (AudioManager.SE.Result);
 
         //player.SetActive(false);
 

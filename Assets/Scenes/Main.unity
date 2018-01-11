@@ -10761,18 +10761,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 82803105146642778, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f,
-        type: 2}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 82803105146642778, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f,
-        type: 2}
-      propertyPath: Loop
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 81632373320378208, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e8cc4913af6f6c4f95df091a9f8ea6f, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &336871359
@@ -12267,6 +12256,31 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4501361918428104, guid: c8540eee81ccf454ab12101ab50cf75b, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593368357757994, guid: c8540eee81ccf454ab12101ab50cf75b, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981278527172726, guid: c8540eee81ccf454ab12101ab50cf75b, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387513485110568, guid: c8540eee81ccf454ab12101ab50cf75b, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819466924850838, guid: c8540eee81ccf454ab12101ab50cf75b, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224390640876628512, guid: c8540eee81ccf454ab12101ab50cf75b,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c8540eee81ccf454ab12101ab50cf75b, type: 2}
   m_IsPrefabParent: 0
@@ -12480,12 +12494,12 @@ Prefab:
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: isStartAsServer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
       propertyPath: m_OfflineScene
-      value: Home
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114652457008908228, guid: c341415438230494da36b51dc59070f4,
         type: 2}
