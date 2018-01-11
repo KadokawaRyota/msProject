@@ -15,6 +15,9 @@ public class ResultCanvas : MonoBehaviour {
 	bool charaInfoDeleteFlg = false;
 
 	bool tutoManaDeleteFlg = false;
+
+	AudioManager audioManager;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -41,6 +44,13 @@ public class ResultCanvas : MonoBehaviour {
 			charaInfoDeleteFlg = true;
 		}
 
+		GameObject audio = GameObject.Find ("AudioManager");
+
+		if (null != audio) {
+			audioManager = audio.GetComponent<AudioManager> ();
+		}
+
+		audioManager.Play_SE (AudioManager.SE.Ending);
 	}
 	
 	// Update is called once per frame

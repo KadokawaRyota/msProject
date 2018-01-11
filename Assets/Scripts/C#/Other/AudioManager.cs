@@ -40,6 +40,8 @@ public class AudioManager : MonoBehaviour {
 		OpenChat,
 		MissionStart,
 		ObjectMove,
+		Result,
+		Ending,
 		MAX
 	};
 
@@ -53,6 +55,7 @@ public class AudioManager : MonoBehaviour {
         {
             //今回インスタンス化したAudioManagerを破棄
             Destroy(this.gameObject);
+			return;
             //AudioManagerインスタンスがなかったら
         }
         else if (instance == null)
@@ -131,6 +134,11 @@ public class AudioManager : MonoBehaviour {
 						break;
                 }
                 break;
+
+		case "Result":
+			Stop_BGM ();
+
+			break;
         }
 
     }
@@ -138,6 +146,9 @@ public class AudioManager : MonoBehaviour {
     //引数のBGMをマスターソースに入れて再生
 	public void Play_BGM(BGM bgm)
 	{
+		if (null != bgmSourceMaster) {
+			Stop_BGM ();
+		}
 		bgmSourceMaster = bgmSource [(int)bgm];	
 		bgmSourceMaster.Play ();
 
