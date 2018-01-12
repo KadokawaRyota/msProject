@@ -28,7 +28,9 @@ using UnityEngine.UI;
     //※未実装だが、こちらのスクリプトを使用する場合。プレイヤーが他のオブジェクトと紐付いていないかステート管理し。
     //プレイヤーが引っ張っている状態なら、オブジェクトと紐付かないようにしなければ、複数のオブジェクトを引っ張ってしまうので注意。
 
-
+//channel(SyncVar変数をUpdateする時の設定Qos参照)
+//sendInterval(どれくらいの頻度でUpdateするか)
+//[NetworkSettings(channel = 1, sendInterval = 0.033f)]
 public class serverObjectController : NetworkBehaviour {
 
 

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ResultCanvas : MonoBehaviour {
 
-	int count = 0;
+	float count = 0f;
 
 	[SerializeField]
-	int nextSceneTime = 5;
+	float nextSceneTime = 5f;
 
 	LoadSceneManager loadSceneManager;
 
@@ -79,12 +79,12 @@ public class ResultCanvas : MonoBehaviour {
 		}
 
 
-		if (count >= nextSceneTime * 60) {
+		if (count >= nextSceneTime) {
 
 			loadSceneManager.LoadNextScene ("Title");
 		} else {
 
-			count++;
+			count += Time.deltaTime;
 		}
 	}
 }

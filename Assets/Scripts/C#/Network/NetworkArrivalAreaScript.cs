@@ -18,6 +18,9 @@ public class NetworkArrivalAreaScript : NetworkBehaviour
         player = GameObject.Find("Player");
 
         transform.parent = parent.transform;
+
+		if(isServer)
+			NetworkServer.Spawn(this.gameObject);
     }
 
     // Update is called once per frame

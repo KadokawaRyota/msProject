@@ -20,6 +20,9 @@ public class NetworkTransportationScript : NetworkBehaviour
     [SerializeField]
     GameObject transObj_L;
 
+	[SerializeField]
+	GameObject arrivalAreaPrefab;
+
     [System.Serializable]
     public class SpawnObject
     {
@@ -27,16 +30,21 @@ public class NetworkTransportationScript : NetworkBehaviour
         public Vector3 missionObjectPosition;
     }
 
+	[System.Serializable]
+	public class ArrivalArea
+	{
+		public Vector3 position;
+		public Quaternion rotation;
+	}
+
     //ここを配列で増やす。
     [SerializeField]
     SpawnObject[] spawnObjectData = new SpawnObject[2];
 
 
     //ゴール地点
-    [SerializeField]
-    GameObject arrivalAreaPrefab;
-    [SerializeField]
-    Vector3 arrivalAreaPosition;
+	[SerializeField]
+	ArrivalArea[] arrivalAreaData = new ArrivalArea[4];
 
     // Use this for initialization
     void Start()
@@ -58,7 +66,8 @@ public class NetworkTransportationScript : NetworkBehaviour
         //アライバルエリアを全て表示
         foreach (Transform child in ArrivalAreas.transform)
         {
-            child.gameObject.GetComponent<ParticleSystem>().Play();
+			//パーティクルなし
+            //child.gameObject.GetComponent<ParticleSystem>().Play();
         }
     }
 
@@ -67,7 +76,6 @@ public class NetworkTransportationScript : NetworkBehaviour
     {
         //ミッションオブジェクトの生成
         GameObject missionObject;
-        GameObject arrivalArea;
 
         for( int cnt = 0; cnt < spawnObjectData.Length; cnt++ )
         {
@@ -111,8 +119,14 @@ public class NetworkTransportationScript : NetworkBehaviour
             }
         }
 
+		for (int cnt = 0; cnt < 1; cnt++) {
         //arraivalAreaの生成
-        arrivalArea = Instantiate(arrivalAreaPrefab, arrivalAreaPosition, arrivalAreaPrefab.transform.localRotation, MissionObjects.transform.parent);
-        NetworkServer.Spawn(arrivalArea);
+        //arrivalArea = Instantiate(arrivalAreaPrefab, arrivalAreaPosition, arrivalAreaPrefab.transform.localRotation, MissionObjects.transform.parent);
+        //NetworkServer.Spawn(arrivalArea);
+
+			//arrivalArea = Instantiate(arrivalAreaPrefab, arrivalAreaData[cnt].position, Quaternion.identity, MissionObjects.transform.parent);
+			//arrivalArea.transform.rotation = arrivalAreaData [cnt].rotation;
+			//NetworkServer.Spawn(arrivalArea);
+		}
     }
 }

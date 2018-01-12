@@ -256,7 +256,7 @@ public class OfflinePostureController : MonoBehaviour {
 					//animator.SetBool("is_walk", false);
                     particleManager.SetSmokeFlg(true);
 
-                    footStampTime *= Time.deltaTime;
+                    footStampTime += Time.deltaTime;
 
                     if (footStampTime > footStampSetTime)
                     {
