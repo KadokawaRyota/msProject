@@ -157,7 +157,8 @@ public class AudioManager : MonoBehaviour {
     //マスターソースを停止
 	public void Stop_BGM()
 	{
-		bgmSourceMaster.Stop ();
+		if (null != bgmSourceMaster)
+			bgmSourceMaster.Stop ();
     }
 
 	public void Play_SE(SE se)

@@ -8,7 +8,8 @@ public class arrivalAreaScript : MonoBehaviour {
 
     GameObject player;
 
-    
+	[SerializeField]
+	Animator garbageTruck;
 
 	void Start () {
         player = GameObject.Find("Player");
@@ -42,7 +43,7 @@ public class arrivalAreaScript : MonoBehaviour {
             {
                 //ゴールしたオブジェクトがゴール内で何秒たったか数える
                 bool bCountCheck = collider.GetComponent<serverObjectController>().GoalCounter(true);
-
+				garbageTruck.SetTrigger ("is_action");
                 //サーバー側でゴールした事を繋がってるプレイヤーに通知する。
                 if ( bCountCheck )
                 {
@@ -50,6 +51,8 @@ public class arrivalAreaScript : MonoBehaviour {
 
                     //ゴールカウンターを0にする。
                     collider.GetComponent<serverObjectController>().GoalCounter(false);
+
+
                 }
             }
         }

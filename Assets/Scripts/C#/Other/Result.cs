@@ -65,10 +65,10 @@ public class Result : MonoBehaviour {
 	[SerializeField]
 	GameObject canvas;
 
-	int count = 0;
+	float count = 0f;
 
 	[SerializeField]
-	int nextSceneTime = 5;
+	float nextSceneTime = 5f;
 
 	LoadSceneManager loadSceneManager;
 
@@ -251,14 +251,14 @@ public class Result : MonoBehaviour {
 				canvas.gameObject.SetActive (true);
             }
 
-			if (count >= nextSceneTime * 60) {
+			if (count >= nextSceneTime) {
 
 				netConnector.NetDisconnect ();
 				loadSceneManager.LoadNextScene ("Result");
 
 			} else {
 				
-				count++;
+				count += Time.deltaTime;
 			}
         }
 	}

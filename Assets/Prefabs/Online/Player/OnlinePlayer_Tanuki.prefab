@@ -2292,7 +2292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff4e4c0c931cf84da68b2a18c8ba0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeedX: 1.52
+  scrollSpeedX: 0.1
   standCam: {fileID: 114191186129996312}
 --- !u!114 &114191186129996312
 MonoBehaviour:
